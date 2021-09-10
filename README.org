@@ -1,3 +1,14 @@
+#+title: Genómica de la biodiversidad
+#+description: Genómica de la biodiversidad
+#+language: es
+#+options: h:3 num:t||nil toc:t author:nil date:nil *:t
+#+options: ^:t
+
 * Estructura del curso
-* TODO 
-* TODO 
+** TODO Dia 1
+*** TODO Introduccion *a* "unix"
+*** TODO Introduccion al cluster de computo
+** TODO Dia 2
+** TODO Dia 3
+** TODO Dia 4
+** TODO Dia 5
