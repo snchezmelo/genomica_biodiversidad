@@ -1,81 +1,81 @@
 
 # &Iacute;ndice
 
-1.  [Estructura del curso](#orgf31c125)
-    1.  [Dia 1](#org274c64f)
-        1.  [Introduccion a unix](#org88d9250)
-        2.  [Introduccion al cluster de computo](#org537f42c)
-    2.  [Dia 2](#orge7325aa)
-    3.  [Dia 3](#org4df7e51)
-    4.  [Dia 4](#orgeee5af0)
-    5.  [Dia 5](#org3cb2ac5)
-2.  [Programas y herramientas requeridos](#org3d8ef55)
-    1.  [Usuarios de Windows](#org637c320)
-        1.  [Emuladores de UNIX](#orgfbe7ac0)
-        2.  [Editores de texto](#orgdb35647)
-    2.  [Usuarios de Mac (OSX)](#org5dd68ce)
-        1.  [Emuladores de terminal](#orgd278778)
-        2.  [Editores de texto](#org97807d1)
-    3.  [Usuarios de Linux](#org22c0ba2)
-        1.  [Emuladores de terminal](#org37ef950)
-        2.  [Editores de texto](#orgb947790)
-    4.  [R \faRProject](#org90caf78)
-3.  [Lecturas recomendadas](#orgbbba9db)
-    1.  [](#orgc4a9cf6)
+1.  [Estructura del curso](#org4cb3f36)
+    1.  [Dia 1](#org44af1a2)
+        1.  [Introduccion a unix](#org4a2728a)
+        2.  [Introduccion al cluster de computo](#orga9304e6)
+    2.  [Dia 2](#org4d8db05)
+    3.  [Dia 3](#orgf29ee58)
+    4.  [Dia 4](#org4fa2736)
+    5.  [Dia 5](#org9cca4ca)
+2.  [Programas y herramientas requeridos](#orga173e58)
+    1.  [Usuarios de Windows](#org2fa0694)
+        1.  [Emuladores de UNIX](#orgd895a32)
+        2.  [Editores de texto](#org5239d5c)
+    2.  [Usuarios de Mac (OSX)](#orgd379fd2)
+        1.  [Emuladores de terminal](#orgaff2b80)
+        2.  [Editores de texto](#org4656b9f)
+    3.  [Usuarios de Linux](#org9a144e0)
+        1.  [Emuladores de terminal](#orgfd1c4bf)
+        2.  [Editores de texto](#org78ebab2)
+    4.  [Análisis estadístico](#org56ccb01)
+3.  [Lecturas recomendadas](#org32ae1b0)
+    1.  [](#orgdb81949)
 
 
 
-<a id="orgf31c125"></a>
+<a id="org4cb3f36"></a>
 
 # Estructura del curso
 
 
-<a id="org274c64f"></a>
+<a id="org44af1a2"></a>
 
 ## TODO Dia 1
 
 
-<a id="org88d9250"></a>
+<a id="org4a2728a"></a>
 
 ### TODO Introduccion a unix
 
 
-<a id="org537f42c"></a>
+<a id="orga9304e6"></a>
 
 ### TODO Introduccion al cluster de computo
 
 
-<a id="orge7325aa"></a>
+<a id="org4d8db05"></a>
 
 ## TODO Dia 2
 
 
-<a id="org4df7e51"></a>
+<a id="orgf29ee58"></a>
 
 ## TODO Dia 3
 
 
-<a id="orgeee5af0"></a>
+<a id="org4fa2736"></a>
 
 ## TODO Dia 4
 
 
-<a id="org3cb2ac5"></a>
+<a id="org9cca4ca"></a>
 
 ## TODO Dia 5
 
 
-<a id="org3d8ef55"></a>
+<a id="orga173e58"></a>
 
 # Programas y herramientas requeridos
 
 
-<a id="org637c320"></a>
+<a id="org2fa0694"></a>
 
 ## Usuarios de Windows
 
 
-<a id="orgfbe7ac0"></a>
+<a id="orgd895a32"></a>
 
 ### Emuladores de UNIX
 
@@ -83,7 +83,7 @@
 -   [ ] Es posible [instalar la terminal de Ubuntu en Windows 10](https://discourse.ubuntu.com/t/instalacion-de-ubuntu-en-windows-10/14949)
 
 
-<a id="orgdb35647"></a>
+<a id="org5239d5c"></a>
 
 ### Editores de texto
 
@@ -93,12 +93,12 @@
 -   [ ] [gEdit](https://gedit.en.softonic.com/)
 
 
-<a id="org5dd68ce"></a>
+<a id="orgd379fd2"></a>
 
 ## Usuarios de Mac (OSX)
 
 
-<a id="orgd278778"></a>
+<a id="orgaff2b80"></a>
 
 ### Emuladores de terminal
 
@@ -106,7 +106,7 @@
 -   [ ] [iTerm2](https://iterm2.com/)
 
 
-<a id="org97807d1"></a>
+<a id="org4656b9f"></a>
 
 ### Editores de texto
 
@@ -119,12 +119,12 @@
 -   [ ] [Emacs](https://www.gnu.org/software/emacs/) <sup><a id="fnr.2.100" class="footref" href="#fn.2">2</a></sup>
 
 
-<a id="org22c0ba2"></a>
+<a id="org9a144e0"></a>
 
 ## Usuarios de Linux
 
 
-<a id="org37ef950"></a>
+<a id="orgfd1c4bf"></a>
 
 ### Emuladores de terminal
 
@@ -133,7 +133,7 @@
 -   [ ] [Tilix](https://gnunn1.github.io/tilix-web/)
 
 
-<a id="orgb947790"></a>
+<a id="org78ebab2"></a>
 
 ### Editores de texto
 
@@ -146,21 +146,21 @@
 -   [ ] [Emacs](https://www.gnu.org/software/emacs/) <sup><a id="fnr.2.100" class="footref" href="#fn.2">2</a></sup>
 
 
-<a id="org90caf78"></a>
+<a id="org56ccb01"></a>
 
-## R \faRProject
+## Análisis estadístico
 
 Usaremos el paquete estadístico R para hacer algunos análisis/gráficos.
 Recomendamos el uso de RStudio, que es un ambiente de desarollo que
 complementa a R. RStudio está disponible para descarga [aquí.](https://www.rstudio.com/products/rstudio/download/)
 
 
-<a id="orgbbba9db"></a>
+<a id="org32ae1b0"></a>
 
 # Lecturas recomendadas
 
 
-<a id="orgc4a9cf6"></a>
+<a id="orgdb81949"></a>
 
 ## TODO 
 
