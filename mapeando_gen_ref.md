@@ -1,87 +1,87 @@
 
 # Table of Contents
 
-1.  [Mapeo: Motivación](#orgd0f1784)
-    1.  [Descripción general](#org3ba1e8b)
-2.  [Mapeo: Calidad de los datos de lectura](#orge634496)
-    1.  [Estructura de los datos: El formato `fastq`](#orga592532)
-    2.  [Puntajes de calidad](#org9fad90e)
-    3.  [Evaluando la calidad](#org2cfab8d)
-    4.  [Buenas y malas calidades](#orgcb72a9c)
-    5.  [Potenicales soluciones cuando la calidad no es buena](#org3b9d5bd)
-    6.  [Analizando las calidades de las lecturas](#org6b9f82e)
-3.  [Mapeo: Genoma de referencia](#org2691b42)
-    1.  [Construcción y ensamblaje](#orgeacb725)
-    2.  [Estándares de calidad y herramientas complementarias](#orgd9b191d)
-    3.  [Descargando un genoma de referencia](#org5ba2a53)
-4.  [Mapeo: Pasos y herramientas](#org50317a2)
-    1.  [Preparando los archivos](#orgdce50da)
-    2.  [Alineamiento de las lecturas](#org890d65b)
-    3.  [Estadísticas del alineamiento](#orgacadf66)
-    4.  [Otros procesos posteriores](#orgd3e0fb8)
+1.  [Mapeo: Motivación](#org9497b53)
+    1.  [Descripción general](#orgb3356a7)
+2.  [Mapeo: Calidad de los datos de lectura](#org6bdd1ba)
+    1.  [Estructura de los datos: El formato `fastq`](#orgb37b37c)
+    2.  [Puntajes de calidad](#orga3138e5)
+    3.  [Evaluando la calidad](#orgf578c71)
+    4.  [Buenas y malas calidades](#orgf602b95)
+    5.  [Potenicales soluciones cuando la calidad no es buena](#orgf5e7150)
+    6.  [Analizando las calidades de las lecturas](#orga601ebd)
+3.  [Mapeo: Genoma de referencia](#org0022204)
+    1.  [Construcción y ensamblaje](#org8c7f073)
+    2.  [Estándares de calidad y herramientas complementarias](#org01ffeac)
+    3.  [Descargando un genoma de referencia](#org2b915f8)
+4.  [Mapeo: Pasos y herramientas](#orge65c1cc)
+    1.  [Preparando los archivos](#org5ddb65d)
+    2.  [Alineamiento de las lecturas](#org01049f3)
+    3.  [Estadísticas del alineamiento](#org3e31102)
+    4.  [Otros procesos posteriores](#org2a75d76)
 
 
-<a id="orgd0f1784"></a>
+<a id="org9497b53"></a>
 
 # TODO Mapeo: Motivación
 
 
-<a id="org3ba1e8b"></a>
+<a id="orgb3356a7"></a>
 
 ## TODO Descripción general
 
 
-<a id="orge634496"></a>
+<a id="org6bdd1ba"></a>
 
 # TODO Mapeo: Calidad de los datos de lectura
 
 
-<a id="orga592532"></a>
+<a id="orgb37b37c"></a>
 
 ## TODO Estructura de los datos: El formato `fastq`
 
 
-<a id="org9fad90e"></a>
+<a id="orga3138e5"></a>
 
 ## TODO Puntajes de calidad
 
 
-<a id="org2cfab8d"></a>
+<a id="orgf578c71"></a>
 
 ## TODO Evaluando la calidad
 
 
-<a id="orgcb72a9c"></a>
+<a id="orgf602b95"></a>
 
 ## TODO Buenas y malas calidades
 
 
-<a id="org3b9d5bd"></a>
+<a id="orgf5e7150"></a>
 
 ## TODO Potenicales soluciones cuando la calidad no es buena
 
 
-<a id="org6b9f82e"></a>
+<a id="orga601ebd"></a>
 
 ## TODO Analizando las calidades de las lecturas
 
 
-<a id="org2691b42"></a>
+<a id="org0022204"></a>
 
 # TODO Mapeo: Genoma de referencia
 
 
-<a id="orgeacb725"></a>
+<a id="org8c7f073"></a>
 
 ## TODO Construcción y ensamblaje
 
 
-<a id="orgd9b191d"></a>
+<a id="org01ffeac"></a>
 
 ## TODO Estándares de calidad y herramientas complementarias
 
 
-<a id="org5ba2a53"></a>
+<a id="org2b915f8"></a>
 
 ## TODO Descargando un genoma de referencia
 
@@ -105,12 +105,12 @@ Sigue estos pasos para descargarlo:
     copiaste.
 
 
-<a id="org50317a2"></a>
+<a id="orge65c1cc"></a>
 
 # TODO Mapeo: Pasos y herramientas
 
 
-<a id="orgdce50da"></a>
+<a id="org5ddb65d"></a>
 
 ## TODO Preparando los archivos
 
@@ -135,7 +135,7 @@ Sigue estos pasos para descargarlo:
     Columna 5: El identificador de la referencia
 
 
-<a id="org890d65b"></a>
+<a id="org01049f3"></a>
 
 ## TODO Alineamiento de las lecturas
 
@@ -184,7 +184,7 @@ Sigue estos pasos para descargarlo:
     recomendable hacer dos alineamientos y luego unirlos usando otras
     herramientas. Para establecer el readgroup usamos la opción `-R` seguida
     de la siguiente cadena de caracteres usando comillas dobles:
-    `` ``@RG\tID:id_muestra\tSM:id_muestra\tPL:Illumina'' ``. Si revisamos esta
+    `"@RG\tID:id_muestra\tSM:id_muestra\tPL:Illumina"`. Si revisamos esta
     expresión en detalle consta de tres campos separados por tabulación
     (`\t`). El primero (`ID`) corresponde al identificador del corrido de
     secuenciación, que normalmente corresponde a uno de los carriles de la
@@ -198,7 +198,7 @@ Sigue estos pasos para descargarlo:
 -   [ ] 
 
 
-<a id="orgacadf66"></a>
+<a id="org3e31102"></a>
 
 ## TODO Estadísticas del alineamiento
 
@@ -211,7 +211,7 @@ Sigue estos pasos para descargarlo:
 -   [ ] 
 
 
-<a id="orgd3e0fb8"></a>
+<a id="org2a75d76"></a>
 
 ## TODO Otros procesos posteriores
 
