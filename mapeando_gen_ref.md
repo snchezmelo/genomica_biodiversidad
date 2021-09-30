@@ -1,87 +1,87 @@
 
 # Table of Contents
 
-1.  [Mapeo: Motivación](#orgfd436eb)
-    1.  [Descripción general](#org126ab87)
-2.  [Mapeo: Calidad de los datos de lectura](#org0961ebb)
-    1.  [Estructura de los datos: El formato `fastq`](#org5ff69e1)
-    2.  [Puntajes de calidad](#org9f7d825)
-    3.  [Evaluando la calidad](#org42bc9d3)
-    4.  [Buenas y malas calidades](#org9239704)
-    5.  [Potenicales soluciones cuando la calidad no es buena](#org13475a8)
-    6.  [Analizando las calidades de las lecturas](#org13a3ac6)
-3.  [Mapeo: Genoma de referencia](#org8358ca2)
-    1.  [Construcción y ensamblaje](#org05f04ca)
-    2.  [Estándares de calidad y herramientas complementarias](#orge434e12)
-    3.  [Descargando un genoma de referencia](#orgef94086)
-4.  [Mapeo: Pasos y herramientas](#orgb4ffbac)
-    1.  [Preparando los archivos](#org9eea203)
-    2.  [Alineamiento de las lecturas](#org27a4917)
-    3.  [Estadísticas del alineamiento](#org912ebb7)
-    4.  [Otros procesos posteriores](#org27a5604)
+1.  [Mapeo: Motivación](#org77db166)
+    1.  [Descripción general](#org1d5ec14)
+2.  [Mapeo: Calidad de los datos de lectura](#org8663bda)
+    1.  [Estructura de los datos: El formato `fastq`](#org34da7bf)
+    2.  [Puntajes de calidad](#org2aa2de7)
+    3.  [Evaluando la calidad](#org0c0decf)
+    4.  [Buenas y malas calidades](#org0935d6e)
+    5.  [Potenicales soluciones cuando la calidad no es buena](#org97c9f0b)
+    6.  [Analizando las calidades de las lecturas](#org55cd30c)
+3.  [Mapeo: Genoma de referencia](#orgda03948)
+    1.  [Construcción y ensamblaje](#org1e0933d)
+    2.  [Estándares de calidad y herramientas complementarias](#orga5e7a6d)
+    3.  [Descargando un genoma de referencia](#orga94852f)
+4.  [Mapeo: Pasos y herramientas](#org5cfa15a)
+    1.  [Preparando los archivos](#org3d6249c)
+    2.  [Alineamiento de las lecturas](#org7431730)
+    3.  [Estadísticas del alineamiento](#org4bfb06a)
+    4.  [Otros procesos posteriores](#orge2ab40a)
 
 
-<a id="orgfd436eb"></a>
+<a id="org77db166"></a>
 
 # TODO Mapeo: Motivación
 
 
-<a id="org126ab87"></a>
+<a id="org1d5ec14"></a>
 
 ## TODO Descripción general
 
 
-<a id="org0961ebb"></a>
+<a id="org8663bda"></a>
 
 # TODO Mapeo: Calidad de los datos de lectura
 
 
-<a id="org5ff69e1"></a>
+<a id="org34da7bf"></a>
 
 ## TODO Estructura de los datos: El formato `fastq`
 
 
-<a id="org9f7d825"></a>
+<a id="org2aa2de7"></a>
 
 ## TODO Puntajes de calidad
 
 
-<a id="org42bc9d3"></a>
+<a id="org0c0decf"></a>
 
 ## TODO Evaluando la calidad
 
 
-<a id="org9239704"></a>
+<a id="org0935d6e"></a>
 
 ## TODO Buenas y malas calidades
 
 
-<a id="org13475a8"></a>
+<a id="org97c9f0b"></a>
 
 ## TODO Potenicales soluciones cuando la calidad no es buena
 
 
-<a id="org13a3ac6"></a>
+<a id="org55cd30c"></a>
 
 ## TODO Analizando las calidades de las lecturas
 
 
-<a id="org8358ca2"></a>
+<a id="orgda03948"></a>
 
 # TODO Mapeo: Genoma de referencia
 
 
-<a id="org05f04ca"></a>
+<a id="org1e0933d"></a>
 
 ## TODO Construcción y ensamblaje
 
 
-<a id="orge434e12"></a>
+<a id="orga5e7a6d"></a>
 
 ## TODO Estándares de calidad y herramientas complementarias
 
 
-<a id="orgef94086"></a>
+<a id="orga94852f"></a>
 
 ## TODO Descargando un genoma de referencia
 
@@ -91,13 +91,13 @@ Sigue estos pasos para descargarlo:
 
 1.  [ ] Ve al sitio web de [lepbase](http://lepbase.org/)
 2.  [ ] Haz click en el botón señalado por las flechas (Downloads)   
-    ![img](../Imagenes/Lepbase_S1.png)
+    ![img](./Imagenes/Lepbase_S1.png)
 3.  [ ] En Downloads, escoge la carpeta que dice `v4`   
-    ![img](../Imagenes/Lepbase_S2.png)
+    ![img](./Imagenes/Lepbase_S2.png)
 4.  [ ] Dentro de `v4` ve a la carpeta `sequence`   
-    ![img](../Imagenes/Lepbase_S3.png)
+    ![img](./Imagenes/Lepbase_S3.png)
 5.  [ ] Dentro de `sequence` busca `Heliconius_melpomene_melpomene_Hmel2.5.scafolds.fa.gz`   
-    ![img](../Imagenes/Lepbase_S4.png)
+    ![img](./Imagenes/Lepbase_S4.png)
 6.  [ ] Dale click derecho al enlace y selecciona `Copiar enlace`
 7.  [ ] Ve a tu carpeta de trabajo en el cluster y crea una nueva carpeta
     llamada `ref_hmel2.5`, cambia de directorio a esta carpeta.
@@ -105,12 +105,12 @@ Sigue estos pasos para descargarlo:
     copiaste.
 
 
-<a id="orgb4ffbac"></a>
+<a id="org5cfa15a"></a>
 
 # TODO Mapeo: Pasos y herramientas
 
 
-<a id="org9eea203"></a>
+<a id="org3d6249c"></a>
 
 ## TODO Preparando los archivos
 
@@ -135,7 +135,7 @@ Sigue estos pasos para descargarlo:
     Columna 5: El identificador de la referencia
 
 
-<a id="org27a4917"></a>
+<a id="org7431730"></a>
 
 ## TODO Alineamiento de las lecturas
 
@@ -186,7 +186,7 @@ Sigue estos pasos para descargarlo:
 -   [ ] 
 
 
-<a id="org912ebb7"></a>
+<a id="org4bfb06a"></a>
 
 ## TODO Estadísticas del alineamiento
 
@@ -199,7 +199,7 @@ Sigue estos pasos para descargarlo:
 -   [ ] 
 
 
-<a id="org27a5604"></a>
+<a id="orge2ab40a"></a>
 
 ## TODO Otros procesos posteriores
 
