@@ -1,89 +1,89 @@
 
 # Table of Contents
 
-1.  [Mapeo: Motivación](#orgb9d96c1)
-    1.  [Descripción general](#orgb7ace46)
-2.  [Mapeo: Calidad de los datos de lectura](#orgbf27a46)
-    1.  [Estructura de los datos: El formato `fastq`](#org3bd4eac)
-    2.  [Puntajes de calidad](#orgd10ca1f)
-    3.  [Evaluando la calidad](#orgf5d0b4f)
-    4.  [Buenas y malas calidades](#org2d36663)
-    5.  [Potenicales soluciones cuando la calidad no es buena](#org3cf57d2)
-    6.  [Analizando las calidades de las lecturas](#orgb4f7bfd)
-3.  [Mapeo: Genoma de referencia](#orga103a9e)
-    1.  [Construcción y ensamblaje](#orgc2d42f7)
-    2.  [Estándares de calidad y herramientas complementarias](#org6f66d78)
-    3.  [Descargando un genoma de referencia](#org1f821b6)
-4.  [Mapeo: Pasos y herramientas](#org144f830)
-    1.  [Preparando los archivos](#org21cea73)
-    2.  [Alineamiento de las lecturas](#org1b2e337)
-    3.  [Quitando duplicados de PCR](#org6409fd6)
-    4.  [Estadísticas del alineamiento](#org89e7da0)
-    5.  [Otros procesos posteriores](#org1872ebe)
+1.  [Mapeo: Motivación](#org5021602)
+    1.  [Descripción general](#org784f688)
+2.  [Mapeo: Calidad de los datos de lectura](#org7f279f0)
+    1.  [Estructura de los datos: El formato `fastq`](#org35aad2c)
+    2.  [Puntajes de calidad](#org760b29a)
+    3.  [Evaluando la calidad](#org80fc2ac)
+    4.  [Buenas y malas calidades](#orgcf04364)
+    5.  [Potenicales soluciones cuando la calidad no es buena](#orge371fb6)
+    6.  [Analizando las calidades de las lecturas](#orgf8f78c4)
+3.  [Mapeo: Genoma de referencia](#org6766ec3)
+    1.  [Construcción y ensamblaje](#orge4dcb01)
+    2.  [Estándares de calidad y herramientas complementarias](#orgf7bc610)
+    3.  [Descargando un genoma de referencia](#org84ace29)
+4.  [Mapeo: Pasos y herramientas](#org9d6144f)
+    1.  [Preparando los archivos](#org07a81dc)
+    2.  [Alineamiento de las lecturas](#orgdc654bb)
+    3.  [Quitando duplicados de PCR](#org7ce560b)
+    4.  [Estadísticas del alineamiento](#org8d4bec2)
+    5.  [Otros procesos posteriores](#orgdcf7a22)
 
 
 
-<a id="orgb9d96c1"></a>
+<a id="org5021602"></a>
 
 # TODO Mapeo: Motivación
 
 
-<a id="orgb7ace46"></a>
+<a id="org784f688"></a>
 
 ## TODO Descripción general
 
 
-<a id="orgbf27a46"></a>
+<a id="org7f279f0"></a>
 
 # TODO Mapeo: Calidad de los datos de lectura
 
 
-<a id="org3bd4eac"></a>
+<a id="org35aad2c"></a>
 
 ## TODO Estructura de los datos: El formato `fastq`
 
 
-<a id="orgd10ca1f"></a>
+<a id="org760b29a"></a>
 
 ## TODO Puntajes de calidad
 
 
-<a id="orgf5d0b4f"></a>
+<a id="org80fc2ac"></a>
 
 ## TODO Evaluando la calidad
 
 
-<a id="org2d36663"></a>
+<a id="orgcf04364"></a>
 
 ## TODO Buenas y malas calidades
 
 
-<a id="org3cf57d2"></a>
+<a id="orge371fb6"></a>
 
 ## TODO Potenicales soluciones cuando la calidad no es buena
 
 
-<a id="orgb4f7bfd"></a>
+<a id="orgf8f78c4"></a>
 
 ## TODO Analizando las calidades de las lecturas
 
 
-<a id="orga103a9e"></a>
+<a id="org6766ec3"></a>
 
 # TODO Mapeo: Genoma de referencia
 
 
-<a id="orgc2d42f7"></a>
+<a id="orge4dcb01"></a>
 
 ## TODO Construcción y ensamblaje
 
 
-<a id="org6f66d78"></a>
+<a id="orgf7bc610"></a>
 
 ## TODO Estándares de calidad y herramientas complementarias
 
 
-<a id="org1f821b6"></a>
+<a id="org84ace29"></a>
 
 ## TODO Descargando un genoma de referencia
 
@@ -107,12 +107,12 @@ Sigue estos pasos para descargarlo:
     copiaste.
 
 
-<a id="org144f830"></a>
+<a id="org9d6144f"></a>
 
 # TODO Mapeo: Pasos y herramientas
 
 
-<a id="org21cea73"></a>
+<a id="org07a81dc"></a>
 
 ## TODO Preparando los archivos
 
@@ -137,7 +137,7 @@ Sigue estos pasos para descargarlo:
     Columna 5: El identificador de la referencia
 
 
-<a id="org1b2e337"></a>
+<a id="orgdc654bb"></a>
 
 ## TODO Alineamiento de las lecturas
 
@@ -214,14 +214,14 @@ Sigue estos pasos para descargarlo:
 -   [ ] 
 
 
-<a id="org6409fd6"></a>
+<a id="org7ce560b"></a>
 
 ## TODO Quitando duplicados de PCR
 
 -   [ ] Tenemos que quitar los duplicados de PCR <sup id="4a609d15b2eb65a1df223b53e3bd2f28"><a href="#Ebbert2016" title="Mark Ebbert, , Mark Wadsworth, Lyndsay Staley, Kaitlyn Hoyt, Brandon Pickett, Justin Miller, John Duce, John Kauwe \&amp; Perry Ridge, Evaluating the necessity of {PCR} duplicate removal from next-generation sequencing data and a comparison of approaches, {{BMC} Bioinformatics}, v(S7), (2016).">Ebbert2016</a></sup>.
 
 
-<a id="org89e7da0"></a>
+<a id="org8d4bec2"></a>
 
 ## TODO Estadísticas del alineamiento
 
@@ -234,7 +234,7 @@ Sigue estos pasos para descargarlo:
 -   [ ] 
 
 
-<a id="org1872ebe"></a>
+<a id="orgdcf7a22"></a>
 
 ## TODO Otros procesos posteriores
 
