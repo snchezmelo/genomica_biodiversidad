@@ -1,87 +1,87 @@
 
 # Table of Contents
 
-1.  [Mapeo: Motivación](#org9497b53)
-    1.  [Descripción general](#orgb3356a7)
-2.  [Mapeo: Calidad de los datos de lectura](#org6bdd1ba)
-    1.  [Estructura de los datos: El formato `fastq`](#orgb37b37c)
-    2.  [Puntajes de calidad](#orga3138e5)
-    3.  [Evaluando la calidad](#orgf578c71)
-    4.  [Buenas y malas calidades](#orgf602b95)
-    5.  [Potenicales soluciones cuando la calidad no es buena](#orgf5e7150)
-    6.  [Analizando las calidades de las lecturas](#orga601ebd)
-3.  [Mapeo: Genoma de referencia](#org0022204)
-    1.  [Construcción y ensamblaje](#org8c7f073)
-    2.  [Estándares de calidad y herramientas complementarias](#org01ffeac)
-    3.  [Descargando un genoma de referencia](#org2b915f8)
-4.  [Mapeo: Pasos y herramientas](#orge65c1cc)
-    1.  [Preparando los archivos](#org5ddb65d)
-    2.  [Alineamiento de las lecturas](#org01049f3)
-    3.  [Estadísticas del alineamiento](#org3e31102)
-    4.  [Otros procesos posteriores](#org2a75d76)
+1.  [Mapeo: Motivación](#org72d55a9)
+    1.  [Descripción general](#orgff8d5c1)
+2.  [Mapeo: Calidad de los datos de lectura](#org1458de6)
+    1.  [Estructura de los datos: El formato `fastq`](#org4e4f1bb)
+    2.  [Puntajes de calidad](#org559e819)
+    3.  [Evaluando la calidad](#org8831c14)
+    4.  [Buenas y malas calidades](#orgb872b28)
+    5.  [Potenicales soluciones cuando la calidad no es buena](#org6b79bf1)
+    6.  [Analizando las calidades de las lecturas](#orga32ab70)
+3.  [Mapeo: Genoma de referencia](#org3570007)
+    1.  [Construcción y ensamblaje](#org2429611)
+    2.  [Estándares de calidad y herramientas complementarias](#org1f22e51)
+    3.  [Descargando un genoma de referencia](#orgcb7b6ab)
+4.  [Mapeo: Pasos y herramientas](#orgd74d9e7)
+    1.  [Preparando los archivos](#orgd7bf629)
+    2.  [Alineamiento de las lecturas](#org831c1a0)
+    3.  [Estadísticas del alineamiento](#org5c3bd1b)
+    4.  [Otros procesos posteriores](#org4ae8049)
 
 
-<a id="org9497b53"></a>
+<a id="org72d55a9"></a>
 
 # TODO Mapeo: Motivación
 
 
-<a id="orgb3356a7"></a>
+<a id="orgff8d5c1"></a>
 
 ## TODO Descripción general
 
 
-<a id="org6bdd1ba"></a>
+<a id="org1458de6"></a>
 
 # TODO Mapeo: Calidad de los datos de lectura
 
 
-<a id="orgb37b37c"></a>
+<a id="org4e4f1bb"></a>
 
 ## TODO Estructura de los datos: El formato `fastq`
 
 
-<a id="orga3138e5"></a>
+<a id="org559e819"></a>
 
 ## TODO Puntajes de calidad
 
 
-<a id="orgf578c71"></a>
+<a id="org8831c14"></a>
 
 ## TODO Evaluando la calidad
 
 
-<a id="orgf602b95"></a>
+<a id="orgb872b28"></a>
 
 ## TODO Buenas y malas calidades
 
 
-<a id="orgf5e7150"></a>
+<a id="org6b79bf1"></a>
 
 ## TODO Potenicales soluciones cuando la calidad no es buena
 
 
-<a id="orga601ebd"></a>
+<a id="orga32ab70"></a>
 
 ## TODO Analizando las calidades de las lecturas
 
 
-<a id="org0022204"></a>
+<a id="org3570007"></a>
 
 # TODO Mapeo: Genoma de referencia
 
 
-<a id="org8c7f073"></a>
+<a id="org2429611"></a>
 
 ## TODO Construcción y ensamblaje
 
 
-<a id="org01ffeac"></a>
+<a id="org1f22e51"></a>
 
 ## TODO Estándares de calidad y herramientas complementarias
 
 
-<a id="org2b915f8"></a>
+<a id="orgcb7b6ab"></a>
 
 ## TODO Descargando un genoma de referencia
 
@@ -105,12 +105,12 @@ Sigue estos pasos para descargarlo:
     copiaste.
 
 
-<a id="orge65c1cc"></a>
+<a id="orgd74d9e7"></a>
 
 # TODO Mapeo: Pasos y herramientas
 
 
-<a id="org5ddb65d"></a>
+<a id="orgd7bf629"></a>
 
 ## TODO Preparando los archivos
 
@@ -135,7 +135,7 @@ Sigue estos pasos para descargarlo:
     Columna 5: El identificador de la referencia
 
 
-<a id="org01049f3"></a>
+<a id="org831c1a0"></a>
 
 ## TODO Alineamiento de las lecturas
 
@@ -177,28 +177,45 @@ Sigue estos pasos para descargarlo:
     marcar los alineamientos más cortos como secundarios (para que los
     alineamientos sean compatibles con `picard`).
     
-     Tal vez la parte más importante de este paso es establecer el **read
+    Tal vez la parte más importante de este paso es establecer el **read
     group**. En este caso podemos asumir que cada muestra fue secuenciada una
     sola vez y en un solo instrumento, luego tenemos un solo **read group** por
     muestra. Si tuviéramos más de un **read group** por muestra sería
     recomendable hacer dos alineamientos y luego unirlos usando otras
-    herramientas. Para establecer el readgroup usamos la opción `-R` seguida
+    herramientas. Para establecer el read group usamos la opción `-R` seguida
     de la siguiente cadena de caracteres usando comillas dobles:
     `"@RG\tID:id_muestra\tSM:id_muestra\tPL:Illumina"`. Si revisamos esta
     expresión en detalle consta de tres campos separados por tabulación
-    (`\t`). El primero (`ID`) corresponde al identificador del corrido de
+    (`\t`). El primero, (`ID`), corresponde al identificador del corrido de
     secuenciación, que normalmente corresponde a uno de los carriles de la
     máquina secuenciadora. El segundo (`SM`) corresponde al identificador de
     la muestra. El tercero (`PL`) corresponde a la plataforma usada para
     secuenciar. En el caso de los datos de *Heliconius* la plataforma
     utilizada para todas las muestras fue Illuimina. En cada caso debes
     cambiar `id_muestra` por el identificador asociado a cada muestra.
--   [ ] 
+    Establece el read group correctamente usando la opción `-R` y los detales
+    correspondientes a cada muestra. Todas las muestras de *Heliconius* que
+    usaremos fueron secuenciadas usando la plataforma `Illumina`.
+    
+    Los tres argumentos siguientes son la ruta de la referencia y la ruta de
+    los archivos de lectura (R1 y luego R2). Asegúrate de especificar rutas
+    absolutas para los tres archivos.
+    
+    La salida por defecto de `bwa mem` es la **salida estándar**; esto significa
+    que debemos re-dirigir los resultados con el operador adecuado hacia un
+    archivo que va a contener todos los alineamientos de nuestras lecturas
+    contra la referencia. Dale a este nuevo archivo un nombre informativo que
+    contenga el identificador de la muestra, una pieza corta de información
+    sobre la referencia usada para alinear, y la extensión de archivo `.sam`
+    (\*s\*equence \*a\*lignment \*m\*ap).
+
+-   [ ] Es necesario hacer un cambio de formato luego de hacer el alineamiento
+    con `bwa`.
 
 -   [ ] 
 
 
-<a id="org3e31102"></a>
+<a id="org5c3bd1b"></a>
 
 ## TODO Estadísticas del alineamiento
 
@@ -211,7 +228,7 @@ Sigue estos pasos para descargarlo:
 -   [ ] 
 
 
-<a id="org2a75d76"></a>
+<a id="org4ae8049"></a>
 
 ## TODO Otros procesos posteriores
 
