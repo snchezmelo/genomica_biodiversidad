@@ -1,87 +1,87 @@
 
 # Table of Contents
 
-1.  [Mapeo: Motivación](#org72d55a9)
-    1.  [Descripción general](#orgff8d5c1)
-2.  [Mapeo: Calidad de los datos de lectura](#org1458de6)
-    1.  [Estructura de los datos: El formato `fastq`](#org4e4f1bb)
-    2.  [Puntajes de calidad](#org559e819)
-    3.  [Evaluando la calidad](#org8831c14)
-    4.  [Buenas y malas calidades](#orgb872b28)
-    5.  [Potenicales soluciones cuando la calidad no es buena](#org6b79bf1)
-    6.  [Analizando las calidades de las lecturas](#orga32ab70)
-3.  [Mapeo: Genoma de referencia](#org3570007)
-    1.  [Construcción y ensamblaje](#org2429611)
-    2.  [Estándares de calidad y herramientas complementarias](#org1f22e51)
-    3.  [Descargando un genoma de referencia](#orgcb7b6ab)
-4.  [Mapeo: Pasos y herramientas](#orgd74d9e7)
-    1.  [Preparando los archivos](#orgd7bf629)
-    2.  [Alineamiento de las lecturas](#org831c1a0)
-    3.  [Estadísticas del alineamiento](#org5c3bd1b)
-    4.  [Otros procesos posteriores](#org4ae8049)
+1.  [Mapeo: Motivación](#org42d91c7)
+    1.  [Descripción general](#org7eb3f89)
+2.  [Mapeo: Calidad de los datos de lectura](#orgb43c625)
+    1.  [Estructura de los datos: El formato `fastq`](#orgc3d341f)
+    2.  [Puntajes de calidad](#org9b459d3)
+    3.  [Evaluando la calidad](#orgf8c265e)
+    4.  [Buenas y malas calidades](#org4e7b3ff)
+    5.  [Potenicales soluciones cuando la calidad no es buena](#org8f9806b)
+    6.  [Analizando las calidades de las lecturas](#orgb3bd2d8)
+3.  [Mapeo: Genoma de referencia](#orgaf27222)
+    1.  [Construcción y ensamblaje](#org6d8bc27)
+    2.  [Estándares de calidad y herramientas complementarias](#orgc80907a)
+    3.  [Descargando un genoma de referencia](#org4400f6d)
+4.  [Mapeo: Pasos y herramientas](#orga828726)
+    1.  [Preparando los archivos](#orgfbcd3c3)
+    2.  [Alineamiento de las lecturas](#org091ae5c)
+    3.  [Estadísticas del alineamiento](#orgf4a8e48)
+    4.  [Otros procesos posteriores](#org1d7eaee)
 
 
-<a id="org72d55a9"></a>
+<a id="org42d91c7"></a>
 
 # TODO Mapeo: Motivación
 
 
-<a id="orgff8d5c1"></a>
+<a id="org7eb3f89"></a>
 
 ## TODO Descripción general
 
 
-<a id="org1458de6"></a>
+<a id="orgb43c625"></a>
 
 # TODO Mapeo: Calidad de los datos de lectura
 
 
-<a id="org4e4f1bb"></a>
+<a id="orgc3d341f"></a>
 
 ## TODO Estructura de los datos: El formato `fastq`
 
 
-<a id="org559e819"></a>
+<a id="org9b459d3"></a>
 
 ## TODO Puntajes de calidad
 
 
-<a id="org8831c14"></a>
+<a id="orgf8c265e"></a>
 
 ## TODO Evaluando la calidad
 
 
-<a id="orgb872b28"></a>
+<a id="org4e7b3ff"></a>
 
 ## TODO Buenas y malas calidades
 
 
-<a id="org6b79bf1"></a>
+<a id="org8f9806b"></a>
 
 ## TODO Potenicales soluciones cuando la calidad no es buena
 
 
-<a id="orga32ab70"></a>
+<a id="orgb3bd2d8"></a>
 
 ## TODO Analizando las calidades de las lecturas
 
 
-<a id="org3570007"></a>
+<a id="orgaf27222"></a>
 
 # TODO Mapeo: Genoma de referencia
 
 
-<a id="org2429611"></a>
+<a id="org6d8bc27"></a>
 
 ## TODO Construcción y ensamblaje
 
 
-<a id="org1f22e51"></a>
+<a id="orgc80907a"></a>
 
 ## TODO Estándares de calidad y herramientas complementarias
 
 
-<a id="orgcb7b6ab"></a>
+<a id="org4400f6d"></a>
 
 ## TODO Descargando un genoma de referencia
 
@@ -105,12 +105,12 @@ Sigue estos pasos para descargarlo:
     copiaste.
 
 
-<a id="orgd74d9e7"></a>
+<a id="orga828726"></a>
 
 # TODO Mapeo: Pasos y herramientas
 
 
-<a id="orgd7bf629"></a>
+<a id="orgfbcd3c3"></a>
 
 ## TODO Preparando los archivos
 
@@ -135,7 +135,7 @@ Sigue estos pasos para descargarlo:
     Columna 5: El identificador de la referencia
 
 
-<a id="org831c1a0"></a>
+<a id="org091ae5c"></a>
 
 ## TODO Alineamiento de las lecturas
 
@@ -207,7 +207,7 @@ Sigue estos pasos para descargarlo:
     contra la referencia. Dale a este nuevo archivo un nombre informativo que
     contenga el identificador de la muestra, una pieza corta de información
     sobre la referencia usada para alinear, y la extensión de archivo `.sam`
-    (\*s\*equence \*a\*lignment \*m\*ap).
+    (\*\*s\*\*equence \*\*a\*\*lignment \*\*m\*\*ap).
 
 -   [ ] Es necesario hacer un cambio de formato luego de hacer el alineamiento
     con `bwa`.
@@ -215,7 +215,7 @@ Sigue estos pasos para descargarlo:
 -   [ ] 
 
 
-<a id="org5c3bd1b"></a>
+<a id="orgf4a8e48"></a>
 
 ## TODO Estadísticas del alineamiento
 
@@ -228,7 +228,7 @@ Sigue estos pasos para descargarlo:
 -   [ ] 
 
 
-<a id="org4ae8049"></a>
+<a id="org1d7eaee"></a>
 
 ## TODO Otros procesos posteriores
 
