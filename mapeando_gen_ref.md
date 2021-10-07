@@ -1,87 +1,89 @@
 
 # Table of Contents
 
-1.  [Mapeo: Motivación](#org0440fdd)
-    1.  [Descripción general](#org8d81356)
-2.  [Mapeo: Calidad de los datos de lectura](#org41e5ca3)
-    1.  [Estructura de los datos: El formato `fastq`](#org60bad2b)
-    2.  [Puntajes de calidad](#orgd82cd60)
-    3.  [Evaluando la calidad](#orga0153fd)
-    4.  [Buenas y malas calidades](#orgf5cf0e9)
-    5.  [Potenicales soluciones cuando la calidad no es buena](#org91514e8)
-    6.  [Analizando las calidades de las lecturas](#org5673335)
-3.  [Mapeo: Genoma de referencia](#orgde1a5e8)
-    1.  [Construcción y ensamblaje](#orgc7ee264)
-    2.  [Estándares de calidad y herramientas complementarias](#org1688056)
-    3.  [Descargando un genoma de referencia](#orgbd6349c)
-4.  [Mapeo: Pasos y herramientas](#orga2c2c93)
-    1.  [Preparando los archivos](#orgf0d9f22)
-    2.  [Alineamiento de las lecturas](#org1d209dd)
-    3.  [Estadísticas del alineamiento](#org68f27e4)
-    4.  [Otros procesos posteriores](#orgdbded6e)
+1.  [Mapeo: Motivación](#orgb9d96c1)
+    1.  [Descripción general](#orgb7ace46)
+2.  [Mapeo: Calidad de los datos de lectura](#orgbf27a46)
+    1.  [Estructura de los datos: El formato `fastq`](#org3bd4eac)
+    2.  [Puntajes de calidad](#orgd10ca1f)
+    3.  [Evaluando la calidad](#orgf5d0b4f)
+    4.  [Buenas y malas calidades](#org2d36663)
+    5.  [Potenicales soluciones cuando la calidad no es buena](#org3cf57d2)
+    6.  [Analizando las calidades de las lecturas](#orgb4f7bfd)
+3.  [Mapeo: Genoma de referencia](#orga103a9e)
+    1.  [Construcción y ensamblaje](#orgc2d42f7)
+    2.  [Estándares de calidad y herramientas complementarias](#org6f66d78)
+    3.  [Descargando un genoma de referencia](#org1f821b6)
+4.  [Mapeo: Pasos y herramientas](#org144f830)
+    1.  [Preparando los archivos](#org21cea73)
+    2.  [Alineamiento de las lecturas](#org1b2e337)
+    3.  [Quitando duplicados de PCR](#org6409fd6)
+    4.  [Estadísticas del alineamiento](#org89e7da0)
+    5.  [Otros procesos posteriores](#org1872ebe)
 
 
-<a id="org0440fdd"></a>
+
+<a id="orgb9d96c1"></a>
 
 # TODO Mapeo: Motivación
 
 
-<a id="org8d81356"></a>
+<a id="orgb7ace46"></a>
 
 ## TODO Descripción general
 
 
-<a id="org41e5ca3"></a>
+<a id="orgbf27a46"></a>
 
 # TODO Mapeo: Calidad de los datos de lectura
 
 
-<a id="org60bad2b"></a>
+<a id="org3bd4eac"></a>
 
 ## TODO Estructura de los datos: El formato `fastq`
 
 
-<a id="orgd82cd60"></a>
+<a id="orgd10ca1f"></a>
 
 ## TODO Puntajes de calidad
 
 
-<a id="orga0153fd"></a>
+<a id="orgf5d0b4f"></a>
 
 ## TODO Evaluando la calidad
 
 
-<a id="orgf5cf0e9"></a>
+<a id="org2d36663"></a>
 
 ## TODO Buenas y malas calidades
 
 
-<a id="org91514e8"></a>
+<a id="org3cf57d2"></a>
 
 ## TODO Potenicales soluciones cuando la calidad no es buena
 
 
-<a id="org5673335"></a>
+<a id="orgb4f7bfd"></a>
 
 ## TODO Analizando las calidades de las lecturas
 
 
-<a id="orgde1a5e8"></a>
+<a id="orga103a9e"></a>
 
 # TODO Mapeo: Genoma de referencia
 
 
-<a id="orgc7ee264"></a>
+<a id="orgc2d42f7"></a>
 
 ## TODO Construcción y ensamblaje
 
 
-<a id="org1688056"></a>
+<a id="org6f66d78"></a>
 
 ## TODO Estándares de calidad y herramientas complementarias
 
 
-<a id="orgbd6349c"></a>
+<a id="org1f821b6"></a>
 
 ## TODO Descargando un genoma de referencia
 
@@ -105,12 +107,12 @@ Sigue estos pasos para descargarlo:
     copiaste.
 
 
-<a id="orga2c2c93"></a>
+<a id="org144f830"></a>
 
 # TODO Mapeo: Pasos y herramientas
 
 
-<a id="orgf0d9f22"></a>
+<a id="org21cea73"></a>
 
 ## TODO Preparando los archivos
 
@@ -135,7 +137,7 @@ Sigue estos pasos para descargarlo:
     Columna 5: El identificador de la referencia
 
 
-<a id="org1d209dd"></a>
+<a id="org1b2e337"></a>
 
 ## TODO Alineamiento de las lecturas
 
@@ -203,12 +205,8 @@ Sigue estos pasos para descargarlo:
     
     La salida por defecto de `bwa mem` es la **salida estándar**; esto significa
     que debemos re-dirigir los resultados con el operador adecuado hacia un
-    archivo que va a contener todos los alineamientos de nuestras lecturas
-    contra la referencia. Dale a este nuevo archivo un nombre informativo que
-    contenga el identificador de la muestra, una pieza corta de información
-    sobre la referencia usada para alinear, y la extensión de archivo `.sam`
-    (<b>s</b>equence <b>a</b>lignment <b>m</b>ap). Con esto completamos
-    nuestro comando de `bwa` y podemos ejecutarlo para hacer el alineamiento.
+    archivo o hacia otro programa si queremos procesar directamente estos
+    datos de salida.
 
 -   [ ] Es necesario hacer un cambio de formato luego de hacer el alineamiento
     con `bwa`.
@@ -216,7 +214,14 @@ Sigue estos pasos para descargarlo:
 -   [ ] 
 
 
-<a id="org68f27e4"></a>
+<a id="org6409fd6"></a>
+
+## TODO Quitando duplicados de PCR
+
+-   [ ] Tenemos que quitar los duplicados de PCR <sup id="4a609d15b2eb65a1df223b53e3bd2f28"><a href="#Ebbert2016" title="Mark Ebbert, , Mark Wadsworth, Lyndsay Staley, Kaitlyn Hoyt, Brandon Pickett, Justin Miller, John Duce, John Kauwe \&amp; Perry Ridge, Evaluating the necessity of {PCR} duplicate removal from next-generation sequencing data and a comparison of approaches, {{BMC} Bioinformatics}, v(S7), (2016).">Ebbert2016</a></sup>.
+
+
+<a id="org89e7da0"></a>
 
 ## TODO Estadísticas del alineamiento
 
@@ -229,7 +234,7 @@ Sigue estos pasos para descargarlo:
 -   [ ] 
 
 
-<a id="orgdbded6e"></a>
+<a id="org1872ebe"></a>
 
 ## TODO Otros procesos posteriores
 
