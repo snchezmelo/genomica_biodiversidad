@@ -3,16 +3,18 @@
 
 1. [O que és *De novo*](#denovo)
 2. [Dato ejemplo](#dato)
-2. [STACKS](#stacks)
-	1. [*process_radtags*](#process_radtagd)
-	2. [*ustacks*](#ustacks)
-	3. [*sstacks*](#sstacks)
-	4. [*cstacks*](#cstacks)
-	5. [*tsv2bam*](#tsv2bam)
-	6. [*gstacks*](#gstacks)
-	7. [*populations*](#population)
+3. [STACKS](#stacks)
+	a. [*process_radtags*](#process_radtagd)
+	b. [*ustacks*](#ustacks)
+	c. [*sstacks*](#sstacks)
+	d. [*cstacks*](#cstacks)
+	e. [*tsv2bam*](#tsv2bam)
+	f. [*gstacks*](#gstacks)
+	g. [*populations*](#population)
 
-# O que és *De novo* <a name = "denovo"></a>
+# O que és *de novo* <a name = "denovo"></a>
+
+
 
 # Dato ejemplo <a name = "dato"></a>
 ### *Lupinus*
