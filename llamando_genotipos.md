@@ -1,29 +1,32 @@
 
 # Table of Contents
 
-1.  [Motivación](#org36dd12f)
-2.  [Sub-muestreando los alineamientos](#orge328509)
-    1.  [Extrayendo una región específica de los alineamientos](#org3ac24da)
-3.  [Llamando genotipos](#org3eaaeb6)
-    1.  [Verosimilitudes de genotipos](#org5a90d08)
-    2.  [Llamada de genotipos](#org6cc8d83)
-4.  [Revisando los resultados](#org951a9f4)
-    1.  [El formato VCF](#org5c35bdb)
-    2.  [Qué veo en mi archivo de resultados?](#orgfb0bd54)
+1.  [Motivación](#orga05cae8)
+2.  [Sub-muestreando los alineamientos](#org65830ac)
+    1.  [Extrayendo una región específica de los alineamientos](#org11c07ee)
+3.  [Llamando genotipos](#org352deab)
+    1.  [Verosimilitudes de genotipos](#orgedafec6)
+    2.  [Llamada de genotipos](#org85c6cc0)
+4.  [Operaciones con archivos VCF/BCF](#orgecc355c)
+    1.  [El formato VCF](#org2b0db65)
+    2.  [Qué veo en mi archivo de resultados?](#org069406f)
+    3.  [Extrayendo información](#orgc21e30c)
+    4.  [Tipos de variantes](#org0e875e8)
+    5.  [Filtrando sitios](#org48fea13)
 
 
 
-<a id="org36dd12f"></a>
+<a id="orga05cae8"></a>
 
 # TODO Motivación
 
 
-<a id="orge328509"></a>
+<a id="org65830ac"></a>
 
 # TODO Sub-muestreando los alineamientos
 
 
-<a id="org3ac24da"></a>
+<a id="org11c07ee"></a>
 
 ## TODO Extrayendo una región específica de los alineamientos
 
@@ -40,36 +43,71 @@
     necesarios. No olvides cargar el módulo de `samtools`.
 
 
-<a id="org3eaaeb6"></a>
+<a id="org352deab"></a>
 
 # TODO Llamando genotipos
 
 
-<a id="org5a90d08"></a>
+<a id="orgedafec6"></a>
 
 ## TODO Verosimilitudes de genotipos
 
 
-<a id="org6cc8d83"></a>
+<a id="org85c6cc0"></a>
 
 ## TODO Llamada de genotipos
 
+-   [ ] Inferencia de alelos:
 -   [ ] Recursos computacionales: 2 procesadores, 8 GB de memoria, 20-25 min de
     tiempo total de ejecución
 -   [ ] 
 
 
-<a id="org951a9f4"></a>
+<a id="orgecc355c"></a>
 
-# TODO Revisando los resultados
+# TODO Operaciones con archivos VCF/BCF
 
 
-<a id="org5c35bdb"></a>
+<a id="org2b0db65"></a>
 
 ## TODO El formato VCF
 
 
-<a id="orgfb0bd54"></a>
+<a id="org069406f"></a>
 
 ## TODO Qué veo en mi archivo de resultados?
+
+
+<a id="orgc21e30c"></a>
+
+## TODO Extrayendo información
+
+
+<a id="org0e875e8"></a>
+
+## TODO Tipos de variantes
+
+
+<a id="org48fea13"></a>
+
+## TODO Filtrando sitios
+
+Usaremos [`vcftools`](https://vcftools.github.io/man_latest.html) para filtrar. Existen otras herramientas disponibles para
+hacer esto, como `bcftools` o `GATK`. `vcftools` es razonablemente simple y
+nos permite calcular algunas estadísticas sobre nuestras muestras para
+decidir qué filtros aplicar. Podemos visualizar estas estadísticas en `R`
+para facilitar el análisis. Recursos computacionales: 2 procesadores, 2 GB de
+memoria, 30 min de tiempo total de ejecución (aprox.).
+
+-   [ ] Preparando el análisis por sitios
+-   [ ] Calculando frecuencias alélicas
+-   [ ] Calculando profundidad promedio de secuenciación por individuo
+-   [ ] Calculando profundidad promedio de secuenciación por sitio
+-   [ ] Calculando calidad de inferencia de alelos (`QUAL`)
+-   [ ] 
+
+-   [ ] Visualizando la distribución de estadísticas en `R`
+    
+        # cargamos el paquete ggplot2
+        library(ggplot2)
 
