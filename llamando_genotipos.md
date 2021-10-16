@@ -34,12 +34,29 @@ hacerlo <u>muestra por muestra</u>. Usaremos `samtools` para esta tarea.
     el nombre de la región que quieres extraer: La región que
     extraeremos corresponde al primer millón y medio de bases del
     scaffold `Hmel218003o` y la especificamos así:
-    `Hmel218003o:1-1500000`.
+    `Hmel218003o:1-1500000`. Dale una extensión informativa a cada
+    archivo de salida: Estamos extrayendo parte del scaffold
+    `Hmel218003o`; te sugerimos usar `C18S3` como parte del nombre de
+    los archivos resultantes.
 
     Recuerda que la forma general de usar `samtools view` es:
 
     ``` shell
+    # Los argumentos dentro de los parentesis cuadrados [] son opcionales
+    # Los argumentos dentro de los angulos <> son obligatorios
     samtools view [options] <in.bam>|<in.sam>|<in.cram> [region ...]
+    ```
+
+-   [ ] Dentro del ciclo `for`, después de extraer la región de interés
+    es necesario crear un índice para cada archivo de salida. Recuerda
+    que esto puedes hacerlo usando `samtools index`.
+
+    La forma general de usar `samtools index es`:
+
+    ``` shell
+    # Los argumentos dentro de los parentesis cuadrados [] son opcionales
+    # los argumentos dentro de los angulos <> son obligatorios
+    samtools index [-@ threads] <in.bam>
     ```
 
 # <span class="todo TODO">TODO</span> Llamando genotipos
