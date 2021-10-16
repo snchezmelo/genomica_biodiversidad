@@ -59,6 +59,11 @@ hacerlo <u>muestra por muestra</u>. Usaremos `samtools` para esta tarea.
     samtools index [-@ threads] <in.bam>
     ```
 
+-   [ ] **Atención!** Antes de enviar el trabajo a la cola muéstrale tu
+    script a un monitor para verificar que no haya errores de sintáxis.
+
+-   [ ] Envía el trabajo a la cola.
+
 # <span class="todo TODO">TODO</span> Llamando genotipos
 
 ## <span class="todo TODO">TODO</span> Verosimilitudes de genotipos
