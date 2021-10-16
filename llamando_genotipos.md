@@ -4,18 +4,43 @@
 
 ## <span class="todo TODO">TODO</span> Extrayendo una región específica de los alineamientos
 
--   [ ] En algunos casos estaremos interesados en extraer regiones
-    específicas del genoma en lugar de analizarlo completamente. En
-    particular, en nuestro curso queremos trabajar con algunos segmentos
-    del genoma de *Heliconius* por motivos prácticos; analizarlo todo
-    nos tomaría mucho tiempo, aún con pocas muestras. Para trabajar con
-    una región específica del genoma aprenderemos a extraer regiones de
-    nuestro alineamiento. Esto debemos hacerlo muestra por muestra.
-    Usaremos `samtools` para esta tarea.
--   [ ] Recursos computacionales: 2 procesadores, 2 GB de memoria, \~5
-    min de tiempo de ejecución
+Recursos computacionales: 2 procesadores, 2 GB de memoria, \~5 min de
+tiempo de ejecución.
+
+En algunos casos estaremos interesados en extraer regiones específicas
+del genoma en lugar de analizarlo completamente. En particular, en
+nuestro curso queremos trabajar con algunos segmentos del genoma de
+*Heliconius* por motivos prácticos; analizarlo todo nos tomaría mucho
+tiempo, aún con pocas muestras y además conocemos regiones en donde hay
+genes interesantes. Para trabajar con una región específica del genoma
+aprenderemos a extraer regiones de nuestro alineamiento. Esto debemos
+hacerlo <u>muestra por muestra</u>. Usaremos `samtools` para esta tarea.
+
 -   [ ] Crea un script de `bash` usando `nano` y solicita los recursos
     necesarios. No olvides cargar el módulo de `samtools`.
+
+-   [ ] Dentro del script crea un ciclo `for` que itere sobre los
+    alineamientos `.bam` que ya están ordenados y sin duplicados. Si no
+    recuerdas cómo escribir un ciclo `for` en `bash` puedes consultarlo
+    aquí &lt;INSERTAR LINK&gt;.
+
+-   [ ] En cada iteración del ciclo debes llamar a `samtools view` con
+    dos procesadores usando la opción `-@`. Debes usar la opción `-b`
+    para que el archivo de salida tenga formato `bam` y debes
+    especificar el nombre del archivo de salida usando la opción `-o`.
+    Como argumentos para `samtools
+          view` debes incluir primero el nombre del archivo `bam`
+    original del que quieres extraer la región y luego debes especificar
+    el nombre de la región que quieres extraer: La región que
+    extraeremos corresponde al primer millón y medio de bases del
+    scaffold `Hmel218003o` y la especificamos así:
+    `Hmel218003o:1-1500000`.
+
+    Recuerda que la forma general de usar `samtools view` es:
+
+    ``` shell
+    samtools view [options] <in.bam>|<in.sam>|<in.cram> [region ...]
+    ```
 
 # <span class="todo TODO">TODO</span> Llamando genotipos
 
