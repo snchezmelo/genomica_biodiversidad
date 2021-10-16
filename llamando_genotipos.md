@@ -1,17 +1,17 @@
 # <span class="todo TODO">TODO</span> Motivación
 
-# <span class="todo TODO">TODO</span> Sub-muestreando los alineamientos
+# Sub-muestreando los alineamientos
 
-## <span class="todo TODO">TODO</span> Extrayendo una región específica de los alineamientos
+## Extrayendo una región específica de los alineamientos
 
-Recursos computacionales: 2 procesadores, 2 GB de memoria, \~5 min de
+Recursos computacionales: 2 procesadores, 2 GB de memoria, \~10 min de
 tiempo de ejecución.
 
 En algunos casos estaremos interesados en extraer regiones específicas
-del genoma en lugar de analizarlo completamente. En particular, en
-nuestro curso queremos trabajar con algunos segmentos del genoma de
+del genoma en lugar de analizarlo completamente. En nuestro curso
+particularmente queremos trabajar con algunos segmentos del genoma de
 *Heliconius* por motivos prácticos; analizarlo todo nos tomaría mucho
-tiempo, aún con pocas muestras y además conocemos regiones en donde hay
+tiempo aún con pocas muestras y además conocemos regiones en donde hay
 genes interesantes. Para trabajar con una región específica del genoma
 aprenderemos a extraer regiones de nuestro alineamiento. Esto debemos
 hacerlo <u>muestra por muestra</u>. Usaremos `samtools` para esta tarea.
@@ -48,8 +48,8 @@ hacerlo <u>muestra por muestra</u>. Usaremos `samtools` para esta tarea.
     ```
 
 -   [ ] Dentro del ciclo `for`, después de extraer la región de interés
-    es necesario crear un índice para cada archivo de salida. Recuerda
-    que esto puedes hacerlo usando `samtools index`.
+    es necesario crear un índice para cada archivo de salida. Esto lo
+    podemos hacer usando `samtools index`.
 
     La forma general de usar `samtools index es`:
 
@@ -60,7 +60,8 @@ hacerlo <u>muestra por muestra</u>. Usaremos `samtools` para esta tarea.
     ```
 
 -   [ ] **Atención!** Antes de enviar el trabajo a la cola muéstrale tu
-    script a un monitor para verificar que no haya errores de sintáxis.
+    script a un monitor/instructor para verificar que no haya errores de
+    sintáxis.
 
 -   [ ] Envía el trabajo a la cola.
 
@@ -70,9 +71,30 @@ hacerlo <u>muestra por muestra</u>. Usaremos `samtools` para esta tarea.
 
 ## <span class="todo TODO">TODO</span> Llamada de genotipos
 
--   [ ] Inferencia de alelos:
--   [ ] Recursos computacionales: 2 procesadores, 8 GB de memoria, 20-25
-    min de tiempo total de ejecución
+Recursos computacionales: 2 procesadores, 8 GB de memoria, 20-25 min de
+tiempo total de ejecución.
+
+Vamos a hacer un paso conocido como "llamada de genotipos" usando los
+alineamientos del scaffold `Hmel218003o` que extrajimos en la tarea
+anterior. El resultado final será un archivo en el que cada base o
+posición en el genoma aparece en una fila y cada una de nuestras
+muestras aparece en una columna.
+
+La estructura es similar a esta tabla, pero es un poco más compleja.
+Luego veremos en detalle la estructura de este archivo.
+
+| CHROM       | POS | Muestra1 | Muestra2 | Muestra3 | Muestra4 | …   |
+|-------------|-----|----------|----------|----------|----------|-----|
+| Hmel218003o | 1   | 0/0      | 0/1      | 0/0      | 1/1      | …   |
+| Hmel218003o | 2   | 0/0      | 0/0      | 0/0      | 0/1      | …   |
+| Hmel218003o | 3   | 0/1      | 0/1      | 0/1      | 0/1      | …   |
+| Hmel218003o | 4   | 0/0      | 0/1      | 0/1      | 1/1      | …   |
+| Hmel218003o | 5   | 0/1      | 0/1      | 0/1      | 1/1      | …   |
+| Hmel218003o | 6   | 0/0      | 0/0      | 0/1      | 0/1      | …   |
+| …           | …   | …        | …        | …        | …        | …   |
+
+-   [ ]
+-   [ ]
 -   [ ]
 
 # <span class="todo TODO">TODO</span> Operaciones con archivos VCF/BCF
