@@ -71,8 +71,8 @@ hacerlo <u>muestra por muestra</u>. Usaremos `samtools` para esta tarea.
 
 ## <span class="todo TODO">TODO</span> Llamada de genotipos
 
-Recursos computacionales: 2 procesadores, 8 GB de memoria, 20-25 min de
-tiempo total de ejecución.
+Recursos computacionales: 2 procesadores, 8 GB de memoria, \~20-25 min
+de tiempo total de ejecución.
 
 Vamos a hacer un paso conocido como "llamada de genotipos" usando los
 alineamientos del scaffold `Hmel218003o` que extrajimos en la tarea
