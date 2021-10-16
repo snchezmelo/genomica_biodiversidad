@@ -1,13 +1,8 @@
----
-author: Juan Enciso
-title: LLamando genotipos
----
+# <span class="todo TODO">TODO</span> Motivación
 
-# [TODO]{.todo .TODO} Motivación {#motivación}
+# <span class="todo TODO">TODO</span> Sub-muestreando los alineamientos
 
-# [TODO]{.todo .TODO} Sub-muestreando los alineamientos {#sub-muestreando-los-alineamientos}
-
-## [TODO]{.todo .TODO} Extrayendo una región específica de los alineamientos {#extrayendo-una-región-específica-de-los-alineamientos}
+## <span class="todo TODO">TODO</span> Extrayendo una región específica de los alineamientos
 
 -   [ ] En algunos casos estaremos interesados en extraer regiones
     específicas del genoma en lugar de analizarlo completamente. En
@@ -22,28 +17,28 @@ title: LLamando genotipos
 -   [ ] Crea un script de `bash` usando `nano` y solicita los recursos
     necesarios. No olvides cargar el módulo de `samtools`.
 
-# [TODO]{.todo .TODO} Llamando genotipos {#llamando-genotipos-1}
+# <span class="todo TODO">TODO</span> Llamando genotipos
 
-## [TODO]{.todo .TODO} Verosimilitudes de genotipos {#verosimilitudes-de-genotipos}
+## <span class="todo TODO">TODO</span> Verosimilitudes de genotipos
 
-## [TODO]{.todo .TODO} Llamada de genotipos {#llamada-de-genotipos}
+## <span class="todo TODO">TODO</span> Llamada de genotipos
 
 -   [ ] Inferencia de alelos:
 -   [ ] Recursos computacionales: 2 procesadores, 8 GB de memoria, 20-25
     min de tiempo total de ejecución
 -   [ ]
 
-# [TODO]{.todo .TODO} Operaciones con archivos VCF/BCF {#operaciones-con-archivos-vcfbcf}
+# <span class="todo TODO">TODO</span> Operaciones con archivos VCF/BCF
 
-## [TODO]{.todo .TODO} El formato VCF {#el-formato-vcf}
+## <span class="todo TODO">TODO</span> El formato VCF
 
-## [TODO]{.todo .TODO} Qué veo en mi archivo de resultados? {#qué-veo-en-mi-archivo-de-resultados}
+## <span class="todo TODO">TODO</span> Qué veo en mi archivo de resultados?
 
-## [TODO]{.todo .TODO} Extrayendo información {#extrayendo-información}
+## <span class="todo TODO">TODO</span> Extrayendo información
 
-## [TODO]{.todo .TODO} Tipos de variantes {#tipos-de-variantes}
+## <span class="todo TODO">TODO</span> Tipos de variantes
 
-## [TODO]{.todo .TODO} Filtrando sitios {#filtrando-sitios}
+## <span class="todo TODO">TODO</span> Filtrando sitios
 
 Usaremos [`vcftools`](https://vcftools.github.io/man_latest.html) para
 filtrar. Existen otras herramientas disponibles para hacer esto, como
@@ -53,7 +48,7 @@ filtros aplicar. Podemos visualizar estas estadísticas en `R` para
 facilitar el análisis. Recursos computacionales: 2 procesadores, 2 GB de
 memoria, 30 min de tiempo total de ejecución (aprox.).
 
-### [TODO]{.todo .TODO} Calculando estadísticas en el set de datos {#calculando-estadísticas-en-el-set-de-datos}
+### <span class="todo TODO">TODO</span> Calculando estadísticas en el set de datos
 
 -   [ ] **Preparando el análisis por sitios:** Es necesario modificar
     nuestro archivo de genotipos para poder aplicar filtros
@@ -61,12 +56,12 @@ memoria, 30 min de tiempo total de ejecución (aprox.).
     mayoría de análisis y modelos en genética de poblaciones están
     diseñados considerando individualmente sitios con dos alelos.
 
-    ``` {.shell}
+    ``` shell
     ```
 
 -   [ ] **Calculando frecuencias alélicas:**
 
-    ``` {.shell}
+    ``` shell
     vcftools --gzvcf heliconius.optixscaf.GT.vcf.gz --freq2 \
              --out heliconius.optixscaf.2 --max-alleles 2
     ```
@@ -82,11 +77,11 @@ memoria, 30 min de tiempo total de ejecución (aprox.).
 
 -   [ ] **Calculando la proporción de datos perdidos por sitio:**
 
-### [TODO]{.todo .TODO} Analizando las estadísticas {#analizando-las-estadísticas}
+### <span class="todo TODO">TODO</span> Analizando las estadísticas
 
 -   [ ] Visualizando la distribución de estadísticas en `R`
 
-    ``` {.r}
+    ``` r
     ### cargamos el paquete ggplot2
     library(ggplot2)
 
@@ -96,36 +91,36 @@ memoria, 30 min de tiempo total de ejecución (aprox.).
 
 -   [ ] **Estadísticas por sitio: Calidad de inferencia de alelos**
 
-    ``` {.r}
+    ``` r
     ```
 
 -   [ ] **Estadísticas por sitio: Profundidad promedio**
 
-    ``` {.r}
+    ``` r
     ```
 
 -   [ ] **Estadísticas por sitio: Datos perdidos**
 
-    ``` {.r}
+    ``` r
     ```
 
 -   [ ] **Estadísticas por sitio: Límite inferior para frecuencias
     alélicas**
 
-    ``` {.r}
+    ``` r
     ```
 
 -   [ ] **Estadísticas por individuo: Profundidad promedio**
 
-    ``` {.r}
+    ``` r
     ```
 
 -   [ ] **Estadísticas por individuo: Datos perdidos**
 
-    ``` {.r}
+    ``` r
     ```
 
-### [TODO]{.todo .TODO} Aplicando los filtros al VCF {#aplicando-los-filtros-al-vcf}
+### <span class="todo TODO">TODO</span> Aplicando los filtros al VCF
 
 -   [ ]
 -   [ ]
