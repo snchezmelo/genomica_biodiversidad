@@ -1,5 +1,5 @@
 <!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-refresh-toc -->
-**Table of Contents**
+# Índice
 
 - [<span class="todo TODO">TODO</span> Motivación](#span-classtodo-todotodospan-motivación)
 - [Sub-muestreando los alineamientos](#sub-muestreando-los-alineamientos)

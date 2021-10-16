@@ -1,5 +1,5 @@
 <!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-refresh-toc -->
-**Table of Contents**
+# Índice
 
 - [<span class="todo TODO">TODO</span> Mapeo: Motivación](#span-classtodo-todotodospan-mapeo-motivación)
     - [<span class="todo TODO">TODO</span> Descripción general](#span-classtodo-todotodospan-descripción-general)
