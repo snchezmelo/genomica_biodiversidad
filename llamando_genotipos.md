@@ -1,24 +1,3 @@
-<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-refresh-toc -->
-# Índice
-
-- [<span class="todo TODO">TODO</span> Motivación](#span-classtodo-todotodospan-motivación)
-- [Sub-muestreando los alineamientos](#sub-muestreando-los-alineamientos)
-    - [Extrayendo una región específica de los alineamientos](#extrayendo-una-región-específica-de-los-alineamientos)
-- [<span class="todo TODO">TODO</span> Llamando genotipos](#span-classtodo-todotodospan-llamando-genotipos)
-    - [<span class="todo TODO">TODO</span> Verosimilitudes de genotipos](#span-classtodo-todotodospan-verosimilitudes-de-genotipos)
-    - [<span class="todo TODO">TODO</span> Llamada de genotipos](#span-classtodo-todotodospan-llamada-de-genotipos)
-- [<span class="todo TODO">TODO</span> Operaciones con archivos VCF/BCF](#span-classtodo-todotodospan-operaciones-con-archivos-vcfbcf)
-    - [<span class="todo TODO">TODO</span> El formato VCF](#span-classtodo-todotodospan-el-formato-vcf)
-    - [<span class="todo TODO">TODO</span> Qué veo en mi archivo de resultados?](#span-classtodo-todotodospan-qué-veo-en-mi-archivo-de-resultados)
-    - [<span class="todo TODO">TODO</span> Extrayendo información](#span-classtodo-todotodospan-extrayendo-información)
-    - [<span class="todo TODO">TODO</span> Tipos de variantes](#span-classtodo-todotodospan-tipos-de-variantes)
-    - [<span class="todo TODO">TODO</span> Filtrando sitios](#span-classtodo-todotodospan-filtrando-sitios)
-        - [<span class="todo TODO">TODO</span> Calculando estadísticas en el set de datos](#span-classtodo-todotodospan-calculando-estadísticas-en-el-set-de-datos)
-        - [<span class="todo TODO">TODO</span> Analizando las estadísticas](#span-classtodo-todotodospan-analizando-las-estadísticas)
-        - [<span class="todo TODO">TODO</span> Aplicando los filtros al VCF](#span-classtodo-todotodospan-aplicando-los-filtros-al-vcf)
-
-<!-- markdown-toc end -->
-
 # <span class="todo TODO">TODO</span> Motivación
 
 # Sub-muestreando los alineamientos
@@ -37,20 +16,20 @@ genes interesantes. Para trabajar con una región específica del genoma
 aprenderemos a extraer regiones de nuestro alineamiento. Esto debemos
 hacerlo <u>muestra por muestra</u>. Usaremos `samtools` para esta tarea.
 
--   [ ] Crea un script de `bash` usando `nano` y solicita los recursos
+1.  [ ] Crea un script de `bash` usando `nano` y solicita los recursos
     necesarios. No olvides cargar el módulo de `samtools`.
 
--   [ ] Dentro del script crea un ciclo `for` que itere sobre los
+2.  [ ] Dentro del script crea un ciclo `for` que itere sobre los
     alineamientos `.bam` que ya están ordenados y sin duplicados. Si no
     recuerdas cómo escribir un ciclo `for` en `bash` puedes consultarlo
     aquí &lt;INSERTAR LINK&gt;.
 
--   [ ] En cada iteración del ciclo debes llamar a `samtools view` con
+3.  [ ] En cada iteración del ciclo debes llamar a `samtools view` con
     dos procesadores usando la opción `-@`. Debes usar la opción `-b`
     para que el archivo de salida tenga formato `bam` y debes
     especificar el nombre del archivo de salida usando la opción `-o`.
     Como argumentos para `samtools
-          view` debes incluir primero el nombre del archivo `bam`
+            view` debes incluir primero el nombre del archivo `bam`
     original del que quieres extraer la región y luego debes especificar
     el nombre de la región que quieres extraer: La región que
     extraeremos corresponde al primer millón y medio de bases del
@@ -68,7 +47,7 @@ hacerlo <u>muestra por muestra</u>. Usaremos `samtools` para esta tarea.
     samtools view [options] <in.bam>|<in.sam>|<in.cram> [region ...]
     ```
 
--   [ ] Dentro del ciclo `for`, después de extraer la región de interés
+4.  [ ] Dentro del ciclo `for`, después de extraer la región de interés
     es necesario crear un índice para cada archivo de salida. Esto lo
     podemos hacer usando `samtools index`.
 
@@ -80,11 +59,11 @@ hacerlo <u>muestra por muestra</u>. Usaremos `samtools` para esta tarea.
     samtools index [-@ threads] <in.bam>
     ```
 
--   [ ] **Atención!** Antes de enviar el trabajo a la cola muéstrale tu
+5.  [ ] **Atención!** Antes de enviar el trabajo a la cola muéstrale tu
     script a un monitor/instructor para verificar que no haya errores de
     sintáxis.
 
--   [ ] Envía el trabajo a la cola.
+6.  [ ] Envía el trabajo a la cola.
 
 # <span class="todo TODO">TODO</span> Llamando genotipos
 
@@ -114,9 +93,17 @@ Luego veremos en detalle la estructura de este archivo.
 | Hmel218003o | 6   | 0/0      | 0/0      | 0/1      | 0/1      | …   |
 | …           | …   | …        | …        | …        | …        | …   |
 
--   [ ]
--   [ ]
--   [ ]
+Existen varias herramientas que pueden llamar genotipos, cada una tiene
+ciertos estándares y modelos probabilísticos que usa para decidir si se
+llama o no a un genotipo determinado. Usaremos
+[`bcftools`](https://samtools.github.io/bcftools/bcftools.html), que es
+parte de `samtools`, por su simplicidad de uso y velocidad de ejecución.
+En general, independientemente de la herramienta utilizada este es el
+paso más largo de todo el proceso, por eso utilizamos una región
+pequeña.
+
+1.  [ ]
+2.  [ ]
 
 # <span class="todo TODO">TODO</span> Operaciones con archivos VCF/BCF
 
@@ -140,7 +127,7 @@ memoria, 30 min de tiempo total de ejecución (aprox.).
 
 ### <span class="todo TODO">TODO</span> Calculando estadísticas en el set de datos
 
--   [ ] **Preparando el análisis por sitios:** Es necesario modificar
+1.  [ ] **Preparando el análisis por sitios:** Es necesario modificar
     nuestro archivo de genotipos para poder aplicar filtros
     correctamente y hacer análisis posteriores de forma correcta; la
     mayoría de análisis y modelos en genética de poblaciones están
@@ -149,27 +136,27 @@ memoria, 30 min de tiempo total de ejecución (aprox.).
     ``` shell
     ```
 
--   [ ] **Calculando frecuencias alélicas:**
+2.  [ ] **Calculando frecuencias alélicas:**
 
     ``` shell
     vcftools --gzvcf heliconius.optixscaf.GT.vcf.gz --freq2 \
              --out heliconius.optixscaf.2 --max-alleles 2
     ```
 
--   [ ] **Calculando profundidad promedio de secuenciación por
+3.  [ ] **Calculando profundidad promedio de secuenciación por
     individuo:**
 
--   [ ] **Calculando profundidad promedio de secuenciación por sitio:**
+4.  [ ] **Calculando profundidad promedio de secuenciación por sitio:**
 
--   [ ] **Calculando calidad de inferencia de alelos (`QUAL`):**
+5.  [ ] **Calculando calidad de inferencia de alelos (`QUAL`):**
 
--   [ ] **Calculando la proporción de datos perdidos por individuo:**
+6.  [ ] **Calculando la proporción de datos perdidos por individuo:**
 
--   [ ] **Calculando la proporción de datos perdidos por sitio:**
+7.  [ ] **Calculando la proporción de datos perdidos por sitio:**
 
 ### <span class="todo TODO">TODO</span> Analizando las estadísticas
 
--   [ ] Visualizando la distribución de estadísticas en `R`
+1.  [ ] Visualizando la distribución de estadísticas en `R`
 
     ``` r
     ### cargamos el paquete ggplot2
@@ -179,39 +166,39 @@ memoria, 30 min de tiempo total de ejecución (aprox.).
     library(tidyverse)
     ```
 
--   [ ] **Estadísticas por sitio: Calidad de inferencia de alelos**
+2.  [ ] **Estadísticas por sitio: Calidad de inferencia de alelos**
 
     ``` r
     ```
 
--   [ ] **Estadísticas por sitio: Profundidad promedio**
+3.  [ ] **Estadísticas por sitio: Profundidad promedio**
 
     ``` r
     ```
 
--   [ ] **Estadísticas por sitio: Datos perdidos**
+4.  [ ] **Estadísticas por sitio: Datos perdidos**
 
     ``` r
     ```
 
--   [ ] **Estadísticas por sitio: Límite inferior para frecuencias
+5.  [ ] **Estadísticas por sitio: Límite inferior para frecuencias
     alélicas**
 
     ``` r
     ```
 
--   [ ] **Estadísticas por individuo: Profundidad promedio**
+6.  [ ] **Estadísticas por individuo: Profundidad promedio**
 
     ``` r
     ```
 
--   [ ] **Estadísticas por individuo: Datos perdidos**
+7.  [ ] **Estadísticas por individuo: Datos perdidos**
 
     ``` r
     ```
 
 ### <span class="todo TODO">TODO</span> Aplicando los filtros al VCF
 
--   [ ]
--   [ ]
--   [ ]
+1.  [ ]
+2.  [ ]
+3.  [ ]
