@@ -26,8 +26,10 @@ mariposas; puedes leer más sobre él en este [paper publicado en
 (2011)](https://www.science.org/doi/pdf/10.1126/science.1208227), en
 esta [perspectiva
 (2011)](https://www.science.org/doi/full/10.1126/science.1211025) o en
-este [paper publicado en
-PNAS.](https://www.pnas.org/content/114/40/10707)
+este [paper publicado en PNAS
+(2017).](https://www.pnas.org/content/114/40/10707)
+
+**Sigue los pasos:**
 
 1.  Crea un script de `bash` usando `nano` y solicita los recursos
     necesarios. No olvides cargar el módulo de `samtools`.
@@ -42,15 +44,14 @@ PNAS.](https://www.pnas.org/content/114/40/10707)
     que el archivo de salida tenga formato `bam` y debes especificar el
     nombre del archivo de salida usando la opción `-o`. Como argumentos
     para `samtools
-            view` debes incluir primero el nombre del archivo `bam`
-    original del que quieres extraer la región y luego debes especificar
-    el nombre de la región que quieres extraer: La región que
-    extraeremos corresponde al primer millón y medio de bases del
-    scaffold `Hmel218003o` y la especificamos así:
-    `Hmel218003o:1-1500000`. Dale una extensión informativa a cada
-    archivo de salida: Estamos extrayendo parte del scaffold
-    `Hmel218003o`; te sugerimos usar `C18S3` como parte del nombre de
-    los archivos resultantes.
+      view` debes incluir primero el nombre del archivo `bam` original
+    del que quieres extraer la región y luego debes especificar el
+    nombre de la región que quieres extraer: La región que extraeremos
+    corresponde al primer millón y medio de bases del scaffold
+    `Hmel218003o` y la especificamos así: `Hmel218003o:1-1500000`. Dale
+    una extensión informativa a cada archivo de salida: Estamos
+    extrayendo parte del scaffold `Hmel218003o`; te sugerimos usar
+    `C18S3` como parte del nombre de los archivos resultantes.
 
     Recuerda que la forma general de usar `samtools view` es:
 
@@ -96,19 +97,21 @@ muestras aparece en una columna.
 La estructura es similar a esta tabla, pero es un poco más compleja.
 Luego veremos en detalle la estructura de este archivo.
 
-| CHROM       | POS | Muestra1 | Muestra2 | Muestra3 | Muestra4 | …   |
-|-------------|-----|----------|----------|----------|----------|-----|
-| Hmel218003o | 1   | 0/0      | 0/1      | 0/0      | 1/1      | …   |
-| Hmel218003o | 2   | 0/0      | 0/0      | 0/0      | 0/1      | …   |
-| Hmel218003o | 3   | 0/1      | 0/1      | 0/1      | 0/1      | …   |
-| Hmel218003o | 4   | 0/0      | 0/1      | 0/1      | 1/1      | …   |
-| Hmel218003o | 5   | 0/1      | 0/1      | 0/1      | 1/1      | …   |
-| Hmel218003o | 6   | 0/0      | 0/0      | 0/1      | 0/1      | …   |
-| …           | …   | …        | …        | …        | …        | …   |
+| CROMOSOMA   | POSICIÓN | REF. | ALT. | Muestra1 | Muestra2 | Muestra3 | Muestra4 | …   |
+|-------------|----------|------|------|----------|----------|----------|----------|-----|
+| Hmel218003o | 1        | A    | G    | 0/0      | 0/1      | 0/0      | 1/1      | …   |
+| Hmel218003o | 2        | T    | G    | 0/0      | 0/0      | 0/0      | 0/1      | …   |
+| Hmel218003o | 3        | G    | A    | 0/1      | 0/1      | 0/1      | 0/1      | …   |
+| Hmel218003o | 4        | C    | A    | 0/0      | 0/1      | 0/1      | 1/1      | …   |
+| Hmel218003o | 5        | C    | T    | 0/1      | 0/1      | 0/1      | 1/1      | …   |
+| Hmel218003o | 6        | T    | C    | 0/0      | 0/0      | 0/1      | 0/1      | …   |
+| …           | …        |      |      | …        | …        | …        | …        | …   |
 
 Existen varias herramientas que pueden llamar genotipos, cada una tiene
 ciertos estándares y modelos probabilísticos que usa para decidir si se
-llama o no a un genotipo determinado. Usaremos
+llama o no a un genotipo determinado.
+
+Usaremos
 [`bcftools`](https://samtools.github.io/bcftools/bcftools.html), que es
 parte de `samtools`, por su simplicidad de uso y velocidad de ejecución.
 En general, independientemente de la herramienta utilizada este es el
