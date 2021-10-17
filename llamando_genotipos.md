@@ -11,10 +11,23 @@ En algunos casos estaremos interesados en extraer regiones específicas
 del genoma en lugar de analizarlo completamente. En nuestro curso
 particularmente queremos trabajar con algunos segmentos del genoma de
 *Heliconius* por motivos prácticos; analizarlo todo nos tomaría mucho
-tiempo aún con pocas muestras y además conocemos regiones en donde hay
+tiempo aún con pocas muestras. Además, conocemos regiones en donde hay
 genes interesantes. Para trabajar con una región específica del genoma
 aprenderemos a extraer regiones de nuestro alineamiento. Esto debemos
 hacerlo <u>muestra por muestra</u>. Usaremos `samtools` para esta tarea.
+Trabajaremos con el scaffold `Hmel218003o` de *Heliconius melpomene*
+cual contiene al gen *optix*.
+
+![](./Imagenes/optix_scaf.png)
+
+Este gen tiene un rol clave en la adaptación de *Heliconius* y otras
+mariposas; puedes leer más sobre él en este [paper publicado en
+*Science*
+(2011)](https://www.science.org/doi/pdf/10.1126/science.1208227), en
+esta [perspectiva
+(2011)](https://www.science.org/doi/full/10.1126/science.1211025) o en
+este [paper publicado en
+PNAS.](https://www.pnas.org/content/114/40/10707)
 
 1.  Crea un script de `bash` usando `nano` y solicita los recursos
     necesarios. No olvides cargar el módulo de `samtools`.
