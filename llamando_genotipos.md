@@ -16,19 +16,19 @@ genes interesantes. Para trabajar con una región específica del genoma
 aprenderemos a extraer regiones de nuestro alineamiento. Esto debemos
 hacerlo <u>muestra por muestra</u>. Usaremos `samtools` para esta tarea.
 
-1.  [ ] Crea un script de `bash` usando `nano` y solicita los recursos
+1.  Crea un script de `bash` usando `nano` y solicita los recursos
     necesarios. No olvides cargar el módulo de `samtools`.
 
-2.  [ ] Dentro del script crea un ciclo `for` que itere sobre los
+2.  Dentro del script crea un ciclo `for` que itere sobre los
     alineamientos `.bam` que ya están ordenados y sin duplicados. Si no
     recuerdas cómo escribir un ciclo `for` en `bash` puedes consultarlo
     aquí &lt;INSERTAR LINK&gt;.
 
-3.  [ ] En cada iteración del ciclo debes llamar a `samtools view` con
-    dos procesadores usando la opción `-@`. Debes usar la opción `-b`
-    para que el archivo de salida tenga formato `bam` y debes
-    especificar el nombre del archivo de salida usando la opción `-o`.
-    Como argumentos para `samtools
+3.  En cada iteración del ciclo debes llamar a `samtools view` con dos
+    procesadores usando la opción `-@`. Debes usar la opción `-b` para
+    que el archivo de salida tenga formato `bam` y debes especificar el
+    nombre del archivo de salida usando la opción `-o`. Como argumentos
+    para `samtools
             view` debes incluir primero el nombre del archivo `bam`
     original del que quieres extraer la región y luego debes especificar
     el nombre de la región que quieres extraer: La región que
@@ -47,8 +47,8 @@ hacerlo <u>muestra por muestra</u>. Usaremos `samtools` para esta tarea.
     samtools view [options] <in.bam>|<in.sam>|<in.cram> [region ...]
     ```
 
-4.  [ ] Dentro del ciclo `for`, después de extraer la región de interés
-    es necesario crear un índice para cada archivo de salida. Esto lo
+4.  Dentro del ciclo `for`, después de extraer la región de interés es
+    necesario crear un índice para cada archivo de salida. Esto lo
     podemos hacer usando `samtools index`.
 
     La forma general de usar `samtools index es`:
@@ -59,11 +59,11 @@ hacerlo <u>muestra por muestra</u>. Usaremos `samtools` para esta tarea.
     samtools index [-@ threads] <in.bam>
     ```
 
-5.  [ ] **Atención!** Antes de enviar el trabajo a la cola muéstrale tu
+5.  **Atención!** Antes de enviar el trabajo a la cola muéstrale tu
     script a un monitor/instructor para verificar que no haya errores de
     sintáxis.
 
-6.  [ ] Envía el trabajo a la cola.
+6.  Envía el trabajo a la cola.
 
 # <span class="todo TODO">TODO</span> Llamando genotipos
 
@@ -102,8 +102,8 @@ En general, independientemente de la herramienta utilizada este es el
 paso más largo de todo el proceso, por eso utilizamos una región
 pequeña.
 
-1.  [ ]
-2.  [ ]
+1.  
+2.  
 
 # <span class="todo TODO">TODO</span> Operaciones con archivos VCF/BCF
 
@@ -127,7 +127,7 @@ memoria, 30 min de tiempo total de ejecución (aprox.).
 
 ### <span class="todo TODO">TODO</span> Calculando estadísticas en el set de datos
 
-1.  [ ] **Preparando el análisis por sitios:** Es necesario modificar
+1.  **Preparando el análisis por sitios:** Es necesario modificar
     nuestro archivo de genotipos para poder aplicar filtros
     correctamente y hacer análisis posteriores de forma correcta; la
     mayoría de análisis y modelos en genética de poblaciones están
@@ -136,27 +136,26 @@ memoria, 30 min de tiempo total de ejecución (aprox.).
     ``` shell
     ```
 
-2.  [ ] **Calculando frecuencias alélicas:**
+2.  **Calculando frecuencias alélicas:**
 
     ``` shell
     vcftools --gzvcf heliconius.optixscaf.GT.vcf.gz --freq2 \
              --out heliconius.optixscaf.2 --max-alleles 2
     ```
 
-3.  [ ] **Calculando profundidad promedio de secuenciación por
-    individuo:**
+3.  **Calculando profundidad promedio de secuenciación por individuo:**
 
-4.  [ ] **Calculando profundidad promedio de secuenciación por sitio:**
+4.  **Calculando profundidad promedio de secuenciación por sitio:**
 
-5.  [ ] **Calculando calidad de inferencia de alelos (`QUAL`):**
+5.  **Calculando calidad de inferencia de alelos (`QUAL`):**
 
-6.  [ ] **Calculando la proporción de datos perdidos por individuo:**
+6.  **Calculando la proporción de datos perdidos por individuo:**
 
-7.  [ ] **Calculando la proporción de datos perdidos por sitio:**
+7.  **Calculando la proporción de datos perdidos por sitio:**
 
 ### <span class="todo TODO">TODO</span> Analizando las estadísticas
 
-1.  [ ] Visualizando la distribución de estadísticas en `R`
+1.  Visualizando la distribución de estadísticas en `R`
 
     ``` r
     ### cargamos el paquete ggplot2
@@ -166,39 +165,39 @@ memoria, 30 min de tiempo total de ejecución (aprox.).
     library(tidyverse)
     ```
 
-2.  [ ] **Estadísticas por sitio: Calidad de inferencia de alelos**
+2.  **Estadísticas por sitio: Calidad de inferencia de alelos**
 
     ``` r
     ```
 
-3.  [ ] **Estadísticas por sitio: Profundidad promedio**
+3.  **Estadísticas por sitio: Profundidad promedio**
 
     ``` r
     ```
 
-4.  [ ] **Estadísticas por sitio: Datos perdidos**
+4.  **Estadísticas por sitio: Datos perdidos**
 
     ``` r
     ```
 
-5.  [ ] **Estadísticas por sitio: Límite inferior para frecuencias
+5.  **Estadísticas por sitio: Límite inferior para frecuencias
     alélicas**
 
     ``` r
     ```
 
-6.  [ ] **Estadísticas por individuo: Profundidad promedio**
+6.  **Estadísticas por individuo: Profundidad promedio**
 
     ``` r
     ```
 
-7.  [ ] **Estadísticas por individuo: Datos perdidos**
+7.  **Estadísticas por individuo: Datos perdidos**
 
     ``` r
     ```
 
 ### <span class="todo TODO">TODO</span> Aplicando los filtros al VCF
 
-1.  [ ]
-2.  [ ]
-3.  [ ]
+1.  
+2.  
+3.  
