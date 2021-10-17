@@ -1,3 +1,30 @@
+---
+bibliography: /home/juanenciso/MEGA/phd_thesis_juan/thesis_bibliography.bib
+description: "Genómica de la biodiversidad: Llamando genotipos"
+lang: es
+title: Llamando y filtrando genotipos
+---
+<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-refresh-toc -->
+# Índice
+
+- [<span class="todo TODO">TODO</span> Motivación](#span-classtodo-todotodospan-motivación)
+- [Sub-muestreando los alineamientos](#sub-muestreando-los-alineamientos)
+    - [Extrayendo una región específica de los alineamientos](#extrayendo-una-región-específica-de-los-alineamientos)
+- [<span class="todo TODO">TODO</span> Llamando genotipos](#span-classtodo-todotodospan-llamando-genotipos)
+    - [<span class="todo TODO">TODO</span> Verosimilitudes de genotipos](#span-classtodo-todotodospan-verosimilitudes-de-genotipos)
+    - [<span class="todo TODO">TODO</span> Llamada de genotipos](#span-classtodo-todotodospan-llamada-de-genotipos)
+- [<span class="todo TODO">TODO</span> Operaciones con archivos VCF/BCF](#span-classtodo-todotodospan-operaciones-con-archivos-vcfbcf)
+    - [<span class="todo TODO">TODO</span> El formato VCF](#span-classtodo-todotodospan-el-formato-vcf)
+    - [<span class="todo TODO">TODO</span> Qué veo en mi archivo de resultados?](#span-classtodo-todotodospan-qué-veo-en-mi-archivo-de-resultados)
+    - [<span class="todo TODO">TODO</span> Extrayendo información](#span-classtodo-todotodospan-extrayendo-información)
+    - [<span class="todo TODO">TODO</span> Tipos de variantes](#span-classtodo-todotodospan-tipos-de-variantes)
+    - [<span class="todo TODO">TODO</span> Filtrando sitios](#span-classtodo-todotodospan-filtrando-sitios)
+        - [<span class="todo TODO">TODO</span> Calculando estadísticas en el set de datos](#span-classtodo-todotodospan-calculando-estadísticas-en-el-set-de-datos)
+        - [<span class="todo TODO">TODO</span> Analizando las estadísticas](#span-classtodo-todotodospan-analizando-las-estadísticas)
+        - [<span class="todo TODO">TODO</span> Aplicando los filtros al VCF](#span-classtodo-todotodospan-aplicando-los-filtros-al-vcf)
+
+<!-- markdown-toc end -->
+
 # <span class="todo TODO">TODO</span> Motivación
 
 # Sub-muestreando los alineamientos
@@ -37,21 +64,22 @@ este [paper publicado en PNAS
 2.  Dentro del script crea un ciclo `for` que itere sobre los
     alineamientos `.bam` que ya están ordenados y sin duplicados. Si no
     recuerdas cómo escribir un ciclo `for` en `bash` puedes consultarlo
-    aquí &lt;INSERTAR LINK&gt;.
+    aquí \<INSERTAR LINK>.
 
 3.  En cada iteración del ciclo debes llamar a `samtools view` con dos
     procesadores usando la opción `-@`. Debes usar la opción `-b` para
     que el archivo de salida tenga formato `bam` y debes especificar el
     nombre del archivo de salida usando la opción `-o`. Como argumentos
     para `samtools
-      view` debes incluir primero el nombre del archivo `bam` original
-    del que quieres extraer la región y luego debes especificar el
-    nombre de la región que quieres extraer: La región que extraeremos
-    corresponde al primer millón y medio de bases del scaffold
-    `Hmel218003o` y la especificamos así: `Hmel218003o:1-1500000`. Dale
-    una extensión informativa a cada archivo de salida: Estamos
-    extrayendo parte del scaffold `Hmel218003o`; te sugerimos usar
-    `C18S3` como parte del nombre de los archivos resultantes.
+            view` debes incluir primero el nombre del archivo `bam`
+    original del que quieres extraer la región y luego debes especificar
+    el nombre de la región que quieres extraer: La región que
+    extraeremos corresponde al primer millón y medio de bases del
+    scaffold `Hmel218003o` y la especificamos así:
+    `Hmel218003o:1-1500000`. Dale una extensión informativa a cada
+    archivo de salida: Estamos extrayendo parte del scaffold
+    `Hmel218003o`; te sugerimos usar `C18S3` como parte del nombre de
+    los archivos resultantes.
 
     Recuerda que la forma general de usar `samtools view` es:
 
