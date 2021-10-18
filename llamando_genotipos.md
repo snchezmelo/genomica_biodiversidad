@@ -4,26 +4,6 @@ description: "Genómica de la biodiversidad: Llamando genotipos"
 lang: es
 title: Llamando y filtrando genotipos
 ---
-<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-refresh-toc -->
-# Índice
-
-- [<span class="todo TODO">TODO</span> Motivación](#span-classtodo-todotodospan-motivación)
-- [Sub-muestreando los alineamientos](#sub-muestreando-los-alineamientos)
-    - [Extrayendo una región específica de los alineamientos](#extrayendo-una-región-específica-de-los-alineamientos)
-- [<span class="todo TODO">TODO</span> Llamando genotipos](#span-classtodo-todotodospan-llamando-genotipos)
-    - [<span class="todo TODO">TODO</span> Verosimilitudes de genotipos](#span-classtodo-todotodospan-verosimilitudes-de-genotipos)
-    - [<span class="todo TODO">TODO</span> Llamada de genotipos](#span-classtodo-todotodospan-llamada-de-genotipos)
-- [<span class="todo TODO">TODO</span> Operaciones con archivos VCF/BCF](#span-classtodo-todotodospan-operaciones-con-archivos-vcfbcf)
-    - [<span class="todo TODO">TODO</span> El formato VCF](#span-classtodo-todotodospan-el-formato-vcf)
-    - [<span class="todo TODO">TODO</span> Qué veo en mi archivo de resultados?](#span-classtodo-todotodospan-qué-veo-en-mi-archivo-de-resultados)
-    - [<span class="todo TODO">TODO</span> Extrayendo información](#span-classtodo-todotodospan-extrayendo-información)
-    - [<span class="todo TODO">TODO</span> Tipos de variantes](#span-classtodo-todotodospan-tipos-de-variantes)
-    - [<span class="todo TODO">TODO</span> Filtrando sitios](#span-classtodo-todotodospan-filtrando-sitios)
-        - [<span class="todo TODO">TODO</span> Calculando estadísticas en el set de datos](#span-classtodo-todotodospan-calculando-estadísticas-en-el-set-de-datos)
-        - [<span class="todo TODO">TODO</span> Analizando las estadísticas](#span-classtodo-todotodospan-analizando-las-estadísticas)
-        - [<span class="todo TODO">TODO</span> Aplicando los filtros al VCF](#span-classtodo-todotodospan-aplicando-los-filtros-al-vcf)
-
-<!-- markdown-toc end -->
 
 # <span class="todo TODO">TODO</span> Motivación
 
@@ -103,9 +83,11 @@ este [paper publicado en PNAS
 
 5.  **Atención!** Antes de enviar el trabajo a la cola muéstrale tu
     script a un monitor/instructor para verificar que no haya errores de
-    sintáxis.
+    sintáxis. Muéstrale también la línea que usarás para enviar el
+    trabajo a la cola.
 
-6.  Envía el trabajo a la cola.
+6.  Envía el trabajo a la cola. Asegúrate de enviar el trabajo desde el
+    directorio donde están tus archivos de entrada.
 
 # <span class="todo TODO">TODO</span> Llamando genotipos
 
@@ -137,17 +119,103 @@ Luego veremos en detalle la estructura de este archivo.
 
 Existen varias herramientas que pueden llamar genotipos, cada una tiene
 ciertos estándares y modelos probabilísticos que usa para decidir si se
-llama o no a un genotipo determinado.
+llama o no a un genotipo determinado. Las diferentes herramientas y
+modelos tienen efectos fuertes sobre los datos que se producirán, por lo
+que es importante considerar las diferentes opciones de antemano. [Este
+review en Nature Genetics
+(2011)](https://www.nature.com/articles/nrg2986) es un buen punto de
+partida para conocer las distintas perspectivas y recomendaciones al
+hacer este paso.
 
-Usaremos
+En este caso usaremos
 [`bcftools`](https://samtools.github.io/bcftools/bcftools.html), que es
 parte de `samtools`, por su simplicidad de uso y velocidad de ejecución.
 En general, independientemente de la herramienta utilizada este es el
-paso más largo de todo el proceso, por eso utilizamos una región
+paso más largo de todo el proceso, por eso trabajaremos con una región
 pequeña.
 
-1.  
-2.  
+**Sigue los pasos:**
+
+1.  Llamar genotipos con `bcftools` y otras herramientas es un proceso
+    que da mejores resultados cuando se consideran los individuos <u>en
+    conjunto</u>. Lo primero que debemos hacer es poner en un archivo de
+    texto plano la lista de alineamientos de la región `Hmel218003o`.
+    Recuerda que cada alineamiento corresponde a un individuo; tu lista
+    debe tener los nombres de los alineamientos de las 18 muestras.
+    ¿Cómo creas este archivo con la lista de muestras?
+
+2.  Crea un script de `bash` usando `nano` y solicita los recursos
+    necesarios. No olvides cargar el módulo de `samtools`.
+
+3.  Tu script debe recibir y procesar la siguiente información (3
+    argumentos como mínimo):
+
+    -   El archivo con la lista de alineamientos que creaste en el paso
+        1
+
+    -   La ubicación del archivo `fasta` de referencia (ruta absoluta)
+
+    -   El nombre del archivo de salida que quieres darle a tu `vcf` con
+        los genotipos. No olvides que vamos a escribir un `vcf`
+        comprimido (`.vcf.gz`).
+
+4.  Dentro de este script haremos tres pasos: <u>El primer paso</u>
+    consiste en calcular las verosimilitudes de los genotipos a partir
+    de los datos observados en el alineamiento. Para este paso usamos
+    [`bcftools mpileup`](https://samtools.github.io/bcftools/bcftools.html#mpileup).
+    Lee la descripción de las opciones de este programa en el enlace.
+    Las opciones relevantes para nuestro análisis son: `-O`,
+    `--threads`, `--max-depth`, `-q`, `-Q`, `-P`, `-a`, `-f` y `-b`. Usa
+    una profundidad máxima de 1000, umbrales de calidad de base y de
+    mapeo de 20 y especifica que nuestros datos se produjeron en una
+    plataforma Illumina. Dedícale un poco más de atención a la opción
+    `-a`, que se usa para especificar con qué información estará anotado
+    nuestro archivo `vcf`. Queremos incluir la profundidad alélica
+    (`AP`) y el número de bases de alta calidad que dan soporte a cada
+    sitio (`DP`). Revisa el manual de `bcftools mpileup` (opción `-a`)
+    para conocer cómo espeficicar estas dos anotaciones.
+
+    ``` shell
+    # Llamaremos de esta forma bcftools mpileup
+    # Resaltamos dos piezas de informacion importantes:
+    # La referencia y la lista de alineamientos
+    bcftools mpileup [opciones] -f ref.fa -b lista_de_bams.txt
+    ```
+
+    La salida de `bcftools mpileup` la re-dirigiremos hacia
+    `bcftools call` usando el operador \`pipe' de unix. Recuerdas cómo
+    usar este operador?
+
+5.  <u>El segundo paso</u> utiliza las verosimilitudes calculadas por la
+    herramienta `mpileup` y las bases observadas en cada posición del
+    alineamiento para determinar el genotipo de cada individuo en esa
+    posición. El resultado conjunto de estos dos primeros pasos se
+    escribe en un archivo `vcf` comprimido con `gzip` (extensión
+    `.vcf.gz`). Utilizamos
+    [`bcftools call`](https://samtools.github.io/bcftools/bcftools.html#call)
+    para este propósito. Lee la descripción de las opciones de este
+    programa en el enlace. Las opciones relevantes para nuestro análisis
+    son: `-m`, `--threads`, `-P`, `-f`, `-O` y `-o`. Utiliza el
+    \`multiallelic caller', usa dos procesadores, usa una tasa de
+    sustitución de 10<sup>−6</sup>
+
+    ``` shell
+    # No olvides conectar la salida estandar de mpileup
+    # con este comando
+    bcftools call [opciones] -o genotipos.vcf.gz
+    ```
+
+6.  Finalmente en <u>el tercer paso</u> generamos un índice del archivo
+    `vcf.gz` para hacer operaciones de forma más rápida con él.
+    [`bcftools index`](https://samtools.github.io/bcftools/bcftools.html#index)
+
+7.  **Atención!** Antes de enviar el trabajo a la cola muéstrale tu
+    script a un monitor/instructor para verificar que no haya errores de
+    sintáxis. Muéstrale también la línea que usarás para enviar el
+    trabajo a la cola.
+
+8.  Envía el trabajo a la cola. Asegúrate de enviar el trabajo desde el
+    directorio donde están tus archivos de entrada.
 
 # <span class="todo TODO">TODO</span> Operaciones con archivos VCF/BCF
 
@@ -161,13 +229,15 @@ pequeña.
 
 ## <span class="todo TODO">TODO</span> Filtrando sitios
 
+Recursos computacionales: 2 procesadores, 2 GB de memoria, \~30 min de
+tiempo total de ejecución.
+
 Usaremos [`vcftools`](https://vcftools.github.io/man_latest.html) para
 filtrar. Existen otras herramientas disponibles para hacer esto, como
 `bcftools` o `GATK`. `vcftools` es razonablemente simple y nos permite
 calcular algunas estadísticas sobre nuestras muestras para decidir qué
 filtros aplicar. Podemos visualizar estas estadísticas en `R` para
-facilitar el análisis. Recursos computacionales: 2 procesadores, 2 GB de
-memoria, 30 min de tiempo total de ejecución (aprox.).
+facilitar el análisis.
 
 ### <span class="todo TODO">TODO</span> Calculando estadísticas en el set de datos
 
