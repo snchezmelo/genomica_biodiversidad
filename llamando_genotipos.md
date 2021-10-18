@@ -22,8 +22,8 @@ tiempo aún con pocas muestras. Además, conocemos regiones en donde hay
 genes interesantes. Para trabajar con una región específica del genoma
 aprenderemos a extraer regiones de nuestro alineamiento. Esto debemos
 hacerlo <u>muestra por muestra</u>. Usaremos `samtools` para esta tarea.
-Trabajaremos con el scaffold `Hmel218003o` de *Heliconius melpomene*
-cual contiene al gen *optix*.
+Trabajaremos con el scaffold `Hmel218003o` de *Heliconius melpomene* que
+contiene al gen *optix*.
 
 ![](./Imagenes/optix_scaf.png)
 
