@@ -61,7 +61,7 @@ este [paper publicado en PNAS
     `Hmel218003o`; te sugerimos usar `C18S3` como parte del nombre de
     los archivos resultantes.
 
-    Recuerda que la forma general de usar `samtools view` es:
+    La forma general de usar `samtools view` es:
 
     ``` shell
     # Los argumentos dentro de los parentesis cuadrados [] son opcionales
@@ -175,6 +175,8 @@ pequeña.
     sitio (`DP`). Revisa el manual de `bcftools mpileup` (opción `-a`)
     para conocer cómo especificar estas dos anotaciones.
 
+    La forma general de usar `bcftools mpileup` es:
+
     ``` shell
     # Llamaremos de esta forma bcftools mpileup
     # Resaltamos dos piezas de informacion importantes:
@@ -183,7 +185,7 @@ pequeña.
     ```
 
     La salida de `bcftools mpileup` la re-dirigiremos hacia
-    `bcftools call` usando el operador \`pipe' de unix. Recuerdas cómo
+    `bcftools call` usando el operador "pipe" de unix. Recuerdas cómo
     usar este operador?
 
 5.  <u>El segundo paso</u> utiliza las verosimilitudes calculadas por la
@@ -200,6 +202,8 @@ pequeña.
     formato para cada muestra y vcf comprimido como tipo de archivo de
     salida. Dale un nombre informativo a tu archivo de salida.
 
+    La forma general de usar `bcftools call` es:
+
     ``` shell
     # No olvides conectar la salida estandar de mpileup
     # con este comando
@@ -213,6 +217,8 @@ pequeña.
     correctamente debería crearse un archivo con un nombre idéntico al
     creado en el paso anterior pero con la extensión `.csi` añadida al
     final; este archivo es el índice.
+
+    La forma general de usar `bcftools index` es:
 
     ``` shell
     # Sintaxis para construir un indice con bcftools
@@ -232,11 +238,44 @@ pequeña.
 
 ## <span class="todo TODO">TODO</span> El formato VCF
 
-## <span class="todo TODO">TODO</span> Qué veo en mi archivo de resultados?
+## <span class="todo TODO">TODO</span> Qué veo en mi archivo VCF de genotipos?
 
 ## <span class="todo TODO">TODO</span> Extrayendo información
 
+Es posible utilizar las herramientas de unix que hemos aprendido a usar
+para explorar la información de un archivo `vcf`. Podemos incluso
+explorar nuestro archivo sin necesidad de descomprimirlo (recuerda que
+es un vcf comprimido). Explora el archivo usando las herramientas que
+consideres necesarias y trata de **no** descomprimirlo usando `gunzip`.
+
+**Responde a las preguntas:**
+
+1.  Cuántas líneas tiene mi archivo de genotipos en total?
+2.  Cuántas líneas tiene el encabezado?
+3.  Cuántas líneas tiene el cuerpo principal?
+4.  Si la región que extrajimos del scaffold `Hmel218003o` tiene 1500000
+    pares de bases, por qué el cuerpo principal tiene más posiciones?
+5.  Todas las posiciones que extrajimos del scaffold `Hmel218003o` están
+    representadas?
+
 ## <span class="todo TODO">TODO</span> Tipos de variantes
+
+Cuando genotipificamos podemos encontrar esencialmente tres tipos de
+sitios: Sitios sin variación con respecto a la referencia, sitios con
+variación simple (SNPs) o sitios que potencialmente pueden tener
+mutaciones estructurales como inserciones o deleciones (INDELS).
+Exploremos nuestro archivo para tener una mejor idea de cómo pueden
+verse estas variantes.
+
+**Responde a las preguntas:**
+
+1.  Qué tipo de variante observamos en la posición 281946 del scaffold
+    `Hmel218003o`?
+2.  Cuál es el alelo encontrado en la referencia?
+3.  Cuál es el alelo alternativo encontrado en algunas de las muestras?
+4.  Cuáles muestras tienen el alelo alternativo en esta posición?
+5.  Cuántas muestras no tienen genotipo en esta posición?
+6.  Cuántos indels hay en el archivo de genotipos?
 
 ## <span class="todo TODO">TODO</span> Filtrando sitios
 
