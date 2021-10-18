@@ -1,27 +1,10 @@
-<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-refresh-toc -->
-# Índice
-
-- [<span class="todo TODO">TODO</span> Mapeo: Motivación](#span-classtodo-todotodospan-mapeo-motivación)
-    - [<span class="todo TODO">TODO</span> Descripción general](#span-classtodo-todotodospan-descripción-general)
-- [<span class="todo TODO">TODO</span> Mapeo: Calidad de los datos de lectura](#span-classtodo-todotodospan-mapeo-calidad-de-los-datos-de-lectura)
-    - [<span class="todo TODO">TODO</span> Estructura de los datos: El formato `fastq`](#span-classtodo-todotodospan-estructura-de-los-datos-el-formato-fastq)
-    - [<span class="todo TODO">TODO</span> Puntajes de calidad](#span-classtodo-todotodospan-puntajes-de-calidad)
-    - [<span class="todo TODO">TODO</span> Evaluando la calidad](#span-classtodo-todotodospan-evaluando-la-calidad)
-    - [<span class="todo TODO">TODO</span> Buenas y malas calidades](#span-classtodo-todotodospan-buenas-y-malas-calidades)
-    - [<span class="todo TODO">TODO</span> Potenicales soluciones cuando la calidad no es buena](#span-classtodo-todotodospan-potenicales-soluciones-cuando-la-calidad-no-es-buena)
-    - [<span class="todo TODO">TODO</span> Analizando las calidades de las lecturas](#span-classtodo-todotodospan-analizando-las-calidades-de-las-lecturas)
-- [<span class="todo TODO">TODO</span> Mapeo: Genoma de referencia](#span-classtodo-todotodospan-mapeo-genoma-de-referencia)
-    - [<span class="todo TODO">TODO</span> Construcción y ensamblaje](#span-classtodo-todotodospan-construcción-y-ensamblaje)
-    - [<span class="todo TODO">TODO</span> Estándares de calidad y herramientas complementarias](#span-classtodo-todotodospan-estándares-de-calidad-y-herramientas-complementarias)
-    - [<span class="todo TODO">TODO</span> Descargando un genoma de referencia](#span-classtodo-todotodospan-descargando-un-genoma-de-referencia)
-- [<span class="todo TODO">TODO</span> Mapeo: Pasos y herramientas](#span-classtodo-todotodospan-mapeo-pasos-y-herramientas)
-    - [<span class="todo TODO">TODO</span> Preparando los archivos](#span-classtodo-todotodospan-preparando-los-archivos)
-    - [<span class="todo TODO">TODO</span> Alineamiento de las lecturas](#span-classtodo-todotodospan-alineamiento-de-las-lecturas)
-    - [<span class="todo TODO">TODO</span> Quitando duplicados de PCR](#span-classtodo-todotodospan-quitando-duplicados-de-pcr)
-    - [<span class="todo TODO">TODO</span> Estadísticas del alineamiento](#span-classtodo-todotodospan-estadísticas-del-alineamiento)
-    - [<span class="todo TODO">TODO</span> Otros procesos posteriores](#span-classtodo-todotodospan-otros-procesos-posteriores)
-
-<!-- markdown-toc end -->
+---
+bibliography: /home/juanenciso/MEGA/phd_thesis_juan/thesis_bibliography.bib
+description: "Genómica de la biodiversidad: Mapeando a genoma de
+  referencia"
+lang: es
+title: Alineamiento de lecturas a un genoma de referencia
+---
 
 # <span class="todo TODO">TODO</span> Mapeo: Motivación
 
@@ -53,27 +36,28 @@ El genoma de referencia que usaremos es de la especie *H. melpomene*
 (v2.5).  
 Sigue estos pasos para descargarlo:  
 
-1.  [ ] Ve al sitio web de [lepbase](http://lepbase.org/)
-2.  [ ] Haz click en el botón señalado por las flechas (Downloads)  
+1.  Ve al sitio web de [lepbase](http://lepbase.org/)
+2.  Haz click en el botón señalado por las flechas (Downloads)  
     ![](./Imagenes/Lepbase_S1.png)
-3.  [ ] En Downloads, escoge la carpeta que dice `v4`  
+3.  En Downloads, escoge la carpeta que dice `v4`  
     ![](./Imagenes/Lepbase_S2.png)
-4.  [ ] Dentro de `v4` ve a la carpeta `sequence`  
+4.  Dentro de `v4` ve a la carpeta `sequence`  
     ![](./Imagenes/Lepbase_S3.png)
-5.  [ ] Dentro de `sequence` busca
+5.  Dentro de `sequence` busca
     `Heliconius_melpomene_melpomene_Hmel2.5.scafolds.fa.gz`  
     ![](./Imagenes/Lepbase_S4.png)
-6.  [ ] Dale click derecho al enlace y selecciona `Copiar enlace`
-7.  [ ] Ve a tu carpeta de trabajo en el cluster y crea una nueva
-    carpeta llamada `ref_hmel2.5`, cambia de directorio a esta carpeta.
-8.  [ ] Descarga el archivo de la referencia con `wget` pegando el
-    enlace que copiaste.
+6.  Dale click derecho al enlace y selecciona `Copiar enlace`
+7.  Ve a tu carpeta de trabajo en el cluster y crea una nueva carpeta
+    llamada `ref_hmel2.5`, cambia de directorio a esta carpeta.
+8.  Descarga el archivo de la referencia con `wget` pegando el enlace
+    que copiaste. Recuerda la ruta de ubicación de este archivo!
+    Regístrala en tu archivo de comandos.
 
 # <span class="todo TODO">TODO</span> Mapeo: Pasos y herramientas
 
 ## <span class="todo TODO">TODO</span> Preparando los archivos
 
--   [ ] Es necesario preparar el genoma de referencia creando una nueva
+1.  Es necesario preparar el genoma de referencia creando una nueva
     estructura de datos a partir del archivo `fasta` original. Esto lo
     hacemos usando el comando `index` de `bwa`. La sintaxis es
     `bwa index archivo.fa`, donde `archivo.fa` es la referencia en
@@ -81,7 +65,7 @@ Sigue estos pasos para descargarlo:
     (`.gz`). Recuerda cargar el módulo `bwa` en centauro antes de crear
     el índice. Este paso no tarda mucho tiempo ( 5min) y requiere pocos
     recursos; puedes realizarlo en una sesión interactiva.
--   [ ] Luego de indexar es necesario crear un archivo de texto con la
+2.  Luego de indexar es necesario crear un archivo de texto con la
     información que usaremos para mapear nuestras lecturas al genoma de
     referencia. Usa `nano` para crear un nuevo archivo de texto.  
     Usa una línea por muestra y la siguiente estructura para cada
@@ -95,12 +79,12 @@ Sigue estos pasos para descargarlo:
 
 ## <span class="todo TODO">TODO</span> Alineamiento de las lecturas
 
--   [ ] Para este paso necesitamos escribir un script de bash usando
-    `nano` (u otro editor de texto disponible en el cluster). Crea un
-    nuevo archivo de texto usando el editor y ponle un nombre
-    informativo, por ejemplo: `mapeo_bwa.sh`
+1.  Para este paso necesitamos escribir un script de bash usando `nano`
+    (u otro editor de texto disponible en el cluster). Crea un nuevo
+    archivo de texto usando el editor y ponle un nombre informativo, por
+    ejemplo: `mapeo_bwa.sh`
 
--   [ ] No olvides añadir el
+2.  No olvides añadir el
     [shebang](https://en.wikipedia.org/wiki/Shebang_(Unix)) en la
     primera línea. En las siguientes líneas escribe directivas para
     pedir al sistema 4 procesadores, 16GB de RAM y 12 horas de tiempo
@@ -108,10 +92,9 @@ Sigue estos pasos para descargarlo:
     te envíe notificaciones al correo cuando el proceso inicie, termine
     o encuentre errores.
 
--   [ ] Carga los módulos requeridos: Durante estos pasos del
-    alineamiento vamos a usar
-    [`bwa`](http://bio-bwa.sourceforge.net/bwa.shtml) para alinear las
-    lecturas al genoma de referencia,
+3.  Carga los módulos requeridos: Durante estos pasos del alineamiento
+    vamos a usar [`bwa`](http://bio-bwa.sourceforge.net/bwa.shtml) para
+    alinear las lecturas al genoma de referencia,
     [`samtools`](https://www.htslib.org/doc/samtools.html) para ordenar
     los alineamientos y optimizar el acceso a las lecturas mapeadas, y
     [`picard-tools`](https://broadinstitute.github.io/picard/) para
@@ -120,7 +103,7 @@ Sigue estos pasos para descargarlo:
     módulos en el cluster. Para `picard-tools` necesitamos cargar la
     versión 8 de `java`, cuyo módulo en el cluster es `java8/1.8.0.172`.
 
--   [ ] Necesitamos establecer la forma en la que ingresamos a nuestro
+4.  Necesitamos establecer la forma en la que ingresamos a nuestro
     script la información necesaria para alinear las lecturas. Para esto
     usamos los **argumentos ordenados** de los scripts de `bash`.
     Recuerda que los números del 1 en adelante, precedidos del operador
@@ -136,14 +119,13 @@ Sigue estos pasos para descargarlo:
     como `lecturas_r1=$1`. Declara de la misma manera el resto de las
     variables.
 
--   [ ] Escribamos el comando de `bwa`. Utilizaremos la función `mem`
-    para hacer el alineamiento de nuestras lecturas pareadas.
-    Inmediatamente después de escribir la función que usaremos,
-    especificamos el número de procesadores que `bwa` usará para
-    alinear, usando la opción `-t`. Vamos a usar 4 procesadores para el
-    alineamiento. Usamos la opción `-M` para marcar los alineamientos
-    más cortos como secundarios (para que los alineamientos sean
-    compatibles con `picard`).
+5.  Escribamos el comando de `bwa`. Utilizaremos la función `mem` para
+    hacer el alineamiento de nuestras lecturas pareadas. Inmediatamente
+    después de escribir la función que usaremos, especificamos el número
+    de procesadores que `bwa` usará para alinear, usando la opción `-t`.
+    Vamos a usar 4 procesadores para el alineamiento. Usamos la opción
+    `-M` para marcar los alineamientos más cortos como secundarios (para
+    que los alineamientos sean compatibles con `picard`).
 
     Tal vez la parte más importante de este paso es establecer el **read
     group**. En este caso podemos asumir que cada muestra fue
@@ -189,20 +171,20 @@ Sigue estos pasos para descargarlo:
     indica a `samtools` que la información debe ser leída usando la
     **entrada estándar** y no un archivo.
 
--   [ ] Es necesario hacer un cambio de formato luego de hacer el
+6.  Es necesario hacer un cambio de formato luego de hacer el
     alineamiento con `bwa`.
 
--   [ ]
+7.  
 
 ## <span class="todo TODO">TODO</span> Quitando duplicados de PCR
 
--   [ ] Tenemos que quitar los duplicados de PCR \[@Ebbert2016\].
+1.  Tenemos que quitar los duplicados de PCR \[@Ebbert2016\].
 
 ## <span class="todo TODO">TODO</span> Estadísticas del alineamiento
 
--   [ ]
--   [ ]
--   [ ]
--   [ ]
+1.  
+2.  
+3.  
+4.  
 
 ## <span class="todo TODO">TODO</span> Otros procesos posteriores

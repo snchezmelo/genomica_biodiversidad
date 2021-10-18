@@ -195,9 +195,10 @@ pequeña.
     [`bcftools call`](https://samtools.github.io/bcftools/bcftools.html#call)
     para este propósito. Lee la descripción de las opciones de este
     programa en el enlace. Las opciones relevantes para nuestro análisis
-    son: `-m`, `--threads`, `-P`, `-f`, `-O` y `-o`. Utiliza el
-    \`multiallelic caller', usa dos procesadores, usa una tasa de
-    sustitución de 10<sup>−6</sup>
+    son: `-m`, `--threads`, `-f`, `-O` y `-o`. Utiliza el "multiallelic
+    caller", dos procesadores, calidad del genotipo (GQ) en el campo de
+    formato para cada muestra y vcf comprimido como tipo de archivo de
+    salida. Dale un nombre informativo a tu archivo de salida.
 
     ``` shell
     # No olvides conectar la salida estandar de mpileup
@@ -206,8 +207,18 @@ pequeña.
     ```
 
 6.  Finalmente en <u>el tercer paso</u> generamos un índice del archivo
-    `vcf.gz` para hacer operaciones de forma más rápida con él.
-    [`bcftools index`](https://samtools.github.io/bcftools/bcftools.html#index)
+    `vcf.gz` para hacer operaciones de forma más rápida con él. Utiliza
+    [`bcftools         index`](https://samtools.github.io/bcftools/bcftools.html#index)
+    con dos procesadores para construir este índice. Si se ejecuta
+    correctamente debería crearse un archivo con un nombre idéntico al
+    creado en el paso anterior pero con la extensión `.csi` añadida al
+    final; este archivo es el índice.
+
+    ``` shell
+    # Sintaxis para construir un indice con bcftools
+    # como archivo de entrada puedes tener formatos vcf o bcf
+    bcftools index [opciones] genotipos.vcf.gz|genotipos.bcf
+    ```
 
 7.  **Atención!** Antes de enviar el trabajo a la cola muéstrale tu
     script a un monitor/instructor para verificar que no haya errores de
