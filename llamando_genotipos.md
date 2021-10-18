@@ -173,7 +173,7 @@ pequeña.
     nuestro archivo `vcf`. Queremos incluir la profundidad alélica
     (`AP`) y el número de bases de alta calidad que dan soporte a cada
     sitio (`DP`). Revisa el manual de `bcftools mpileup` (opción `-a`)
-    para conocer cómo espeficicar estas dos anotaciones.
+    para conocer cómo especificar estas dos anotaciones.
 
     ``` shell
     # Llamaremos de esta forma bcftools mpileup
