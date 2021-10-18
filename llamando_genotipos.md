@@ -284,10 +284,11 @@ tiempo total de ejecución.
 
 Usaremos [`vcftools`](https://vcftools.github.io/man_latest.html) para
 filtrar. Existen otras herramientas disponibles para hacer esto, como
-`bcftools` o `GATK`. `vcftools` es razonablemente simple y nos permite
-calcular algunas estadísticas sobre nuestras muestras para decidir qué
-filtros aplicar. Podemos visualizar estas estadísticas en `R` para
-facilitar el análisis.
+`bcftools` o `GATK`.
+[`vcftools`](https://vcftools.github.io/man_latest.html) es
+razonablemente simple y nos permite calcular algunas estadísticas sobre
+nuestras muestras para decidir qué filtros aplicar. Podemos visualizar
+estas estadísticas en `R` para facilitar el análisis.
 
 ### <span class="todo TODO">TODO</span> Calculando estadísticas en el set de datos
 
@@ -295,9 +296,19 @@ facilitar el análisis.
     nuestro archivo de genotipos para poder aplicar filtros
     correctamente y hacer análisis posteriores de forma correcta; la
     mayoría de análisis y modelos en genética de poblaciones están
-    diseñados considerando individualmente sitios con dos alelos.
+    diseñados considerando individualmente sitios con dos alelos
+    (bialélicos). Debemos entonces quitar los indels y los sitios
+    multialélicos de nuestro archivo `vcf`.
+
+    `vcftools` `--remove-indels` `--gzvcf` `--max-alleles`
+
+    La forma de usar `vcftoos` es la siguiente:
 
     ``` shell
+    # Consulta los ejemplos en el manual de vcftools para que
+    # tengas mas claridad de la sintaxis que usaras
+    vcftools [--vcf ARCHIVO | --gzvcf ARCHIVO | --bcf ARCHIVO] \
+             [--out PREFIJO] [OPCIONES DE FILTRO] [OPCIONES DE SALIDA]
     ```
 
 2.  **Calculando frecuencias alélicas:**
