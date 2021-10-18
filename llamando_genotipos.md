@@ -307,7 +307,7 @@ facilitar el análisis.
     comprimir, cuando tengas el resultado en un vcf comprímelo con
     `gzip`.
 
-    La forma general de usar `vcftoos` es la siguiente:
+    La forma general de usar `vcftools` es la siguiente:
 
     ``` shell
     # Consulta los ejemplos en el manual de vcftools para que
