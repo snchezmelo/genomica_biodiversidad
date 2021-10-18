@@ -284,11 +284,10 @@ tiempo total de ejecución.
 
 Usaremos [`vcftools`](https://vcftools.github.io/man_latest.html) para
 filtrar. Existen otras herramientas disponibles para hacer esto, como
-`bcftools` o `GATK`.
-[`vcftools`](https://vcftools.github.io/man_latest.html) es
-razonablemente simple y nos permite calcular algunas estadísticas sobre
-nuestras muestras para decidir qué filtros aplicar. Podemos visualizar
-estas estadísticas en `R` para facilitar el análisis.
+`bcftools` o `GATK`. `vcftools` es razonablemente simple y nos permite
+calcular algunas estadísticas sobre nuestras muestras para decidir qué
+filtros aplicar. Podemos visualizar estas estadísticas en `R` para
+facilitar el análisis.
 
 ### <span class="todo TODO">TODO</span> Calculando estadísticas en el set de datos
 
