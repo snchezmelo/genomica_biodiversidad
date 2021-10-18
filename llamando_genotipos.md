@@ -93,7 +93,7 @@ este [paper publicado en PNAS
 
 ## <span class="todo TODO">TODO</span> Verosimilitudes de genotipos
 
-## <span class="todo TODO">TODO</span> Llamada de genotipos
+## Llamada de genotipos
 
 Recursos computacionales: 2 procesadores, 8 GB de memoria, \~20-25 min
 de tiempo total de ejecución.
@@ -289,19 +289,25 @@ calcular algunas estadísticas sobre nuestras muestras para decidir qué
 filtros aplicar. Podemos visualizar estas estadísticas en `R` para
 facilitar el análisis.
 
-### <span class="todo TODO">TODO</span> Calculando estadísticas en el set de datos
+### <span class="todo TODO">TODO</span> Calculando estadísticas en nuestros genotipos
 
 1.  **Preparando el análisis por sitios:** Es necesario modificar
     nuestro archivo de genotipos para poder aplicar filtros
     correctamente y hacer análisis posteriores de forma correcta; la
     mayoría de análisis y modelos en genética de poblaciones están
     diseñados considerando individualmente sitios con dos alelos
-    (bialélicos). Debemos entonces quitar los indels y los sitios
-    multialélicos de nuestro archivo `vcf`.
+    (bialélicos). Debemos entonces quitar los indels y los sitios con
+    más de dos alelos de nuestro archivo `vcf`. Para quitar los indels
+    usamos la opción `--remove-indels`. Para quedarnos con sitios con
+    uno o dos alelos usamos la opción `--max-alleles`. La opción
+    `--recode` se usa para tener información de salida en formato `vcf`.
+    La opción `--recode-INFO-all` se usa para mantener el encabezado del
+    vcf original y la opción `--out` se usa para darle un pre-fijo al
+    nombre del archivo de salida. `vcftools` escribe un archivo sin
+    comprimir, cuando tengas el resultado en un vcf comprímelo con
+    `gzip`.
 
-    `vcftools` `--remove-indels` `--gzvcf` `--max-alleles`
-
-    La forma de usar `vcftoos` es la siguiente:
+    La forma general de usar `vcftoos` es la siguiente:
 
     ``` shell
     # Consulta los ejemplos en el manual de vcftools para que
@@ -310,22 +316,36 @@ facilitar el análisis.
              [--out PREFIJO] [OPCIONES DE FILTRO] [OPCIONES DE SALIDA]
     ```
 
-2.  **Calculando frecuencias alélicas:**
+    Puedes correr `vcftools` en una sesión interactiva de slurm,
+    recuerda solicitar la sesión interactiva con `salloc`.
+
+    **Atención:** Muéstrale tus líneas de comandoq a un monitor o
+    instructor antes de correrlas.
+
+    Si corriste `vcftools` correctamente debes observar algo parecido a
+    esto:
 
     ``` shell
-    vcftools --gzvcf heliconius.optixscaf.GT.vcf.gz --freq2 \
-             --out heliconius.optixscaf.2 --max-alleles 2
+    VCFtools - 0.1.16
+    (C) Adam Auton and Anthony Marcketta 2009
+
+    Parameters as interpreted:
+    --gzvcf heliconius.optixscaf.GT.ALLSITES.vcf.gz
+    --recode-INFO-all
+    --max-alleles 2
+    --out heliconius.optixscaf.SNPS.NV
+    --recode
+    --remove-indels
+
+    Using zlib version: 1.2.11
+    Warning: Expected at least 2 parts in INFO entry: ...
+    Warning: Expected at least 2 parts in INFO entry: ...
+    Warning: Expected at least 2 parts in INFO entry: ...
+    After filtering, kept 18 out of 18 Individuals
+    Outputting VCF file...
+    After filtering, kept 1454897 out of a possible 1502460 Sites
+    Run Time = 31.00 seconds
     ```
-
-3.  **Calculando profundidad promedio de secuenciación por individuo:**
-
-4.  **Calculando profundidad promedio de secuenciación por sitio:**
-
-5.  **Calculando calidad de inferencia de alelos (`QUAL`):**
-
-6.  **Calculando la proporción de datos perdidos por individuo:**
-
-7.  **Calculando la proporción de datos perdidos por sitio:**
 
 ### <span class="todo TODO">TODO</span> Analizando las estadísticas
 
@@ -370,7 +390,7 @@ facilitar el análisis.
     ``` r
     ```
 
-### <span class="todo TODO">TODO</span> Aplicando los filtros al VCF
+### <span class="todo TODO">TODO</span> Aplicando los filtros al archivo VCF
 
 1.  
 2.  
