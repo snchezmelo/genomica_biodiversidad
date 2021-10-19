@@ -319,7 +319,7 @@ facilitar el análisis.
     Puedes correr `vcftools` en una sesión interactiva de slurm,
     recuerda solicitar la sesión interactiva con `salloc`.
 
-    **Atención:** Muéstrale tus líneas de comandoq a un monitor o
+    **Atención:** Muéstrale tus líneas de comando a un monitor o
     instructor antes de correrlas.
 
     Si corriste `vcftools` correctamente debes observar algo parecido a
@@ -330,12 +330,7 @@ facilitar el análisis.
     (C) Adam Auton and Anthony Marcketta 2009
 
     Parameters as interpreted:
-    --gzvcf heliconius.optixscaf.GT.ALLSITES.vcf.gz
-    --recode-INFO-all
-    --max-alleles 2
-    --out heliconius.optixscaf.SNPS.NV
-    --recode
-    --remove-indels
+    ...
 
     Using zlib version: 1.2.11
     Warning: Expected at least 2 parts in INFO entry: ...
@@ -346,6 +341,117 @@ facilitar el análisis.
     After filtering, kept 1454897 out of a possible 1502460 Sites
     Run Time = 31.00 seconds
     ```
+
+2.  **Contando alelos:**
+
+    El primer criterio que usaremos para filtrar algunos sitios es el
+    número de alelos que observamos en ellos. Si el número de individuos
+    con alelos en un sitio es muy bajo, y si hay alelos "raros" en un
+    sitio, podríamos tener efectos negativos en nuestros análisis
+    posteriores. En parte esto se debe a que muchos de los modelos y
+    análisis disponibles son sensibles a la presencia de variantes raras
+    (presentes en baja frecuencia).
+
+    Usaremos nuestro archivo con sitios invariantes y bi-alélicos para
+    calcular los conteos de alelos por sitio. Llama a `vcftools` usando
+    la opción `--counts2` para contar los alelos por sitio. No olvides
+    especificar un nombre de salida para los conteos (`--out`).
+
+    Abre el archivo resultante usando `less`, deberías ver algo como
+    esto:
+
+    ``` shell
+    CHROM   POS     N_ALLELES       N_CHR   {COUNT}
+    Hmel218003o     133     1       0       0
+    Hmel218003o     134     1       2       2
+    Hmel218003o     135     1       2       2
+    Hmel218003o     136     1       2       2
+    Hmel218003o     137     1       2       2
+    ```
+
+    Si te fijas, algunas filas tienen 6 elementos y otras tienen 5 ¿Por
+    qué pasa esto? Revisa atentamente el archivo y trata de responder a
+    la pregunta.
+
+    Para trabajar con un archivo como este en `R` es más sencillo tener
+    el mismo número de columnas en todas las filas. Las filas con 5
+    columnas solo tienen el conteo del alelo de referencia y no del
+    alelo alterno, ese conteo es de 0 (¿Por qué?) y debemos agregarlo
+    por nuestra cuenta.
+
+    Usaremos el lenguaje
+    [`awk`](https://www.gnu.org/software/gawk/manual/gawk.html) para
+    hacer esta tarea. `awk` procesa el archivo línea por línea y permite
+    explorar varias propiedades de cada línea. El razonamiento es el
+    siguiente: Si una línea tiene menos de 6 columnas (`NF`) entonces
+    debemos imprimir la línea original ($0) y adjuntar un 0 al final (el
+    número de alelos alternos en el sitio), separado por un caracter de
+    tabulación `"\t"`. En caso contrario imprimimos la línea original
+    (`$0`).
+
+    El razonamiento anterior se captura en la siguiente línea de comando
+    usando `awk`. Asegúrate de que entiendes la línea antes de
+    ejecutarla. Si tienes dudas pide aclaraciones al personal docente o
+    a tus compañeros de curso.
+
+    ``` shell
+    # Sintaxis:
+    # awk 'codigo de awk' archivo
+    awk '{if(NF < 6){print $0 "\t" 0}else{print $0}}' archivo.conteos
+    ```
+
+    Reemplaza el nombre `archivo.conteos` por el nombre de tu archivo.
+    El resultado de la operación va a la salida estandar, re-dirígelo a
+    un nuevo archivo con un nombre informativo; en mi caso el nuevo
+    archivo se llama `heliconius.optixscaf.conteofull`.
+
+3.  **Calculando profundidad promedio de secuenciación por individuo:**
+
+    La profundidad de sencuenciación es importante pues ayuda a informar
+    los soportes estadísticos para llamar determinados alelos. En
+    general, se considera que los datos soportados por profundidades
+    bajas tienen un mayor nivel de incertidumbre que aquellos en donde
+    la profundidad es mayor.
+
+    A nivel de individuo la profundidad también tiene un efecto sobre la
+    calidad de los análisis: Si un individuo tiene profundidad muy baja
+    a lo largo de todo su genoma puede afectar las estadísticas de todo
+    el set de datos y sería preferible excluirlo.
+
+    ``` shell
+    ```
+
+4.  **Calculando profundidad promedio de secuenciación por sitio:**
+
+    A nivel de sitio el efecto de la profundidad baja no es muy
+    diferente: Si un sitio tiene baja profundidad de cobertura es más
+    difícil confiar en los alelos presentes en ese sitio. También es
+    recomendable remover sitios con baja profundidad de secuenciación.
+
+    ``` shell
+    ```
+
+5.  **Calculando calidad de inferencia de alelos (`QUAL`):**
+
+    La calidad de inferencia de los alelos depende de varios factores.
+
+    ``` shell
+    ```
+
+6.  **Calculando la proporción de datos perdidos por individuo:**
+
+    Individuos con una proporción grande de sitios perdidos pueden
+    causar problemas en los análisis; de ser tenidos en cuenta sería
+    necesario eliminar muchos sitios potencialmente informativos para
+    mantener la calidad.
+
+    ``` shell
+    ```
+
+7.  **Calculando la proporción de datos perdidos por sitio:**
+
+    En cierta forma este factor ya lo tenemos en cuenta cuando contamos
+    el número de alelos por sitio.
 
 ### <span class="todo TODO">TODO</span> Analizando las estadísticas
 
