@@ -464,15 +464,22 @@ facilitar el análisis.
     `.imiss`.
 
     El archivo de salida es pequeño y puedes explorarlo. Responde: ¿Qué
-    individuos tienen la tasa más alta de datos perdidos? ¿Notas algún
-    patrón? ¿Cuál puede ser la razón biológica para estas observaciones?
+    individuos tienen las tasas más altas de datos perdidos? ¿Notas
+    algún patrón? ¿Cuál puede ser la razón biológica para estas
+    observaciones?
 
 7.  **Calculando la proporción de datos perdidos por sitio:**
 
-    En cierta forma este factor ya lo tenemos en cuenta cuando contamos
-    el número de alelos por sitio.
+    La proporción de datos perdidos por sitio nos permite determinar
+    regiones del genoma que fueron difíciles de alinear para la mayoría
+    de los individuos y que por lo tanto no serán informativas. En
+    cierta forma esto ya lo tenemos en cuenta cuando contamos el número
+    de alelos por sitio. Tenemos 18 individuos dipliodes; un sitio con
+    cantidad perfecta de información tendrá entonces 36 alelos.
 
-    `vcftools` `--missing-site` `--out`
+    Calculamos la proporción de datos perdidos por sitio usando la
+    opción `--missing-site`. La extensión del archivo de salida debe ser
+    `.lmiss`
 
 ### <span class="todo TODO">TODO</span> Analizando las estadísticas
 
