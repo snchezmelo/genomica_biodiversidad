@@ -355,7 +355,9 @@ facilitar el análisis.
     Usaremos nuestro archivo con sitios invariantes y bi-alélicos para
     calcular los conteos de alelos por sitio. Llama a `vcftools` usando
     la opción `--counts2` para contar los alelos por sitio. No olvides
-    especificar un nombre de salida para los conteos (`--out`).
+    especificar un prefijo para el nombre de salida (`--out`). El
+    archivo de salida debe tener la extensión `.frq.count` (`vcftools`
+    pone la extensión automáticamente).
 
     Abre el archivo resultante usando `less`, deberías ver algo como
     esto:
@@ -397,7 +399,7 @@ facilitar el análisis.
     ``` shell
     # Sintaxis:
     # awk 'codigo de awk' archivo
-    awk '{if(NF < 6){print $0 "\t" 0}else{print $0}}' archivo.conteos
+    awk '{if(NF < 6){print $0 "\t" 0} else {print $0}}' archivo.conteos
     ```
 
     Reemplaza el nombre `archivo.conteos` por el nombre de tu archivo.
@@ -418,8 +420,11 @@ facilitar el análisis.
     a lo largo de todo su genoma puede afectar las estadísticas de todo
     el set de datos y sería preferible excluirlo.
 
-    ``` shell
-    ```
+    Llama a `vcftools` usando la opción `--depth` para calcular la
+    profundidad promedio por individuo. No olvides especificar un
+    prefijo para el nombre de salida (`--out`). El archivo de salida
+    debe tener la extensión `.idepth`. Para estos datos debemos ver
+    valores entre 18 y 37 de profundidad aproximadamente.
 
 4.  **Calculando profundidad promedio de secuenciación por sitio:**
 
@@ -428,30 +433,46 @@ facilitar el análisis.
     difícil confiar en los alelos presentes en ese sitio. También es
     recomendable remover sitios con baja profundidad de secuenciación.
 
-    ``` shell
-    ```
+    Calculamos la profundidad por sitio usando la opción
+    `--site-mean-depth`. El archivo de salida debe tener la extensión
+    `.ldepth.mean`.
 
-5.  **Calculando calidad de inferencia de alelos (`QUAL`):**
+5.  **Calculando calidad de alineamiento por sitio (`QUAL`):**
 
-    La calidad de inferencia de los alelos depende de varios factores.
+    La calidad de alineamiento por sitio nos dice qué tan bien alineadas
+    están las lecturas que cubren una región determinada.
 
-    ``` shell
-    ```
+    Calculamos la calidad de alineamiento por sitio usando la opción
+    `--site-quality`. El archivo de salida debe tener la extensión
+    `.lqual`.
 
 6.  **Calculando la proporción de datos perdidos por individuo:**
 
-    Individuos con una proporción grande de sitios perdidos pueden
+    Los sitios con datos perdidos son aquellos en donde no hubo
+    evidencia suficiente para llamar un genotipo durante el paso de
+    llamada. Estos sitios aparecen en el archivo `vcf` como `./.`,
+    puedes dar un ejemplo de un sitio en algún indivuduo que no tenga
+    genotipo llamado?
+
+    Los individuos con una proporción grande de sitios perdidos pueden
     causar problemas en los análisis; de ser tenidos en cuenta sería
     necesario eliminar muchos sitios potencialmente informativos para
-    mantener la calidad.
+    mantener la calidad de los datos en general.
 
-    ``` shell
-    ```
+    Calculamos la proporción de datos perdidos por individuo usando la
+    opción `--missing-indv`. La extensión del archivo de salida debe ser
+    `.imiss`.
+
+    El archivo de salida es pequeño y puedes explorarlo. Responde: ¿Qué
+    individuos tienen la tasa más alta de datos perdidos? ¿Notas algún
+    patrón? ¿Cuál puede ser la razón biológica para estas observaciones?
 
 7.  **Calculando la proporción de datos perdidos por sitio:**
 
     En cierta forma este factor ya lo tenemos en cuenta cuando contamos
     el número de alelos por sitio.
+
+    `vcftools` `--missing-site` `--out`
 
 ### <span class="todo TODO">TODO</span> Analizando las estadísticas
 
