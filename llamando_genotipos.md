@@ -1,7 +1,5 @@
 ---
-bibliography: /home/juanenciso/MEGA/phd_thesis_juan/thesis_bibliography.bib
-description: "Genómica de la biodiversidad: Llamando genotipos"
-lang: es
+author: Juan Enciso
 title: Llamando y filtrando genotipos
 ---
 
@@ -653,11 +651,11 @@ facilitar el análisis.
 
     ![](./Imagenes/datos_perdidos_indv.png)
 
-    Pregunta: ¿Dados los datos perdidos, hay algún individuo que crees
-    que deba excluirse?
+    Pregunta: ¿Observando la información de los datos perdidos, crees
+    que hay algún individuo que deba excluirse?
 
 ### <span class="todo TODO">TODO</span> Aplicando los filtros al archivo VCF
 
-1.  
-2.  
-3.  
+1.  **Criterio basado en conteos:**
+2.  **Criterio basado en profundidad:**
+3.  **Criterio basado en datos perdidos:**
