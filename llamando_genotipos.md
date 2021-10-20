@@ -616,8 +616,9 @@ facilitar el análisis.
     library(tidyverse)
     ```
 
-2.  **Estadísticas por sitio: Conteo de alelos** <span
-    id="estadisticas_sitio_conteo"></span>
+2.  **Estadísticas por sitio: Conteo de alelos**
+
+    <span id="estadisticas_sitio_conteo"></span>
 
     ``` r
     ### Cargamos los datos de conteo de alelos
@@ -651,8 +652,9 @@ facilitar el análisis.
     que tengan 30 o más alelos. Vamos a conservar los sitios con 30 o
     más alelos.
 
-3.  **Estadísticas por sitio: Profundidad promedio** <span
-    id="estadisticas_prof_promedio"></span> Normalmente en un
+3.  **Estadísticas por sitio: Profundidad promedio**
+
+    <span id="estadisticas_prof_promedio"></span> Normalmente en un
     experimento de secuenciación la profundidad es altamente variable;
     algunos sitios no tienen cobertura mientras que otros están
     cubiertos por cientos o miles de lecturas. Debemos examinar la
