@@ -832,5 +832,5 @@ facilitar el análisis.
     junto a ellas la lista de nombres de individuos que queremos
     mantener o descartar.
 
-**Pregunta:** Después de filtrar ¿Cuántos sitios tenemos después de
-aplicar los filtros que aplicamos?
+**Pregunta:** Después de filtrar ¿Cuántos sitios tenemos en nuestra
+última versión del archivo de genotipos?
