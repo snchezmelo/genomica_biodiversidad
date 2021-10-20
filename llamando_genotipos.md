@@ -566,10 +566,48 @@ facilitar el análisis.
     El resultado debe verse así:
     ![](./Imagenes/conteo_alelos_x_sitio.png)
 
+    ¿Cómo podemos usar la información que acabamos de graficar para
+    tomar decisiones? Podemos ver en la gráfica que la mayoría de sitios
+    tienen 30 o más alelos, lo cual corresponde a tener información
+    aproximadamente para el 83% de los individuos. Este número es
+    razonable, tendríamos relativamente buena información en los sitios
+    que tengan 30 o más alelos. Vamos a conservar los sitios con 30 o
+    más alelos.
+
 3.  **Estadísticas por sitio: Profundidad promedio**
 
+    Normalmente en un experimento de secuenciación la profundidad es
+    altamente variable; algunos sitios no tienen cobertura mientras que
+    otros están cubiertos por cientos o miles de lecturas. Debemos
+    examinar la variación de profundidad en los sitios que estamos
+    analizando. Para esto cargamos y graficamos los datos de la
+    siguiente forma:
+
     ``` r
+    ### Cargamos los datos de profundidad promedio por sitio
+    prof_avg_sitio <- read_tsv("heliconius.optixscaf.2.ldepth.mean")
+
+    ### Pintamos un histograma de la profundidad por sitio
+    ggplot(data=prof_avg_sitio, aes(x=MEAN_DEPTH)) + geom_histogram() +
+      labs(x="Prof. prom. x sitio", y="Conteo")
     ```
+
+    El resultado debe verse así:
+
+    ![](./Imagenes/prof_promedio_sitio.png)
+
+    Preguntas: ¿Cuál es el rango principal de distribución de los datos
+    de profundidad? ¿Por qué el eje x tiene su límite derecho tan lejos?
+
+    Normalmente se considera que en un experimento de secuenciación la
+    profundidad debe ser mayor a 5 (5 lecturas soportando los alelos
+    observados en una posición, a menos que el experimento haya sido
+    diseñado desde el principio con baja profundidad). Según nuestra
+    gráfica es raro observar sitios con profundidad de secuenciación de
+    50 o más; las profundidades muy altas pueden ser resultado de
+    artefactos y es razonable excluirlas. Vamos a limitar las
+    profundidades por sitio al intervalo
+    5 ≤ *p**r**o**f**u**n**d**i**d**a**d* ≤ 50.
 
 4.  **Estadísticas por sitio: Datos perdidos**
 
