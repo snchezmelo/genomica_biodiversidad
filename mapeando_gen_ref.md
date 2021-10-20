@@ -176,9 +176,52 @@ Sigue estos pasos para descargarlo:
 
 7.  
 
-## <span class="todo TODO">TODO</span> Quitando duplicados de PCR
+## Quitando duplicados de PCR
 
-1.  Tenemos que quitar los duplicados de PCR \[@Ebbert2016\].
+Recursos computacionales: 2 procesadores, 8 GB de memoria, \~20 min de
+tiempo de ejecución.
+
+1.  Tenemos que quitar los duplicados de PCR, estos pueden interferir
+    luego con el proceso de inferencia de alelos \[@Ebbert2016\]. Para
+    este proceso vamos a usar una herramienta llamada
+    [`Picard Tools`](https://broadinstitute.github.io/picard/).
+    Específicamente queremos usar la herramienta
+    [`MarkDuplicates`](https://broadinstitute.github.io/picard/command-line-overview.html#MarkDuplicates).
+    En centauro `Picard tools` está en la ruta
+    `/opt/ohpc/pub/apps/picard-tools/2.18.15/picard.jar`. Es una
+    aplicación de `java` por lo tanto debes cargar el módulo de `java` y
+    llamarla usando `8GB` de memoria como máximo:
+
+    ``` shell
+    # Estructura basica de llamada a una app de java
+    java -Xmx8G -jar /ruta/completa/archivo.jar
+    ```
+
+    Debemos crear un directorio temporal en donde `Picard` almacenará
+    algunos datos mientras completa el proceso de quitar duplicados.
+    Crea un directorio llamado `DIR_TEMP`.
+
+    El nombre de la herramienta (`MarkDuplicates`) debe ir
+    inmediantamente después de `picard.jar`. A continuación
+    especificamos los argumentos de `MarkDuplicates` que debemos
+    utilizar. Son: `REMOVE_DUPLICATES=true`, `ASSUME_SORTED=true`,
+    `VALIDATION_STRINGENCY=SILENT`,
+    `MAX_FILE_HANDLES_FOR_READ_ENDS_MAP=1000`,
+    `INPUT=alineamiento.sort.bam`, `OUTPUT=alineamiento.sort.rmd.bam`,
+    `METRICS_FILE=alineamiento.sort.rmd.metrics`, y el directorio
+    temporal `TMP_DIR=DIR_TEMP`.
+
+2.  Crea un script de `bash` solicitando los recursos necesarios y
+    construye la línea con la que vas a llamar a `Picard`. Recuerda
+    cargar el módulo de `java`. Carga también el módulo de `samtools`,
+    pues lo vamos a necesitar para el último paso.
+
+3.  Debemos indexar todos los alineamientos a los que les removamos sus
+    duplicados. Finaliza tu script con una llamada a `samtools` para
+    indexar el nuevo alineamiento creado.
+
+    **Atención!:** Antes de enviar el trabajo a la cola muéstrale tu
+    script al personal docente para verificar que se ve bien :)
 
 ## <span class="todo TODO">TODO</span> Estadísticas del alineamiento
 
