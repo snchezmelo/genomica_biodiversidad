@@ -2,8 +2,6 @@
 author: Juan Enciso
 ---
 
-\>#+options: ^:t f:t author: nil skip: t
-
 # <span class="todo TODO">TODO</span> Motivación
 
 # Sub-muestreando los alineamientos
@@ -742,9 +740,9 @@ facilitar el análisis.
     seleccionar los sitios que cumplen con el criterio que establecemos
     y exportar estos datos en el formato requerido.
 
-    Recuerda que en la sección [4.4.1](#calcula_estadisticas) hicimos
-    una operación en la que le dábamos a cada sitio un identificador
-    único.
+    Recuerda que en la sección donde [4.4.1](#calcula_estadisticas)
+    hicimos una operación en la que le dábamos a cada sitio un
+    identificador único.
 
     ``` r
     ### Sitios con mas de 30 alelos en los cuales
@@ -771,15 +769,9 @@ facilitar el análisis.
     ``` shell
     vcftools --gzvcf heliconius.optixscaf.SNPS.NV.vcf.gz \
              --snps sitios_retenidos_cont.txt --recode --recode-INFO-all \
-             --out heliconius.optixscaf.SNPS.NV.FL1
+             --stdout | bgzip -c > heliconius.optixscaf.SNPS.NV.FL1.vcf.gz
 
     # After filtering, kept 1067052 out of a possible 1454897 Sites
-
-    mv heliconius.optixscaf.SNPS.NV.FL1.recode.vcf \
-       heliconius.optixscaf.SNPS.NV.FL1.vcf
-
-    bgzip heliconius.optixscaf.SNPS.NV.FL1.vcf
-
     bcftools index heliconius.optixscaf.SNPS.NV.FL1.vcf.gz
     ```
 
