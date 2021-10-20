@@ -189,7 +189,8 @@ pequeña.
     herramienta `mpileup` y las bases observadas en cada posición del
     alineamiento para determinar el genotipo de cada individuo en esa
     posición. El resultado conjunto de estos dos primeros pasos se
-    escribe en un archivo `vcf` comprimido con `gzip` (extensión
+    escribe en un archivo `vcf` comprimido con
+    [`bgzip`](https://www.htslib.org/doc/bgzip.html) (extensión
     `.vcf.gz`). Utilizamos
     [`bcftools call`](https://samtools.github.io/bcftools/bcftools.html#call)
     para este propósito. Lee la descripción de las opciones de este
@@ -304,7 +305,7 @@ facilitar el análisis.
     vcf original y la opción `--out` se usa para darle un pre-fijo al
     nombre del archivo de salida. `vcftools` escribe un archivo sin
     comprimir, cuando tengas el resultado en un vcf comprímelo con
-    `gzip`.
+    `bgzip`.
 
     La forma general de usar `vcftools` es la siguiente:
 
@@ -745,7 +746,23 @@ facilitar el análisis.
               col_names = FALSE)
     ```
 
+    Aplicamos el filtro: Le decimos a `vcftools` que debe dejar
+    únicamente estos sitios y descartar el resto. Usamos la opción
+    `--snps`.
+
     ``` shell
+    vcftools --gzvcf heliconius.optixscaf.SNPS.NV.vcf.gz \
+             --snps sitios_retenidos_cont.txt --recode --recode-INFO-all \
+             --out heliconius.optixscaf.SNPS.NV.FL1
+
+    # After filtering, kept 1067052 out of a possible 1454897 Sites
+
+    mv heliconius.optixscaf.SNPS.NV.FL1.recode.vcf \
+       heliconius.optixscaf.SNPS.NV.FL1.vcf
+
+    bgzip heliconius.optixscaf.SNPS.NV.FL1.vcf
+
+    bcftools index heliconius.optixscaf.SNPS.NV.FL1.vcf.gz
     ```
 
 2.  **Criterio basado en profundidad:**
