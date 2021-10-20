@@ -616,7 +616,8 @@ facilitar el análisis.
     library(tidyverse)
     ```
 
-2.  **Estadísticas por sitio: Conteo de alelos**
+2.  **Estadísticas por sitio: Conteo de alelos** <span
+    id="estadisticas_sitio_conteo"></span>
 
     ``` r
     ### Cargamos los datos de conteo de alelos
@@ -650,14 +651,13 @@ facilitar el análisis.
     que tengan 30 o más alelos. Vamos a conservar los sitios con 30 o
     más alelos.
 
-3.  **Estadísticas por sitio: Profundidad promedio**
-
-    Normalmente en un experimento de secuenciación la profundidad es
-    altamente variable; algunos sitios no tienen cobertura mientras que
-    otros están cubiertos por cientos o miles de lecturas. Debemos
-    examinar la variación de profundidad en los sitios que estamos
-    analizando. Para esto cargamos y graficamos los datos de la
-    siguiente forma:
+3.  **Estadísticas por sitio: Profundidad promedio** <span
+    id="estadisticas_prof_promedio"></span> Normalmente en un
+    experimento de secuenciación la profundidad es altamente variable;
+    algunos sitios no tienen cobertura mientras que otros están
+    cubiertos por cientos o miles de lecturas. Debemos examinar la
+    variación de profundidad en los sitios que estamos analizando. Para
+    esto cargamos y graficamos los datos de la siguiente forma:
 
     ``` r
     ### Cargamos los datos de profundidad promedio por sitio
@@ -747,12 +747,13 @@ facilitar el análisis.
 
     Cargamos nuestro archivo de conteos en `R`. Fíjate que conectamos
     varias operaciones entre sí con el operador `%>%`, que funciona como
-    `|`, pero en `R`. Dijimos que queríamos retener sitios con 30 o más
-    alelos, luego debemos aplicar un filtro para retener los sitios que
-    cumplen con esta condición (primer `filter`). Con estos sitios
-    calculamos la frecuencia del alelo menos frecuente (`AF`, parte de
-    `mutate`, `ifelse`, etc.). Luego, queremos retener los sitios que
-    tienen más de tres alelos menores, es decir, una valor de
+    `|`, pero en `R`. Dijimos anteriormente
+    ([2](#estadisticas_sitio_conteo)) que queríamos retener sitios con
+    30 o más alelos, luego debemos aplicar un filtro para retener los
+    sitios que cumplen con esta condición (primer `filter`). Con estos
+    sitios calculamos la frecuencia del alelo menos frecuente (`AF`,
+    parte de `mutate`, `ifelse`, etc.). Luego, queremos retener los
+    sitios que tienen más de tres alelos menores, es decir, una valor de
     `AF > 3/30` (0.1). También queremos retener sitios invariantes
     (`AF == 0`). Luego, creamos una nueva columna llamada `SNP_ID`, que
     es el resultado de unir las columnas `CHROM` y `POS` usando `:` como
@@ -802,4 +803,27 @@ facilitar el análisis.
 
 2.  **Criterio basado en profundidad:**
 
+    Cuando calculamos la profundidad por sitio
+    ([3](#estadisticas_prof_promedio)) decidimos retener sitios con
+    profundidades entre 5 y 50. Podemos establecer estos límites en
+    `vcftools` usando las opciones `--min-meanDP
+             <float>` y `--max-meanDP <float>`. Como en el caso del
+    filtro anterior, usa las opciones de `vcftools` para producir datos
+    en formato `vcf` y envíalos a la salida estándar. Utiliza `bgzip -c`
+    para comprimir, re-dirige a un archivo nuevo e indéxalo con
+    `bcftools`.
+
+    ``` shell
+    vcftools --gzvcf heliconius.optixscaf.SNPS.NV.FL1.vcf.gz \
+             --min-meanDP 5 --max-meanDP 50 --recode --recode-INFO-all \
+             --stdout | bgzip -c > heliconius.optixscaf.SNPS.NV.FL2.vcf.gz
+
+    bcftools index heliconius.optixscaf.SNPS.NV.FL2.vcf.gz
+    ```
+
 3.  **Criterio basado en datos perdidos:**
+
+``` shell
+```
+
+1.  **Criterios basados en estadísitcas por individuo**
