@@ -238,9 +238,9 @@ pequeña.
 
 ## <span class="todo TODO">TODO</span> El formato VCF
 
-## <span class="todo TODO">TODO</span> Qué veo en mi archivo VCF de genotipos?
+Descripción del formato VCF.
 
-## <span class="todo TODO">TODO</span> Extrayendo información
+## Extrayendo información
 
 Es posible utilizar las herramientas de unix que hemos aprendido a usar
 para explorar la información de un archivo `vcf`. Podemos incluso
@@ -258,7 +258,7 @@ consideres necesarias y trata de **no** descomprimirlo usando `gunzip`.
 5.  Todas las posiciones que extrajimos del scaffold `Hmel218003o` están
     representadas?
 
-## <span class="todo TODO">TODO</span> Tipos de variantes
+## Tipos de variantes
 
 Cuando genotipificamos podemos encontrar esencialmente tres tipos de
 sitios: Sitios sin variación con respecto a la referencia, sitios con
@@ -276,6 +276,8 @@ verse estas variantes.
 4.  Cuáles muestras tienen el alelo alternativo en esta posición?
 5.  Cuántas muestras no tienen genotipo en esta posición?
 6.  Cuántos indels hay en el archivo de genotipos?
+7.  Cómo harías para encontrar qué sitios tienen SNPs y qué sitios son
+    invariantes?
 
 ## <span class="todo TODO">TODO</span> Filtrando sitios
 
@@ -289,7 +291,7 @@ calcular algunas estadísticas sobre nuestras muestras para decidir qué
 filtros aplicar. Podemos visualizar estas estadísticas en `R` para
 facilitar el análisis.
 
-### <span class="todo TODO">TODO</span> Calculando estadísticas en nuestros genotipos
+### Calculando estadísticas en nuestros genotipos
 
 1.  **Preparando el análisis por sitios:** Es necesario modificar
     nuestro archivo de genotipos para poder aplicar filtros
@@ -407,6 +409,29 @@ facilitar el análisis.
     un nuevo archivo con un nombre informativo; en mi caso el nuevo
     archivo se llama `heliconius.optixscaf.conteofull`.
 
+    Finalmente debemos editar el encabezado para que sea leido
+    correctamente por `R`. Abre el archivo con `nano` y cambia el nombre
+    de la columna `{COUNT}` por `CONTEO_REF` y el `0` que aparece como
+    nombre de la última columna por `CONTEO_ALT`.
+
+    <u>Antes:</u>
+
+    ``` shell
+    CHROM  POS N_ALLELES   N_CHR   {COUNT} 0
+    Hmel218003o    133 1   0   0   0
+    Hmel218003o    134 1   2   2   0
+    Hmel218003o    135 1   2   2   0
+    ```
+
+    <u>Después:</u>
+
+    ``` shell
+    CHROM  POS N_ALLELES   N_CHR   CONTEO_REF  CONTEO_ALT
+    Hmel218003o    133 1   0   0   0
+    Hmel218003o    134 1   2   2   0
+    Hmel218003o    135 1   2   2   0
+    ```
+
 3.  **Calculando profundidad promedio de secuenciación por individuo:**
 
     La profundidad de sencuenciación es importante pues ayuda a informar
@@ -481,22 +506,65 @@ facilitar el análisis.
     opción `--missing-site`. La extensión del archivo de salida debe ser
     `.lmiss`
 
-### <span class="todo TODO">TODO</span> Analizando las estadísticas
+8.  **Transfiriendo los datos a nuestra máquina**
 
-1.  Visualizando la distribución de estadísticas en `R`
+    Finalmente copia a tu máquina los archivos creados usando `scp` o
+    `rsync`.
+
+### <span class="todo TODO">TODO</span> Analizando y visualizando las estadísticas de los genotipos en `R`
+
+1.  **Preparando el ambiente de trabajo**
+
+    Debemos asegurarnos de que tenemos nuestro `R` en el estado
+    apropiado antes de trabajar analizando los datos. Empecemos creando
+    un nuevo script en `Rstudio` y dándole un nombre apropiado.
 
     ``` r
-    ### cargamos el paquete ggplot2
-    library(ggplot2)
+    ### Empezamos limpiando el ambiente de trabajo
+    rm(list = ls())
 
-    ### opcionalmente si tienes instalado tidyverse
+    ### cambia la ruta actual de trabajo a la carpeta donde
+    ### guardas los datos generados en la sección anterior
+    setwd("~/ruta/de/trabajo")
+    ```
+
+    Si no lo tenemos instalado, instalamos el paquete
+    [`tidyverse`](https://www.tidyverse.org/), que es una colección de
+    paquetes diseñada para trabajar en análisis de datos.
+
+    ``` r
+    ### Si no tenemos instalado tidyverse, ejecutamos
+    install.packages("tidyverse")
+
+    ### Cargamos el paquete
     library(tidyverse)
     ```
 
-2.  **Estadísticas por sitio: Calidad de inferencia de alelos**
+2.  **Estadísticas por sitio: Conteo de alelos**
 
     ``` r
+    ### Cargamos los datos de conteo de alelos
+    conteo_alelos <- read_tsv("archivo.conteo")
     ```
+
+    Debemos tomar decisiones sobre el número de alelos que queremos como
+    representación mínima para un sitio. No tenemos muchas muestras,
+    apenas 18 individuos dipliodes, entonces idealmente en todos los
+    sitios deberíamos tener 36 alelos. Si examinamos en detalle los
+    datos nos damos cuenta que muchos sitios están lejos de tener los 36
+    alelos. ¿Cómo podemos ver un resumen de lo que está pasando con
+    nuestros datos? Podemos revisarlo con la función `summary` de `R`.
+    También podemos visualizarlo: Hagamos un histograma de los conteos
+    de alelos por sitio usando las funciones del paquete `ggplot2`.
+
+    ``` r
+    ### Pintamos un histograma de los conteos de alelos por sitio
+    ggplot(data=conteo_alelos, aes(x=N_CHR)) + geom_histogram() +
+      labs(x="Num. alelos", y="Conteo")
+    ```
+
+    El resultado debe verse así:
+    ![](./Imagenes/conteo_alelos_x_sitio.png)
 
 3.  **Estadísticas por sitio: Profundidad promedio**
 
