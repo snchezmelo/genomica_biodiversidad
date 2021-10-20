@@ -395,7 +395,7 @@ facilitar el análisis.
 
     Listo! Después de esta operación complicada tenemos sitios con
     identificador; revisa el contenido del nuevo archivo con `zless -s`.
-    Deberías notar el cambio.
+    Nota el cambio.
 
     ``` shell
     #CHROM  POS     ID      REF     ALT
@@ -725,15 +725,24 @@ facilitar el análisis.
 
 1.  **Criterio basado en conteos:**
 
+    Este es el filtro más complejo de los tres.
+
     ``` r
     ### Sitios con mas de 30 alelos en los cuales
     ### la frecuencia del alelo menor debe ser mayor que 0.1
+    ### creamos una nueva columna llamada ID_SNP
+    ### con el identificador de los sitios que vamos a conservar
+    ### seleccionamos solo esta columna y asignamos el nombre sitios_cont
     sitios_cont <- conteo_alelos %>% filter(N_CHR >= 30) %>%
       mutate(AF=ifelse(CONTEO_ALT < CONTEO_REF, CONTEO_ALT/N_CHR,
                        CONTEO_REF/N_CHR)) %>%
-      filter(AF == 0 | AF > 0.1)
+      filter(AF == 0 | AF > 0.1) %>%
+      mutate(ID_SNP=paste(CHROM, POS, sep=":")) %>%
+      select(ID_SNP)
 
-    write_tsv()
+    ### Escribimos estos datos en un archivo ignorando el encabezado
+    write_tsv(sitios_cont, "sitios_retenidos_cont.txt",
+              col_names = FALSE)
     ```
 
     ``` shell
