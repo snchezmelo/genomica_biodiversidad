@@ -605,8 +605,8 @@ facilitar el análisis.
     diseñado desde el principio con baja profundidad). Según nuestra
     gráfica es raro observar sitios con profundidad de secuenciación de
     50 o más; las profundidades muy altas pueden ser resultado de
-    artefactos y es razonable excluirlas. Vamos a limitar las
-    profundidades por sitio al intervalo
+    artefactos y es razonable excluirlas. Por lo tanto, vamos a incluir
+    sitios cuyas profundidades promedio estén en el intervalo
     5 ≤ *p**r**o**f**u**n**d**i**d**a**d* ≤ 50.
 
 4.  **Estadísticas por sitio: Datos perdidos**
