@@ -341,6 +341,74 @@ facilitar el análisis.
     Run Time = 31.00 seconds
     ```
 
+    Para poder hacer algunos de los filtros que haremos en esta práctica
+    es necesario agregar una pieza de información que no está aún en
+    nuestro vcf: El identificador de cada sitio. Fíjate en la tercera
+    columna del archivo de genotipos; tiene puntos que representan
+    ausencia de información.
+
+    ``` shell
+    #CHROM  POS     ID      REF     ALT
+    Hmel218003o     133     .       G       .
+    Hmel218003o     134     .       T       .
+    Hmel218003o     135     .       A       .
+    Hmel218003o     136     .       T       .
+    Hmel218003o     137     .       G       .
+    Hmel218003o     138     .       T       .
+    ```
+
+    Necesitamos convertir estos puntos en identificadores únicos de cada
+    sitio. Una solución usada a menudo para nombrar los sitios es el
+    formato `scaffold:posicion`. Para hacer esto con nuestros datos
+    vamos a usar la herramienta
+    [`sed`](https://www.gnu.org/software/sed/) (\<b>s\</b>tream
+    \<b>ed\</b>itor). Haremos varios pasos para incluir esta información
+    en nuestro archivo. El paso <u>clave</u> utiliza `sed` para
+    sustituir todo lo que empiece con `Hmel` seguido de cualquier
+    cantidad de dígitos, seguido de una o minúscula (primera columna),
+    una tabulación, varios dígitos seguidos (segunda columna), otra
+    tabulación y un punto por la primera columna, una tabulación, la
+    segunda columna, otra tabulación, y las columnas 1 y 2 unidas por el
+    caracter `:`. Debemos volver a comprimir usando
+    [`bgzip`](https://www.htslib.org/doc/bgzip.html), enviando el
+    resultado a la salida estándar y luego re-dirigimos la salida
+    estándar al nombre que queremos darle a los datos usando el operador
+    `>`. Finalizamos indexando este nuevo archivo con `bcftools index`.
+    Los procesos de descomprimir, sustituir y comprimir nuevamente están
+    unidos entre sí por el operador `|`. Lee con atención los siguientes
+    comandos.
+
+    ``` shell
+    # Cambiamos el nombre de nuestro archivo a un nombre transitorio
+    mv heliconius.optixscaf.SNPS.NV.vcf.gz heliconius.optixscaf.SNPS.NV.NOID.vcf.gz
+
+    # Descomprimimos y agregamos los id por sitio
+    # comprimimos con bgzip y enviamos a la salida estandar
+    # re-dirigimos al nombre de archivo original
+    zcat heliconius.optixscaf.SNPS.NV.NOID.vcf.gz \
+        | sed -e 's/\(Hmel[[:digit:]]\+o\)\t\([[:digit:]]\+\)\t\./\1\t\2\t\1:\2/g' \
+        | bgzip -c > heliconius.optixscaf.SNPS.NV.vcf.gz
+
+    # indexamos nuevamente con bcftools
+    bcftools index heliconius.optixscaf.SNPS.NV.vcf.gz
+    ```
+
+    Listo! Después de esta operación complicada tenemos sitios con
+    identificador; revisa el contenido del nuevo archivo con `zless -s`.
+    Deberías notar el cambio.
+
+    ``` shell
+    #CHROM  POS     ID      REF     ALT
+    Hmel218003o     133     Hmel218003o:133 G       .
+    Hmel218003o     134     Hmel218003o:134 T       .
+    Hmel218003o     135     Hmel218003o:135 A       .
+    Hmel218003o     136     Hmel218003o:136 T       .
+    Hmel218003o     137     Hmel218003o:137 G       .
+    Hmel218003o     138     Hmel218003o:138 T       .
+    ```
+
+    Podemos continuar con los siguientes pasos.
+
 2.  **Contando alelos:**
 
     El primer criterio que usaremos para filtrar algunos sitios es el
@@ -656,5 +724,21 @@ facilitar el análisis.
 ### <span class="todo TODO">TODO</span> Aplicando los filtros al archivo VCF
 
 1.  **Criterio basado en conteos:**
+
+    ``` r
+    ### Sitios con mas de 30 alelos en los cuales
+    ### la frecuencia del alelo menor debe ser mayor que 0.1
+    sitios_cont <- conteo_alelos %>% filter(N_CHR >= 30) %>%
+      mutate(AF=ifelse(CONTEO_ALT < CONTEO_REF, CONTEO_ALT/N_CHR,
+                       CONTEO_REF/N_CHR)) %>%
+      filter(AF == 0 | AF > 0.1)
+
+    write_tsv()
+    ```
+
+    ``` shell
+    ```
+
 2.  **Criterio basado en profundidad:**
+
 3.  **Criterio basado en datos perdidos:**
