@@ -1,5 +1,4 @@
 ---
-author: Juan Enciso
 ---
 
 # <span class="todo TODO">TODO</span> Motivación
@@ -740,7 +739,7 @@ facilitar el análisis.
     seleccionar los sitios que cumplen con el criterio que establecemos
     y exportar estos datos en el formato requerido.
 
-    Recuerda que en la sección donde [4.4.1](#calcula_estadisticas)
+    Recuerda que en la sección donde [4.4.1](#calcula_estadisticas),
     hicimos una operación en la que le dábamos a cada sitio un
     identificador único.
 

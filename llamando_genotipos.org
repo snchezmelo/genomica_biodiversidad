@@ -1,4 +1,5 @@
-#+options: ^:t f:t author: nil skip: t
+#+AUTHOR:
+#+options: ^:t f:t
 
 * TODO Motivación
 * Sub-muestreando los alineamientos
