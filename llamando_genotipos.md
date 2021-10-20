@@ -504,14 +504,16 @@ facilitar el análisis.
 
     Calculamos la proporción de datos perdidos por sitio usando la
     opción `--missing-site`. La extensión del archivo de salida debe ser
-    `.lmiss`
+    `.lmiss`. Ya hicimos un paso equivalente a este en el paso 2 de esta
+    sección (contando alelos). En este punto el cálculo sería
+    redundante.
 
 8.  **Transfiriendo los datos a nuestra máquina**
 
     Finalmente copia a tu máquina los archivos creados usando `scp` o
     `rsync`.
 
-### <span class="todo TODO">TODO</span> Analizando y visualizando las estadísticas de los genotipos en `R`
+### Analizando y visualizando las estadísticas de los genotipos en `R`
 
 1.  **Preparando el ambiente de trabajo**
 
@@ -609,26 +611,50 @@ facilitar el análisis.
     sitios cuyas profundidades promedio estén en el intervalo
     5 ≤ *p**r**o**f**u**n**d**i**d**a**d* ≤ 50.
 
-4.  **Estadísticas por sitio: Datos perdidos**
+4.  **Estadísticas por individuo: Profundidad promedio**
+
+    Los datos de estadísticas por individuo no son muy grandes entonces
+    podemos verlos sin necesidad de una gráfica. Sin embargo, vamos a
+    graficarlos para practicar nuestras habilidades de presentación de
+    datos con `R`. Exploremos la profundidad promedio por indivuduo.
 
     ``` r
+    ### Profundidad promedio por individuo
+    prof_prom_indv <- read_tsv("heliconius.optixscaf.2.idepth")
+
+    ### Graficamos los datos
+    ggplot(data=prof_prom_indv, aes(x=INDV, y=MEAN_DEPTH)) + geom_point() +
+      labs(x="Individuo", y="Prof. promedio") + 
+      theme(axis.text.x = element_text(angle = 45, hjust=1))
     ```
 
-5.  **Estadísticas por sitio: Límite inferior para frecuencias
-    alélicas**
+    ![](./Imagenes/prof_prom_indv.png)
+
+    Podemos observar que nuestros individuos tienen todos profundidad
+    promedio superior a 20, lo cual se considera bueno. Si tuvieramos
+    individuos cuyos promedios de profundidad están por debajo de 3
+    podríamos considerar excluirlos del análisis.
+
+5.  **Estadísticas por individuo: Datos perdidos**
+
+    Exploremos el porcentaje de datos perdidos que cada individuo tiene
+    en la region `Hmel218003o:1-1500000`.
 
     ``` r
+    ### Estadisticas por individuo
+    ### Importando datos
+    datos_perdidos_indv <- read_tsv("heliconius.optixscaf.2.imiss")
+
+    ### Pintando la grafica
+    ggplot(data=datos_perdidos_sitio, aes(x=INDV, y=F_MISS)) + geom_point() +
+      labs(x="Individuo", y="% Datos perdidos") + 
+      theme(axis.text.x = element_text(angle = 45, hjust=1))
     ```
 
-6.  **Estadísticas por individuo: Profundidad promedio**
+    ![](./Imagenes/datos_perdidos_indv.png)
 
-    ``` r
-    ```
-
-7.  **Estadísticas por individuo: Datos perdidos**
-
-    ``` r
-    ```
+    Pregunta: ¿Dados los datos perdidos, hay algún individuo que crees
+    que deba excluirse?
 
 ### <span class="todo TODO">TODO</span> Aplicando los filtros al archivo VCF
 
