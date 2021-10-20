@@ -2,14 +2,18 @@
 author: Juan Enciso
 ---
 
+\>#+options: ^:t f:t author: nil skip: t
+
 # <span class="todo TODO">TODO</span> Motivación
 
 # Sub-muestreando los alineamientos
 
+<span id="submuestreo"></span>
+
 ## Extrayendo una región específica de los alineamientos
 
-Recursos computacionales: 2 procesadores, 2 GB de memoria, \~10 min de
-tiempo de ejecución.
+<span id="region_especifica"></span> Recursos computacionales: 2
+procesadores, 2 GB de memoria, \~10 min de tiempo de ejecución.
 
 En algunos casos estaremos interesados en extraer regiones específicas
 del genoma en lugar de analizarlo completamente. En nuestro curso
@@ -88,12 +92,14 @@ este [paper publicado en PNAS
 
 # <span class="todo TODO">TODO</span> Llamando genotipos
 
+<span id="llamando_gt"></span>
+
 ## <span class="todo TODO">TODO</span> Verosimilitudes de genotipos
 
 ## Llamada de genotipos
 
-Recursos computacionales: 2 procesadores, 8 GB de memoria, \~20-25 min
-de tiempo total de ejecución.
+<span id="llamada_gt"></span> Recursos computacionales: 2 procesadores,
+8 GB de memoria, \~20-25 min de tiempo total de ejecución.
 
 Vamos a hacer un paso conocido como "llamada de genotipos" usando los
 alineamientos del scaffold `Hmel218003o` que extrajimos en la tarea
@@ -234,17 +240,20 @@ pequeña.
 
 # <span class="todo TODO">TODO</span> Operaciones con archivos VCF/BCF
 
+<span id="operaciones_vcf"></span>
+
 ## <span class="todo TODO">TODO</span> El formato VCF
 
-Descripción del formato VCF.
+<span id="formato_vcf"></span> Descripción del formato VCF.
 
 ## Extrayendo información
 
-Es posible utilizar las herramientas de unix que hemos aprendido a usar
-para explorar la información de un archivo `vcf`. Podemos incluso
-explorar nuestro archivo sin necesidad de descomprimirlo (recuerda que
-es un vcf comprimido). Explora el archivo usando las herramientas que
-consideres necesarias y trata de **no** descomprimirlo usando `gunzip`.
+<span id="extrayendo_info_vcf"></span> Es posible utilizar las
+herramientas de unix que hemos aprendido a usar para explorar la
+información de un archivo `vcf`. Podemos incluso explorar nuestro
+archivo sin necesidad de descomprimirlo (recuerda que es un vcf
+comprimido). Explora el archivo usando las herramientas que consideres
+necesarias y trata de **no** descomprimirlo usando `gunzip`.
 
 **Responde a las preguntas:**
 
@@ -258,12 +267,12 @@ consideres necesarias y trata de **no** descomprimirlo usando `gunzip`.
 
 ## Tipos de variantes
 
-Cuando genotipificamos podemos encontrar esencialmente tres tipos de
-sitios: Sitios sin variación con respecto a la referencia, sitios con
-variación simple (SNPs) o sitios que potencialmente pueden tener
-mutaciones estructurales como inserciones o deleciones (INDELS).
-Exploremos nuestro archivo para tener una mejor idea de cómo pueden
-verse estas variantes.
+<span id="tipos_variantes"></span> Cuando genotipificamos podemos
+encontrar esencialmente tres tipos de sitios: Sitios sin variación con
+respecto a la referencia, sitios con variación simple (SNPs) o sitios
+que potencialmente pueden tener mutaciones estructurales como
+inserciones o deleciones (INDELS). Exploremos nuestro archivo para tener
+una mejor idea de cómo pueden verse estas variantes.
 
 **Responde a las preguntas:**
 
@@ -279,8 +288,8 @@ verse estas variantes.
 
 ## <span class="todo TODO">TODO</span> Filtrando sitios
 
-Recursos computacionales: 2 procesadores, 2 GB de memoria, \~30 min de
-tiempo total de ejecución.
+<span id="filtrando_sitios"></span> Recursos computacionales: 2
+procesadores, 2 GB de memoria, \~30 min de tiempo total de ejecución.
 
 Usaremos [`vcftools`](https://vcftools.github.io/man_latest.html) para
 filtrar. Existen otras herramientas disponibles para hacer esto, como
@@ -290,6 +299,8 @@ filtros aplicar. Podemos visualizar estas estadísticas en `R` para
 facilitar el análisis.
 
 ### Calculando estadísticas en nuestros genotipos
+
+<span id="calcula_estadisticas"></span>
 
 1.  **Preparando el análisis por sitios:** Es necesario modificar
     nuestro archivo de genotipos para poder aplicar filtros
@@ -726,7 +737,14 @@ facilitar el análisis.
 
 1.  **Criterio basado en conteos:**
 
-    Este es el filtro más complejo de los tres.
+    Este es el filtro más complejo de los tres. Lo que debemos hacer en
+    este caso es anlizar nuestros datos de conteo de alelos en `R`,
+    seleccionar los sitios que cumplen con el criterio que establecemos
+    y exportar estos datos en el formato requerido.
+
+    Recuerda que en la sección [4.4.1](#calcula_estadisticas) hicimos
+    una operación en la que le dábamos a cada sitio un identificador
+    único.
 
     ``` r
     ### Sitios con mas de 30 alelos en los cuales
