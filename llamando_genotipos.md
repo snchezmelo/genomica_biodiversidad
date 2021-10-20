@@ -823,9 +823,14 @@ facilitar el análisis.
     bcftools index heliconius.optixscaf.SNPS.NV.FL2.vcf.gz
     ```
 
-3.  **Criterio basado en datos perdidos:**
+3.  **Criterios basados en estadísitcas por individuo:**
 
-``` shell
-```
+    En general nuestros individuos lucen bien en términos de profundidad
+    promedio y datos perdidos como lo vimos en nuestras gráficas de
+    resultados. Si quisiéramos excluir individuos basados en estas
+    estadísticas usamos las opciones `--keep` o `--remove`, incluyendo
+    junto a ellas la lista de nombres de individuos que queremos
+    mantener o descartar.
 
-1.  **Criterios basados en estadísitcas por individuo**
+**Pregunta:** Después de filtrar ¿Cuántos sitios tenemos después de
+aplicar los filtros que aplicamos?
