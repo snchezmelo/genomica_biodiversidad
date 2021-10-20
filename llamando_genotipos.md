@@ -1,6 +1,5 @@
 ---
 author: Juan Enciso
-title: Llamando y filtrando genotipos
 ---
 
 # <span class="todo TODO">TODO</span> Motivación
