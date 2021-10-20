@@ -804,11 +804,30 @@
        los sitios que cumplen con el criterio que establecemos y exportar estos
        datos en el formato requerido.
 
-       Recuerda que en la sección donde [[calcula_estadisticas][preparábamos el análisis por sitios]],
-       hicimos una operación en la que le dábamos a cada sitio un identificador
-       único.
+       Recuerda que en la sección donde preparábamos el análisis por sitios
+       ([[calcula_estadisticas]]) hicimos una operación en la que le dábamos a cada
+       sitio un identificador único. Usaremos esos identificadores únicos aquí
+       para filtrar nuestro archivo usando la opción ~--snps~ de ~vcftools~.
+
+       Cargamos nuestro archivo de conteos en ~R~. Fíjate que conectamos varias
+       operaciones entre sí con el operador ~%>%~, que funciona como ~|~, pero
+       en ~R~. Dijimos que queríamos retener sitios con 30 o más alelos, luego
+       debemos aplicar un filtro para retener los sitios que cumplen con esta
+       condición (primer ~filter~). Con estos sitios calculamos la frecuencia
+       del alelo menos frecuente (~AF~, parte de ~mutate~, ~ifelse~, etc.).
+       Luego, queremos retener los sitios que tienen más de tres alelos menores,
+       es decir, una valor de ~AF > 3/30~ (0.1). También queremos retener sitios
+       invariantes (~AF == 0~). Luego, creamos una nueva columna llamada
+       ~SNP_ID~, que es el resultado de unir las columnas ~CHROM~ y ~POS~ usando
+       ~:~ como separador (parte de ~mutate~ y ~paste~). Seleccionamos solo esa
+       columna (~select~) y la asignamos a la variable ~sitios_cont~. Finalmente
+       escribimos estos datos en el disco usando la función ~write_tsv~,
+       ignorando el nombre de la columna.
        
        #+begin_src r
+         ### Conteo alelos x sitio, cargamos los datos
+         conteo_alelos <- read_tsv("heliconius.optixscaf.conteofull")
+         
          ### Sitios con mas de 30 alelos en los cuales
          ### la frecuencia del alelo menor debe ser mayor que 0.1
          ### creamos una nueva columna llamada ID_SNP
@@ -826,8 +845,13 @@
                    col_names = FALSE)
        #+end_src
 
+       *Atención!:* Muéstrale el resultado de esta operación al personal docente
+       antes de continuar.
+
        Aplicamos el filtro: Le decimos a ~vcftools~ que debe dejar únicamente
-       estos sitios y descartar el resto. Usamos la opción ~--snps~.
+       estos sitios y descartar el resto. Usamos la opción ~--snps~. Copia los
+       datos que acabaste de generar a tu carpeta de trabajo en el clúster y usa
+       este archivo para indicarle a ~vcftools~ qué sitios retener.
     
        #+begin_src shell
          vcftools --gzvcf heliconius.optixscaf.SNPS.NV.vcf.gz \
