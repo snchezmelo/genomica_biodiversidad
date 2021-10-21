@@ -130,20 +130,22 @@ Sigue estos pasos para descargarlo:
     group** por muestra sería recomendable hacer dos alineamientos y
     luego unirlos usando otras herramientas. Para establecer el read
     group usamos la opción `-R` seguida de la siguiente cadena de
-    caracteres usando comillas dobles:
-    `"@RG\tID:id_muestra\tSM:id_muestra\tPL:Illumina"`. Si revisamos
-    esta expresión en detalle consta de tres campos separados por
-    tabulación (`\t`). El primero, (`ID`), corresponde al identificador
-    del corrido de secuenciación, que normalmente corresponde a uno de
-    los carriles de la máquina secuenciadora. El segundo (`SM`)
-    corresponde al identificador de la muestra. El tercero (`PL`)
-    corresponde a la plataforma usada para secuenciar. En el caso de los
-    datos de *Heliconius* la plataforma utilizada para todas las
-    muestras fue Illuimina. En cada caso debes cambiar `id_muestra` por
-    el identificador asociado a cada muestra. Establece el read group
-    correctamente usando la opción `-R` y los detales correspondientes a
-    cada muestra. Todas las muestras de *Heliconius* que usaremos fueron
-    secuenciadas usando la plataforma `Illumina`.
+    caracteres usando comillas dobles y evaluandola usando `echo`. Si el
+    identificador de la muestra está en una variable llamada
+    `id_muestra`, esta parte de la llamada se vería así: `$(echo
+             "@RG\tID:$id_muestra\tSM:$id_muestra\tPL:Illumina")`. Si
+    revisamos esta expresión en detalle consta de tres campos separados
+    por tabulación (`\t`). El primero, (`ID`), corresponde al
+    identificador del corrido de secuenciación, que normalmente
+    corresponde a uno de los carriles de la máquina secuenciadora. El
+    segundo (`SM`) corresponde al identificador de la muestra. El
+    tercero (`PL`) corresponde a la plataforma usada para secuenciar. En
+    el caso de los datos de *Heliconius* la plataforma utilizada para
+    todas las muestras fue Illuimina. En cada caso debes cambiar
+    `id_muestra` por el identificador asociado a cada muestra. Establece
+    el read group correctamente usando la opción `-R` y los detales
+    correspondientes a cada muestra. Todas las muestras de *Heliconius*
+    que usaremos fueron secuenciadas usando la plataforma `Illumina`.
 
     Los tres argumentos siguientes son la ruta de la referencia y la
     ruta de los archivos de lectura (R1 y luego R2). Asegúrate de
@@ -181,13 +183,13 @@ Sigue estos pasos para descargarlo:
     verificar que luce bien antes de enviarlo a la cola de trabajo.
 
 <details>
-<summary> Haz click para ver el código correspondiente a esta parte </summary>
+<summary> Haz click para ver el código correspondiente a esta parte del mapeo </summary>
 
 ``` shell
 #!/bin/bash
 #SBATCH -p normal
 #SBATCH -n 4
-#SBATCH --mem=16000
+#SBATCH --mem=8000
 #SBATCH --time=0-12:00
 
 read_1=$1
