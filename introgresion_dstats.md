@@ -74,7 +74,7 @@ Requerimientos computacionales: TBD
 
 3.  **Examinando los resultados: Ventanas a lo largo de Hmel218003o**
 
-4.  **Visualizando** *F*<sub>*S**T*</sub> **a lo largo de Hmel218003o**
+4.  **Visualizando F<sub>ST</sub> a lo largo de Hmel218003o**
 
     ![](./Imagenes/fst_ventana_10k.png)
 
