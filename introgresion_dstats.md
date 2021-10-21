@@ -29,7 +29,7 @@ Requerimientos computacionales: TBD
     usar `vcftools` para analizar la estructura por ventana usando este
     archivo y otras piezas de información.
 
-    <img src="https://render.githubusercontent.com/render/math?math=\large\frac{\sigma_{P}^{2}}{\sigma_{P}^{2} %2B \sigma_{I}^{2} %2B \sigma_{G}^{2}}">
+    <img src="https://render.githubusercontent.com/render/math?math=\huge\frac{\sigma_{P}^{2}}{\sigma_{P}^{2} %2B \sigma_{I}^{2} %2B \sigma_{G}^{2}}">
 
     Necesitamos preparar archivos de texto en los que especificamos la
     población a la que pertenece cada muestra. Usando `nano` crea un
