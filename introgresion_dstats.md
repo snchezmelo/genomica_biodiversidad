@@ -30,6 +30,8 @@ Requerimientos computacionales: TBD
     archivo y otras piezas de información.
 
     <p><span class="math display">\[ \frac{\sigma_{P}^{2}}{\sigma_{P}^{2} + \sigma_{I}^{2} + \sigma_{G}^{2}} \]</span></p>
+    $$ \frac{\sigma_{P}^{2}}{\sigma_{P}^{2} + \sigma_{I}^{2} + \sigma_{G}^{2}} $$
+
     Necesitamos preparar archivos de texto en los que especificamos la
     población a la que pertenece cada muestra. Usando `nano` crea un
     archivo por población. Cada archivo debe tener una columna con los
