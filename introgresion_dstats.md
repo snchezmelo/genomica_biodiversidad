@@ -105,15 +105,94 @@ Requerimientos computacionales: TBD
     Antes de importar los datos a `R` vamos a procesar nuestro archivo
     para ignorar los valores no numéricos. De esta forma podemos
     procesar los datos un poco más fácil en `R`. Usa `grep` para excluir
-    las posiciones con valores no numéricos.
+    las posiciones con valores no numéricos y guarda el resultado en un
+    nuevo archivo.
+
+    Carga la librería `tidyverse` y los datos en `R`.
+
+    ``` r
+    ###
+    rm(list=ls())
+
+    library(tidyverse)
+
+    ### carga los datos
+    fst_site <- read_tsv("archivo.weir.fst")
+
+    ### recuerda cargar las tres comparaciones
+    ```
+
+    Ahora debemos agregarle una nueva columna a cada uno de los
+    dataframes que indique la comparación que estamos haciendo. Puedes
+    hacerlo usando la función
+    [`mutate`](https://dplyr.tidyverse.org/reference/mutate.html) de
+    `tidyverse`. En la nueva columna incluye el nombre de la comparación
+    tantas veces como filas tenga el dataframe. Puedes hacer esto usando
+    las funciones `rep` y `nrow`. `nrow(dataframe)` te debería dar el
+    número de filas en el dataframe. Haz esto para los tres marcos de
+    datos
+
+    <details>
+    <summary> Trata de escribir el código por tu cuenta. Si no puedes avanzar mira el código aquí </summary>
+
+    ``` r
+    ###
+    ### mutate le agrega la columna COMP al dataframe fst_site
+    ### la columna que agrega es "comparacion" repetida nrow(fst_site) veces
+    fst_site <- mutate(fst_site, COMP=rep("comparacion", nrow(fst_site)))
+    ```
+
+    </details>
+
+    Junta los datos usando la función `rbind`. La función `rbind` junta
+    las filas de los dataframes que entran como parámetro.
+
+    <details>
+    <summary> Trata de escribir el código por tu cuenta. Si no puedes avanzar mira el código aquí </summary>
+
+    ``` r
+    ### rbind une los datos de las tres comparaciones
+    ### de forma vertical
+    fst_todos <- rbind(fst_site1, fst_site2, fst_site3)
+    ```
+
+    </details>
+
+    Pinta los datos uisando `ggplot`. Haz un gráfico de puntos con la
+    posición en `Hmel218003o` en el eje x y el índice de fijación por
+    sitio en el eje
+
+    <details>
+    <summary> Trata de escribir el código por tu cuenta. Si no puedes avanzar mira el código aquí </summary>
+
+    ``` r
+    ### Pintamos un grafico de puntos dandole colores diferentes a cada
+    ### comparacion
+    ggplot(data=fst_todos, aes(x=POS, y=WEIR_AND_COCKERHAM_FST, color=COMP)) +
+      geom_point() + theme_bw() +
+      labs(x="Posicion en Hmel218003o", y=expression("F"["ST"]))
+    ```
+
+    </details>
 
     Observemos la gráfica:
 
     ![](./Imagenes/fst_plot_site.png)
 
     Se ve terrible! :fearful: No podemos distinguir muchos detalles a lo
-    largo de la región examinada. ¿Será mejor usar un enfoque diferente?
-    ¿Cómo podemos mejorar el análisis?
+    largo de la región examinada.
+
+    -   ¿Qué valores u observaciones se ven extrañas o incorrectas?
+
+    -   ¿Qué podemos hacer para conservar solo los valores que tengan
+        sentido?
+
+    -   ¿Cómo podemos mejorar la visualización?
+
+    ![](./Imagenes/fst_sitio_facets.png)
+
+    -   ¿Podemos hacer inferencias basados en esta nueva versión? ¿Qué
+        comparaciones muestran mayores índices de fijación en general?
 
 ## <span class="todo TODO">TODO</span> Calculando índice de fijación F<sub>ST</sub> por ventana
 
