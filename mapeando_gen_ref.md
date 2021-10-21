@@ -180,6 +180,33 @@ Sigue estos pasos para descargarlo:
 7.  **Atención!:** Muéstrale tu script al personal docente para
     verificar que luce bien antes de enviarlo a la cola de trabajo.
 
+\<details> \<summary> Haz click para ver el código correspondiente a
+esta parte \</summary>
+
+``` shell
+#!/bin/bash
+#SBATCH -p normal
+#SBATCH -n 4
+#SBATCH --mem=16000
+#SBATCH --time=0-12:00
+
+read_1=$1
+read_2=$2
+ref=$3
+rg_info=$4
+ref_info=$5
+
+module load bwa
+module load samtools
+
+bwa mem -t 4 -M -R $(echo "@RG\tID:$rg_info\tSM:$rg_info\tPL:Illumina") \
+    $ref $read_1 $read_2 | samtools sort -@ 4 -o $rg_info.$ref_info.SHORT.sort.bam -
+
+samtools index $rg_info.$ref_info.SHORT.sort.bam
+```
+
+\</details>
+
 ## Quitando duplicados de PCR
 
 Recursos computacionales: 2 procesadores, 8 GB de memoria, \~20 min de
