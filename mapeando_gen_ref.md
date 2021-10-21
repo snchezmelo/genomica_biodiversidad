@@ -186,7 +186,7 @@ tiempo de ejecución.
     verificar que luce bien antes de enviarlo a la cola de trabajo.
 
 <details>
-<summary> Haz click para ver el código correspondiente a esta parte del mapeo </summary>
+<summary> Trata de construir el script por tu cuenta. Si no puedes avanzar en tu solución puedes ver el código aquí. </summary>
 
 ``` shell
 #!/bin/bash
