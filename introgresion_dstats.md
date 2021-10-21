@@ -24,7 +24,7 @@ estima las varianzas genéticas entre poblaciones (P), individuos de una
 población (I) y genotipos de un individuo (G). Luego utiliza la
 expresión a continuación para estimar F<sub>ST</sub>:
 
-<img src="https://render.githubusercontent.com/render/math?math=\huge\F_{ST} = frac{\sigma_{P}^{2}}{\sigma_{P}^{2} %2B \sigma_{I}^{2} %2B \sigma_{G}^{2}}">
+<img src="https://render.githubusercontent.com/render/math?math=\huge F_{ST} = \frac{\sigma_{P}^{2}}{\sigma_{P}^{2} %2B \sigma_{I}^{2} %2B \sigma_{G}^{2}}">
 
 ## <span class="todo TODO">TODO</span> Calculando índice de fijación F<sub>ST</sub> por sitio
 
