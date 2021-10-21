@@ -1,5 +1,4 @@
 ---
-author: Juan Enciso
 ---
 
 # <span class="todo TODO">TODO</span> Análisis poblacionales por sitios y ventanas
