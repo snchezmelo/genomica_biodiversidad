@@ -3,7 +3,7 @@
 
 # <span class="todo TODO">TODO</span> Análisis poblacionales por sitios y ventanas
 
-## <span class="todo TODO">TODO</span> Motivación y explicación
+## Motivación y explicación
 
 EL índice de fijación F<sub>ST</sub> es una medida de separación entre
 grupos de individuos. En teoría F<sub>ST</sub> varía entre 0 y 1 en
@@ -27,7 +27,7 @@ poblaciones:
 
 <img src="https://render.githubusercontent.com/render/math?math=\huge F_{ST} = \frac{\sigma_{P}^{2}}{\sigma_{P}^{2} %2B \sigma_{I}^{2} %2B \sigma_{G}^{2}}">
 
-## <span class="todo TODO">TODO</span> Calculando índice de fijación F<sub>ST</sub> por sitio
+## Calculando índice de fijación F<sub>ST</sub> por sitio
 
 Requerimientos computacionales: TBD
 
@@ -111,7 +111,7 @@ Requerimientos computacionales: TBD
     Carga la librería `tidyverse` y los datos en `R`.
 
     ``` r
-    ###
+    ### limpia el ambiente de trabajo
     rm(list=ls())
 
     library(tidyverse)
@@ -130,7 +130,7 @@ Requerimientos computacionales: TBD
     tantas veces como filas tenga el dataframe. Puedes hacer esto usando
     las funciones `rep` y `nrow`. `nrow(dataframe)` te debería dar el
     número de filas en el dataframe. Haz esto para los tres marcos de
-    datos
+    datos.
 
     <details>
     <summary> Trata de escribir el código por tu cuenta. Si no puedes avanzar mira el código aquí </summary>
@@ -148,7 +148,7 @@ Requerimientos computacionales: TBD
     las filas de los dataframes que entran como parámetro.
 
     <details>
-    <summary> Trata de escribir el código por tu cuenta. Si no puedes avanzar mira el código aquí </summary>
+    <summary> Si necesitas pistas de cómo hacerlo puedes ver el código aquí </summary>
 
     ``` r
     ### rbind une los datos de las tres comparaciones
@@ -158,12 +158,14 @@ Requerimientos computacionales: TBD
 
     </details>
 
-    Pinta los datos uisando `ggplot`. Haz un gráfico de puntos con la
-    posición en `Hmel218003o` en el eje x y el índice de fijación por
-    sitio en el eje
+    Pinta los datos uisando `ggplot`. Haz un gráfico de puntos
+    (`geom_point()`) con la posición en `Hmel218003o` en el eje x y el
+    índice de fijación por sitio en el eje y. En mi caso pinté las
+    diferentes comparaciones usando diferentes colores. Puedes también
+    pintarlas en paneles independientes usando la función `facet_wrap`.
 
     <details>
-    <summary> Trata de escribir el código por tu cuenta. Si no puedes avanzar mira el código aquí </summary>
+    <summary> Si necesitas pistas de cómo hacerlo puedes ver el código aquí </summary>
 
     ``` r
     ### Pintamos un grafico de puntos dandole colores diferentes a cada
@@ -182,26 +184,27 @@ Requerimientos computacionales: TBD
     Se ve terrible! :fearful: No podemos distinguir muchos detalles a lo
     largo de la región examinada.
 
-    -   ¿Qué valores u observaciones se ven extrañas o incorrectas?
+    -   [ ] ¿Qué valores u observaciones se ven extrañas o incorrectas?
 
-    -   ¿Qué podemos hacer para conservar solo los valores que tengan
-        sentido?
+    -   [ ] ¿Qué podemos hacer para conservar solo los valores que
+        tengan sentido?
 
-    -   ¿Cómo podemos mejorar la visualización?
+    -   [ ] ¿Cómo podemos mejorar la visualización?
 
     ![](./Imagenes/fst_sitio_facets.png)
 
-    -   ¿Podemos hacer inferencias basados en esta nueva versión? ¿Qué
-        comparaciones muestran mayores índices de fijación en general?
+    -   [ ] ¿Podemos hacer inferencias basados en esta nueva versión?
+        ¿Qué comparaciones muestran mayores índices de fijación en
+        general?
 
-## <span class="todo TODO">TODO</span> Calculando índice de fijación F<sub>ST</sub> por ventana
+## Calculando índice de fijación F<sub>ST</sub> por ventana
 
 Requerimientos computacionales: TBD
 
 1.  **Preparando los datos**
 
-    En este caso la preparación es la misma que cuando calculamos
-    F<sub>ST</sub> por sitio.
+    En este caso los archivos de entrada son los mismos que cuando
+    calculamos F<sub>ST</sub> por sitio.
 
 2.  **Estimando la estructura a lo largo de Hmel218003o**
 
@@ -256,6 +259,79 @@ Requerimientos computacionales: TBD
     -   [ ] ¿Observas diferencias entre los dos estimados de estructura?
 
 4.  **Visualizando F<sub>ST</sub> a lo largo de Hmel218003o**
+
+    Graficar los resultados por ventana es muy similar a como lo hicimos
+    por sitio. Carga la librería `tidyverse` y los datos en `R`.
+
+    ``` r
+    ### limpia el ambiente de trabajo
+    rm(list=ls())
+
+    library(tidyverse)
+
+    ### carga los datos
+    fst_site <- read_tsv("archivo.weir.ventanas.fst")
+
+    ### recuerda cargar las tres comparaciones
+    ```
+
+    Ahora debemos agregarle una nueva columna a cada uno de los
+    dataframes que indique la comparación que estamos haciendo. Puedes
+    hacerlo usando la función
+    [`mutate`](https://dplyr.tidyverse.org/reference/mutate.html) de
+    `tidyverse`. En la nueva columna incluye el nombre de la comparación
+    tantas veces como filas tenga el dataframe. Puedes hacer esto usando
+    las funciones `rep` y `nrow`. `nrow(dataframe)` te debería dar el
+    número de filas en el dataframe. Haz esto para los tres marcos de
+    datos.
+
+    <details>
+    <summary> Trata de escribir el código por tu cuenta. Si no puedes avanzar mira el código aquí </summary>
+
+    ``` r
+    ###
+    ### mutate le agrega la columna COMP al dataframe fst_site
+    ### la columna que agrega es "comparacion" repetida nrow(fst_site) veces
+    fst_site <- mutate(fst_site, COMP=rep("comparacion", nrow(fst_site)))
+    ```
+
+    </details>
+
+    Junta los datos usando la función `rbind`. La función `rbind` junta
+    las filas de los dataframes que entran como parámetro.
+
+    <details>
+    <summary> Si necesitas pistas de cómo hacerlo puedes ver el código aquí </summary>
+
+    ``` r
+    ### rbind une los datos de las tres comparaciones
+    ### de forma vertical
+    fst_todos <- rbind(fst_site1, fst_site2, fst_site3)
+    ```
+
+    </details>
+
+    Pinta los datos uisando `ggplot`. Haz un gráfico de línea
+    (`geom_line()`) o de punto (`geom_point()`).Usa la posición de
+    inicio o fin de ventana en el eje x y el índice de fijación por
+    sitio en el eje y. En mi caso pinté las diferentes comparaciones
+    usando diferentes colores. Puedes también pintarlas en paneles
+    independientes usando la función `facet_wrap`.
+
+    <details>
+    <summary> Si necesitas pistas de cómo hacerlo puedes ver el código aquí </summary>
+
+    ``` r
+    ### Pintamos un grafico de puntos dandole colores diferentes a cada
+    ### comparacion
+    ggplot(data=fst_todos, aes(x=POS, y=WEIR_AND_COCKERHAM_FST, color=COMP)) +
+      geom_point() + theme_bw() +
+      labs(x="Posicion en Hmel218003o", y=expression("F"["ST"]))
+    ```
+
+    </details>
+
+    Observemos la gráfica:
 
     ![](./Imagenes/fst_ventana_10k.png)
 
