@@ -78,6 +78,9 @@ Sigue estos pasos para descargarlo:
 
 ## Alineamiento de las lecturas
 
+Recursos computacionales: 2 procesadores, 8 GB de memoria, \~40 min de
+tiempo de ejecución.
+
 1.  Para este paso necesitamos escribir un script de bash usando `nano`
     (u otro editor de texto disponible en el cluster). Crea un nuevo
     archivo de texto usando el editor y ponle un nombre informativo, por
@@ -188,7 +191,7 @@ Sigue estos pasos para descargarlo:
 ``` shell
 #!/bin/bash
 #SBATCH -p normal
-#SBATCH -n 4
+#SBATCH -n 2
 #SBATCH --mem=8000
 #SBATCH --time=0-12:00
 
@@ -215,8 +218,10 @@ Recursos computacionales: 2 procesadores, 8 GB de memoria, \~20 min de
 tiempo de ejecución.
 
 1.  Tenemos que quitar los duplicados de PCR, estos pueden interferir
-    luego con el proceso de inferencia de alelos \[@Ebbert2016\]. Para
-    este proceso vamos a usar una suite de herramientas llamada
+    luego con el proceso de inferencia de alelos. Puedes encontrar
+    detalles sobre este proceso en [este paper de
+    Ebbert (2016)](http://ebbertlab.com/Ebbert_PCR_duplicates_BMC_Bioinformatics.pdf).
+    Para este proceso vamos a usar una suite de herramientas llamada
     [`Picard Tools`](https://broadinstitute.github.io/picard/).
     Específicamente queremos usar la herramienta
     [`MarkDuplicates`](https://broadinstitute.github.io/picard/command-line-overview.html#MarkDuplicates).
@@ -257,6 +262,32 @@ tiempo de ejecución.
 
     **Atención!:** Antes de enviar el trabajo a la cola muéstrale tu
     script al personal docente para verificar que se ve bien :)
+
+<details>
+<summary> Trata de construir el script por tu cuenta. Si no puedes avanzar en tu solución puedes ver el código aquí. </summary>
+
+``` shell
+#!/bin/bash
+#SBATCH -p normal
+#SBATCH -n 2
+#SBATCH --mem=8000
+#SBATCH --time=0-12:00
+
+baminfo=$1
+
+module load java8
+module load samtools
+
+java -Xmx8G -jar /opt/ohpc/pub/apps/picard-tools/2.18.15/picard.jar \
+     MarkDuplicates REMOVE_DUPLICATES=true ASSUME_SORTED=true \
+     VALIDATION_STRINGENCY=SILENT MAX_FILE_HANDLES_FOR_READ_ENDS_MAP=1000 \
+     INPUT=$baminfo OUTPUT=${baminfo%sort.bam}sort.rmd.bam \
+     METRICS_FILE=${baminfo%sort.bam}sort.rmd.metrics TMP_DIR=../TMP_DIR
+
+samtools index ${baminfo%sort.bam}sort.rmd.bam
+```
+
+</details>
 
 ## <span class="todo TODO">TODO</span> Estadísticas del alineamiento
 

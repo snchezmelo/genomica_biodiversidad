@@ -370,15 +370,15 @@ facilitar el análisis.
     sitio. Una solución usada a menudo para nombrar los sitios es el
     formato `scaffold:posicion`. Para hacer esto con nuestros datos
     vamos a usar la herramienta
-    [`sed`](https://www.gnu.org/software/sed/) (\*\*s\*\*tream
-    \*\*ed\*\*itor). Haremos varios pasos para incluir esta información
-    en nuestro archivo. El paso <u>clave</u> utiliza `sed` para
-    sustituir todo lo que empiece con `Hmel` seguido de cualquier
-    cantidad de dígitos, seguido de una o minúscula (primera columna),
-    una tabulación, varios dígitos seguidos (segunda columna), otra
-    tabulación y un punto por la primera columna, una tabulación, la
-    segunda columna, otra tabulación, y las columnas 1 y 2 unidas por el
-    caracter `:`. Debemos volver a comprimir usando
+    [`sed`](https://www.gnu.org/software/sed/) (stream editor). Haremos
+    varios pasos para incluir esta información en nuestro archivo. El
+    paso <u>clave</u> utiliza `sed` para sustituir todo lo que empiece
+    con `Hmel` seguido de cualquier cantidad de dígitos, seguido de una
+    o minúscula (primera columna), una tabulación, varios dígitos
+    seguidos (segunda columna), otra tabulación y un punto por la
+    primera columna, una tabulación, la segunda columna, otra
+    tabulación, y las columnas 1 y 2 unidas por el caracter `:`. Debemos
+    volver a comprimir usando
     [`bgzip`](https://www.htslib.org/doc/bgzip.html), enviando el
     resultado a la salida estándar y luego re-dirigimos la salida
     estándar al nombre que queremos darle a los datos usando el operador
