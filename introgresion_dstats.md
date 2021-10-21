@@ -30,6 +30,8 @@ Requerimientos computacionales: TBD
     usar `vcftools` para analizar la estructura por ventana usando este
     archivo y otras piezas de información.
 
+    $$\\frac{\\sigma\_{P}^{2}}{\\sigma\_{P}^{2} + \\sigma\_{I}^{2} + \\sigma\_{G}^{2}}$$
+
     Necesitamos preparar archivos de texto en los que especificamos la
     población a la que pertenece cada muestra. Usando `nano` crea un
     archivo por población. Cada archivo debe tener una columna con los
