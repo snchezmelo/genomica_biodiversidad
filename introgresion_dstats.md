@@ -18,6 +18,14 @@ genes que permitan a las poblaciones adaptarse a diferentes ambientes,
 dependiendo de los alelos que tengan. En este caso la exploración de
 estos patrones a lo largo del genoma se vuelve interesante.
 
+El estimado que usaremos está basado en el método de [Weir y Cockerham
+(1984)](https://www.jstor.org/stable/2408641). Este método esencialmente
+estima las varianzas genéticas entre poblaciones (P), individuos de una
+población (I) y genotipos de un individuo (G). Luego utiliza la
+expresión a continuación para estimar F<sub>ST</sub>:
+
+<img src="https://render.githubusercontent.com/render/math?math=\huge\F_{ST} = frac{\sigma_{P}^{2}}{\sigma_{P}^{2} %2B \sigma_{I}^{2} %2B \sigma_{G}^{2}}">
+
 ## <span class="todo TODO">TODO</span> Calculando índice de fijación F<sub>ST</sub> por sitio
 
 Requerimientos computacionales: TBD
@@ -28,8 +36,6 @@ Requerimientos computacionales: TBD
     archivo de genotipos ya fue filtrado en un paso anterior. Vamos a
     usar `vcftools` para analizar la estructura por ventana usando este
     archivo y otras piezas de información.
-
-    <img src="https://render.githubusercontent.com/render/math?math=\huge\frac{\sigma_{P}^{2}}{\sigma_{P}^{2} %2B \sigma_{I}^{2} %2B \sigma_{G}^{2}}">
 
     Necesitamos preparar archivos de texto en los que especificamos la
     población a la que pertenece cada muestra. Usando `nano` crea un
