@@ -19,11 +19,11 @@ genes que permitan a las poblaciones adaptarse a diferentes ambientes,
 dependiendo de los alelos que tengan. En este caso la exploración de
 estos patrones a lo largo del genoma se vuelve interesante.
 
-## <span class="todo TODO">TODO</span> Calculando índice de fijación por sitio
+## <span class="todo TODO">TODO</span> Calculando índice de fijación F<sub>ST</sub> por sitio
 
 Requerimientos computacionales: TBD
 
-## <span class="todo TODO">TODO</span> Calculando índice de fijación por ventana
+## <span class="todo TODO">TODO</span> Calculando índice de fijación F<sub>ST</sub> por ventana
 
 Requerimientos computacionales: TBD
 
