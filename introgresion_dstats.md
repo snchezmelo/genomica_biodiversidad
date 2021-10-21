@@ -74,9 +74,27 @@ Requerimientos computacionales: TBD
 
 3.  **Examinando los resultados: Ventanas a lo largo de Hmel218003o**
 
+    Examina los archivos de texto que resultaron de estimar
+    F<sub>ST</sub> con `vcftools`. ¿Qué estructura tienen? ¿Qué
+    inforamción puedes identificar? ¿? ¿?
+
 4.  **Visualizando F<sub>ST</sub> a lo largo de Hmel218003o**
 
     ![](./Imagenes/fst_ventana_10k.png)
+
+    Preguntas:
+
+    -   [ ] ¿Qué poblaciones tienen un menor nivel de estructuración
+        entre sí?
+
+    -   [ ] ¿Qué poblaciones tienen un mayor nivel de estructuración
+        entre sí?
+
+    -   [ ] ¿Qué explicación puede tener esta diferencia entre
+        comparaciones?
+
+    -   [ ] ¿Hay alguna región de `Hmel218003o` en donde los patrones
+        observados se comportan de forma inesperada?
 
     <details>
     <summary> Mira una versión mejorada aquí ¿Qué cambios harías en el análisis para lograr una versión así? </summary>
