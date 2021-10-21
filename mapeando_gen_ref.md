@@ -180,8 +180,8 @@ Sigue estos pasos para descargarlo:
 7.  **Atención!:** Muéstrale tu script al personal docente para
     verificar que luce bien antes de enviarlo a la cola de trabajo.
 
-\<details> \<summary> Haz click para ver el código correspondiente a
-esta parte \</summary>
+<details>
+<summary> Haz click para ver el código correspondiente a esta parte </summary>
 
 ``` shell
 #!/bin/bash
@@ -205,7 +205,7 @@ bwa mem -t 4 -M -R $(echo "@RG\tID:$rg_info\tSM:$rg_info\tPL:Illumina") \
 samtools index $rg_info.$ref_info.SHORT.sort.bam
 ```
 
-\</details>
+</details>
 
 ## Quitando duplicados de PCR
 

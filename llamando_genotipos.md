@@ -370,8 +370,8 @@ facilitar el análisis.
     sitio. Una solución usada a menudo para nombrar los sitios es el
     formato `scaffold:posicion`. Para hacer esto con nuestros datos
     vamos a usar la herramienta
-    [`sed`](https://www.gnu.org/software/sed/) (\<b>s\</b>tream
-    \<b>ed\</b>itor). Haremos varios pasos para incluir esta información
+    [`sed`](https://www.gnu.org/software/sed/) (\*\*s\*\*tream
+    \*\*ed\*\*itor). Haremos varios pasos para incluir esta información
     en nuestro archivo. El paso <u>clave</u> utiliza `sed` para
     sustituir todo lo que empiece con `Hmel` seguido de cualquier
     cantidad de dígitos, seguido de una o minúscula (primera columna),
@@ -732,7 +732,7 @@ facilitar el análisis.
     Pregunta: ¿Observando la información de los datos perdidos, crees
     que hay algún individuo que deba excluirse?
 
-### <span class="todo TODO">TODO</span> Aplicando los filtros al archivo VCF
+### Aplicando los filtros al archivo VCF
 
 1.  **Criterio basado en conteos:**
 
