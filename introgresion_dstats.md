@@ -6,11 +6,10 @@ author: Juan Enciso
 
 ## <span class="todo TODO">TODO</span> Motivación y explicación
 
-EL índice de fijación *F*<sub>*S**T*</sub> es una medida de separación
-entre grupos de individuos. En teoría *F*<sub>*S**T*</sub> varía entre 0
-y 1 en donde 0 representa la ausencia de distancia genética entre
-poblaciones, mientras que 1 significa que las poblaciones están
-totalmente separadas.
+EL índice de fijación F<sub>ST</sub> es una medida de separación entre
+grupos de individuos. En teoría F<sub>ST</sub> varía entre 0 y 1 en
+donde 0 representa la ausencia de distancia genética entre poblaciones,
+mientras que 1 significa que las poblaciones están totalmente separadas.
 
 La diferenciación entre poblaciones puede variar a lo largo del genoma;
 dos poblaciones pueden ser casi idénticas en una región y tener una
