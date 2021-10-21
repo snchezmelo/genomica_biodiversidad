@@ -22,7 +22,8 @@ El estimado que usaremos está basado en el método de [Weir y Cockerham
 (1984)](https://www.jstor.org/stable/2408641). Este método esencialmente
 estima las varianzas genéticas entre poblaciones (P), individuos de una
 población (I) y genotipos de un individuo (G). Luego utiliza la
-expresión a continuación para estimar F<sub>ST</sub>:
+siguiente expresión para estimar el índice de fijación entre
+poblaciones:
 
 <img src="https://render.githubusercontent.com/render/math?math=\huge F_{ST} = \frac{\sigma_{P}^{2}}{\sigma_{P}^{2} %2B \sigma_{I}^{2} %2B \sigma_{G}^{2}}">
 
@@ -83,7 +84,36 @@ Requerimientos computacionales: TBD
 
 3.  **Examinando los resultados:**
 
+    Examina los archivos de texto que resultaron de estimar
+    F<sub>ST</sub> por sitios con `vcftools`.
+
+    Responde a las preguntas:
+
+    -   [ ] ¿Qué estructura tienen los archivos (número de filas y
+        columnas, encabezado)?
+
+    -   [ ] ¿Qué inforamción puedes identificar en ellos (contenido de
+        cada columna)?
+
+    -   [ ] ¿Cuántos estimados de estructura aparecen?
+
+    -   [ ] ¿Qué valores aparecen más frecuentemente? ¿Cuál piensas que
+        es la razón por la que observamos estos valores?
+
 4.  **Visualizando F<sub>ST</sub> por sitio a lo largo de Hmel218003o**
+
+    Antes de importar los datos a `R` vamos a procesar nuestro archivo
+    para ignorar los valores no numéricos. De esta forma podemos
+    procesar los datos un poco más fácil en `R`. Usa `grep` para excluir
+    las posiciones con valores no numéricos.
+
+    Observemos la gráfica:
+
+    ![](./Imagenes/fst_plot_site.png)
+
+    Se ve terrible! :fearful: No podemos distinguir muchos detalles a lo
+    largo de la región examinada. ¿Será mejor usar un enfoque diferente?
+    ¿Cómo podemos mejorar el análisis?
 
 ## <span class="todo TODO">TODO</span> Calculando índice de fijación F<sub>ST</sub> por ventana
 
@@ -132,7 +162,7 @@ Requerimientos computacionales: TBD
 3.  **Examinando los resultados: Ventanas a lo largo de Hmel218003o**
 
     Examina los archivos de texto que resultaron de estimar
-    F<sub>ST</sub> con `vcftools`.
+    F<sub>ST</sub> por ventanas con `vcftools`.
 
     Responde a las preguntas:
 
