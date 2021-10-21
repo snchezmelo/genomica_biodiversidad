@@ -23,10 +23,6 @@ estos patrones a lo largo del genoma se vuelve interesante.
 
 Requerimientos computacionales: TBD
 
-## <span class="todo TODO">TODO</span> Calculando índice de fijación F<sub>ST</sub> por ventana
-
-Requerimientos computacionales: TBD
-
 1.  **Preparando los datos**
 
     Para este análisis ya tenemos una gran parte preparada; nuestro
@@ -47,8 +43,62 @@ Requerimientos computacionales: TBD
 
 2.  **Estimando la estructura a lo largo de Hmel218003o**
 
+    Utiliza `vcftools` con las opciones `--weir-fst-pop <archivo
+            identidades>`. Revisa [la documentación de
+    `vcftools`](https://vcftools.github.io/man_latest.html) para
+    informarte sobre cómo comparar individuos de dos poblaciones. En
+    teoría puedes estimar la estructura genética entre más de dos grupos
+    pero la interpretación de los resultados se vuelve compleja, por eso
+    vamos a comparar **pares de poblaciones**. Recuerda especificar un
+    prefijo para tu archivo de salida con la opción `--out <prefijo>`.
+
+    <details>
+    <summary> Trata de construir la línea de comando por tu cuenta. Si no puedes avanzar mira el código aquí </summary>
+
+    ``` shell
+    # comparacion timaretas: florencia thelxinoe
+    vcftools --gzvcf heliconius.optixscaf.SNPS.NV.FL2.vcf.gz \
+             --weir-fst-pop tim_fln_ids.txt --weir-fst-pop tim_thx_ids.txt \
+             --out fln_thx_fst.SITIO
+
+    # comparacion malleti florencia
+    vcftools --gzvcf heliconius.optixscaf.SNPS.NV.FL2.vcf.gz \
+             --weir-fst-pop tim_fln_ids.txt --weir-fst-pop melp_mallet_ids.txt \
+             --out mallet_fln_fst.SITIO
+
+    # comparacion malleti thelxinoe
+    vcftools --gzvcf heliconius.optixscaf.SNPS.NV.FL2.vcf.gz \
+             --weir-fst-pop tim_thx_ids.txt --weir-fst-pop melp_mallet_ids.txt \
+             --out mallet_thx_fst.SITIO
+    ```
+
+    </details>
+
+3.  **Examinando los resultados:**
+
+4.  **Visualizando F<sub>ST</sub> por sitio a lo largo de Hmel218003o**
+
+## <span class="todo TODO">TODO</span> Calculando índice de fijación F<sub>ST</sub> por ventana
+
+Requerimientos computacionales: TBD
+
+1.  **Preparando los datos**
+
+    En este caso la preparación es la misma que cuando calculamos
+    F<sub>ST</sub> por sitio.
+
+2.  **Estimando la estructura a lo largo de Hmel218003o**
+
     Utiliza `vcftools` con las opciones
     `--weir-fst-pop <archivo identidades>`
+    `--fst-window-size <tamaño ventana>`
+    `--fst-window-step <tamaño paso>` para correr el análisis usando
+    ventanas de un tamaño determinado por `<tamaño ventana>`, dando
+    pasos que miden `<tamaño paso>` a lo largo del scaffold. Para
+    empezar, usa un tamaño de ventana de 10000 bases y un tamaño de paso
+    de 5000 bases. Recuerda qué información debes incluir para comparar
+    dos poblaciones. Recuerda especificar un prefijo para tu archivo de
+    salida con la opción `--out <prefijo>`.
 
     <details>
     <summary> Trata de construir la línea de comando por tu cuenta. Si no puedes avanzar mira el código aquí </summary>
@@ -75,14 +125,25 @@ Requerimientos computacionales: TBD
 3.  **Examinando los resultados: Ventanas a lo largo de Hmel218003o**
 
     Examina los archivos de texto que resultaron de estimar
-    F<sub>ST</sub> con `vcftools`. ¿Qué estructura tienen? ¿Qué
-    inforamción puedes identificar? ¿? ¿?
+    F<sub>ST</sub> con `vcftools`.
+
+    Responde a las preguntas:
+
+    -   [ ] ¿Qué estructura tienen los archivos (número de filas y
+        columnas, encabezado)?
+
+    -   [ ] ¿Qué inforamción puedes identificar en ellos (contenido de
+        cada columna)?
+
+    -   [ ] ¿Cuántos estimados de estructura aparecen?
+
+    -   [ ] ¿Observas diferencias entre los dos estimados de estructura?
 
 4.  **Visualizando F<sub>ST</sub> a lo largo de Hmel218003o**
 
     ![](./Imagenes/fst_ventana_10k.png)
 
-    Preguntas:
+    Responde a las preguntas:
 
     -   [ ] ¿Qué poblaciones tienen un menor nivel de estructuración
         entre sí?
