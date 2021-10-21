@@ -20,7 +20,11 @@ genes que permitan a las poblaciones adaptarse a diferentes ambientes,
 dependiendo de los alelos que tengan. En este caso la exploración de
 estos patrones a lo largo del genoma se vuelve interesante.
 
-## <span class="todo TODO">TODO</span> Calculando *F*<sub>*S**T*</sub> por ventana
+## <span class="todo TODO">TODO</span> Calculando índice de fijación por sitio
+
+Requerimientos computacionales: TBD
+
+## <span class="todo TODO">TODO</span> Calculando índice de fijación por ventana
 
 Requerimientos computacionales: TBD
 
@@ -71,7 +75,7 @@ Requerimientos computacionales: TBD
 
 3.  **Examinando los resultados: Ventanas a lo largo de Hmel218003o**
 
-4.  **Visualizando *F*<sub>*S**T*</sub> a lo largo de Hmel218003o**
+4.  **Visualizando** *F*<sub>*S**T*</sub> **a lo largo de Hmel218003o**
 
     ![](./Imagenes/fst_ventana_10k.png)
 
@@ -81,8 +85,6 @@ Requerimientos computacionales: TBD
     ![](./Imagenes/fst_ventana_50k.png)
 
     </details>
-
-## <span class="todo TODO">TODO</span> Calculando *F*<sub>*S**T*</sub> por sitio
 
 ## <span class="todo TODO">TODO</span> Otros estadísticos poblacionales
 
