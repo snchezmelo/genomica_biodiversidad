@@ -76,7 +76,7 @@ Sigue estos pasos para descargarlo:
     Columna 4: El identificador de la muestra  
     Columna 5: El identificador de la referencia  
 
-## <span class="todo TODO">TODO</span> Alineamiento de las lecturas
+## Alineamiento de las lecturas
 
 1.  Para este paso necesitamos escribir un script de bash usando `nano`
     (u otro editor de texto disponible en el cluster). Crea un nuevo
@@ -174,7 +174,11 @@ Sigue estos pasos para descargarlo:
     samtools index aln.sam|aln.bam
     ```
 
-7.  Listo!
+    Listo! Con esta instrucción finalizamos el script que alinea, ordena
+    e indexa la primera versión del alineamiento.
+
+7.  **Atención!:** Muéstrale tu script al personal docente para
+    verificar que luce bien antes de enviarlo a la cola de trabajo.
 
 ## Quitando duplicados de PCR
 
