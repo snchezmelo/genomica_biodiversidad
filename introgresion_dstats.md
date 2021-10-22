@@ -413,7 +413,7 @@ calcular D de Patterson, explorar si hay evidencia de introgresión en
 nuestros datos y pensar en la relevancia biológica de nuestras
 observaciones.
 
-## Estadísticas D: Explicación
+## D de Patterson: Explicación
 
 | ![](./Imagenes/abba_baba_figure_helic.png)                                                                                                               |
 |----------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -436,6 +436,18 @@ dos patrones se observa en el sitio *i* a lo largo de *n* sitios. El
 numerador cuantifica el exceso de uno de los dos patrones respecto al
 otro y el numerador normaliza por el número total de patrones
 observados.
+
+Esta explicación es una simplificación; si contáramos solo los sitios en
+los cuales todos los individuos de P<sub>1</sub> y del outgroup tienen
+el alelo A y todos los individuos de P<sub>2</sub> y P<sub>3</sub>
+tienen el alelo B para cuantificar patrones ABBA estamos ignorando
+muchos sitios con información útil. La forma de calcular el estadístico
+D en la práctica involucra el uso de frecuencias alélicas.
+
+Si p<sub>ij</sub> denota la frecuencia del alelo i en la población j (i
+= {1, 2}; j = {1, 2, 3, 4}) entonces el D de Patterson se estima como
+
+<img src="https://render.githubusercontent.com/render/math?math=\huge D(P_{1}, P_{2}, P_{3}, O) = \frac{\sum_{i=1}^{n} [(1 - p_{i1}) \times p_{i2} \times p_{i3} \times (1 - p_{i4}) - p_{i1} \times (1 - p_{i2}) \times (1 - p_{i3}) \times p_{i4}]}{\sum_{i=1}^{n} [(1 - p_{i1}) \times p_{i2} \times p_{i3} \times (1 - p_{i4}) %2B p_{i1} \times (1 - p_{i2}) \times (1 - p_{i3}) \times p_{i4}]}">
 
 ## <span class="todo TODO">TODO</span> Referencias importantes
 
