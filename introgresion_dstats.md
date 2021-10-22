@@ -405,6 +405,10 @@ florencia* adaptarse, creando un anillo mimético con *H. melpomene
 malleti*. Recuerda el valor adaptativo del mimetismo Mülleriano para
 *Heliconius*.
 
+| ![](./Imagenes/hipotesis_introgresion1.png)                                                                                                                     |
+|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Razas que tenemos para nuestra hipótesis de introgresión ([Martin et al., 2019](https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.2006288)) |
+
 Aprenderemos a utilizar uno de muchos programas disponibles para
 calcular D de Patterson, explorar si hay evidencia de introgresión en
 nuestros datos y pensar en la relevancia biológica de nuestras
@@ -412,9 +416,9 @@ observaciones.
 
 ## <span class="todo TODO">TODO</span> Estadísticas D: Explicación
 
-| ![](./Imagenes/abba_baba_figure_helic.png)                                     |
-|--------------------------------------------------------------------------------|
-| Patrones ABBA y BABA que pueden surgir si el alelo derivado (B) va a P2 o a P1 |
+| ![](./Imagenes/abba_baba_figure_helic.png)                                                                                                               |
+|----------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Patrones ABBA y BABA que pueden surgir si el alelo derivado (B) va a P2 o a P1 ([Dasmahpatra et al., 2012](https://www.nature.com/articles/nature11041)) |
 
 ## <span class="todo TODO">TODO</span> Referencias importantes
 
