@@ -449,9 +449,9 @@ Recursos computacionales: TBD
 
     Prueba varios tamaños de ventana y paso: Prueba las combinaciones
     20,10; 50,25; 100,50; 500,250; 1000,500. Cada una de ellas no tarda
-    mucho en correr. **Reto:** Puedes hacerlo en un ciclo `for`? Las
-    operaciones aritméticas deben ir dentro de dobles paréntesis y
-    precedidas por el operador `$`.
+    mucho en correr. **Reto:** Puedes hacerlo en un ciclo `for`? Pista:
+    Puedes hacerlo con operaciones aritméticas, las cuales deben ir
+    dentro de dobles paréntesis y precedidas por el operador `$`.
 
     Ejemplo:
 
@@ -459,6 +459,7 @@ Recursos computacionales: TBD
     num=30
     # multiplica a num por 2
     resultado=$(($num*2))
+    # resultado es 60
     ```
 
 3.  **Examinando los datos:**
