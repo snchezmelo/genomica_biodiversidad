@@ -1,14 +1,7 @@
 ---
-bibliography: /home/juanenciso/MEGA/phd_thesis_juan/thesis_bibliography.bib
-description: "Genómica de la biodiversidad: Mapeando a genoma de
-  referencia"
-lang: es
-title: Alineamiento de lecturas a un genoma de referencia
 ---
 
 # <span class="todo TODO">TODO</span> Mapeo: Motivación
-
-## <span class="todo TODO">TODO</span> Descripción general
 
 # <span class="todo TODO">TODO</span> Mapeo: Calidad de los datos de lectura
 
@@ -52,10 +45,16 @@ Sigue estos pasos para descargarlo:
 8.  Descarga el archivo de la referencia con `wget` pegando el enlace
     que copiaste. Recuerda la ruta de ubicación de este archivo!
     Regístrala en tu archivo de comandos.
+9.  Verifica que el archivo se haya descargado correctamente y que puede
+    leerse y procesarse. Usa `zless -S` para visualizarlo. Usa `zcat` o
+    `zgrep` para responder a la siguiente pregunta: ¿Cuántas secuencias
+    tiene este archivo multifasta? Pista: El número de secuencias en un
+    archivo `fasta` puede contarse contando el número de encabezados de
+    secuencia (líneas que empiezan con `>`).
 
 # <span class="todo TODO">TODO</span> Mapeo: Pasos y herramientas
 
-## <span class="todo TODO">TODO</span> Preparando los archivos
+## Preparando los archivos
 
 1.  Es necesario preparar el genoma de referencia creando una nueva
     estructura de datos a partir del archivo `fasta` original. Esto lo
@@ -77,7 +76,10 @@ Sigue estos pasos para descargarlo:
     Columna 4: El identificador de la muestra  
     Columna 5: El identificador de la referencia  
 
-## <span class="todo TODO">TODO</span> Alineamiento de las lecturas
+## Alineamiento de las lecturas
+
+Recursos computacionales: 2 procesadores, 8 GB de memoria, \~40 min de
+tiempo de ejecución.
 
 1.  Para este paso necesitamos escribir un script de bash usando `nano`
     (u otro editor de texto disponible en el cluster). Crea un nuevo
@@ -96,12 +98,9 @@ Sigue estos pasos para descargarlo:
     vamos a usar [`bwa`](http://bio-bwa.sourceforge.net/bwa.shtml) para
     alinear las lecturas al genoma de referencia,
     [`samtools`](https://www.htslib.org/doc/samtools.html) para ordenar
-    los alineamientos y optimizar el acceso a las lecturas mapeadas, y
-    [`picard-tools`](https://broadinstitute.github.io/picard/) para
-    quitar duplicados de PCR y hacer conversiones adicionales de
-    formato. `bwa` y `samtools` están disponibles directamente como
-    módulos en el cluster. Para `picard-tools` necesitamos cargar la
-    versión 8 de `java`, cuyo módulo en el cluster es `java8/1.8.0.172`.
+    los alineamientos y optimizar el acceso a las lecturas mapeadas.
+    `bwa` y `samtools` están disponibles directamente como módulos en el
+    cluster.
 
 4.  Necesitamos establecer la forma en la que ingresamos a nuestro
     script la información necesaria para alinear las lecturas. Para esto
@@ -134,20 +133,22 @@ Sigue estos pasos para descargarlo:
     group** por muestra sería recomendable hacer dos alineamientos y
     luego unirlos usando otras herramientas. Para establecer el read
     group usamos la opción `-R` seguida de la siguiente cadena de
-    caracteres usando comillas dobles:
-    `"@RG\tID:id_muestra\tSM:id_muestra\tPL:Illumina"`. Si revisamos
-    esta expresión en detalle consta de tres campos separados por
-    tabulación (`\t`). El primero, (`ID`), corresponde al identificador
-    del corrido de secuenciación, que normalmente corresponde a uno de
-    los carriles de la máquina secuenciadora. El segundo (`SM`)
-    corresponde al identificador de la muestra. El tercero (`PL`)
-    corresponde a la plataforma usada para secuenciar. En el caso de los
-    datos de *Heliconius* la plataforma utilizada para todas las
-    muestras fue Illuimina. En cada caso debes cambiar `id_muestra` por
-    el identificador asociado a cada muestra. Establece el read group
-    correctamente usando la opción `-R` y los detales correspondientes a
-    cada muestra. Todas las muestras de *Heliconius* que usaremos fueron
-    secuenciadas usando la plataforma `Illumina`.
+    caracteres usando comillas dobles y evaluandola usando `echo`. Si el
+    identificador de la muestra está en una variable llamada
+    `id_muestra`, esta parte de la llamada se vería así: `$(echo
+             "@RG\tID:$id_muestra\tSM:$id_muestra\tPL:Illumina")`. Si
+    revisamos esta expresión en detalle consta de tres campos separados
+    por tabulación (`\t`). El primero, (`ID`), corresponde al
+    identificador del corrido de secuenciación, que normalmente
+    corresponde a uno de los carriles de la máquina secuenciadora. El
+    segundo (`SM`) corresponde al identificador de la muestra. El
+    tercero (`PL`) corresponde a la plataforma usada para secuenciar. En
+    el caso de los datos de *Heliconius* la plataforma utilizada para
+    todas las muestras fue Illuimina. En cada caso debes cambiar
+    `id_muestra` por el identificador asociado a cada muestra. Establece
+    el read group correctamente usando la opción `-R` y los detales
+    correspondientes a cada muestra. Todas las muestras de *Heliconius*
+    que usaremos fueron secuenciadas usando la plataforma `Illumina`.
 
     Los tres argumentos siguientes son la ruta de la referencia y la
     ruta de los archivos de lectura (R1 y luego R2). Asegúrate de
@@ -160,25 +161,133 @@ Sigue estos pasos para descargarlo:
     este caso queremos optar por la segunda opción para ordenar el
     alineamiento según las coordenadas del genoma de referencia y para
     guardar el alineamiento en un formato amigable con el espacio en
-    disco. Usando el operador `pipe` re-dirigimos la salida hacia la
-    herramienta `samtools`, como necesitamos ordenar el alineamiento
-    entonces la función de `samtools` que utilizaremos será `sort`.
-    Especificamos que queremos usar 4 procesadores con la opción `-@` y
-    usando la opción `-o` le damos el nombre al archivo de salida; como
-    es un alineamiento ya ordenado vamos a finalizar el nombre del
-    archivo con el sufijo `.sort.bam`. La última pieza de información
-    que debemos darle a `samtools sort` es un `-` (guión): Esto le
-    indica a `samtools` que la información debe ser leída usando la
-    **entrada estándar** y no un archivo.
+    disco (más compacto). Usando el operador `pipe` re-dirigimos la
+    salida hacia la herramienta `samtools`. Como necesitamos ordenar el
+    alineamiento entonces la función de `samtools` que utilizaremos será
+    `sort`. Especificamos que queremos usar 4 procesadores con la opción
+    `-@` y usando la opción `-o` le damos el nombre al archivo de
+    salida; como es un alineamiento ya ordenado vamos a finalizar el
+    nombre del archivo con el sufijo `.sort.bam`. La última pieza de
+    información que debemos darle a `samtools sort` es un `-` (guión):
+    Esto le indica a `samtools` que la información debe ser leída usando
+    la **entrada estándar** y no un archivo.
 
-6.  Es necesario hacer un cambio de formato luego de hacer el
-    alineamiento con `bwa`.
+6.  Finalmente debemos indexar el alineamiento resultante con `samtools
+             index`. La sintáxis es la siguiente:
 
-7.  
+    ``` shell
+    samtools index aln.sam|aln.bam
+    ```
 
-## <span class="todo TODO">TODO</span> Quitando duplicados de PCR
+    Listo! Con esta instrucción finalizamos el script que alinea, ordena
+    e indexa la primera versión del alineamiento.
 
-1.  Tenemos que quitar los duplicados de PCR \[@Ebbert2016\].
+7.  **Atención!:** Muéstrale tu script al personal docente para
+    verificar que luce bien antes de enviarlo a la cola de trabajo.
+
+<details>
+<summary> Trata de construir el script por tu cuenta. Si no puedes avanzar en tu solución puedes ver el código aquí. </summary>
+
+``` shell
+#!/bin/bash
+#SBATCH -p normal
+#SBATCH -n 2
+#SBATCH --mem=8000
+#SBATCH --time=0-12:00
+
+read_1=$1
+read_2=$2
+ref=$3
+rg_info=$4
+ref_info=$5
+
+module load bwa
+module load samtools
+
+bwa mem -t 4 -M -R $(echo "@RG\tID:$rg_info\tSM:$rg_info\tPL:Illumina") \
+    $ref $read_1 $read_2 | samtools sort -@ 4 -o $rg_info.$ref_info.SHORT.sort.bam -
+
+samtools index $rg_info.$ref_info.SHORT.sort.bam
+```
+
+</details>
+
+## Quitando duplicados de PCR
+
+Recursos computacionales: 2 procesadores, 8 GB de memoria, \~20 min de
+tiempo de ejecución.
+
+1.  Tenemos que quitar los duplicados de PCR, estos pueden interferir
+    luego con el proceso de inferencia de alelos. Puedes encontrar
+    detalles sobre este proceso en [este paper de
+    Ebbert (2016)](http://ebbertlab.com/Ebbert_PCR_duplicates_BMC_Bioinformatics.pdf).
+    Para este proceso vamos a usar una suite de herramientas llamada
+    [`Picard Tools`](https://broadinstitute.github.io/picard/).
+    Específicamente queremos usar la herramienta
+    [`MarkDuplicates`](https://broadinstitute.github.io/picard/command-line-overview.html#MarkDuplicates).
+    En centauro `Picard tools` está en la ruta
+    `/opt/ohpc/pub/apps/picard-tools/2.18.15/picard.jar`. Es una
+    aplicación de `java` por lo tanto debes cargar el módulo de `java`
+    (para `picard-tools` necesitamos cargar la versión 8 de `java`, cuyo
+    módulo en el cluster es `java8/1.8.0.172`) y llamarla usando `8GB`
+    de memoria como máximo:
+
+    ``` shell
+    # Estructura basica de llamada a una app de java
+    java -Xmx8G -jar /ruta/completa/archivo.jar
+    ```
+
+    Debemos crear un directorio temporal en donde `Picard` almacenará
+    algunos datos mientras completa el proceso de quitar duplicados.
+    Crea un directorio llamado `DIR_TEMP`.
+
+    El nombre de la herramienta (`MarkDuplicates`) debe ir
+    inmediantamente después de `picard.jar`. A continuación
+    especificamos los argumentos de `MarkDuplicates` que debemos
+    utilizar. Son: `REMOVE_DUPLICATES=true`, `ASSUME_SORTED=true`,
+    `VALIDATION_STRINGENCY=SILENT`,
+    `MAX_FILE_HANDLES_FOR_READ_ENDS_MAP=1000`,
+    `INPUT=alineamiento.sort.bam`, `OUTPUT=alineamiento.sort.rmd.bam`,
+    `METRICS_FILE=alineamiento.sort.rmd.metrics`, y el directorio
+    temporal `TMP_DIR=DIR_TEMP`.
+
+2.  Crea un script de `bash` solicitando los recursos necesarios y
+    construye la línea con la que vas a llamar a `Picard`. Recuerda
+    cargar el módulo de `java`. Carga también el módulo de `samtools`,
+    pues lo vamos a necesitar para el último paso.
+
+3.  Debemos indexar todos los alineamientos a los que les removamos sus
+    duplicados. Finaliza tu script con una llamada a `samtools` para
+    indexar el nuevo alineamiento creado.
+
+    **Atención!:** Antes de enviar el trabajo a la cola muéstrale tu
+    script al personal docente para verificar que se ve bien :)
+
+<details>
+<summary> Trata de construir el script por tu cuenta. Si no puedes avanzar en tu solución puedes ver el código aquí. </summary>
+
+``` shell
+#!/bin/bash
+#SBATCH -p normal
+#SBATCH -n 2
+#SBATCH --mem=8000
+#SBATCH --time=0-12:00
+
+baminfo=$1
+
+module load java8
+module load samtools
+
+java -Xmx8G -jar /opt/ohpc/pub/apps/picard-tools/2.18.15/picard.jar \
+     MarkDuplicates REMOVE_DUPLICATES=true ASSUME_SORTED=true \
+     VALIDATION_STRINGENCY=SILENT MAX_FILE_HANDLES_FOR_READ_ENDS_MAP=1000 \
+     INPUT=$baminfo OUTPUT=${baminfo%sort.bam}sort.rmd.bam \
+     METRICS_FILE=${baminfo%sort.bam}sort.rmd.metrics TMP_DIR=../TMP_DIR
+
+samtools index ${baminfo%sort.bam}sort.rmd.bam
+```
+
+</details>
 
 ## <span class="todo TODO">TODO</span> Estadísticas del alineamiento
 
