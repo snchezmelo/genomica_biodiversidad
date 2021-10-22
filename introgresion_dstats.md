@@ -258,6 +258,22 @@ Requerimientos computacionales: TBD
 
     -   [ ] ¿Observas diferencias entre los dos estimados de estructura?
 
+    Ve a [ensembl.lepbase.org](http://ensembl.lepbase.org/index.html) y
+    haz click sobre *Heliconius melpomene melpomene*, Hmel2.5.
+
+    ![](./Imagenes/emsembl.png)
+
+    En la parte superior derecha encuentras la herramienta de búsqueda.
+    Esta herramienta te permite buscar en el genoma de *H. melpomene*
+    por coordenada genómica o por nombre del elemento (gen). Si buscas a
+    un elemento por nombre podrás encontrar detalles de su localización
+    en el genoma. Busca al gen *optix* en la barra de búsqueda.
+
+    ![](./Imagenes/ensembl_search.png)
+
+    -   [ ] Cuáles son las coordenadas del gen *optix* en el scaffold
+        `Hmel218003o`?
+
 4.  **Visualizando F<sub>ST</sub> a lo largo de Hmel218003o**
 
     Graficar los resultados por ventana es muy similar a como lo hicimos
@@ -346,8 +362,11 @@ Requerimientos computacionales: TBD
     -   [ ] ¿Qué explicación puede tener esta diferencia entre
         comparaciones?
 
-    -   [ ] ¿Hay alguna región de `Hmel218003o` en donde los patrones
-        observados se comportan de forma inesperada?
+    -   [ ] ¿Hay alguna región de `Hmel218003o` en donde observes
+        patrones interesantes?
+
+    -   [ ] ¿Puedes pintar la posición de *optix* en tu gráfica? Pista:
+        Usa la función `geom_rect` de `ggplot`.
 
     <details>
     <summary> Mira una versión mejorada aquí ¿Qué cambios harías en el análisis para lograr una versión así? </summary>
@@ -388,12 +407,59 @@ Recursos computacionales: TBD
 
 1.  **Preparando los datos:**
 
-    Vamos a trabajar con nuestro `vcf` filtrado.
+    Vamos a trabajar con nuestro `vcf` filtrado al igual que cuando
+    calculamos el índice de fijación por ventanas. En este caso también
+    debemos especificar la población a la que pertenecen nuestras
+    muestras de la siguiente manera. Crea un archivo nuevo usando
+    `nano`, dale un nombre informativo. Al interior de este archivo
+    debes esribir dos columnas separadas por tabulación (`\t`). En la
+    primera columna debes tener los nombres de las muestras tal y como
+    aparecen en el `vcf`. En la segunda columna debes especificar la
+    población a la que pertenece cada muestra. Debemos especificar las
+    poblaciones P1, P2 y P3 del análisis de introgresión. Los nombres de
+    las poblaciones son: Florencia, Thelxinoe, Malleti y Silvaniformes,
+    pero las Silvaniformes son nuestro outgroup, luego para ellas
+    debemos especificar la palabra Outgroup en la columna derecha. En
+    teoría todas las muestras del Outgroup deberían funcionar bien, pero
+    si el Outgroup y P1 experimentaron flujo genético en la región de
+    interés esto puede crear artefactos en los resultados. Es posible
+    que nuestras muestras de *H. pardalinus*, que son de Perú, muestren
+    evidencia de flujo con otras *Heliconius* de Perú (como Thelxinoe).
+    Es por eso que a estas las excluimos del análisis marcando la
+    segunda columna como xxx.
+
+    El archivo de poblaciones debe verse parecido a esto:
+
+    ``` shell
+    muestra1.1 Poblacion1
+    muestra1.2 Poblacion1
+    muestra2.1 Poblacion2
+    muestra2.2 Poblacion2
+    muestra3.1 Poblacion3
+    muestra3.2 Poblacion3
+    muestraO.1 Outgroup
+    muestraO.2 xxx
+    muestraO.3 Outgroup
+    ```
 
 2.  **Estimando las estadísticas D:**
 
     Dsuite está disponible en para los usuarios de `biologia.evolutiva`
     en `/shared/Dsuite/Build/Dsuite`
+
+    Prueba varios tamaños de ventana y paso: Prueba las combinaciones
+    20,10; 50,25; 100,50; 500,250; 1000,500. Cada una de ellas no tarda
+    mucho en correr. **Reto:** Puedes hacerlo en un ciclo `for`? Las
+    operaciones aritméticas deben ir dentro de dobles paréntesis y
+    precedidas por el operador `$`.
+
+    Ejemplo:
+
+    ``` shell
+    num=30
+    # multiplica a num por 2
+    resultado=$(($num*2))
+    ```
 
 3.  **Examinando los datos:**
 
@@ -410,8 +476,20 @@ Recursos computacionales: TBD
 
     ![](./Imagenes/ensembl_search.png)
 
+    -   [ ] ¿Cuáles son las coordenadas del gen *optix* en el scaffold
+        `Hmel218003o`?
+
 4.  **Visualizando los resultados:**
 
+    Crea una gráfica del estadístico D a lo largo del scaffold
+    `Hmel218003o`. Puedes usar un gráfico de línea o punto.
+
     ![](./Imagenes/D_stat_optixscaf.png)
+
+    -   [ ] ¿Hay alguna región de `Hmel218003o` en donde observes
+        patrones interesantes?
+
+    -   [ ] ¿Puedes pintar la posición del gen *optix* en tu gráfica?
+        Pista: Usa la función `geom_rect` de `ggplot`.
 
 ## <span class="todo TODO">TODO</span> Regiones con sobrerrepesentación de patrones ABBA/BABA
