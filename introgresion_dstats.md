@@ -392,8 +392,28 @@ evidencia que soporta este cambio de paradigma.
 Una de las herramientas estadísticas que primero se usó para detectar
 introgresión entre especies se conoce como D de Patterson [(Green et
 al., 2010)](https://www.science.org/doi/abs/10.1126/science.1188021).
+Este estadístico ha sido ampliamente utilizado para describir eventos de
+introgresión en varios taxa. El D de Patterson y los estadísticos
+derivados de este se calculan de forma simple, se ajustan bien a los
+datos genómicos y funcionan bien en muchos escenarios demográficos.
+
+La evolución de diversos rasgos adaptativos en varias especies puede
+ocurrir por introgresión adaptativa. En nuestro caso la hipótesis es que
+hubo flujo genético entre *H. melpomene malleti* y *H. timareta
+florencia* y que este flujo genético le permitió a *H. timareta
+florencia* adaptarse, creando un anillo mimético con *H. melpomene
+malleti*. Recuerda el valor adaptativo del mimetismo Mülleriano para
+*Heliconius*.
+
+Aprenderemos a utilizar uno de muchos programas disponibles para
+calcular D de Patterson, explorar si hay evidencia de introgresión en
+nuestros datos y pensar en la relevancia biológica de nuestras
+observaciones.
 
 ## <span class="todo TODO">TODO</span> Estadísticas D: Explicación
+
+![Figure 7: Patrones ABBA y BABA que pueden surgir si el alelo derivado
+va a P2 o a P1](./Imagenes/abba_baba_figure_helic.png)
 
 ## <span class="todo TODO">TODO</span> Referencias importantes
 
