@@ -429,7 +429,7 @@ donde P<sub>1</sub> y P<sub>3</sub> compartan el alelo derivado y
 P<sub>2</sub> tenga el alelo del outgroup. El estadístico D se define
 como
 
-<img src="https://render.githubusercontent.com/render/math?math=\huge D(P_{1}, P_{2}, P_{3}, O) = \frac{\sum_{i=1}^{n} C_{ABBA}(i) - C_{BABA}(i)}{\sum_{i=1}^{n} C_{ABBA}(i) + C_{BABA}(i)}">
+<img src="https://render.githubusercontent.com/render/math?math=\huge D(P_{1}, P_{2}, P_{3}, O) = \frac{\sum_{i=1}^{n} C_{ABBA}(i) - C_{BABA}(i)}{\sum_{i=1}^{n} C_{ABBA}(i) %2B C_{BABA}(i)}">
 
 Donde C<sub>ABBA</sub>(i) y C<sub>BABA</sub>(i) son 0 ó 1 si uno de los
 dos patrones se observa en el sitio *i* a lo largo de *n* sitios. El
