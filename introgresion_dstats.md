@@ -397,6 +397,21 @@ Recursos computacionales: TBD
 
 3.  **Examinando los datos:**
 
+    Ve a [ensembl.lepbase.org](http://ensembl.lepbase.org/index.html) y
+    haz click sobre *Heliconius melpomene melpomene*, Hmel2.5.
+
+    ![](./Imagenes/emsembl.png)
+
+    En la parte superior derecha encuentras la herramienta de búsqueda.
+    Esta herramienta te permite buscar en el genoma de *H. melpomene*
+    por coordenada genómica o por nombre del elemento (gen). Si buscas a
+    un elemento por nombre podrás encontrar detalles de su localización
+    en el genoma. Busca al gen *optix* en la barra de búsqueda.
+
+    ![](./Imagenes/ensembl_search.png)
+
 4.  **Visualizando los resultados:**
+
+    ![](./Imagenes/D_stat_optixscaf.png)
 
 ## <span class="todo TODO">TODO</span> Regiones con sobrerrepesentación de patrones ABBA/BABA
