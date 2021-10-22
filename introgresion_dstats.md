@@ -413,7 +413,7 @@ observaciones.
 ## <span class="todo TODO">TODO</span> Estadísticas D: Explicación
 
 ![Figure 7: Patrones ABBA y BABA que pueden surgir si el alelo derivado
-va a P2 o a P1](./Imagenes/abba_baba_figure_helic.png)
+(B) va a P2 o a P1](./Imagenes/abba_baba_figure_helic.png)
 
 ## <span class="todo TODO">TODO</span> Referencias importantes
 
