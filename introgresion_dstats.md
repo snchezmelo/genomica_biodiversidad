@@ -383,6 +383,16 @@ Requerimientos computacionales: TBD
 
 ## <span class="todo TODO">TODO</span> Motivación y explicación
 
+Recientemente en biología evolutiva la idea de que las poblaciones y las
+especies pueden entrar en contacto e intercambiar material genético ha
+sido más aceptada. La disponibilidad de técnicas de secuenciación y
+herramientas estadísticas ha tenido como consecuencia la publicación de
+evidencia que soporta este cambio de paradigma.
+
+Una de las herramientas estadísticas que primero se usó para detectar
+introgresión entre especies se conoce como D de Patterson [(Green et
+al., 2010)](https://www.science.org/doi/abs/10.1126/science.1188021).
+
 ## <span class="todo TODO">TODO</span> Estadísticas D: Explicación
 
 ## <span class="todo TODO">TODO</span> Referencias importantes
