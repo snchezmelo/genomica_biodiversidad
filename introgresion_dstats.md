@@ -423,10 +423,10 @@ Denotamos los alelos que están en el outgroup como A y los alelos
 derivados como B. Para el conjunto ordenado {P<sub>1</sub>,
 P<sub>2</sub>, P<sub>3</sub>, O} tenemos dos configuraciones alélicas de
 interés: ABBA ó BABA. ABBA se refiere a los sitios en donde
-P<sub>1</sub> tenga el alelo del outgroup y P<sub>2</sub> y
+P<sub>1</sub> tiene el alelo del outgroup y P<sub>2</sub> y
 P<sub>3</sub> compartan el alelo derivado. BABA corresponde a sitios en
 donde P<sub>1</sub> y P<sub>3</sub> compartan el alelo derivado y
-P<sub>2</sub> tenga el alelo del outgroup. El estadístico D se define
+P<sub>2</sub> tiene el alelo del outgroup. El estadístico D se define
 como
 
 <img src="https://render.githubusercontent.com/render/math?math=\huge D(P_{1}, P_{2}, P_{3}, O) = \frac{\sum_{i=1}^{n} C_{ABBA}(i) - C_{BABA}(i)}{\sum_{i=1}^{n} C_{ABBA}(i) %2B C_{BABA}(i)}">
