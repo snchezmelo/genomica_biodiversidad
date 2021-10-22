@@ -387,21 +387,11 @@ Requerimientos computacionales: TBD
 
 ## <span class="todo TODO">TODO</span> Referencias importantes
 
-# <span class="todo TODO">TODO</span> Introgresión: Estimados globales a nivel genómico
-
-## <span class="todo TODO">TODO</span> Herramientas de estimación
-
-## <span class="todo TODO">TODO</span> Significancia estadística
-
-## <span class="todo TODO">TODO</span> Fracción del genoma compartida entre especies
-
-## <span class="todo TODO">TODO</span> Aplicación: Especiación con flujo genético
-
 # <span class="todo TODO">TODO</span> Introgresión: Estimados por ventana
 
 ## <span class="todo TODO">TODO</span> Evolución de la adaptación
 
-## <span class="todo TODO">TODO</span> Análisis por ventanas
+## Análisis por ventanas
 
 Recursos computacionales: TBD
 
@@ -464,6 +454,17 @@ Recursos computacionales: TBD
 
 3.  **Examinando los datos:**
 
+    Examina los archivos que resultaron de correr `Dinvestigate` con
+    varios tamaños de ventana y responde a las preguntas.
+
+    -   [ ] ¿Qué estructura tienen los archivos (número de filas, número
+        de columnas y encabezado)?
+
+    -   [ ] ¿Qué información puedes identificar en los archvios
+        (contenido de las columnas)?
+
+    -   [ ] ¿Cuántos estimados de flujo genético aparecen?
+
     Ve a [ensembl.lepbase.org](http://ensembl.lepbase.org/index.html) y
     haz click sobre *Heliconius melpomene melpomene*, Hmel2.5.
 
@@ -483,7 +484,9 @@ Recursos computacionales: TBD
 4.  **Visualizando los resultados:**
 
     Crea una gráfica del estadístico D a lo largo del scaffold
-    `Hmel218003o`. Puedes usar un gráfico de línea o punto.
+    `Hmel218003o`. Puedes usar un gráfico de línea o punto. Tu resultado
+    debe verse como esta gŕafica. Pinta los estimados que obtuviste con
+    varios tamaños de ventana y decide cuál es más informativo.
 
     ![](./Imagenes/D_stat_optixscaf.png)
 
@@ -492,5 +495,3 @@ Recursos computacionales: TBD
 
     -   [ ] ¿Puedes pintar la posición del gen *optix* en tu gráfica?
         Pista: Usa la función `geom_rect` de `ggplot`.
-
-## <span class="todo TODO">TODO</span> Regiones con sobrerrepesentación de patrones ABBA/BABA
