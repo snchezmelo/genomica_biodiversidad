@@ -384,4 +384,19 @@ Requerimientos computacionales: TBD
 
 ## <span class="todo TODO">TODO</span> Análisis por ventanas
 
+Recursos computacionales: TBD
+
+1.  **Preparando los datos:**
+
+    Vamos a trabajar con nuestro `vcf` filtrado.
+
+2.  **Estimando las estadísticas D:**
+
+    Dsuite está disponible en para los usuarios de `biologia.evolutiva`
+    en `/shared/Dsuite/Build/Dsuite`
+
+3.  **Examinando los datos:**
+
+4.  **Visualizando los resultados:**
+
 ## <span class="todo TODO">TODO</span> Regiones con sobrerrepesentación de patrones ABBA/BABA
