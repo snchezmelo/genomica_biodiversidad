@@ -381,7 +381,7 @@ Requerimientos computacionales: TBD
 
 # <span class="todo TODO">TODO</span> Introgresión
 
-## <span class="todo TODO">TODO</span> Motivación y explicación
+## Motivación
 
 Recientemente en biología evolutiva la idea de que las poblaciones y las
 especies pueden entrar en contacto e intercambiar material genético ha
@@ -398,12 +398,11 @@ derivados de este se calculan de forma simple, se ajustan bien a los
 datos genómicos y funcionan bien en muchos escenarios demográficos.
 
 La evolución de diversos rasgos adaptativos en varias especies puede
-ocurrir por introgresión adaptativa. En nuestro caso la hipótesis es que
-hubo flujo genético entre *H. melpomene malleti* y *H. timareta
-florencia* y que este flujo genético le permitió a *H. timareta
-florencia* adaptarse, creando un anillo mimético con *H. melpomene
-malleti*. Recuerda el valor adaptativo del mimetismo Mülleriano para
-*Heliconius*.
+ocurrir por introgresión. En nuestro caso la hipótesis es que hubo flujo
+genético entre *H. melpomene malleti* y *H. timareta florencia* y que
+este flujo genético le permitió a *H. timareta florencia* convergir
+fenotípicamente, creando un anillo mimético con *H. melpomene malleti*.
+Recuerda el valor adaptativo del mimetismo Mülleriano para *Heliconius*.
 
 | ![](./Imagenes/hipotesis_introgresion1.png)                                                                                                                     |
 |-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -414,17 +413,37 @@ calcular D de Patterson, explorar si hay evidencia de introgresión en
 nuestros datos y pensar en la relevancia biológica de nuestras
 observaciones.
 
-## <span class="todo TODO">TODO</span> Estadísticas D: Explicación
+## Estadísticas D: Explicación
 
 | ![](./Imagenes/abba_baba_figure_helic.png)                                                                                                               |
 |----------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Patrones ABBA y BABA que pueden surgir si el alelo derivado (B) va a P2 o a P1 ([Dasmahpatra et al., 2012](https://www.nature.com/articles/nature11041)) |
+
+Denotamos los alelos que están en el outgroup como A y los alelos
+derivados como B. Para el conjunto ordenado {P<sub>1</sub>,
+P<sub>2</sub>, P<sub>3</sub>, O} tenemos dos configuraciones alélicas de
+interés: ABBA ó BABA. ABBA se refiere a los sitios en donde
+P<sub>1</sub> tenga el alelo del outgroup y P<sub>2</sub> y
+P<sub>3</sub> compartan el alelo derivado. BABA corresponde a sitios en
+donde P<sub>1</sub> y P<sub>3</sub> compartan el alelo derivado y
+P<sub>2</sub> tenga el alelo del outgroup. El estadístico D se define
+como
+
+<img src="https://render.githubusercontent.com/render/math?math=\huge D(P_{1}, P_{2}, P_{3}, O) = \frac{\sum_{i=1}^{n} C_{ABBA}(i) - C_{BABA}(i)}{\sum_{i=1}^{n} C_{ABBA}(i) + C_{BABA}(i)}">
+
+Donde C<sub>ABBA</sub>(i) y C<sub>BABA</sub>(i) son 0 ó 1 si uno de los
+dos patrones se observa en el sitio *i* a lo largo de *n* sitios. El
+numerador cuantifica el exceso de uno de los dos patrones respecto al
+otro y el numerador normaliza por el número total de patrones
+observados.
 
 ## <span class="todo TODO">TODO</span> Referencias importantes
 
 # <span class="todo TODO">TODO</span> Introgresión: Estimados por ventana
 
 ## <span class="todo TODO">TODO</span> Evolución de la adaptación
+
+Vamos
 
 ## Análisis por ventanas
 
