@@ -447,7 +447,7 @@ D en la práctica involucra el uso de frecuencias alélicas.
 Si p<sub>ij</sub> denota la frecuencia del alelo i en la población j (i
 = {1, 2}; j = {1, 2, 3, 4}) entonces el D de Patterson se estima como
 
-<img src="https://render.githubusercontent.com/render/math?math=\huge D(P_{1}, P_{2}, P_{3}, O) = \frac{\sum_{i=1}^{n} [(1 - p_{i1}) \times p_{i2} \times p_{i3} \times (1 - p_{i4}) - p_{i1} \times (1 - p_{i2}) \times (1 - p_{i3}) \times p_{i4}]}{\sum_{i=1}^{n} [(1 - p_{i1}) \times p_{i2} \times p_{i3} \times (1 - p_{i4}) %2B p_{i1} \times (1 - p_{i2}) \times (1 - p_{i3}) \times p_{i4}]}">
+<img src="https://render.githubusercontent.com/render/math?math=\huge D(P_{1}, P_{2}, P_{3}, O) = \frac{\sum_{i=1}^{n} [(1 - p_{i1})  p_{i2} p_{i3} (1 - p_{i4}) - p_{i1} (1 - p_{i2}) (1 - p_{i3}) p_{i4}]}{\sum_{i=1}^{n} [(1 - p_{i1}) p_{i2} p_{i3} (1 - p_{i4}) %2B p_{i1} (1 - p_{i2}) (1 - p_{i3}) p_{i4}]}">
 
 ## <span class="todo TODO">TODO</span> Referencias importantes
 
