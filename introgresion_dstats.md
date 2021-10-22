@@ -412,9 +412,7 @@ observaciones.
 
 ## <span class="todo TODO">TODO</span> Estadísticas D: Explicación
 
-![](./Imagenes/abba_baba_figure_helic.png)
-
-|                                                                                |
+| ![](./Imagenes/abba_baba_figure_helic.png)                                     |
 |--------------------------------------------------------------------------------|
 | Patrones ABBA y BABA que pueden surgir si el alelo derivado (B) va a P2 o a P1 |
 
