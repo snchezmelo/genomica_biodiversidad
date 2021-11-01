@@ -5,7 +5,7 @@
 
 ## <span class="todo TODO">TODO</span> Preparación
 
-Si estás trabajando en Windows asegúrate de tener instalado [Git
+**Si estás trabajando en Windows:** Asegúrate de tener instalado [Git
 Bash](https://gitforwindows.org/). Necesitamos familiarizarnos con el
 funcionamiento de Copiar y Pegar para poder navegar fácilmente las
 diferentes rutas de archivos en nuestra máquina y en el cluster. Si
@@ -25,6 +25,20 @@ que te permiten copiar y pegar texto en el emulador de terminal.
 
     ![](./Imagenes/habilitar_cp_gitbash2.png)
 
+4.  Prueba los nuevos cambios. Asegúrate de que puedes seleccionar y
+    copiar texto usando `Ctrl + Shift + c` y pegar texto usando
+    `Ctrl + Shift + v`.
+
+**Si estás trabajando en Linux:** Este comportamiento está habilitado
+por defecto en Linux. Prueba que puedes copiar usando `Ctrl + Shift + c`
+y pegar usando `Ctrl + Shift + v` en tu emulador de terminal. Si no es
+posible consulta al personal docente.
+
+**Si estás trabajando en Mac:** Este comportamiento está habilitado
+usando la forma usual de copiar y pegar en Mac. `⌘ + c` para copiar y
+`⌘ + v` para pegar. Prueba que las combinaciones produzcan el
+funcionamiento esperado, si no es así consulta al personal docente.
+
 ## <span class="todo TODO">TODO</span> 
 
 ## <span class="todo TODO">TODO</span> 
@@ -42,7 +56,7 @@ que te permiten copiar y pegar texto en el emulador de terminal.
 Usaremos el programa `ssh` ([secure
 shell](https://www.ssh.com/academy/ssh)) para conectarnos a CENTAURO
 desde nuestra máquina. El ejemplo que veremos usa [Git Bash
-(Windows)](https://gitforwindows.org/). La sintáxis para Linux y MAC (OS
+(Windows)](https://gitforwindows.org/). La sintáxis para Linux y Mac (OS
 X) es la misma.
 
 1.  Descarga y copia la llave de acceso (archivo `.pem`) en una ruta que
