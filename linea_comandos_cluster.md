@@ -69,11 +69,24 @@ X) es la misma.
 2.  Abre una nueva ventana de `Git Bash` o del emulador de terminal con
     el que estés trabajando. Navega tu sistema usando los comandos
     aprendidos para moverte en el sistema de archivos. Ve a la carpeta
-    en donde pusiste tu llave de acceso.
+    en donde pusiste tu llave de acceso. Haz una lista de los archivos
+    en la carpeta, ves la llave `.pem` dentro de esa carpeta?
 
-3.  
+3.  Utiliza secure shell (`ssh`) para abrir una conexión remota a
+    Centauro. Utiliza la opción `-i` para especificar la ruta a la llave
+    `.pem` y la opción `-p` para especificar el puerto de acceso
+    (53841). A continuación especifica tu nombre de usuario asignado
+    seguido de un `@` y finaliza con la dirección pública del cluster
+    (`loginpub.hpc.urosario.edu.co`). Observa el ejemplo en la imagen.
 
-4.  
+    ![](./Imagenes/conexion_centauro.png)
+
+4.  Verifica que la conexión fue exitosa. Deberías observar el siguiente
+    texto en pantalla:
+
+    ![](./Imagenes/conexion_exitosa.png)
+
+    Si no logras conectarte con éxito contacta al personal docente.
 
 ## <span class="todo TODO">TODO</span> Ambiente de trabajo
 
