@@ -77,7 +77,7 @@ X) es la misma.
     `.pem` y la opción `-p` para especificar el puerto de acceso
     (53841). A continuación especifica tu nombre de usuario asignado
     seguido de un `@` y finaliza con la dirección pública del cluster
-    (`loginpub.hpc.urosario.edu.co`). Observa el ejemplo en la imagen.
+    (`loginpub-hpc.urosario.edu.co`). Observa el ejemplo en la imagen.
 
     ![](./Imagenes/conexion_centauro.png)
 
