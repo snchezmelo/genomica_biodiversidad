@@ -21,7 +21,7 @@ que te permiten copiar y pegar texto en el emulador de terminal.
 
 3.  En la ventana de opciones ve a la pestaña `Keys`. En la sección
     `Shortcuts` chequea la caja que dice `Ctrl+Shift+letter
-            shortcuts` :ballot<sub>boxwithcheck</sub>:.
+            shortcuts`
 
     ![](./Imagenes/habilitar_cp_gitbash2.png)
 
