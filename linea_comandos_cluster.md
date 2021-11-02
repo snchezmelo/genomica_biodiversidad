@@ -235,10 +235,11 @@ Identificador de secuencia. **En tu máquina local haz lo siguiente**.
     dos rutas que copiaste en tu editor de texto.
 
     Dale un nombre informativo a tu archivo. Puedes usar la información
-    que encuentras en \<XXX> de la siguiente forma:
-    `especie.subespecie.R1.fastq.gz` o `especie.subespecie.R2.fastq.gz`
-    dependiendo de si bajas el primer (<sub>1</sub>) o el segundo
-    (<sub>2</sub>) conjunto de secuencias.
+    que encuentras en
+    [`lista_muestras_descarga.txt`](./material/lista_muestras_descarga.txt)
+    de la siguiente forma: `especie.subespecie.R1.fastq.gz` o
+    `especie.subespecie.R2.fastq.gz` dependiendo de si bajas el primer
+    (<sub>1</sub>) o el segundo (<sub>2</sub>) conjunto de secuencias.
 
 9.  Ejecuta la línea que acabas de escribir. Asegúrate de que estás
     haciendo la descarga, puedes verificar que la descarga se está
