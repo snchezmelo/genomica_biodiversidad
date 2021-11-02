@@ -57,7 +57,7 @@ gráfica y la línea de comandos.
 
 1.  Navega hacia tu directorio de trabajo usando la línea de comandos y
     descarga allí el archivo
-    [linea<sub>comando</sub>.zip](https://raw.githubusercontent.com/juanenciso14/genomica_biodiversidad/tree/master/material/linea_comando.zip)
+    [`linea_comando.zip`](https://github.com/juanenciso14/genomica_biodiversidad/blob/master/material/linea_comando.zip?raw=true)
     usando `wget` o `curl`.
 
 ## <span class="todo TODO">TODO</span> Creación de directorios y archivos
