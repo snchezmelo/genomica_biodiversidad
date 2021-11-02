@@ -3,14 +3,16 @@
 
 # <span class="todo TODO">TODO</span> Unix básico
 
-## <span class="todo TODO">TODO</span> Preparación
+## Preparación
 
 **Si estás trabajando en Windows:** Asegúrate de tener instalado [Git
-Bash](https://gitforwindows.org/). Necesitamos familiarizarnos con el
-funcionamiento de Copiar y Pegar para poder navegar fácilmente las
-diferentes rutas de archivos en nuestra máquina y en el cluster. Si
-tienes Git Bash en Windows necesitamos activar las funciones del teclado
-que te permiten copiar y pegar texto en el emulador de terminal.
+Bash
+SDK](https://github.com/git-for-windows/build-extra/releases/tag/git-sdk-1.0.8).
+Necesitamos familiarizarnos con el funcionamiento de Copiar y Pegar para
+poder navegar fácilmente las diferentes rutas de archivos en nuestra
+máquina y en el cluster. Si tienes Git Bash en Windows necesitamos
+activar las funciones del teclado que te permiten copiar y pegar texto
+en el emulador de terminal.
 
 1.  Abre tu emulador de terminal
 
@@ -39,9 +41,34 @@ usando la forma usual de copiar y pegar en Mac. `⌘ + c` para copiar y
 `⌘ + v` para pegar. Prueba que las combinaciones produzcan el
 funcionamiento esperado, si no es así consulta al personal docente.
 
-## <span class="todo TODO">TODO</span> 
+## <span class="todo TODO">TODO</span> Navegación del sistema de archivos
 
-## <span class="todo TODO">TODO</span> 
+Ten un archivo de texto a la mano (NO uses un documento de Word). A
+medida que avances en los ejercicios registra los comandos utilizados.
+Es buena práctica hacer anotaciones y comentarios de los comandos que
+usas, utiliza el caracter `#` para crear comentarios en tus archivos de
+texto.
+
+1.  Crea un directorio de trabajo en una ubicación a la que puedas
+    acceder
+
+fácilmente y asegúrate que puedes acceder a él usando la interfaz
+gráfica y la línea de comandos.
+
+1.  Navega hacia tu directorio de trabajo usando la línea de comandos y
+    descarga allí el archivo
+    [linea<sub>comando</sub>.zip](https://raw.githubusercontent.com/juanenciso14/genomica_biodiversidad/tree/master/material/linea_comando.zip)
+    usando `wget` o `curl`.
+
+## <span class="todo TODO">TODO</span> Creación de directorios y archivos
+
+## <span class="todo TODO">TODO</span> Programas disponibles en tu máquina
+
+Comenta qué diferencias observas con herramientas disponibles en los
+sistemas de tus compañeros de grupo. Todos tienen las mismas
+herramientas disponibles? Todos tienen la herramienta `man` disponible?
+
+## <span class="todo TODO">TODO</span> Copia, movimiento y deleción de contenido
 
 # <span class="todo TODO">TODO</span> Unix no tan básico
 
@@ -51,7 +78,7 @@ funcionamiento esperado, si no es así consulta al personal docente.
 
 # <span class="todo TODO">TODO</span> Trabajando en el cluster de cómputo (CENTAURO)
 
-## <span class="todo TODO">TODO</span> Conexión al cluster
+## Conexión al cluster
 
 Usaremos el programa `ssh` ([secure
 shell](https://www.ssh.com/academy/ssh)) para conectarnos a CENTAURO
