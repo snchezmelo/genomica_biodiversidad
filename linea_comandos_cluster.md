@@ -41,7 +41,7 @@ usando la forma usual de copiar y pegar en Mac. `⌘ + c` para copiar y
 `⌘ + v` para pegar. Prueba que las combinaciones produzcan el
 funcionamiento esperado, si no es así consulta al personal docente.
 
-## <span class="todo TODO">TODO</span> Navegación del sistema de archivos
+## Navegación del sistema de archivos
 
 Ten un archivo de texto a la mano (NO uses un documento de Word). A
 medida que avances en los ejercicios registra los comandos utilizados.
@@ -50,17 +50,50 @@ usas, utiliza el caracter `#` para crear comentarios en tus archivos de
 texto.
 
 1.  Crea un directorio de trabajo en una ubicación a la que puedas
-    acceder
+    acceder fácilmente y asegúrate que puedes acceder a él usando la
+    interfaz gráfica y la línea de comandos.
 
-fácilmente y asegúrate que puedes acceder a él usando la interfaz
-gráfica y la línea de comandos.
-
-1.  Navega hacia tu directorio de trabajo usando la línea de comandos y
+2.  Navega hacia tu directorio de trabajo usando la línea de comandos y
     descarga allí el archivo
     [`linea_comando.zip`](https://github.com/juanenciso14/genomica_biodiversidad/blob/master/material/linea_comando.zip?raw=true)
     usando `wget` o `curl`.
 
+    Si usas `wget` renombra el archivo usando la opción `-O` seguida del
+    nombre que le quieres dar al archivo. Si no lo renombras tendrá la
+    extensión `?raw=true`, la cual no queremos.
+
+3.  Descomprime el archivo que descargaste usando la herramienta
+    `unzip`. Qué resulta de hacer esta operación? Qué tipo de objeto es
+    `linea_comando`?
+
+4.  Ve a tu carpeta home :house:.
+
+5.  Ve a la carpeta `linea_comando` usando una <u>ruta absoluta</u>.
+
+6.  Ve al directorio `carpeta_4` dentro de `linea_comando` usando una
+    <u>ruta relativa</u>.
+
+7.  Usando un solo comando y una <u>ruta relativa</u> ve al directorio
+    `ssubcarpeta2.2.2`. Cuál es la ruta absoluta al directorio?
+
+8.  Usando un solo comando y una <u>ruta relativa</u> ve al directorio
+    `subCarpeta1.2`
+
+9.  Usando un solo comando y la <u>ruta absoluta</u> ve a
+    `subCarpeta3.1`
+
+10. Vuelve a :house: utilizando una ruta relativa
+
 ## <span class="todo TODO">TODO</span> Creación de directorios y archivos
+
+-   [ ] Replica la creación de `linea_comando` con todo su contenido.
+    Algunos archivos están vacíos y otros contienen texto plano. Replica
+    el contenido de estos archivos usando un editor de texto o el
+    comando `echo` y el operador de re-dirección. Documenta en tu
+    archivo de comandos todos los pasos que seguiste para crear
+    `linea_comando` y todo su contenido.
+
+    ![](./Imagenes/tree_linea_comando.png)
 
 ## <span class="todo TODO">TODO</span> Programas disponibles en tu máquina
 
