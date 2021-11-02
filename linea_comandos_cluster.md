@@ -173,7 +173,7 @@ La descarga desde SRA es un poco más compleja y está fuera del alcance
 de este curso.
 
 El archivo
-[file:./material/lista_muestras_descarga.txt](./material/lista_muestras_descarga.txt)
+[lista<sub>muestrasdescarga</sub>.txt](./material/lista_muestras_descarga.txt)
 contiene cuatro columnas con la siguiente información: i. Especie
 abreviada ii. Subespecie abreviada iii. Identificador de muestra y iv.
 Identificador de secuencia. **En tu máquina local haz lo siguiente**.
