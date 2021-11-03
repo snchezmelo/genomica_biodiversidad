@@ -33,6 +33,13 @@ Examinaremos los archivos `fastq` de *Heliconius* con los que vamos a
 trabajar. El objetivo es que reconozcas su estructura y que identifiques
 partes importantes de estos datos antes de procesarlos.
 
+**Atención:** Los archivos de lecturas, alineamientos y genotipos
+normalmente se comprimen porque contienen mucho texto y ocupan un
+espacio sustancial en el disco. **No descomprimas estos archivos**.
+Existen herramientas para analizar el contenido de archivos comprimidos
+como `zcat`, `zless`, `zgrep`, etc., que son versiones modificadas de
+herramientas comunes para analizar texto en Unix.
+
 1.  Para el archivo de lecturas que descargaste usando `wget`: Cuenta el
     número de líneas y el número de lecturas que contiene el archivo.
 
