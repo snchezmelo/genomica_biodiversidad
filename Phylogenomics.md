@@ -1,4 +1,6 @@
-# Table of Contents
+# Inferindo filogenias
+
+## Tabla de contenido
 
 1. [Árbol de máxima verosimilitud](#raxml)
 2. [Árbol de especies](#esp)
@@ -48,23 +50,23 @@ python ./scripts/vcf2phylip.py -i $file.altHom.vcf.gz -o "${file}.phylip"
 Ahora que tenemos nuestro archivo phylip podemos hacer un *sbatch* para ejecutar RAxML. 
 
 Los parámetros que usaremos: 
-`-T` especifica cuantos procesadores (SOLO VERSIÓN PTHREADS!)
-`-s` especifica el nombre del archivo de entrada (phylip o fasta)
-`-f a`vamos hacer un análisis de bootstrap rápida y la busqueda por la mejor arbole de ML en la misma ejecución
-`-N` vas calcular 100 bootstraps
-`- m` modelo de evolución. Ao usar *ASC_* usted indica que desea aplicar una corrección a el sesgo de verificación (**ascertainment bias??**) a los cálculos de verosimilitud. Para datos de SNPs vamos utilizar el modelo gamma de heterogeneidad de tasas con corrección de sesgo de verificación y optimización de las tasas de sustitución (ASC_GTRGAMMA). Con esto modelo necesitas especificar el tipo de corrección (siguiente parámetro)
-`--asc-corr` permite especificar el tipo de sesgo de confirmación que desea utilizar (predeterminado: lewis)
-`-o` especifique el nombre de un solo grupo externo o una lista separada por comas de
+:`-T` especifica cuantos procesadores (SOLO VERSIÓN PTHREADS!)
+:`-s` especifica el nombre del archivo de entrada (phylip o fasta)
+:`-f a`vamos hacer un análisis de bootstrap rápida y la busqueda por la mejor arbole de ML en la misma ejecución
+:`-N` vas calcular 100 bootstraps
+:`- m` modelo de evolución. Ao usar *ASC_* usted indica que desea aplicar una corrección a el sesgo de verificación (**ascertainment bias??**) a los cálculos de verosimilitud. Para datos de SNPs vamos utilizar el modelo gamma de heterogeneidad de tasas con corrección de sesgo de verificación y optimización de las tasas de sustitución (ASC_GTRGAMMA). Con esto modelo necesitas especificar el tipo de corrección (siguiente parámetro)
+:`--asc-corr` permite especificar el tipo de sesgo de confirmación que desea utilizar (predeterminado: lewis)
+:`-o` especifique el nombre de un solo grupo externo o una lista separada por comas de
 grupos externos
-`-n` especifica el nombre del archivo de salida
-`-p` especifica un *random seed* para la inferencia inicial de parsimonia. Para todas las opciones en RAxML que requieran algún tipo de aleatorización, se debe especificar esta opción.
-`-x` especifica un *random seed* para el bootstrap rápido
+:`-n` especifica el nombre del archivo de salida
+:`-p` especifica un *random seed* para la inferencia inicial de parsimonia. Para todas las opciones en RAxML que requieran algún tipo de aleatorización, se debe especificar esta opción.
+:`-x` especifica un *random seed* para el bootstrap rápido
 
 El código para el *sbatch* és:
 ```
 module load raxml/8.2.11
 
-file="<name_of_file>""
+file="<name_of_file>"
 
 # Prueba rápida con 100 bootstraps
 raxmlHPC-PTHREADS-AVX -T 2 \
@@ -96,15 +98,15 @@ Para inferir la árbole de especie entre las especies de *Heliconius*, vamos usa
 
 Antes de empezar necesitamos bajar el software:
 1. Vamos generar una carpeta llamada "PAUP" dentro de la carpeta "Filogenómica". 
-2. Dentro de la carpeta PAUP, tenemos que hacer el download del software PAUP (la versión para Linux): 
+2. dentro de la carpeta PAUP, tenemos que hacer el download del software PAUP (la versión para Linux): 
 `wget http://phylosolutions.com/paup-test/paup4a168_centos64.gz`
-3. Para descomprimir PAUP:
+3. para descomprimir PAUP:
 `gunzip paup4a168_centos64.gz`
 4. y hacer que PAUP sea ejecutable:
 `chmod +x paup4a168_centos64`
 
 Ahora estamos listos para empezar :)
-1. PAUP acepta como input un archivo en el formato *nexus*. Para esto, modificaremos manualmente nuestro archivo *phylip* utilizado en RAxML a uno *nexus*. Usando nano cambiaremos el encabezado del archivo phylip a:
+1. PAUP acepta como input un archivo en el formato *nexus*. Para esto, modificaremos manualmente nuestro archivo *phylip* utilizado en RAxML a uno *nexus*. Usando `nano` cambiaremos el encabezado del archivo phylip a:
 ```
 #NEXUS
 begin data;
@@ -147,7 +149,7 @@ end;
 - **nreps** número de réplicas de bootstrap (100)
 - **savetrees** salva la árbol
 
-El comando és:
+Ahora estamos listos para ejecutar PAUP:
 ```
 file="heliconius.optixscaf.SNPS.FL2.nex"
 
