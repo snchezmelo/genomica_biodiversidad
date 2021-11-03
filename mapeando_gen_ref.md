@@ -1,5 +1,6 @@
 <!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-refresh-toc -->
-**Table of Contents**
+# Índice
+
 
 - [Mapeo: Calidad de los datos de lectura](#mapeo-calidad-de-los-datos-de-lectura)
     - [Estructura de los datos: El formato `fastq`](#estructura-de-los-datos-el-formato-fastq)
@@ -14,6 +15,7 @@
     - [Quitando duplicados de PCR](#quitando-duplicados-de-pcr)
 
 <!-- markdown-toc end -->
+___
 
 # Mapeo: Calidad de los datos de lectura
 
