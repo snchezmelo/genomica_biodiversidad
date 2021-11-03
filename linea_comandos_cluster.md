@@ -191,7 +191,11 @@ trabajar este punto</u>.
     establecer qué individuos tienen asociadas las siguientes marcas en
     `secuencia2`.
 
-    `TATCCTCT` `GTAAGGAG` `TAGATCGC`
+    `TATCCTCT`
+
+    `GTAAGGAG`
+
+    `TAGATCGC`
 
     Recuerda re-dirigir la información entre herramientas usando el
     operador apropiado. Al usar cut puedes especificar el delimitador
