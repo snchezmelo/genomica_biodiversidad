@@ -202,7 +202,7 @@ trabajar este punto</u>.
     Responde: ¿En total cuántos individuos tienen alguna de estas tres
     secuencias en la segunfa parte de la columna izquierda?
 
-# <span class="todo TODO">TODO</span> Trabajando en el cluster de cómputo (CENTAURO)
+# Trabajando en el cluster de cómputo (CENTAURO)
 
 ## Conexión al cluster
 
