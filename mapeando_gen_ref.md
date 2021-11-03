@@ -1,29 +1,153 @@
 ---
 ---
 
-# <span class="todo TODO">TODO</span> Mapeo: Motivación
+# Mapeo: Calidad de los datos de lectura
 
-# <span class="todo TODO">TODO</span> Mapeo: Calidad de los datos de lectura
+## Estructura de los datos: El formato `fastq`
 
-## <span class="todo TODO">TODO</span> Estructura de los datos: El formato `fastq`
+La estructura del formato de lecturas `fastq` es sencilla, la
+información correspondiente a cada lectura está codificada en cuatro
+líneas consecutivas que contienen la siguiente información:
 
-## <span class="todo TODO">TODO</span> Puntajes de calidad
+-   La primera línea contiene el identificador de la lectura y comienza
+    siempre con `@`, seguido del identificador único de la lectura. Si
+    la librería fue hecha usando el método `paired-end` el identificador
+    finaliza con un `1` o un `2` dependiendo del par al que pertenece
+    (<sub>1</sub> o <sub>2</sub>).
+-   La segunda línea es la secuencia de ADN leida por la máquina
+-   La tercera línea empieza con un `+` y opcionalmente se sigue de
+    otros datos adicionales de identificación de la secuencia.
+-   La cuarta línea contiene las calidades de cada base encontrada en la
+    línea 2. Las líneas 2 y 4 deben tener la misma longitud.
 
-## <span class="todo TODO">TODO</span> Evaluando la calidad
+Ejemplo de la información correspondiente a **una** lectura de Illumina
 
-## <span class="todo TODO">TODO</span> Buenas y malas calidades
+``` shell
+@ERR1307113.10673758/1
+GTCTACTCTTTCACTTTCGACCAGGCCTATAAAGCCCTTGGTGCTGCTATAGGCCGCCATGTACTGTCCCGTCATGCTTCCGTGAATGACACGGGAGCTG
++
+@CBFFFFFHHFHHJIJJJJJIJGGGHGDHGIIGIIJJJJJIBHIIJGAHBIHEGHIEHGAC?AEEDFFE@A?CCDCCCDDC?CB<8@A<A3:5599>>89
+```
 
-## <span class="todo TODO">TODO</span> Potenicales soluciones cuando la calidad no es buena
+Examinaremos los archivos `fastq` de *Heliconius* con los que vamos a
+trabajar. El objetivo es que reconozcas su estructura y que identifiques
+partes importantes de estos datos antes de procesarlos.
 
-## <span class="todo TODO">TODO</span> Analizando las calidades de las lecturas
+1.  Para el archivo de lecturas que descargaste usando `wget`: Cuenta el
+    número de líneas y el número de lecturas que contiene el archivo.
 
-# <span class="todo TODO">TODO</span> Mapeo: Genoma de referencia
+2.  Para los archivos en el directorio `reads_short`: Escoge un par de
+    muestras y analiza los pares de lecturas (R1 y R2) de estas
+    muestras. Cuenta el número de líneas y de lecturas de R1 y R2.
+    ¿Cuántas líneas tienen? ¿Cuántas lecturas tienen? ¿R1 y R2 tienen el
+    mismo número de lecturas?
 
-## <span class="todo TODO">TODO</span> Construcción y ensamblaje
+## Puntajes de calidad
 
-## <span class="todo TODO">TODO</span> Estándares de calidad y herramientas complementarias
+El rango de calidades de las bases secuenciadas está codificado en la
+siguiente escala.
 
-## <span class="todo TODO">TODO</span> Descargando un genoma de referencia
+``` shell
+Menor calidad ----> ----> ----> ----> ----> -----> ----> ----> ----> ----> ----> Mayor calidad
+!"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~
+| |                      |     |         |                                      |            |
+0.2......................26....31........41.....................................80..........93
+```
+
+¿Qué interpretación tienen esos números? La calidad Q y la probabilidad
+de error en una base P se relacionan mediante la siguiente expresión:
+
+<img src="https://render.githubusercontent.com/render/math?math=\huge Q = -10 \times log_{10} P">
+
+Esta escala de calidades se conoce como la escala Phred. El puntaje
+Phred está directamente relacionado con la probabilidad de error al leer
+una base en un experimento de secuenciación como lo muestra la tabla.
+
+| Puntaje Phred (Q) | Probabilidad de error (P) | Precisión de la base secuenciada |
+|-------------------|---------------------------|----------------------------------|
+| 20                | 1 en 100                  | 99%                              |
+| 40                | 1 en 10000                | 99.99%                           |
+| 80                | 1 en 100000000            | 99.999999%                       |
+
+## Analizando las calidades de las lecturas
+
+Recursos computacionales: 1 procesador, 1 GB de memoria, \~10 min de
+tiempo de ejecución.
+
+Corriendo fastqc con los datos de *Heliconius*:
+
+1.  En tu carpeta de trabajo crea un directorio temporal, dale el nombre
+    que quieras. Yo, por ejemplo, lo llamé `TMP_DIR`. Ten a mano la ruta
+    absoluta a este directorio (usa `pwd` y copia la ruta).
+
+2.  Crea un script de `bash` para enviar el trabajo a la cola del
+    cluster. Pide los recursos necesarios usando las directivas de
+    `SBATCH`, no olvides el `shebang`. Encuentra el módulo de `Fastqc`
+    en el cluster y cárgalo correctamente.
+
+3.  En tu script: Crea un directiorio y dale un nombre que identifique a
+    la muestra que vas a correr. Finaliza el nombre con el sufijo `_QC`.
+
+4.  En tu script: Llama a `fastqc` con las opciones `-d <directorio>` y
+    `-o
+            <directorio>`. `-d` se usa para especificar el directorio en
+    el que `fastqc` escribirá algunos resultados intermedios
+    temporalmente. `-o` se usa para especificar el nombre o ruta del
+    directorio en el que se guardarán los resultados finales (varios
+    archivos).
+
+    La sintaxis para llamar a `fastqc` tiene la siguiente estructura,
+    donde `seqfile1` y `seqfile2` son los archivos que contienen las
+    lecturas pareadas de UNA SOLA muestra. ¿Cómo crees que cambia la
+    sintaxis si tienes un solo archivo de lecturas?
+
+    ``` shell
+    # sintaxis para llamar fastqc
+    # si quieres consultar en detalle las opciones
+    # ejecuta fastqc -h
+    fastqc [OPCIONES] seqfile1 seqfile2
+    ```
+
+5.  Antes de enviar tu script a la cola de trabajo muéstraselo al
+    personal docente para revisar que se ve bien.
+
+6.  Cuando `fastqc` termine de correr, todos los archivos resultantes
+    deben quedar en el directorio especificado usando `-o`. Copia este
+    directorio con todo su contenido a tu máquina.
+
+7.  Usando tu interfaz gráfica ve hasta el directorio que acabas de
+    copiar. Verás 4 archivos; dos comprimidos y dos con extensión
+    `.html`. Cada par de archivos corresponde a uno de los pares de
+    lecturas de cada muestra (<sub>1</sub> y <sub>2</sub>). Abre cada
+    uno de los archivos `.html` usando tu navegador web y explora su
+    contenido, qué observas?
+
+## Buenas y malas calidades
+
+Sin mucha experiencia no es fácul saber cuándo determinamos que un
+experimento de secuenciación resultó mal para una o varias muestras. En
+este punto podemos referirnos a ejemplos de buenas y malas calidades
+para ver en qué casos un set de lecturas puede no ser apropiado.
+
+Aquí encuentras un ejemplo de [lecturas de Illumina de buena
+calidad](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/good_sequence_short_fastqc.html)
+y otro de [lecturas de Illumina de mala
+calidad](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/bad_sequence_fastqc.html).
+Compara las calidades de las lecturas que analizaste y responde: ¿En
+general, los datos de secuenciación tienen buena o mala calidad? ¿Alguna
+medida en particular se ve mal para tus lecturas? Discute con tu grupo
+las observaciones hechas sobre tus datos.
+
+Te alentamos a revisar [la documentación de
+`fastqc`](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/3%20Analysis%20Modules/).
+Esta contiene explicaciones detalladas sobre cada medida de calidad, las
+posibles razones por las que la calidad puede ser mala en algunos
+experimentos/lecturas y sugerencias sobre cómo procesar los datos para
+mejorar la calidad.
+
+# Mapeo: Genoma de referencia
+
+## Descargando un genoma de referencia
 
 El genoma de referencia que usaremos es de la especie *H. melpomene*
 (v2.5).  
@@ -52,7 +176,7 @@ Sigue estos pasos para descargarlo:
     archivo `fasta` puede contarse contando el número de encabezados de
     secuencia (líneas que empiezan con `>`).
 
-# <span class="todo TODO">TODO</span> Mapeo: Pasos y herramientas
+# Mapeo: Pasos y herramientas
 
 ## Preparando los archivos
 
@@ -288,12 +412,3 @@ samtools index ${baminfo%sort.bam}sort.rmd.bam
 ```
 
 </details>
-
-## <span class="todo TODO">TODO</span> Estadísticas del alineamiento
-
-1.  
-2.  
-3.  
-4.  
-
-## <span class="todo TODO">TODO</span> Otros procesos posteriores
