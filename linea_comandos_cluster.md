@@ -191,13 +191,17 @@ trabajar este punto</u>.
     establecer qué individuos tienen asociadas las siguientes marcas en
     `secuencia2`.
 
-    `TATCCTCT` `GTAAGGAG` `TAGATCGC`
+    `TATCCTCT`
+
+    `GTAAGGAG`
+
+    `TAGATCGC`
 
     Recuerda re-dirigir la información entre herramientas usando el
     operador apropiado. Al usar cut puedes especificar el delimitador
     usando la opción `-d` seguida del caracter delimitador entre
     comillas sencillas. Por ejemplo, si el delimitador es un caracter de
-    tabulación (`\t`) usarías `` -d`\t' ``.
+    tabulación (`\t`) usarías `-d'\t'`.
 
     Responde: ¿En total cuántos individuos tienen alguna de estas tres
     secuencias en la segunfa parte de la columna izquierda?
@@ -293,7 +297,7 @@ usando `sbatch`. A partir del paso 4 trabaja en una sesión interactiva.
     empiece, termine, o encuentre errores. Usa directivas `#SBATCH` o
     incluye la solicitud de envío de notificaciones al correo y tu
     dirección de correo electrónico como opciones en `sbatch`. Para esto
-    usa las opciones `--mail-type` y `--mail`.
+    usa las opciones `--mail-type` y `--mail-user`.
 
 3.  Haz una predicción de la duración del trabajo en minutos. Para esto
     puedes suponer que cada iteración del ciclo tarda un poco más de un
@@ -324,7 +328,7 @@ usando `sbatch`. A partir del paso 4 trabaja en una sesión interactiva.
 
     # transfiriendo hacia CENTAURO
     scp -i <ruta.llave.pem> -P 53841 /rutal/local/archivo \
-        usuario@@loginpub-hpc.urosario.edu.co:/ruta/para/copiar/
+        usuario@loginpub-hpc.urosario.edu.co:/ruta/para/copiar/
     ```
 
 7.  Envía el archivo resultante (`bash_loops1.tar.gz`) a tu correo
@@ -337,6 +341,36 @@ usando `sbatch`. A partir del paso 4 trabaja en una sesión interactiva.
 
     # Presiona ENTER, luego Ctrl + d, luego ENTER nuevamente
     ```
+
+    <details>
+    <summary> Si no logras avanzar escribiendo el script de bash puedes encontrar la respuesta aquí. Asegúrate de hacerlo por tu cuenta primero! </summary>
+
+    ``` shell
+    #!/bin/bash
+    #SBATCH -p normal
+    #SBATCH -n 1
+    #SBATCH --mem 500MB
+    #SBATCH -t 0-1:00
+    #SBATCH --mail-type=BEGIN,END,FAIL
+    #SBATCH --mail-user=usuario@urosario.edu.co
+
+    for i in {1..800}
+    do
+        mkdir carpeta_$i
+        cd carpeta_$i
+        echo "Hola mundo\nEstamos aprendiendo\nA usar el cluster" > \
+             archivo_$i.txt
+        cd ..
+        sleep 1
+    done
+
+    # Para archivar y comprimir bash_loops1 usa
+    tar czf bash_loops1.tar.gz bash_loops1
+
+    # ten en cuenta la localizacion de bash_loops1
+    ```
+
+    </details>
 
 ## Descarga de archivos de secuencia y uso de `screen`
 
