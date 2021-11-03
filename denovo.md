@@ -69,9 +69,7 @@ En un análisis típico, los datos se recibirán de un secuenciador de Illumina 
 
 *Process_radtags* examina las lecturas crudas de Illumina y, en primer lugar, comprueba que los barcodes y el sitio de corte RAD (Fig. 5) estén intactos y demultiplexa los datos. Si hay errores en el barcode o en el sitio RAD dentro de un cierto margen, *process_radtags* puede corregirlos. En segundo lugar, desliza una ventana a lo largo de la lectura y verifica el puntaje de calidad promedio dentro de la ventana. Si la puntuación cae por debajo del 90% de probabilidad de ser correcta (una puntuación phred bruta de 10), la lectura se descarta. Esto permite algunos errores de secuenciación mientras se eliminan las lecturas en las que la secuencia se degrada a medida que se secuencia.
 
-![Diagrama con un ejemplo de los elementos (barcode, adaptadores, ...) de cada fragmento de ADN secuenciado (from Peterson et al., 2012[^1]).](./Imagenes/Peterson2012_diagramLibrary.png)
-
-[^1]: Peterson BK, Weber JN, Kay EH, Fisher HS, Hoekstra HE (2012) Double Digest RADseq: An Inexpensive Method for De Novo SNP Discovery and Genotyping in Model and Non-Model Species. PLoS ONE 7(5): e37135. doi:10.1371/journal.pone.0037135 
+![Diagrama con un ejemplo de los elementos (barcode, adaptadores, ...) de cada fragmento de ADN secuenciado ([from Peterson et al., 2012)](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0037135)](./Imagenes/Peterson2012_diagramLibrary.png)
 
 **Archivos necesarios:**
 - archivo fastq.gz con todas las muestras crudas (no procesado)
@@ -105,6 +103,7 @@ Hoy usaremos estas opciones (para otras consulte el manual de Stacks):
 
 `--filter_illumina` = descartar las lecturas que hayan sido marcadas por el filtro de pureza de Illumina como fallidas
 
+
 <details>
 <summary>¡Solo mira aquí si realmente necesitas!</summary>
 `process_radtags -p . -i gzfastq -b <archivo_barcodes>.txt -o ./01_process_radtags -q -E phred33 -D -e ecoRI --inline_null --barcode_dist_1 1 --filter_illumina`
@@ -128,14 +127,23 @@ Hoy usaremos estas opciones (para otras consulte el manual de Stacks):
 **Parámetros:**
 
 Tenga en cuenta que un comando *ustacks* debe realizarse para cada muestra
+
 `-t` = tipo de archivo de entrada. Tipos admitidos: fasta, fastq, gzfasta o gzfastq (predeterminado: adivinar)
+
 `-f` = ruta del archivo de entrada con el nombre del archivo (<NOMBRE>.fz.gz)
+
 `-o` = ruta donde escribir los resultados (`01_stacks`)
+
 `-i` = un ID de numérico único para cada muestra (1,2,3,...)
+
 `-m` = profundidad mínima de cobertura requerida para crear un stack (predeterminado 3, usaremos 5)
+
 `-M` = distancia máxima (en nucleótidos) permitida entre stacks (predeterminado 2)
+
 `-p` = habilitar la ejecución paralela con número de subprocesos (usaremos -p 8)
+
 `--model_type` = 'snp' (predeterminado), 'bounded'(vamos usar esto), o 'fixed'
+
 
 <details>
 <summary>¡Solo mira aquí si realmente necesitas!</summary>
@@ -159,9 +167,13 @@ Crea un catálogo a partir de cualquier conjunto de muestras procesadas por usta
 - los archivos de las muestras generado por *ustacks*
 
 **Parámetros:**
+
 `-o` = ruta donde escribir los resultados (`01_stacks`)
+
 `-s` = prefijo de muestra desde el cual cargar loci en el catálogo (necesita usar uno `-s` por muestra)
+
 `-p` = habilitar la ejecución paralela con número de subprocesos (usaremos -p 8)
+
 `-n` = número de discrepancias permitidas entre los loci putativos cuando se crea el catálogo (predeterminado 1, usaremos 2)
 
 **Memoria necesaria:** ~5.5gb
@@ -184,9 +196,13 @@ Los conjuntos de loci putativos construidos por *ustacks* se van a buscar en el 
 **Parámetros:**
 
 `-c,--catatlog` = ruta al catálogo generado en *cstacks*
+
 `-o,--out-path` = ruta donde escribir resultados (`01_stacks`)
+
 `-M,--popmap` = ruta a un mapa de población que contiene todas las muestras que le gustaría comparar con el catálogo
+
 `-p,--threads`: enable parallel execution with num_threads threads
+
 Tenga en cuenta que un comando *sstacks* debe realizarse para cada muestra
 
 **Memoria necesaria:** ~5.5gb
@@ -206,8 +222,11 @@ El programa *tsv2bam* transpondrá los datos para que estén orientados por locu
 - mapa de población
 
 **Parámetros:**
+
 `-P,--in-dir` = directorio de entrada que tenga los archivos generados por *ustacks* y *sstacks* (`01_stacks`)
+
 `-M,--popmap` = ruta a un mapa de población (lo mismo que *stacks*)
+
 `-t` — habilitar la ejecución paralela con número de subprocesos (predeterminado 1, usaremos 8)
 
 **Memoria necesaria:** ~600mb
@@ -227,7 +246,9 @@ El programa gstacks examinará un conjunto de datos RAD un locus a la vez, obser
 - mapa de poblacion
 
 **Parámetros:**
+
 `-P` = directorio de entrada que contiene archivos '* .matches.bam' creados por el pipeline *de novo* de Stacks (`01_stacks`)
+
 `-M,--popmap` = ruta a un mapa de población (lo mismo que se usó antes)
 
 **Memoria necesaria:** ~350mb
@@ -249,18 +270,31 @@ El programa gstacks examinará un conjunto de datos RAD un locus a la vez, obser
 Lista completa de parámetros [aquí](https://catchenlab.life.illinois.edu/stacks/comp/populations.php).
  
 `-P,--in_path` = directorio de entrada que tenga los archivos generados por Stacks (`01_stacks`)
+
 `-O,--out_path` = ruta a un directorio donde escribir los archivos de salida. (predeterminado al valor de -P.)
+
 `-M,--popmap` = ruta a un mapa de población (lo mismo que se usó antes)
+
 `-t,--threads` = habilitar la ejecución paralela con número de subprocesos (predeterminado 1, usaremos 8)
+
 `-p,--min-populations [int]` = número mínimo de poblaciones en las que debe estar presente un locus para ser procesado
+
 `-r,--min-samples-per-pop [float]` = porcentaje mínimo de individuos en una población requerido para procesar un locus para esa población (usaremos 0.8)
+
 `-R,--min-samples-overall [float]` = porcentaje mínimo de individuos en poblaciones requerido para procesar un locus (usaremos 0.8)
+
 `--min-mac [int]` = especificar el número mínimo de muestras que un alelo tiene que estar presente para procesar un SNP (aplicado a la metapoblación, usaremos 2).
+
 `--max-obs-het [float]` = especificar la heterocigosidad máxima observada requerida para procesar un sitio de nucleótidos en un locus (aplicado a la metapoblación, usaremos 0.5)
+
 `--write-random-snp` = restringir el análisis de datos a un SNP aleatorio por locus
+
 `--fstats` = habilitar estadísticas basadas en SNPs y las F basadas en haplotipos
+
 `--vcf` = output SNPs y haplotipos en  Variant Call Format (VCF).
+
 `--structure` = output los resultados en el formato de Structure
+
 `--plink` = output genotipos en formato PLINK
 
 Para este conjunto de datos, vamos correr *populations* dos veces. Uno usando todos los SNPs para calcular estadísticas sumarias `--fstats` y otro para generar los archivos para diferentes programas usando solamente un SNP aleatorio por loci `--write-random-snp` `--vcf` `--structure` `--plink`. Crear una carpeta para cada vez que ejecutaremos *populations*.
