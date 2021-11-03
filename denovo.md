@@ -36,8 +36,8 @@ Vamos utilizar cinco individuos de cada espécies que fueron secuenciados a trav
 ![Mapa con la distribución de las dos espécies de *Lupinus* que vamos utilizar en nuestro dataset - en amarillo.](./Imagenes/Lupinus_distr.png)
 
 Artículos con más información sobre el conjunto de datos: 
-: - Contreras-Ortiz, et al., 2018: https://academic.oup.com/botlinnean/article-abstract/187/1/118/4907975; 
-: - Nevado et al., 2018: https://nph.onlinelibrary.wiley.com/doi/full/10.1111/nph.15243
+- Contreras-Ortiz, et al., 2018: https://academic.oup.com/botlinnean/article-abstract/187/1/118/4907975; 
+- Nevado et al., 2018: https://nph.onlinelibrary.wiley.com/doi/full/10.1111/nph.15243
 
 ---
 
@@ -82,16 +82,27 @@ En un análisis típico, los datos se recibirán de un secuenciador de Illumina 
 Muchos de los parámetros utilizados aquí dependerán de cómo se haya secuenciado la biblioteca. Por lo tanto, es importante tener en cuenta que estos cambiarán de una biblioteca a otra según el conjunto de barcodes, adaptadores y el protocolo de secuencia utilizado.
 
 Hoy usaremos estas opciones (para otras consulte el manual de Stacks):
+
 `-p` = ruta al directorio con el archivo fastq.gz
+
 `-i` = tipo de archivo de entrada, ya sea 'fastq', 'gzfastq' (fastq comprimido con gzip), 'bam' o 'bustard'
+
 `-b` = ruta a un archivo que contiene el listado de los barcodes(archivo tiene en cada línea: barcode <TAB> muestra)
+
 `-o` = ruta donde poner los archivos procesados (`01_stacks`)
+
 `-q, --quality` = descartar lecturas con baja calidad
+
 `-E` = especificar cómo se codifican las puntuaciones de calidad, 'phred33' (Illumina 1.8 + / Sanger, predeterminado) o 'phred64' (Illumina 1.3-1.5)
+
 `-D` = capturar lecturas descartadas en un archivo
+
 `-e [enz], --renz_1 [enz]` = la enzima de restrición utilizada (acá vamos utilizar `ecoRI`)
+
 `--inline_null` = barcode está en la misma línea que la secuencia, ocurre solo en lecturas *single-end* (predeterminado)
+
 `--barcode_dist_1` = la cantidad de discrepancias permitidas al rescatar códigos de barras (predeterminado 1)
+
 `--filter_illumina` = descartar las lecturas que hayan sido marcadas por el filtro de pureza de Illumina como fallidas
 
 <details>
