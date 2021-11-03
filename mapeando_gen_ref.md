@@ -1,5 +1,19 @@
----
----
+<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-refresh-toc -->
+**Table of Contents**
+
+- [Mapeo: Calidad de los datos de lectura](#mapeo-calidad-de-los-datos-de-lectura)
+    - [Estructura de los datos: El formato `fastq`](#estructura-de-los-datos-el-formato-fastq)
+    - [Puntajes de calidad](#puntajes-de-calidad)
+    - [Analizando las calidades de las lecturas](#analizando-las-calidades-de-las-lecturas)
+    - [Buenas y malas calidades](#buenas-y-malas-calidades)
+- [Mapeo: Genoma de referencia](#mapeo-genoma-de-referencia)
+    - [Descargando un genoma de referencia](#descargando-un-genoma-de-referencia)
+- [Mapeo: Pasos y herramientas](#mapeo-pasos-y-herramientas)
+    - [Preparando los archivos](#preparando-los-archivos)
+    - [Alineamiento de las lecturas](#alineamiento-de-las-lecturas)
+    - [Quitando duplicados de PCR](#quitando-duplicados-de-pcr)
+
+<!-- markdown-toc end -->
 
 # Mapeo: Calidad de los datos de lectura
 
@@ -13,7 +27,7 @@ líneas consecutivas que contienen la siguiente información:
     siempre con `@`, seguido del identificador único de la lectura. Si
     la librería fue hecha usando el método `paired-end` el identificador
     finaliza con un `1` o un `2` dependiendo del par al que pertenece
-    (<sub>1</sub> o <sub>2</sub>).
+    (`_1` o `_2`).
 -   La segunda línea es la secuencia de ADN leida por la máquina
 -   La tercera línea empieza con un `+` y opcionalmente se sigue de
     otros datos adicionales de identificación de la secuencia.
@@ -125,9 +139,9 @@ Corriendo fastqc con los datos de *Heliconius*:
 7.  Usando tu interfaz gráfica ve hasta el directorio que acabas de
     copiar. Verás 4 archivos; dos comprimidos y dos con extensión
     `.html`. Cada par de archivos corresponde a uno de los pares de
-    lecturas de cada muestra (<sub>1</sub> y <sub>2</sub>). Abre cada
-    uno de los archivos `.html` usando tu navegador web y explora su
-    contenido, qué observas?
+    lecturas de cada muestra (`_1` y `_2`). Abre cada uno de los
+    archivos `.html` usando tu navegador web y explora su contenido, qué
+    observas?
 
 ## Buenas y malas calidades
 
