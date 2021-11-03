@@ -1,7 +1,7 @@
 ---
 ---
 
-# <span class="todo TODO">TODO</span> Unix básico
+# Unix básico
 
 ## Preparación
 
@@ -17,7 +17,7 @@ en el emulador de terminal.
 1.  Abre tu emulador de terminal
 
 2.  Haz click derecho en cualquier parte de la ventana. En el menú
-    desplegable haz click en `Options...`.
+    desplegable haz click en `Options...`
 
     ![](./Imagenes/habilitar_cp_gitbash1.png)
 
@@ -36,8 +36,8 @@ por defecto en Linux. Prueba que puedes copiar usando `Ctrl + Shift + c`
 y pegar usando `Ctrl + Shift + v` en tu emulador de terminal. Si no es
 posible consulta al personal docente.
 
-**Si estás trabajando en Mac:** Este comportamiento está habilitado
-usando la forma usual de copiar y pegar en Mac. `⌘ + c` para copiar y
+**Si estás trabajando en mac OS:** Este comportamiento está habilitado
+usando la forma usual de copiar y pegar en mac OS. `⌘ + c` para copiar y
 `⌘ + v` para pegar. Prueba que las combinaciones produzcan el
 funcionamiento esperado, si no es así consulta al personal docente.
 
@@ -74,7 +74,7 @@ texto.
     <u>ruta relativa</u>.
 
 7.  Usando un solo comando y una <u>ruta relativa</u> ve al directorio
-    `ssubcarpeta2.2.2`. Cuál es la ruta absoluta al directorio?
+    `ssubcarpeta2.2.2`. ¿Cuál es la ruta absoluta al directorio?
 
 8.  Usando un solo comando y una <u>ruta relativa</u> ve al directorio
     `subCarpeta1.2`
@@ -82,7 +82,7 @@ texto.
 9.  Usando un solo comando y la <u>ruta absoluta</u> ve a
     `subCarpeta3.1`
 
-10. Vuelve a :house: utilizando una ruta relativa
+10. Vuelve a :house: utilizando una ruta relativa.
 
 ## Creación de directorios y archivos
 
@@ -95,26 +95,112 @@ texto.
 
     ![](./Imagenes/tree_linea_comando.png)
 
-## <span class="todo TODO">TODO</span> Programas disponibles en tu máquina
+## Programas disponibles en tu máquina
 
--   [ ] Comenta qué diferencias observas con herramientas disponibles en
-    los sistemas de tus compañeros de grupo. Todos tienen las mismas
-    herramientas disponibles? Todos tienen la herramienta `man`
-    disponible?
+1.  Comenta qué diferencias observas con las herramientas disponibles en
+    los sistemas de tus compañeros de grupo. ¿Todos tienen las mismas
+    herramientas disponibles?
 
--   [ ]
+2.  Revisa las rutas disponibles en `$PATH`. Escoge una de las rutas que
+    observas en `$PATH`, recuerda que están separadas por `:`. ¿Qué
+    otras herramientas están disponibles en la ruta que escogiste?
+    Nombra por lo menos cuatro de ellas y describe qué hacen. Utiliza
+    `man` para explorar la documentación de las herramientas.
 
-<!-- -->
+## Copia, movimiento y deleción de directorios y archivos
 
--   [ ]
+1.  Ve a tu carpeta :house:
 
-## <span class="todo TODO">TODO</span> Copia, movimiento y deleción de contenido
+2.  Ve a `linea_comando` usando una ruta relativa.
 
-# <span class="todo TODO">TODO</span> Unix no tan básico
+3.  Crea un archivo llamado `lista_carpetas.txt` que contenga la lista
+    de carpetas dentro de `linea_comando` ¿Cómo ignoras los archivos y
+    te quedas solo con las carpetas? Consulta la ayuda de `ls` usando
+    `man`.
 
-## <span class="todo TODO">TODO</span> 
+4.  Mueve `archivo2.1.2.2.txt` y `Archivo2.1.2.3.txt` a `subcarpeta3.1`
+    usando rutas relativas y un solo comando.
 
-## <span class="todo TODO">TODO</span> 
+5.  Copia `archivo1.2.1.txt` y `archivo1.2.2.txt` a `subcarpeta2.2`. Usa
+    un solo comando.
+
+6.  Copia el directorio `ssubcarpeta2.1.2` con todo su contenido a
+    `carpeta_4` en un solo comando. ¿Encuentras errores? consulta el
+    manual de `cp` para recordar la opción apropiada que debes utilizar.
+
+7.  Borra el directorio `subCarpeta1.2` con todo su contenido en un solo
+    comando. Utiliza la opción de verificación de la herramienta usada
+    para borrar.
+
+8.  Crea dos archivos vacíos en `carpeta_4` y nómbralos como quieras.
+
+9.  Ve un nivel arriba del directorio `linea_comando`. Comprime la
+    carpeta `linea_comando` usando el comando
+    `zip -r linea_comando_<nombre>.zip
+            linea_comando` donde `<nombre>` es tu nombre. Recuerda no
+    dejar espacios en los nombres de archivo.
+
+# Unix no tan básico
+
+## Genes con nombres duplicados
+
+El archivo
+[`genes_ch1_mus_musculus.txt`](./material/genes_ch1_mus_musculus.txt)
+contiene identificadores de los genes del cromosoma 1 de *Mus musculus*
+en la primera columna y los nombres comunes de estos genes en la segunda
+columna. Algunos genes tienen nombres repetidos en la derecha. El
+objetivo es encontrar las entradas con nombres comunes de genes que
+estén duplicados. Las instrucciones utilizadas para resolver este punto
+deben guardarse en un script de `bash` que contenga el paso por paso de
+la solución.
+
+1.  Usa el comando `cut` para cortar y acceder a columnas individuales
+    del archivo de genes del ratón. La opción `-f<n>` te permite escoger
+    columnas individuales o grupos de columnas que quieras cortar. Debes
+    reemplazar `<n>` por el número de columna que quieras seleccionar.
+2.  Usa los comandos `uniq`, `sort` y `grep` para contar la aparición de
+    cada nombre en la segunda columna.
+3.  Genera una lista con los nombres de los genes repetidos y guárdala
+    en un archivo llamado `repetidos_ch1_mmus.txt`
+4.  Genera una lista con los nombres de los genes no repetidos y
+    guárdala en un archivo llamado `no_repetidos_ch1_mmus.txt`
+5.  Responde: ¿Cuántas líneas tiene originalmente el archivo
+    `genes_ch1_mus_musculus.txt`?
+6.  Responde: Ignorando las repeticiones ¿cuántos genes únicos hay
+    realmente en estos datos?
+7.  Responde: Reporta el número más alto de repeticiones que tiene un
+    gen en este archivo.
+
+## Marcadores de secuencias
+
+Cuando se hacen experimentos de secuenciación a gran escala normalmente
+se agregan marcas moleculares para poder identificar las muestras
+correctamente al momento de procesar los datos. El archivo
+[`tags_seqs.txt.gz`](./material/tags_seqs.txt.gz) contiene dos columnas:
+En la columna izquierda hay identificadores moleculares únicos para cada
+individuo. Estos tienen el formato `secuencia1-secuencia2`, las dos
+secuencias en conjunto se usan para identificar diferentes detalles del
+proceso de secuenciación. En la columna 2 del archivo están los
+identificadores de cada individuo. <u>No descomprimas el archivo para
+trabajar este punto</u>.
+
+1.  Utiliza la herramienta `zless` para verificar la estructura del
+    archivo.
+
+2.  Utiliza la versión apropiada de `cat` junto con `cut` y `grep` para
+    establecer qué individuos tienen asociadas las siguientes marcas en
+    `secuencia2`.
+
+    `TATCCTCT` `GTAAGGAG` `TAGATCGC`
+
+    Recuerda re-dirigir la información entre herramientas usando el
+    operador apropiado. Al usar cut puedes especificar el delimitador
+    usando la opción `-d` seguida del caracter delimitador entre
+    comillas sencillas. Por ejemplo, si el delimitador es un caracter de
+    tabulación (`\t`) usarías `` -d`\t' ``.
+
+    Responde: ¿En total cuántos individuos tienen alguna de estas tres
+    secuencias en la segunfa parte de la columna izquierda?
 
 # <span class="todo TODO">TODO</span> Trabajando en el cluster de cómputo (CENTAURO)
 
@@ -123,8 +209,8 @@ texto.
 Usaremos el programa `ssh` ([secure
 shell](https://www.ssh.com/academy/ssh)) para conectarnos a CENTAURO
 desde nuestra máquina. El ejemplo que veremos usa [Git Bash
-(Windows)](https://gitforwindows.org/). La sintáxis para Linux y Mac (OS
-X) es la misma.
+(Windows)](https://gitforwindows.org/). La sintáxis para Linux y mac OS
+es la misma.
 
 1.  Descarga y copia la llave de acceso (archivo `.pem`) en una ruta que
     conozcas y a la que puedas acceder fácilmente. En este caso yo creé
@@ -154,15 +240,105 @@ X) es la misma.
 
     ![](./Imagenes/conexion_exitosa.png)
 
-    Si no logras conectarte con éxito contacta al personal docente.
+    Si no logras conectarte con éxito pide ayuda al personal docente.
 
-## <span class="todo TODO">TODO</span> Ambiente de trabajo
+## Buscando módulos
 
-## <span class="todo TODO">TODO</span> Módulos
+Podemos encontrar módulos disponibles en el cluster usando dos rutas: La
+primera es utilizar el sub-comando `spider` de `module` seguido del
+nombre que estamos buscando. La segunda es utilizar el sub-comando
+`avail` de `module` y re-dirigir el resultado a `grep` para buscar el
+patrón que queremos encontrar.
 
-## <span class="todo TODO">TODO</span> La cola de trabajo
+1.  Utiliza `moldule avail` en conjunto `grep` para buscar algún módulo
+    en particular. Prueba buscando los módulos `java`, `stacks` y
+    `OrthoMCL`. Describe qué observas en las tres búsquedas.
+2.  Utiliza el sub-comando `keyword` de `module` para buscar los tres
+    módulos del numeral anterior. Describe qué observas en las tres
+    búsquedas.
+3.  Utiliza el sub-comando `spider` de `module` para buscar los tres
+    módulos del numeral 1. Describe qué observas en las tres búsquedas
+4.  ¿Cómo describirías las diferencias entre `keyword` y `spider`?
+5.  Consulta la ayuda de `module` usando la opción `-h` y responde:
+    ¿Existe alguna forma de consultar los módulos que ya están cargados
+    en tu sesión? ¿Cómo lo haces?
+6.  Consulta la ayuda de `module` la opción `-h` y responde: ¿Existe
+    alguna forma de cargar versiones diferentes de un mismo módulo sin
+    realizar dos cargas independientes? ¿Cómo lo haces?
 
-## <span class="todo TODO">TODO</span> Descarga de archivos de secuencia
+¿Qué diferencias notas?
+
+## La cola de trabajo
+
+El archivo [`bash_loops1.tar.gz`](./material/bash_loops1.tar.gz) fue
+creado con la herramienta `tar` y contiene varias carpetas, cada una de
+ellas contiene un archivo de texto con un mensaje. Descomprime el
+archivo usando `tar` con las opciones `-z`, `-x` y `-f` para poder
+explorar la estructura de directorios contenida en el archivo. Explora
+el contenido de uno de los archivos de texto para saber cuál es el
+mensaje y luego genera una estructura idéntica a la de la carpeta
+`bash_loops1`. Utiliza un solo ciclo `for` para generar las carpetas y
+crear los archivos con el mensaje. Agrega una pausa de un segundo a cada
+iteración del `for` usando la herramienta `sleep`. Pon las instrucciones
+correspondientes a los primeros 3 pasos en un script de `bash` con el
+código apropiado para poderlo enviar a la cola de trabajos del cluster
+usando `sbatch`. A partir del paso 4 trabaja en una sesión interactiva.
+
+1.  Solicita recursos para ejecutar el trabajo. Usa las directivas
+    `#SBATCH` en el inicio de tu script para enviar a la cola `normal`,
+    solicita un solo procesador, 50MB de memoria RAM y 1h de tiempo de
+    ejecución. No olvides incluir el `shebang`!.
+
+2.  Adicionalmente, envía notificaciones a tu correo cuando la tarea
+    empiece, termine, o encuentre errores. Usa directivas `#SBATCH` o
+    incluye la solicitud de envío de notificaciones al correo y tu
+    dirección de correo electrónico como opciones en `sbatch`. Para esto
+    usa las opciones `--mail-type` y `--mail`.
+
+3.  Haz una predicción de la duración del trabajo en minutos. Para esto
+    puedes suponer que cada iteración del ciclo tarda un poco más de un
+    segundo debido al comando `sleep`. ¿Cuántas iteraciones tiene la
+    tarea?
+
+4.  Al finalizar la ejecución: Verifica la información de corrido que el
+    sistema envió a tu correo electrónico, si no puedes encontrar los
+    mensajes revisa tu carpeta **Spam**.
+
+5.  Archiva y comprime la estructura resultante usando `tar` y las
+    opciones `c`, `z` y `f`. Consulta el manual de `tar` para saber qué
+    hace cada opción y cómo organizar el comando.
+
+    ``` shell
+    # sintaxis de uso de tar
+    tar [OPCIONES] [ARCHIVOS]
+    ```
+
+6.  Copia el archivo resultante (`bash_loops1.tar.gz`) a tu máquina
+    personal usando `scp` (haz esto desde tu máquina). La sintáxis para
+    copiar archivos usando `scp` desde/hacia CENTAURO es:
+
+    ``` shell
+    # transfiriendo desde CENTAURO
+    scp -i <ruta.llave.pem> -P 53841 \
+        usuario@loginpub-hpc.urosario.edu.co:/ruta/al/archivo /rutal/local/
+
+    # transfiriendo hacia CENTAURO
+    scp -i <ruta.llave.pem> -P 53841 /rutal/local/archivo \
+        usuario@@loginpub-hpc.urosario.edu.co:/ruta/para/copiar/
+    ```
+
+7.  Envía el archivo resultante (`bash_loops1.tar.gz`) a tu correo
+    electrónico usando la herramienta `mailx`. La sintáxis para adjuntar
+    archivos y enviarlos a una dirección de correo es la siguiente.
+
+    ``` shell
+    mailx -a <adjunto1> -a <adjunto2> \
+          -s "Asunto" tu.direccion.de@correo.com
+
+    # Presiona ENTER, luego Ctrl + d, luego ENTER nuevamente
+    ```
+
+## Descarga de archivos de secuencia y uso de `screen`
 
 Los dos repositorios más grandes de secuencias de ácidos nucléicos
 producidas usando secuenciación de nueva generación son el European
@@ -220,9 +396,9 @@ Identificador de secuencia. **En tu máquina local haz lo siguiente**.
     la posibilidad de desacoplar nuestra sesión para que el trabajo se
     siga ejecutando aún cuando nos desconectemos del cluster. Escribe
     `screen -S <sesion>` en donde `<sesion>` debe ser reemplazado por el
-    nombre que quieras darle a la sesión de descarga. Por ejemplo puedes
-    llamarla `descarga_NGS`. Verás que se abre una nueva sesión de
-    trabajo.
+    nombre que quieras darle a la sesión de descarga. Por ejemplo,
+    puedes llamarla `descarga_NGS`. Verás que se abre una nueva sesión
+    de trabajo.
 
 8.  En esta sesión nueva usarás `wget` para descargar uno de los dos
     archivos de secuencias de NGS que encontramos en ENA. La sintáxis
@@ -255,3 +431,12 @@ Identificador de secuencia. **En tu máquina local haz lo siguiente**.
     trabajando después de que te desconectes. Verifica con un instructor
     que tu procedimiento de descarga funciona y que puedes desacoplar tu
     sesión de `screen`.
+
+11. **Re-acoplando la sesión desacoplada**. `screen` te permite
+    conectarte nuevamente a la sesión en la que estabas trabajando antes
+    mediante la opción `-r`. Si solo tienes una sesión de `screen`
+    desacoplada puedes ejecutar solamente `screen -r`, si tienes más de
+    una sesión desacoplada debes ejecutar `screen -r <sesion>` donde
+    `<sesion>` es el nombre que le diste a tu sesión de `screen` en el
+    paso 7. Verifica que puedes conectarte nuevamente a la sesión de
+    descarga y desacopla la sesión nuevamente con `Ctrl + a` y `d`.
