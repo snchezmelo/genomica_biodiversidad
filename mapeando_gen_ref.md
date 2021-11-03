@@ -57,7 +57,7 @@ Menor calidad ----> ----> ----> ----> ----> -----> ----> ----> ----> ----> ---->
 ¿Qué interpretación tienen esos números? La calidad Q y la probabilidad
 de error en una base P se relacionan mediante la siguiente expresión:
 
-<img src="https://render.githubusercontent.com/render/math?math=\huge Q = -10 \times log_{10} P">
+<img src="https://render.githubusercontent.com/render/math?math=\huge Q = -10 \times log_{10}(P)">
 
 Esta escala de calidades se conoce como la escala Phred. El puntaje
 Phred está directamente relacionado con la probabilidad de error al leer
