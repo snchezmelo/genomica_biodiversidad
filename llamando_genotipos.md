@@ -1,5 +1,5 @@
 <!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-refresh-toc -->
-**Table of Contents**
+# Índice
 
 - [Sub-muestreando los alineamientos](#sub-muestreando-los-alineamientos)
     - [Extrayendo una región específica de los alineamientos](#extrayendo-una-región-específica-de-los-alineamientos)
