@@ -1,8 +1,6 @@
 ---
 ---
 
-# <span class="todo TODO">TODO</span> Motivación
-
 # Sub-muestreando los alineamientos
 
 <span id="submuestreo"></span>
@@ -91,7 +89,47 @@ este [paper publicado en PNAS
 
 <span id="llamando_gt"></span>
 
-## <span class="todo TODO">TODO</span> Verosimilitudes de genotipos
+## <span class="todo TODO">TODO</span> Genotipos y SNPs
+
+El proceso de convertir las bases de las lecturas y los puntajes ed
+calidad de cada base en un conjunto de genotipos para cada individuo se
+divide en dos pasos: Llamada de SNPs y llamada de genotipos.
+
+La llamada de SNPs consiste en determinar las posiciones del genoma hay
+polimorfismos o sitios variantes. En este proceso se determina qué
+posiciones tienen bases diferentes a las encontradas en el genoma de
+referencia. Los alelos o bases encontradas en el genoma de referencia y
+las que sean iguales a ellas en las muestras se llaman **alelos de
+referencia (REF)** y las bases en las muestras que sean diferentes a las
+encontradas en la referencia se llaman **alelos alternos (ALT)**.
+
+La llamada de genotipos es el proceso de determinar el genotipo de cada
+individuo en todos los sitios posibles a lo largo de su genoma. Usamos
+la palabra 'llamada' para referirnos a la estimación de un único SNP o
+genotipo.
+
+Las llamadas de SNPs y genotipos se hacen esencialmente contando las
+bases encontradas en las lecturas alineadas en un sitio determinado para
+cada individuo usando reglas y umbrales relativamente simples.
+Típicamente estos procesos aplican un primer filtro, el cual retiene
+solamente las bases de alta calidad. Con este criterio normalmente
+podemos tener confianza de que la evidencia encontrada para un alelo
+determiando es buena. Por ejemplo, el umbral de calidad más común que se
+usa es que el puntaje Phred de una base debe ser mínimo de 20 (recuerda
+que esto implica que la probabilidad de error en la base es de 1 en
+100). Luego, si en el conteo de bases de alta calidad encontramos una
+proporción de alelos 80:20 podemos decir que el individuo es
+heterocigoto para ese sitio (ver imagen abajo).
+
+| ![](./Imagenes/soporte_genotipo.png)                                                            |
+|-------------------------------------------------------------------------------------------------|
+| Representación de una llamada de genotipo usando umbrales Q  ≥ 20 y proporción de conteos 80:20 |
+
+Las aproximaciones más comunes hacen los procesos que acabamos de
+describir pero existen métodos alternos que incorporan la incertidumbre
+de los genotipos directamente en el análisis de los alineamiento (ver
+por ejemplo [Korneliussen et al.,
+2014](https://pubmed.ncbi.nlm.nih.gov/25420514/)).
 
 ## Llamada de genotipos
 
@@ -283,7 +321,7 @@ una mejor idea de cómo pueden verse estas variantes.
 7.  Cómo harías para encontrar qué sitios tienen SNPs y qué sitios son
     invariantes?
 
-## <span class="todo TODO">TODO</span> Filtrando sitios
+## Filtrando sitios
 
 <span id="filtrando_sitios"></span> Recursos computacionales: 2
 procesadores, 2 GB de memoria, \~30 min de tiempo total de ejecución.
@@ -585,7 +623,7 @@ facilitar el análisis.
 8.  **Transfiriendo los datos a nuestra máquina**
 
     Finalmente copia a tu máquina los archivos creados usando `scp` o
-    `rsync`.
+    `mailx`.
 
 ### Analizando y visualizando las estadísticas de los genotipos en `R`
 
@@ -742,7 +780,7 @@ facilitar el análisis.
     y exportar estos datos en el formato requerido.
 
     Recuerda que en la sección donde preparábamos el análisis por sitios
-    ([4.4.1](#calcula_estadisticas)) hicimos una operación en la que le
+    ([3.4.1](#calcula_estadisticas)) hicimos una operación en la que le
     dábamos a cada sitio un identificador único. Usaremos esos
     identificadores únicos aquí para filtrar nuestro archivo usando la
     opción `--snps` de `vcftools`.
