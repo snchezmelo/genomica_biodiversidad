@@ -85,11 +85,11 @@ este [paper publicado en PNAS
 6.  Envía el trabajo a la cola. Asegúrate de enviar el trabajo desde el
     directorio donde están tus archivos de entrada.
 
-# <span class="todo TODO">TODO</span> Llamando genotipos
+# Llamando genotipos
 
 <span id="llamando_gt"></span>
 
-## <span class="todo TODO">TODO</span> Genotipos y SNPs
+## Genotipos y SNPs
 
 El proceso de convertir las bases de las lecturas y los puntajes ed
 calidad de cada base en un conjunto de genotipos para cada individuo se
@@ -273,15 +273,33 @@ pequeña.
 8.  Envía el trabajo a la cola. Asegúrate de enviar el trabajo desde el
     directorio donde están tus archivos de entrada.
 
-# <span class="todo TODO">TODO</span> Operaciones con archivos VCF/BCF
+# Operaciones con archivos VCF/BCF
 
 <span id="operaciones_vcf"></span>
 
-## <span class="todo TODO">TODO</span> El formato VCF
+## El formato VCF
 
-<span id="formato_vcf"></span> Descripción del formato VCF.
+<span id="formato_vcf"></span>
 
-## Extrayendo información
+VCF es un formato de texto plano, a menudo comprimido, que contiene
+información genética de uno o más organismos en varias posiciones a lo
+largo del genoma.
+
+Normalmente la estructura del archivo VCF consta de tres partes: i) Las
+líneas de meta-información (líneas que empiezan con `##`) ii) la línea
+de encabezado (empieza con `#CHROM`) y iii) líneas de datos con las
+posiciones específicas a lo largo del genoma y otra información de las
+muestras. Puedes encontrar la especificación del formato VCF con
+descripciones detalladas de todos sus campos
+[aquí](https://samtools.github.io/hts-specs/VCFv4.2.pdf). A continuación
+puedes ver un ejemplo de las primeras líneas de un archivo VCF.
+
+![](./Imagenes/formato_VCF_ej.png)
+
+-   [ ] Explora el archivo de genotipos (`.vcf.gz`) usando `zless -S`.
+    ¿Puedes ubicar la línea de encabezado?
+
+## Extrayendo información de un archivo VCF
 
 <span id="extrayendo_info_vcf"></span> Es posible utilizar las
 herramientas de unix que hemos aprendido a usar para explorar la
@@ -299,6 +317,11 @@ necesarias y trata de **no** descomprimirlo usando `gunzip`.
     pares de bases, por qué el cuerpo principal tiene más posiciones?
 5.  Todas las posiciones que extrajimos del scaffold `Hmel218003o` están
     representadas?
+6.  Reto: Extrae los nombres de las muestras de la línea de encabezado
+    del `vcf` y haz que se muestre cada uno en una línea diferente. Para
+    hacer esto combina `zgrep`, `cut` y `tr`, re-dirigiendo la
+    información entre estas herramientas en el orden apropiado y
+    posteriormente guarda la salida en un archivo de texto plano.
 
 ## Tipos de variantes
 
