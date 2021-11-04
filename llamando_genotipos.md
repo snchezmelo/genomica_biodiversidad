@@ -1,4 +1,21 @@
----
+<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-refresh-toc -->
+**Table of Contents**
+
+- [Sub-muestreando los alineamientos](#sub-muestreando-los-alineamientos)
+    - [Extrayendo una región específica de los alineamientos](#extrayendo-una-región-específica-de-los-alineamientos)
+- [Llamando genotipos](#llamando-genotipos)
+    - [Genotipos y SNPs](#genotipos-y-snps)
+    - [Llamada de genotipos](#llamada-de-genotipos)
+- [Operaciones con archivos VCF/BCF](#operaciones-con-archivos-vcfbcf)
+    - [El formato VCF](#el-formato-vcf)
+    - [Extrayendo información de un archivo VCF](#extrayendo-información-de-un-archivo-vcf)
+    - [Tipos de variantes](#tipos-de-variantes)
+    - [Filtrando sitios](#filtrando-sitios)
+        - [Calculando estadísticas en nuestros genotipos](#calculando-estadísticas-en-nuestros-genotipos)
+        - [Analizando y visualizando las estadísticas de los genotipos en `R`](#analizando-y-visualizando-las-estadísticas-de-los-genotipos-en-r)
+        - [Aplicando los filtros al archivo VCF](#aplicando-los-filtros-al-archivo-vcf)
+
+<!-- markdown-toc end -->
 ---
 
 # Sub-muestreando los alineamientos
