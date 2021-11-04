@@ -16,7 +16,6 @@
         - [Aplicando los filtros al archivo VCF](#aplicando-los-filtros-al-archivo-vcf)
 
 <!-- markdown-toc end -->
----
 
 # Sub-muestreando los alineamientos
 
@@ -57,7 +56,7 @@ este [paper publicado en PNAS
 2.  Dentro del script crea un ciclo `for` que itere sobre los
     alineamientos `.bam` que ya están ordenados y sin duplicados. Si no
     recuerdas cómo escribir un ciclo `for` en `bash` puedes consultarlo
-    aquí \<INSERTAR LINK>.
+    [aquí](./for_loops_bash.md).
 
 3.  En cada iteración del ciclo debes llamar a `samtools view` con dos
     procesadores usando la opción `-@`. Debes usar la opción `-b` para
