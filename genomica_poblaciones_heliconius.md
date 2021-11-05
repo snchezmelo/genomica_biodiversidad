@@ -3,7 +3,50 @@
 
 # <span class="todo TODO">TODO</span> Análisis poblacionales por sitios y ventanas
 
-## Motivación y explicación
+Vamos a usar nuestro archivo `vcf` para examinar la diversidad genómica
+en nuestras muestras. Recuerda que cada fila del ar chivo `vcf` describe
+una posición en el genoma de varias muestras y las columnas describen
+las llamadas de los alelos de cada individuo.
+
+Analizar la diversidad genética nos permite describir las poblaciones y
+posiblemente la evidencia de algunos procesos de selección que estas
+hayan tenido en su historia natural.
+
+Existen estrategias robustas para medir diversidad genética que nos
+permiten comparar qué tanta variedad hay en nuestras muestras y en qué
+lugares del genoma posiblemente están pasando cosas interesantes.
+
+## <span class="todo TODO">TODO</span> Diversidad nucleotídica π
+
+Corre `vcftools`
+
+``` shell
+vcftools --gzvcf heliconius.optixscaf.SNPS.NV.FL2.vcf.gz \
+         --window-pi 10000 --out diversidad_nucl_10K
+```
+
+Analiza los datos
+
+Pinta los resultados
+
+``` r
+```
+
+## <span class="todo TODO">TODO</span> D de Tajima
+
+Corre `vcftools`
+
+``` shell
+```
+
+Analiza los datos
+
+Pinta los resultados
+
+``` r
+```
+
+## Índice de fijación: Motivación y explicación
 
 EL índice de fijación F<sub>ST</sub> es una medida de separación entre
 grupos de individuos. En teoría F<sub>ST</sub> varía entre 0 y 1 en
@@ -379,7 +422,7 @@ Requerimientos computacionales: TBD
 
 ## <span class="todo TODO">TODO</span> Estadísticos de selección
 
-# <span class="todo TODO">TODO</span> Introgresión
+# Introgresión
 
 ## Motivación
 
@@ -442,15 +485,14 @@ los cuales todos los individuos de P<sub>1</sub> y del outgroup tienen
 el alelo A y todos los individuos de P<sub>2</sub> y P<sub>3</sub>
 tienen el alelo B para cuantificar patrones ABBA estamos ignorando
 muchos sitios con información útil pues en muchos sitios a lo largo del
-genoma las poblaciones no tienen alelos fijos. La forma de calcular el
-estadístico D en la práctica involucra el uso de frecuencias alélicas.
+genoma las poblaciones no tienen alelos fijos.
 
-Si p<sub>ij</sub> denota la frecuencia del alelo i en la población j (i
-= {1, 2}; j = {1, 2, 3, 4}) entonces el D de Patterson se estima como
+La forma de calcular el estadístico D en la práctica involucra el uso de
+frecuencias alélicas. Si p<sub>ij</sub> denota la frecuencia del alelo i
+en la población j (i = {1, 2}; j = {1, 2, 3, 4}) entonces el D de
+Patterson se estima como
 
 <img src="https://render.githubusercontent.com/render/math?math=\huge D(P_{1}, P_{2}, P_{3}, O) = \frac{\sum_{i=1}^{n} [(1 - p_{i1})  p_{i2} p_{i3} (1 - p_{i4}) - p_{i1} (1 - p_{i2}) (1 - p_{i3}) p_{i4}]}{\sum_{i=1}^{n} [(1 - p_{i1}) p_{i2} p_{i3} (1 - p_{i4}) %2B p_{i1} (1 - p_{i2}) (1 - p_{i3}) p_{i4}]}">
-
-## <span class="todo TODO">TODO</span> Referencias importantes
 
 # <span class="todo TODO">TODO</span> Introgresión: Estimados por ventana
 
