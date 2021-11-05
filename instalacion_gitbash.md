@@ -1,11 +1,17 @@
+<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-refresh-toc -->
+# Índice
+
+- [Git Bash SDK](#git-bash-sdk)
+    - [Instalación de Git Bash SDK](#instalación-de-git-bash-sdk)
+    - [Instalación de herramientas en Git Bash SDK](#instalación-de-herramientas-en-git-bash-sdk)
+
+<!-- markdown-toc end -->
+
 ---
----
 
-# Preparación de las herramientas (Windows)
+# Git Bash SDK
 
-## Git Bash SDK
-
-### Instalación de Git Bash SDK
+## Instalación de Git Bash SDK
 
 Descarga el ejecutable (exe) de [Git Bash
 SDK](https://github.com/git-for-windows/build-extra/releases/tag/git-sdk-1.0.8)
@@ -16,7 +22,7 @@ y ejecuta el archivo descargado.
 Sigue las instrucciones del proceso de instalación, puede tardar algunos
 minutos.
 
-### Instalación de herramientas en Git Bash SDK
+## Instalación de herramientas en Git Bash SDK
 
 Haremos un ejemplo de instalación con `wget`. Esta es una herramienta
 que usaremos para gestionar descargas desde la línea de comando. Git
@@ -36,23 +42,3 @@ Esto ejecutará correctamente la instalación de `wget` siempre y cuando
 
 Si necesitas instalar otras herramientas que no están disponibles por
 defecto, puedes usar esta misma sintaxis :smiley:.
-
-## <span class="todo TODO">TODO</span> Editor de texto
-
-## <span class="todo TODO">TODO</span> R y Rstudio
-
-# <span class="todo TODO">TODO</span> Preparación de las herramientas (Linux)
-
-## <span class="todo TODO">TODO</span> Emulador de terminal
-
-## <span class="todo TODO">TODO</span> Editor de texto
-
-## <span class="todo TODO">TODO</span> R y Rstudio
-
-# <span class="todo TODO">TODO</span> Preparación de las herramientas (Mac OS)
-
-## <span class="todo TODO">TODO</span> Emulador de terminal
-
-## <span class="todo TODO">TODO</span> Editor de texto
-
-## <span class="todo TODO">TODO</span> R y Rstudio
