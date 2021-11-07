@@ -292,12 +292,14 @@ Ahora que del modelo *div* ya esta siendo ejecutado, vamos generar los archivos 
 
 <details>
 <summary>De manera similar al modelo `div`, modifique el comando `cat` de arriba para comparar qué *run* presenta el mejor *likelihood*. </summary>
-`cat ${PREFIX}_{1..5}.bestlhoods | grep -v MaxObsLhood | awk '{print NR,$7}' | sort -k 2`
+```
+PREFIX="Lupinus_divMig"
+cat ${PREFIX}_{1..5}.bestlhoods | grep -v MaxObsLhood | awk '{print NR,$7}' | sort -k 2
+```
 </details>
 
 **Comparación de modelos con AIC**
-Vamos usar *Akaike information criterion* (AIC) para comparar los dos modelos que ejecutamos.
-Se calcula como:
+Vamos usar [*Akaike information criterion* (AIC)](https://en.wikipedia.org/wiki/Akaike_information_criterion) para comparar los dos modelos que ejecutamos. Se calcula como:
 
 <img src="https://render.githubusercontent.com/render/math?math=AIC = 2K-2ln(L)">
 
@@ -305,3 +307,97 @@ Dónde:
 *K*: el número de parámetros del modelo
 *ln(L)*: la probabilidad logarítmica del modelo - fastsimcoal ya calcula este valor automáticamente.
 
+El AIC encontra el modelo que explica la mayor variación en los datos, mientras que penaliza a los modelos que utilizan un número excesivo de parámetros. Cuanto menor sea el AIC, mejor se ajustará al modelo. Aquí porque solo estamos comparando dos modelos, calculemos manualmente AIC, en R:
+
+```{r}
+#los valores de log(likelihood) para cada modelo
+div <- <VALOR>
+div_mig <- <VALOR>
+
+#el numero de parametros para cada modelo
+k_div <- <NUM_PARAM>
+k_div_mig <- <NUM_PARAM>
+
+#convertir de log10 a ln
+ln_div <- div/log10(exp(1))
+ln_div
+
+ln_div_mig <- div_mig/log10(exp(1))
+ln_div_mig
+
+#calcular el AIC de cada modelo
+AIC_div <- 2*k_div-2*ln_div
+AIC_div
+AIC_div_mig <- 2*k_div_mig-2*ln_div_mig
+AIC_div_mig
+
+```
+
+> **PREGUNTA:** ¿Qué modelo explica mejor los datos?
+
+**Bootstrap**
+Ahora que sabemos cuál de los modelos es el mejor, podemos hacer *bootstrapping* para averiguar qué tan seguros estamos en nuestras estimaciones de parámetros. Para esto vamos obtener intervalos de confianza haciendo *parametric bootstraps* - en la página 58-60 del [manual](http://cmpg.unibe.ch/software/fastsimcoal27/man/fastsimcoal27.pdf) hay una buena explicación.
+
+La idea és que utilizemos el archivo que contiene las estimaciones de los parámetros (*_maxL.par*) de la ejecución com mejor *likelihood* , para simular 100 SFS en función de estos parámetros y ejecutar *fastsimcoal* basado en estas simulaciones SFS. De esta forma, descubriremos cómo nuestros datos tienen poder para inferir correctamente los parámetros estimados. 
+
+1. crear una carpeta `bootstrap` en la carpeta `fastsimcoal`
+2. copiar el archivo `\*_maxL.par` de la mejor *run* del mejor modelo para la carpeta `bootstrap` - vamos modificar esto archivo
+3. tenemos que mirar cuantos SNPs se usaron en *easySFS* para modificar el archivo `\*_maxL.par`. Para esto, tenemos que mirar el archivo `datadict.txt` creado por *easySFS*. Usando el comando `wc` podemos descubrir cuántas líneas hay en este archivo - ese es el número de SNP utilizados.
+1896
+4. Modificar `\*_maxL.par`:
+- En la línea abajo de "//Number of independent loci [chromosome]" sustituir 1 por el número de SNPs utilizados por *easySFS*
+- sustituir la última línea por: FREQ por DNA y 1 por 100, que se quede así: `DNA 100 0 7e-9 OUTEXP`
+
+5. retirar *_maxL* del nombre del archivo (`mv`)
+
+6. Ejecute fastsimcoal con esto `.par` modificado para generar 10 SFS simulados. Por razones de tiempo, acá vamos simular solo 10 SFSs, pero el correcto es generar mucho más, como 100.
+
+`$ruta_fastsimcoal -i Lupinus_div.par -n10 -j -d -s0 -x -I -q`
+
+Esto generará 10 SFS en diez subdirectorios separados en el directorio de resultados `Lupinus_div`. 
+
+7. con este procedimiento, se puede estimar los parámetros de estos SFS simulados utilizando los mismos `.tpl` y `.est` archivos utilizados para obtener el archivo *\*_maxL.par*. Entonces tenemos que copiar `.tpl` y `.est` para cada una de las carpetas
+con los SFS simulados. En la carpeta del modelo que tenga los archivos `.tpl` y `.est`, hacer:
+`for i in {1..10}; do cp Lupinus_div.* <RUTA>/bootstrap/Lupinus_div/Lupinus_div_$i; done`
+
+#empezando acá tengo, estou haciendo unas pruebas en los bootstraps
+
+8. Ahora que ya tenemos los archivos listos para hacer el bootstrap, vamos copiar y modificar el `.sh` usado en la ejecución inicial de *fastsimcoal* para hacer los *bootstraps*.Primero copei el `.sh`  para la carpeta `bootstrap`. Ahora vamos cambiar el archivo:
+1. Cambiar la opción -m por -d
+
+
+~10min
+70Mb
+
+En `results`:
+`cat ${PREFIX}_{1..10}.bestlhoods | grep -v MaxObsLhood`
+
+Best run
+NPOP1	NPOP2	NANC	TDIV	MaxEstLhood	MaxObsLhood
+5426	9781	1193100	8824	-2431.781	-2285.228
+
+9. estimate 95 CI using the Cal95CI.py (requires to run first the cpSummary.py)
+
+
+> quantile(boot$NANC,c(.025,.975))
+   2.5%   97.5% 
+1076567 6982900 
+> quantile(boot$NPOP1,c(.025,.975))
+    2.5%    97.5% 
+ 4006.45 37974.83 
+> quantile(boot$NPOP2,c(.025,.975))
+     2.5%     97.5% 
+ 7518.575 70112.250 
+> quantile(boot$TDIV,c(.025,.975))
+    2.5%    97.5% 
+ 6582.80 61350.55 
+ 
+ En R:
+ 
+setwd("~/Dropbox/Postdoc_Rosario/BiodiversityGenomics_Winter2021/demography/")
+boot <- read.csv("fastsimcoal_bootstrap.txt", sep = "\t")
+
+quantile(boot$NANC,c(.025,.975))
+quantile(boot$NPOP1,c(.025,.975))
+quantile(boot$NPOP2,c(.025,.975))
+quantile(boot$TDIV,c(.025,.975))
