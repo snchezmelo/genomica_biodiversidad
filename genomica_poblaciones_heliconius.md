@@ -18,16 +18,153 @@ lugares del genoma posiblemente están pasando cosas interesantes.
 
 ## <span class="todo TODO">TODO</span> Diversidad nucleotídica π
 
-Corre `vcftools`
+La [diversidad
+nucleotídica](https://en.wikipedia.org/wiki/Nucleotide_diversity), a
+menudo simbolizada con la letra π, es la diferencia de composición
+genética entre todos los pares de individuos de nuestro conjunto de
+muestras promediada entre el número de comparaciones hechas. Es una
+medida simple de diversidad genética y se puede estimar con precisión,
+aún con pocas muestras.
 
-``` shell
-vcftools --gzvcf heliconius.optixscaf.SNPS.NV.FL2.vcf.gz \
-         --window-pi 10000 --out diversidad_nucl_10K
-```
+Esta medida normalmente se estima promediando varios sitios en regiones
+del genoma en lugar de estimarse para un solo sitio.
 
-Analiza los datos
+\[ \] Pregunta: ¿Qué procesos pueden causar que algunas partes del
+genoma tengan más diversidad nucleotídica que otras en una población?
 
-Pinta los resultados
+1.  **Estimando diversidad nucleotídica a lo largo de `Hmel218003o`**
+
+    Para este análisis ya tenemos todo preparado; nuestro archivo de
+    genotipos ya fue filtrado en un paso anterior. Podemos estimar la
+    diversidad nucleotídica en nuestros datos usando `vcftools`.
+    Empezaremos haciendo estimados de π en ventanas de 2kb (2000 bases)
+    a lo largo del scaffold `Hmel218003o`. Para esto usamos la opción
+    `--window-pi <tam. ventana>` de `vcftools`, donde `<tamn. ventana>`
+    es un número entero que define el número de posiciones que debe
+    contener una ventana.
+
+    <details>
+    <summary> Trata de construir la línea de comando por tu cuenta. Si no puedes avanzar mira el código aquí </summary>
+
+    ``` shell
+    vcftools --gzvcf heliconius.optixscaf.SNPS.NV.FL2.vcf.gz \
+             --window-pi 2000 --out diversidad_nucl_2K
+    ```
+
+    </details>
+
+2.  **Examinando los resultados**
+
+    Verifica el archivo de texto que resultó de estimar π en ventanas de
+    2kb.
+
+    Responde a las siguientes preguntas:
+
+    -   [ ] ¿Qué estructura tiene el archivo (número y contenido de
+        filas, columnas y encabezado)?
+
+    -   [ ] ¿Qué información puedes identificar en las columnas del
+        archivo?
+
+    -   [ ] ¿Qué efectos puede tener el número de variantes en el
+        estimado?
+
+    -   [ ] ¿Según tus observaciones, los estimados de todas las
+        ventanas son confiables o piensas que hay algunos que no lo son?
+
+    -   [ ] ¿Para interpretar los datos te quedarías con todos los
+        resultados o excluirías algunas ventanas? ¿Por qué?
+
+3.  **Visualizando los resultados**
+
+    Transfiere los resultados de los análisis de diversidad nucleotídica
+    a tu máquina local usando `scp` o `mailx`.
+
+    Carga la librería `tidyverse` y los datos en `R`.
+
+    ``` r
+    ### limpia el ambiente de trabajo
+    rm(list=ls())
+
+    library(tidyverse)
+
+    ### carga los datos
+    pi_2k <- read_tsv("archivo.pi.2k")
+    ```
+
+    Observando nuestros datos en texto plano notamos que existen algunas
+    ventanas que tienen muy pocos sitios segregantes. Usando un
+    histograma, visualicemos la distribución de sitios segregantes a lo
+    largo de las ventanas del scaffold para evaluar qué tan informativas
+    son las ventanas con menos sitios invariantes.
+
+    <details>
+    <summary> Trata de hacer el histograma por tu cuenta. Si no puedes avanzar mira el código aquí </summary>
+
+    ``` r
+    ggplot(data=datos.pi.2k, aes(x=N_VARIANTS)) + geom_histogram()
+    ```
+
+    </details>
+
+    El histograma debe verse así
+
+    ![](./Imagenes/histog_nsites_pi2k.png)
+
+    El estimado de π es robusto en la mayoría de los casos pero puede
+    ser engañoso cuando hay un solo sitio variante en la ventana.
+    Podemos aplicar un criterio un poco más estricto y filtrar las
+    ventanas que tengan pocas variantes, no solo una. Según nuestro
+    histograma hay un buen número de ventanas con más de 25 variantes.
+    Para no aplicar un filtro tan estricto y tener un buen balance entre
+    cantidad de información y datos confiables filtremos las ventanas
+    con menos de 10 variantes.
+
+    <details>
+    <summary> Trata de filtrar los datos por tu cuenta. Si no puedes avanzar mira el código aquí </summary>
+
+    ``` r
+    datos.pi.2k.filtrados <- datos.pi.2k %>% filter(N_VARIANTS>10)
+    ```
+
+    </details>
+
+    Grafica los datos filtrados usando `ggplot` y una gráfica de línea.
+
+    <details>
+    <summary> Trata de graficar los resultados por tu cuenta. Si no puedes avanzar mira el código aquí </summary>
+
+    ``` r
+    ggplot(datos.pi.2k.filtrados, aes(x=BIN_START, y=PI)) + geom_line() + theme_bw() +
+      labs(x="Posicion en Hmel218003o", y=expression("Diversidad nucleotidica"))
+    ```
+
+    </details>
+
+    Observa los resultados ¿Tu gráfica se parece a esta?
+
+    ![](./Imagenes/window_pi_2k.png)
+
+    Preguntas:
+
+    -   [ ] ¿Puedes observar algún patrón?
+
+    -   [ ] Calcula versiones del estimado usando ventanas más grandes y
+        más pequeñas a lo largo de `Hmel218003o`, usa por lo menos otros
+        dos tamaños de ventana. ¿Qué observas cuando cambias el tamaño
+        de ventana?
+
+    -   [ ] En tu opinión ¿Qué tamaño de ventana permite observar mejor
+        la variación de diversidad nucleotídica a lo largo de
+        `Hmel218003o`?
+
+En los pasos anteriores usamos todos los individuos en nuestro conjunto
+de muestras para calcular π por ventanas. Caclula π por ventanas por
+separado para las dos razas de *Heliconius timareta* y para *Heliconius
+melpomene malleti* (tres en total, uno por población) ¿Cómo lo haces?
+Pista: Puedes hacerlo en una sola llamada de `vcftools` para cada
+población usando la opción `-keep`. ¿Cómo produces el archivo de texto
+que contiene los nombres de los individuos que vas a usar?
 
 ``` r
 ```
@@ -144,6 +281,9 @@ Requerimientos computacionales: TBD
         es la razón por la que observamos estos valores?
 
 4.  **Visualizando F<sub>ST</sub> por sitio a lo largo de Hmel218003o**
+
+    Transfiere los resultados de los análisis de índice de fijación
+    F<sub>ST</sub> a tu máquina local usando `scp` o `mailx`.
 
     Antes de importar los datos a `R` vamos a procesar nuestro archivo
     para ignorar los valores no numéricos. De esta forma podemos
@@ -417,10 +557,6 @@ Requerimientos computacionales: TBD
     ![](./Imagenes/fst_ventana_50k.png)
 
     </details>
-
-## <span class="todo TODO">TODO</span> Otros estadísticos poblacionales
-
-## <span class="todo TODO">TODO</span> Estadísticos de selección
 
 # Introgresión
 
