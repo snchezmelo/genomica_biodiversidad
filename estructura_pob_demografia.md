@@ -2,12 +2,12 @@
 
 ## Tabla de contenido:
 
-1. [Estructura de la población](#estructura):
-	a. [PCA](#pca)
-	b. [Admixture](#admixture)
-2. [Demografia](#demografia)
-	a. [Inferindo el SFS](#SFS)
-	b. [Fastsimcoal](#fastsimcoal)
+1. [Estructura de la población](#estructura):  
+	a. [PCA](#pca)  
+	b. [Admixture](#admixture)  
+2. [Demografia](#demografia)  
+	a. [Inferindo el SFS](#SFS)  
+	b. [Fastsimcoal](#fastsimcoal)  
 
 # Estructura de la población <a name = "estructura"></a>
 ## PCA <a name = "pca"></a>
@@ -177,12 +177,17 @@ Es importante tener en cuenta que existen diferentes tipos de SFS (para una, dos
 
 Acá, vamos utilizar un script llamado [*easySFS*](https://github.com/isaacovercast/easySFS) para generar el SFS de nuestro archivo vcf. Como tenemos dos poblaciones, vamos estimar el *joint* SFS o 2D SFS (= "minor allele frequency SFS" = *jointMAF*).
 
-1. crear una carpeta "fastsimcoal" dentro de la carpeta "demografia"
-2. en carpeta "fastsimcoal" vamos clonar el repositorio de *easySFS*: `git clone https://github.com/isaacovercast/easySFS.git`
-3. `cd easySFS`
-4. tenemos que cargar un ambiente conda antes de ejecutar el script: `conda active SFS` (si algún día vas a ejecutar este programa en tu computadora, tendrás que instalar algunas dependencias que ya están instaladas acá en el cluster, para eso, sigue las instrucciones que están en el [repositorio de github](https://github.com/isaacovercast/easySFS)).
-5. necesitamos de 2 archivos para hacer el SFS: el vcf (con uno solo SNP per loci) y el archivo de población que usamos con *Stacks* - mira las rutas donde están estos dos archivos.
-6. ahora estamos listos para generar el SFS en dos pasos. El primero es:  
+1. crear una carpeta *fastsimcoal* dentro de la carpeta *demografia*
+2. en carpeta *fastsimcoal* vamos instalar *easySFS*, para esto vamos seguir las instrucciones que están en el [repositorio de github](https://github.com/isaacovercast/easySFS):  
+- crea un nuevo ambiente conda: `conda create -n easySFS`
+- activar el ambiente: `conda activate easySFS`
+- instalar dependencias: `conda install -c bioconda dadi pandas`
+- clonar el repositorio: `git clone https://github.com/isaacovercast/easySFS.git`
+- `cd easySFS`
+- y hacer ejecutable: `chmod 777 easySFS.py`
+
+3. necesitamos de 2 archivos para hacer el SFS: el vcf (con uno solo SNP per loci) y el archivo de población que usamos con *Stacks* - mira las rutas donde están estos dos archivos.  
+4. ahora estamos listos para generar el SFS en dos pasos. El primero es:  
 `./easySFS.py -i <ruta_vcf>/populations.snps.vcf -p <ruta_pop_map>/Lupinus_pops.txt --preview`
 
 Que dará como resultado algo como esto:
