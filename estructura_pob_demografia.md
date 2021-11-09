@@ -336,14 +336,13 @@ AIC_div_mig
 > **PREGUNTA:** ¿Qué modelo explica mejor los datos?
 
 **Bootstrap**
-Ahora que sabemos cuál de los modelos es el mejor, podemos hacer *bootstrapping* para averiguar qué tan seguros estamos en nuestras estimaciones de parámetros. Para esto vamos obtener intervalos de confianza haciendo *parametric bootstraps* - en la página 58-60 del [manual](http://cmpg.unibe.ch/software/fastsimcoal27/man/fastsimcoal27.pdf) hay una buena explicación.
+Ahora que sabemos cuál de los modelos es el mejor, podemos hacer *bootstrapping* para averiguar qué tan seguros estamos de nuestras estimaciones de parámetros. Para esto vamos obtener intervalos de confianza haciendo *parametric bootstraps* - en las páginas 58-60 del [manual](http://cmpg.unibe.ch/software/fastsimcoal27/man/fastsimcoal27.pdf) hay una buena explicación.
 
-La idea és que utilizemos el archivo que contiene las estimaciones de los parámetros (*_maxL.par*) de la ejecución com mejor *likelihood* , para simular 100 SFS en función de estos parámetros y ejecutar *fastsimcoal* basado en estas simulaciones SFS. De esta forma, descubriremos cómo nuestros datos tienen poder para inferir correctamente los parámetros estimados. 
+La idea és que utilizemos el archivo que contiene las estimaciones de los parámetros (*_maxL.par*) de la ejecución com mejor *likelihood* , para simular 100 SFS y ejecutar *fastsimcoal* basado en estos SFS simulados. De esta forma, descubriremos cómo nuestros datos tienen poder para inferir correctamente los parámetros estimados. 
 
 1. crear una carpeta `bootstrap` en la carpeta `fastsimcoal`
 2. copiar el archivo `\*_maxL.par` de la mejor *run* del mejor modelo para la carpeta `bootstrap` - vamos modificar esto archivo
-3. tenemos que mirar cuantos SNPs se usaron en *easySFS* para modificar el archivo `\*_maxL.par`. Para esto, tenemos que mirar el archivo `datadict.txt` creado por *easySFS*. Usando el comando `wc` podemos descubrir cuántas líneas hay en este archivo - ese es el número de SNP utilizados.
-1896
+3. tenemos que mirar cuantos SNPs se usaron en *easySFS* para modificar el archivo `\*_maxL.par`. Para esto, miraamos el archivo `datadict.txt` creado por *easySFS*. Usando el comando `wc` podemos descubrir cuántas líneas hay en este archivo - ese es el número de SNP utilizados.
 4. Modificar `\*_maxL.par`:
 - En la línea abajo de "//Number of independent loci [chromosome]" sustituir 1 por el número de SNPs utilizados por *easySFS*
 - sustituir la última línea por: FREQ por DNA y 1 por 100, que se quede así: `DNA 100 0 7e-9 OUTEXP`
@@ -354,50 +353,43 @@ La idea és que utilizemos el archivo que contiene las estimaciones de los pará
 
 `$ruta_fastsimcoal -i Lupinus_div.par -n10 -j -d -s0 -x -I -q`
 
-Esto generará 10 SFS en diez subdirectorios separados en el directorio de resultados `Lupinus_div`. 
+Esto generará 10 SFS (`-n`)en diez subdirectorios separados (`-j`) en el directorio `Lupinus_div`. Además,  
+`-d` calcula SFS para los sitios derivados (acá yo penso que tenemos que usar `-m`, pero la versión 2.7 esta con un *bug*. Yo escribí en el google groups preguntando a cerca de esto problema)  
+`-s0` generar SNPs de los datos de ADN - especificar el número máximo de SNP para generar (use 0 para generar todos los SNP)  
+`-x` no genera *Arlequin* output
+`-I` genera mutaciones de acuerdo con el modelo de mutación de sitio infinito (IS)  
+`-q` salida de mensaje mínima en el console
 
-7. con este procedimiento, se puede estimar los parámetros de estos SFS simulados utilizando los mismos `.tpl` y `.est` archivos utilizados para obtener el archivo *\*_maxL.par*. Entonces tenemos que copiar `.tpl` y `.est` para cada una de las carpetas
+7. con este procedimiento, se puede estimar los parámetros de estos SFS simulados utilizando los mismos `.tpl` y `.est` de la ejecución inicial de *fastsimcoal*. Entonces tenemos que copiar `.tpl` y `.est` para cada una de las carpetas
 con los SFS simulados. En la carpeta del modelo que tenga los archivos `.tpl` y `.est`, hacer:
 `for i in {1..10}; do cp Lupinus_div.* <RUTA>/bootstrap/Lupinus_div/Lupinus_div_$i; done`
 
-#empezando acá tengo, estou haciendo unas pruebas en los bootstraps
+8. Ahora que ya tenemos los archivos listos para hacer el bootstrap, vamos copiar y modificar el `.sh` usado en la ejecución inicial de *fastsimcoal* para hacer los *bootstraps*. Primero copie el `.sh` para la carpeta `bootstrap`. Ahora vamos cambiar el archivo:
+1. cambiar `job_name` y el `--array=1-10`
+2. cambiar la ruta para la carpeta `boostrap/Lupinus_div/${PREFIX}_${SLURM_ARRAY_TASK_ID}`_
+3. como ahora las carpetas ya están todas generadas de antemano, tenemos que remover las r líneas con los comandos `mkdir`, `cp` y `cd` 
+4. en la línea de comando del *fastsimcoal*, cambiar la opción `-m` por `-d`
+5. cambiar la carpeta `bestlhoods` por una nueva que vamos crear llamada `results` dentro de la carpeta `bootstrap`
 
-8. Ahora que ya tenemos los archivos listos para hacer el bootstrap, vamos copiar y modificar el `.sh` usado en la ejecución inicial de *fastsimcoal* para hacer los *bootstraps*.Primero copei el `.sh`  para la carpeta `bootstrap`. Ahora vamos cambiar el archivo:
-1. Cambiar la opción -m por -d
+**Memoria necesaria:** ~70mb
 
+**Tiempo de ejecución:** ~10min
 
-~10min
-70Mb
+**Output:** dentro de la carpeta `results` vamos tener todos los archivos `bestlhoods` para calcular los intervalos de confianza. 
 
 En `results`:
 `cat ${PREFIX}_{1..10}.bestlhoods | grep -v MaxObsLhood`
+Al hacer esto, generaremos una tabla fácil que podemos copiar y pegar en un archivo txt para leerlo en R. Si desea poner un encabezado en la tabla, simplemente cópielo de uno de los archivos, por ejemplo: `head -n 1 Lupinus_div_1.bestlhoods`
 
-Best run
-NPOP1	NPOP2	NANC	TDIV	MaxEstLhood	MaxObsLhood
-5426	9781	1193100	8824	-2431.781	-2285.228
-
-9. estimate 95 CI using the Cal95CI.py (requires to run first the cpSummary.py)
-
-
-> quantile(boot$NANC,c(.025,.975))
-   2.5%   97.5% 
-1076567 6982900 
-> quantile(boot$NPOP1,c(.025,.975))
-    2.5%    97.5% 
- 4006.45 37974.83 
-> quantile(boot$NPOP2,c(.025,.975))
-     2.5%     97.5% 
- 7518.575 70112.250 
-> quantile(boot$TDIV,c(.025,.975))
-    2.5%    97.5% 
- 6582.80 61350.55 
- 
- En R:
- 
-setwd("~/Dropbox/Postdoc_Rosario/BiodiversityGenomics_Winter2021/demography/")
+9. En R en tu computadora:
+```{r}
+setwd("<RUTA>")
 boot <- read.csv("fastsimcoal_bootstrap.txt", sep = "\t")
 
 quantile(boot$NANC,c(.025,.975))
 quantile(boot$NPOP1,c(.025,.975))
 quantile(boot$NPOP2,c(.025,.975))
 quantile(boot$TDIV,c(.025,.975))
+```
+
+y listo :smile:
