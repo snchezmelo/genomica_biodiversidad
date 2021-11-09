@@ -1,6 +1,176 @@
 ---
 ---
 
+# <span class="todo TODO">TODO</span> Estructura poblacional en *Heliconius*
+
+## <span class="todo TODO">TODO</span> Infiriendo estructura poblacional
+
+## <span class="todo TODO">TODO</span> Infiriendo estructura poblacional usando PCA
+
+Usaremos el archivo `heliconius.GT.NOINDEL.FILTER.vcf.gz` disponible en
+la ruta \<XXX>. Este archivo tiene 5 cromosomas de nuestros 18
+individuos de *Heliconius*. Es una aproximación más realista, pero
+todavía limitada, al conjunto completo de datos del genoma si lo
+comparamos con los datos que hemos venido trabajando.
+
+La herramienta que usaremos para explorar la estructura poblacional
+usando el análisis de componentes principales es `plink 1.9`, como
+hicimos con los datos de *Lupinus*, pero con algunos pasos y opciones
+adicionales.
+
+1.  **Sitios independientes:** En este caso necesitamos tener
+    independencia entre los sitios que usamos para hacer el análisis. La
+    solución a esto es eliminar una fracción de sitios que estén en
+    desequilibrio de ligamiento, es decir, sitios cuyos alelos muestren
+    una frecuencia muy alta de asociación estadística. Usamos las
+    siguientes opciones en `plink` para tener una dos listas: Una de
+    sitios en desequilibrio de ligamiento (extensión `.prune.out`) y
+    otra de sitios que son independientes entre sí (extensión
+    `.prune.in`).
+
+    -   `--vcf <archivo.vcf.gz>`
+
+    -   `--double-id`
+
+    -   `--allow-extra-chr`
+
+    -   `--indep-pairwise <tamaño ventana> <paso> <umbral r^{2}>` 50 10
+        0.1
+
+    -   `--out <prefijo>`
+
+        ``` shell
+        plink --vcf archivo.vcf.gz --double-id \
+              --allow-extra-chr --indep-pairwise ventana paso umbral \
+              --out prefijo_salida
+        ```
+
+    Examina ambos archivos de salida, ¿Qué información observas en
+    ellos? ¿Cuántos sitios están registrados en cada uno de los
+    archivos?
+
+2.  **Análisis de componentes principales:** Ahora ejecutamos el
+    análisis de componentes principales usando solo los sitios
+    independientes resultantes del paso anterior.
+
+    -   `--vcf <archivo.vcf.gz>`
+
+    -   `--double-id`
+
+    -   `--allow-extra-chr`
+
+    -   `--extract <archivo.prune.in>` recibe la lista de sitios
+        independientes.
+
+    -   `--pca`
+
+    -   `--out <prefijo.salida>`
+
+        ``` shell
+        plink --vcf archivo.vcf.gz --double-id \
+              --allow-extra-chr --extract archivo.prune.in \
+              --pca --out prefijo.salida
+        ```
+
+    `plink` produce dos archivos de resultados al ejecutar el PCA: uno
+    que contiene las proyecciones sobre cada eje para cada individuo
+    (extensión `.eigenvec`), y otro que contiene los valores propios
+    correspondientes a cada componente principal (extensión
+    `.eigenval`). En este caso cada uno de los valores propios
+    corresponde a la varianza explicada por cada uno de los componentes
+    principales. Transfiere estos dos archivos de resultados a tu
+    máquina usando `scp` ó `mailx`.
+
+3.  **Visualización de los resultados en R:**
+
+    ``` r
+    ### Leer datos de la pca, recuerda que tenemos dos archivos
+    eigvec <- read_table2("archivo.eigenvec", col_names = FALSE)
+    eigval <- scan("archivo.eigenval")
+
+    ### Arreglamos un poco los datos de los vectores propios
+    ### quitamos la primera o segunda columna, que estan repetidas
+    eigvec <- eigvec[,-1]
+
+    ### le damos nombres a las columnas
+    ### sustituimos los valores X1, X2,... etc, por nombres informativos
+    names(eigvec)[1] <- "Indv"
+    names(eigvec)[2:ncol(eigvec)] <- paste("PC", 1:(ncol(eigvec) - 1), sep="")
+
+    ### datos de especie y raza
+    especie <- rep(NA, length(eigvec$Indv))
+
+    ### a los nombres que contengan "melp" les asignamos "Melpomene"
+    especie[grep("melp", eigvec$Indv)] <- "Melpomene"
+    ### a los nombres que contengan "tim" les asignamos "Timareta"
+    especie[grep("tim", eigvec$Indv)] <- "Timareta"
+    ### a los nombres que no contengan "melp" o "tim" les asignamos "Silvaniforme"
+    especie[-grep("melp|tim", eigvec$Indv)] <- "Silvaniforme"
+
+    ### Hacemos lo mismo con las razas
+    raza <- rep(NA, length(eigvec$Indv))
+
+    raza[grep("malleti", eigvec$Indv)] <- "Malleti"
+    raza[grep("fln", eigvec$Indv)] <- "Florencia"
+    raza[grep("thx", eigvec$Indv)] <- "Thelxinoe"
+    raza[-grep("malleti|fln|thx", eigvec$Indv)] <- "Otra"
+
+    esp_raza <- paste(especie, raza, sep="_")
+
+    ### Construimos nuevamente el marco de datos de la PCA
+    ### juntando toda la informacion que especificamos anteriorente
+    pca_helic <- as_tibble(data.frame(especie, raza, esp_raza, eigvec))
+
+    # Construimos los datos del porcentaje de variacion por componente
+    pve <- data.frame(PC = 1:length(eigval), pve = 100*(eigval/sum(eigval)))
+
+    ### Graficamos los resultados de la PCA
+    ggplot(pca_helic, aes(x=PC1, y=PC2, col=especie, shape=raza)) +
+      geom_point(size=6) + coord_equal() + theme_bw() +
+      xlab(paste("PC1 (", signif(pve$pve[1], 3), "%)")) +
+      ylab(paste("PC2 (", signif(pve$pve[2], 3), "%)"))
+
+    ### Graficamos el porcentaje explicado por componente
+    ggplot(pve, aes(x=PC, y=pve)) + geom_bar(stat="identity") + theme_bw() +
+      ylab("Porcentaje de variación explicado") + 
+      xlab("Componente principal") +
+      scale_x_continuous(breaks = 1:length(pve))
+    ```
+
+    ![](./Imagenes/PCA_helic.png)
+
+    ![](./Imagenes/pve_pca_helic.png)
+
+## <span class="todo TODO">TODO</span> Los resultados de la PCA dependen de la perspectiva
+
+Comparación región optix con una representación más global del genoma.
+Ciertas regiones del genoma pueden mostrar procesos evolutivos
+interesantes.
+
+Usa `vcftools` para extraer la región `Hmel218003o:650000-1000000`, que
+rodea al gen *optix*. Esta región podemos extraerla de cualquiera de los
+dos conjuntos de genotipos (`vcf.gz`), debemos guardarla correctamente
+como un archivo `vcf.gz`.
+
+Extrayendo el subconjunto
+
+``` shell
+```
+
+Usa `plink` para retener solo los sitios en equilibrio de ligamiento
+(independientes entre sí) y para hacer un análisis de componentes
+principales de esta región.
+
+Sitios independientes y PCA
+
+``` shell
+```
+
+Gráficas
+
+``` r
+```
+
 # <span class="todo TODO">TODO</span> Análisis poblacionales por sitios y ventanas
 
 Vamos a usar nuestro archivo `vcf` para examinar la diversidad genómica
@@ -16,7 +186,7 @@ Existen estrategias robustas para medir diversidad genética que nos
 permiten comparar qué tanta variedad hay en nuestras muestras y en qué
 lugares del genoma posiblemente están pasando cosas interesantes.
 
-## <span class="todo TODO">TODO</span> Diversidad nucleotídica π
+## Diversidad nucleotídica π
 
 La [diversidad
 nucleotídica](https://en.wikipedia.org/wiki/Nucleotide_diversity), a
@@ -124,7 +294,7 @@ genoma tengan más diversidad nucleotídica que otras en una población?
     <summary> Trata de filtrar los datos por tu cuenta. Si no puedes avanzar mira el código aquí </summary>
 
     ``` r
-    datos.pi.2k.filtrados <- datos.pi.2k %>% filter(N_VARIANTS>10)
+    datos.pi.2k.filtrados <- datos.pi.2k %>% filter(N_VARIANTS > 10)
     ```
 
     </details>
@@ -164,14 +334,34 @@ separado para las dos razas de *Heliconius timareta* y para *Heliconius
 melpomene malleti* (tres en total, uno por población) ¿Cómo lo haces?
 Pista: Puedes hacerlo en una sola llamada de `vcftools` para cada
 población usando la opción `-keep`. ¿Cómo produces el archivo de texto
-que contiene los nombres de los individuos que vas a usar?
+que contiene los nombres de los individuos que vas a usar? Grafica los
+datos y compáralos con los estimados anteriores.
 
-``` r
-```
+-   [ ] ¿Observas diferencias? ¿A qué crees que se deben estas
+    diferencias?
+
+**Si te sobra tiempo...**
+
+Explora los patrones de diversidad nucleotídica en el set de datos
+extendido. ¿Puedes graficar la diversidad nucleotídica promedio por
+scaffold como un boxplot? ¿Hay algún scaffold que tenga diversidad
+nucleotídica promedio distinta a la del resto de los scaffolds?
 
 ## <span class="todo TODO">TODO</span> D de Tajima
 
-Corre `vcftools`
+Podemos calcular estadísticos que nos permiten analizar si ciertas
+regiones del genoma en nuestras poblaciones están evolucionando
+neutralmente ó si están experimentando una posible presión de selección.
+Una de las medidas que podemos usar para esto es el D de Tajima. El D de
+Tajima puede cambiar con cambios en el tamaño poblacional o cuando hay
+procesos de selección.
+
+Nuevamente, podemos usar `vcftools` para calcular el D de Tajima. Como
+en el caso de π, podemos calcular D de Tajima por ventana a lo largo de
+una región del genoma (scaffold ó cromosoma) o del genoma completo. Para
+esto usamos la opción `--TajimaD <tam. ventana>` donde `<tam. ventana>`
+es un número entero que determina el tamaño de la ventana que usaremos
+para el análisis.
 
 ``` shell
 ```
