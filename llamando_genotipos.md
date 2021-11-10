@@ -17,9 +17,18 @@
 
 <!-- markdown-toc end -->
 
+
 # Sub-muestreando los alineamientos
 
 <span id="submuestreo"></span>
+
+Para este paso vamos a utilizar los alineamientos de las 18 muestras de
+*Heliconius* cuyos duplicados de PCR ya fueron removidos. Los
+alineamientos y sus archivos de índice se encuentran en la ruta
+`/ruta/XXX` y tienen la extensión `smallr.rmd.sort.bam`. Copia los
+alineamientos y sus índicies a un directorio llamado `llamada_genotipos`
+en tu directorio de trabajo. **Asegúrate de copiar los alineamientos y
+sus índices**.
 
 ## Extrayendo una región específica de los alineamientos
 
@@ -54,9 +63,9 @@ este [paper publicado en PNAS
     necesarios. No olvides cargar el módulo de `samtools`.
 
 2.  Dentro del script crea un ciclo `for` que itere sobre los
-    alineamientos `.bam` que ya están ordenados y sin duplicados. Si no
-    recuerdas cómo escribir un ciclo `for` en `bash` puedes consultarlo
-    [aquí](./for_loops_bash.md).
+    alineamientos `.bam` que ya están ordenados y sin duplicados de PCR.
+    Si no recuerdas cómo escribir un ciclo `for` en `bash` puedes
+    consultarlo [aquí](./for_loops_bash.md).
 
 3.  En cada iteración del ciclo debes llamar a `samtools view` con dos
     procesadores usando la opción `-@`. Debes usar la opción `-b` para
@@ -70,8 +79,9 @@ este [paper publicado en PNAS
     scaffold `Hmel218003o` y la especificamos así:
     `Hmel218003o:1-1500000`. Dale una extensión informativa a cada
     archivo de salida: Estamos extrayendo parte del scaffold
-    `Hmel218003o`; te sugerimos usar `C18S3` como parte del nombre de
-    los archivos resultantes.
+    `Hmel218003o`; te sugerimos usar `optixscaf` como parte del nombre
+    de los archivos resultantes (el scaffold `Hmel218003o` contiene al
+    gen *optix*, de ahí el nombre).
 
     La forma general de usar `samtools view` es:
 
@@ -366,11 +376,15 @@ una mejor idea de cómo pueden verse estas variantes.
 procesadores, 2 GB de memoria, \~30 min de tiempo total de ejecución.
 
 Usaremos [`vcftools`](https://vcftools.github.io/man_latest.html) para
-filtrar. Existen otras herramientas disponibles para hacer esto, como
-`bcftools` o `GATK`. `vcftools` es razonablemente simple y nos permite
-calcular algunas estadísticas sobre nuestras muestras para decidir qué
-filtros aplicar. Podemos visualizar estas estadísticas en `R` para
-facilitar el análisis.
+filtrar y [bgzip](https://www.htslib.org/doc/bgzip.html) como
+herramienta complementaria para manejar la compresión de archivos `vcf`.
+Existen otras herramientas disponibles para hacer esto, como `bcftools`
+o `GATK`. `vcftools` es razonablemente simple y nos permite calcular
+algunas estadísticas sobre nuestras muestras para decidir qué filtros
+aplicar. Podemos visualizar estas estadísticas en `R` para facilitar el
+análisis. `vcftools` está disponible como módulo en Centauro y `bgzip`
+hace parte del módulo `samtools`. Carga ambos módulos antes de empezar a
+trabajar.
 
 ### Calculando estadísticas en nuestros genotipos
 
@@ -390,7 +404,7 @@ facilitar el análisis.
     vcf original y la opción `--out` se usa para darle un pre-fijo al
     nombre del archivo de salida. `vcftools` escribe un archivo sin
     comprimir, cuando tengas el resultado en un vcf comprímelo con
-    `bgzip`.
+    `bgzip`. La sintaxis para usar `bgzip` es `bgzip archivo.vcf.gz`.
 
     La forma general de usar `vcftools` es la siguiente:
 
@@ -462,7 +476,9 @@ facilitar el análisis.
     `>`. Finalizamos indexando este nuevo archivo con `bcftools index`.
     Los procesos de descomprimir, sustituir y comprimir nuevamente están
     unidos entre sí por el operador `|`. Lee con atención los siguientes
-    comandos.
+    comandos. Para usar `bgzip` necesitamos las herramientas
+    relacionadas con `samtools`, cargamos el módulo de `samtools` si no
+    está cargado.
 
     ``` shell
     # Cambiamos el nombre de nuestro archivo a un nombre transitorio
@@ -508,9 +524,13 @@ facilitar el análisis.
     Usaremos nuestro archivo con sitios invariantes y bi-alélicos para
     calcular los conteos de alelos por sitio. Llama a `vcftools` usando
     la opción `--counts2` para contar los alelos por sitio. No olvides
-    especificar un prefijo para el nombre de salida (`--out`). El
-    archivo de salida debe tener la extensión `.frq.count` (`vcftools`
-    pone la extensión automáticamente).
+    especificar un prefijo para el nombre de salida
+    (`--out <prefijo archivo
+             salida>`). El archivo de salida tiene la extensión
+    `.frq.count` (`vcftools` pone la extensión automáticamente). Como
+    tenemos un archivo de genotipos comprimido `vcf.gz` debemos usar la
+    opción `--gzvcf <archivo
+             de genotipos>`.
 
     Abre el archivo resultante usando `less`, deberías ver algo como
     esto:
@@ -600,7 +620,10 @@ facilitar el análisis.
     profundidad promedio por individuo. No olvides especificar un
     prefijo para el nombre de salida (`--out`). El archivo de salida
     debe tener la extensión `.idepth`. Para estos datos debemos ver
-    valores entre 18 y 37 de profundidad aproximadamente.
+    valores entre 18 y 37 de profundidad aproximadamente. Como tenemos
+    un archivo de genotipos comprimido `vcf.gz` debemos usar la opción
+    `--gzvcf <archivo de
+             genotipos>`.
 
 4.  **Calculando profundidad promedio de secuenciación por sitio:**
 
@@ -911,3 +934,6 @@ facilitar el análisis.
 
 **Pregunta:** Después de filtrar ¿Cuántos sitios tenemos en nuestra
 última versión del archivo de genotipos?
+
+-   [ ] Reto: ¿Puedes aplicar estos dos filtros en una sola línea? ¿Cómo
+    lo harías?

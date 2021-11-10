@@ -252,7 +252,7 @@ Sigue estos pasos para descargarlo:
 
 ## Alineamiento de las lecturas
 
-Recursos computacionales: 2 procesadores, 8 GB de memoria, \~40 min de
+Recursos computacionales: 2 procesadores, 4 GB de memoria, \~25 min de
 tiempo de ejecución.
 
 1.  Para este paso necesitamos escribir un script de bash usando `nano`
@@ -382,8 +382,8 @@ tiempo de ejecución.
     module load bwa
     module load samtools
 
-    bwa mem -t 4 -M -R $(echo "@RG\tID:$rg_info\tSM:$rg_info\tPL:Illumina") \
-        $ref $read_1 $read_2 | samtools sort -@ 4 -o $rg_info.$ref_info.SHORT.sort.bam -
+    bwa mem -t 2 -M -R $(echo "@RG\tID:$rg_info\tSM:$rg_info\tPL:Illumina") \
+        $ref $read_1 $read_2 | samtools sort -@ 2 -o $rg_info.$ref_info.SHORT.sort.bam -
 
     samtools index $rg_info.$ref_info.SHORT.sort.bam
     ```
@@ -413,8 +413,9 @@ tiempo de ejecución.
 
 ## Quitando duplicados de PCR
 
-Recursos computacionales: 2 procesadores, 8 GB de memoria, \~20 min de
-tiempo de ejecución.
+Recursos computacionales: 2 procesadores, 4 GB de memoria, \~20 min de
+tiempo de ejecución. Este análisis lo vas a correr con el alineamiento
+resultante del paso anterior.
 
 1.  Tenemos que quitar los duplicados de PCR, estos pueden interferir
     luego con el proceso de inferencia de alelos. Puedes encontrar
@@ -428,12 +429,13 @@ tiempo de ejecución.
     `/opt/ohpc/pub/apps/picard-tools/2.18.15/picard.jar`. Es una
     aplicación de `java` por lo tanto debes cargar el módulo de `java`
     (para `picard-tools` necesitamos cargar la versión 8 de `java`, cuyo
-    módulo en el cluster es `java8/1.8.0.172`) y llamarla usando `8GB`
-    de memoria como máximo:
+    módulo en el cluster es `java8/1.8.0.172`) y llamarla usando `4GB`
+    de memoria como máximo. La llamada a una aplicación de java se hace
+    usando la siguiente sintáxis:
 
     ``` shell
     # Estructura basica de llamada a una app de java
-    java -Xmx8G -jar /ruta/completa/archivo.jar
+    java -Xmx4G -jar /ruta/completa/archivo.jar
     ```
 
     Debemos crear un directorio temporal en donde `Picard` almacenará
@@ -441,49 +443,94 @@ tiempo de ejecución.
     Crea un directorio llamado `DIR_TEMP`.
 
     El nombre de la herramienta (`MarkDuplicates`) debe ir
-    inmediantamente después de `picard.jar`. A continuación
-    especificamos los argumentos de `MarkDuplicates` que debemos
-    utilizar. Son: `REMOVE_DUPLICATES=true`, `ASSUME_SORTED=true`,
+    inmediatamente después de `picard.jar`. A continuación especificamos
+    los argumentos de `MarkDuplicates` que debemos utilizar. Son:
+    `REMOVE_DUPLICATES=true`, `ASSUME_SORTED=true`,
     `VALIDATION_STRINGENCY=SILENT`,
     `MAX_FILE_HANDLES_FOR_READ_ENDS_MAP=1000`,
     `INPUT=alineamiento.sort.bam`, `OUTPUT=alineamiento.sort.rmd.bam`,
     `METRICS_FILE=alineamiento.sort.rmd.metrics`, y el directorio
-    temporal `TMP_DIR=DIR_TEMP`.
+    temporal `TMP_DIR=DIR_TEMP`. Te recomendamos capturar los nombres
+    del alineamiento ordenado original (`alineamiento.sort.bam`), el
+    nombre del alineamiento sin duplicados (`alineamiento.sort.rmd.bam`)
+    y el nombre archivo de métricas (`alineamiento.sort.rmd.metrics`),
+    usando los argumentos posicionales de un script de bash. Por
+    ejemplo, la correspondencia puede ser la siguiente: Primer argumento
+    (`$1`) `alineamiento.sort.bam`. Segundo argumento (`$2`)
+    `alineamiento.sort.rmd.bam`. Tercer argumento (`$3`)
+    `alineamiento.sort.rmd.metrics`. Recuerda que en estos nombres debes
+    sustituir `alineamiento` por los datos relevantes de la muestra que
+    estás trabajando. Recuerda también que los argumentos posicionales
+    puedes asignarlos a variables usando el operador `=` así:
+
+    ``` shell
+    bam_original=$1
+    nombre_salida=$2
+    nombre_metricas=$3
+    ```
+
+    Y luego puedes usar estas variables con el operador `$` en tu
+    script: `$bam_original`, `$nombre_salida` y `$nombre_metricas`.
 
 2.  Crea un script de `bash` solicitando los recursos necesarios y
     construye la línea con la que vas a llamar a `Picard`. Recuerda
     cargar el módulo de `java`. Carga también el módulo de `samtools`,
-    pues lo vamos a necesitar para el último paso.
+    pues lo vamos a necesitar para el último paso. Usa también las
+    opciones `--mail-type` y `--mail-user` para recibir notificaciones
+    sobre el progreso del análisis.
 
-3.  Debemos indexar todos los alineamientos a los que les removamos sus
-    duplicados. Finaliza tu script con una llamada a `samtools` para
-    indexar el nuevo alineamiento creado.
+3.  Debemos indexar nuestro alineamiento después de remover sus
+    duplicados de PCR. Finaliza tu script con una llamada a `samtools`
+    para indexar el nuevo alineamiento creado.
 
     **Atención!:** Antes de enviar el trabajo a la cola muéstrale tu
     script al personal docente para verificar que se ve bien :)
 
-<details>
-<summary> Trata de construir el script por tu cuenta. Si no puedes avanzar en tu solución puedes ver el código aquí. </summary>
+    <details>
+    <summary> Trata de construir el script por tu cuenta. Si no puedes avanzar en tu solución puedes ver el código aquí. </summary>
 
-``` shell
-#!/bin/bash
-#SBATCH -p normal
-#SBATCH -n 2
-#SBATCH --mem=8000
-#SBATCH --time=0-12:00
+    ``` shell
+    #!/bin/bash
+    #SBATCH -p normal
+    #SBATCH -n 2
+    #SBATCH --mem=4000
+    #SBATCH --time=0-12:00
+    #SBATCH --mail-type=BEGIN,END,FAIL
+    #SBATCH --mail-user=mi.usuario@urosario.edu.co
 
-baminfo=$1
+    baminfo=$1
+    salida=$2
+    metricas=$3
 
-module load java8
-module load samtools
+    module load java8
+    module load samtools
 
-java -Xmx8G -jar /opt/ohpc/pub/apps/picard-tools/2.18.15/picard.jar \
-     MarkDuplicates REMOVE_DUPLICATES=true ASSUME_SORTED=true \
-     VALIDATION_STRINGENCY=SILENT MAX_FILE_HANDLES_FOR_READ_ENDS_MAP=1000 \
-     INPUT=$baminfo OUTPUT=${baminfo%sort.bam}sort.rmd.bam \
-     METRICS_FILE=${baminfo%sort.bam}sort.rmd.metrics TMP_DIR=../TMP_DIR
+    java -Xmx4G -jar /opt/ohpc/pub/apps/picard-tools/2.18.15/picard.jar \
+         MarkDuplicates REMOVE_DUPLICATES=true ASSUME_SORTED=true \
+         VALIDATION_STRINGENCY=SILENT MAX_FILE_HANDLES_FOR_READ_ENDS_MAP=1000 \
+         INPUT=$baminfo OUTPUT=$salida \
+         METRICS_FILE=$metricas TMP_DIR=../TMP_DIR
 
-samtools index ${baminfo%sort.bam}sort.rmd.bam
-```
+    samtools index $salida
+    ```
 
-</details>
+    </details>
+
+4.  Envía tu trabajo a la cola usando `sbatch`. Ten en cuenta los
+    argumentos posicionales que requiere el script. Muéstrale la línea
+    de comando a un miembro del personal docente antes de enviar el
+    trabajo a la cola.
+
+    <details>
+    <summary> Trata de escribir la línea de comando por tu cuenta. Si no puedes avanzar en tu solución puedes ver el código aquí. </summary>
+
+    Si tu script se llama `quita_duplicados.sh` puedes llamarlo usando
+    los tres argumentos posicionales de esta forma. Asegúrate de
+    reemplazar los argumentos con las rutas correctas a tus archivos.
+
+    ``` shell
+    sbatch quita_duplicados.sh /ruta/alineamiento.ordenado.bam \
+           /ruta/alineamiento.salida /ruta/alineamiento.metricas
+    ```
+
+    </details>
