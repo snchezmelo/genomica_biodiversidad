@@ -230,6 +230,7 @@ Sigue estos pasos para descargarlo:
     (`.gz`). Recuerda cargar el módulo `bwa` en centauro antes de crear
     el índice. Este paso no tarda mucho tiempo ( 5min) y requiere pocos
     recursos; puedes realizarlo en una sesión interactiva.
+
 2.  Luego de indexar es necesario crear un archivo de texto con la
     información que usaremos para mapear nuestras lecturas al genoma de
     referencia. Usa `nano` para crear un nuevo archivo de texto.  
@@ -241,6 +242,13 @@ Sigue estos pasos para descargarlo:
     comprimido).  
     Columna 4: El identificador de la muestra  
     Columna 5: El identificador de la referencia  
+    **Importante:** Este archivo es creado con esta estructura para
+    poder tener un registro organizado de las muestras que queremos
+    procesar. **Cada estudiante hará el mapeo de solo una de las
+    muestras.**
+
+3.  Escoge **una** de las muestras para hacer el mapeo, ten a mano la
+    línea de este archivo correspondiente a la muestra.
 
 ## Alineamiento de las lecturas
 
@@ -255,7 +263,7 @@ tiempo de ejecución.
 2.  No olvides añadir el
     [shebang](https://en.wikipedia.org/wiki/Shebang_(Unix)) en la
     primera línea. En las siguientes líneas escribe directivas para
-    pedir al sistema 4 procesadores, 16GB de RAM y 12 horas de tiempo
+    pedir al sistema 2 procesadores, 4GB de RAM y 12 horas de tiempo
     límite de ejecución. Escribe también directivas para que el sistema
     te envíe notificaciones al correo cuando el proceso inicie, termine
     o encuentre errores.
@@ -287,10 +295,11 @@ tiempo de ejecución.
 5.  Escribamos el comando de `bwa`. Utilizaremos la función `mem` para
     hacer el alineamiento de nuestras lecturas pareadas. Inmediatamente
     después de escribir la función que usaremos, especificamos el número
-    de procesadores que `bwa` usará para alinear, usando la opción `-t`.
-    Vamos a usar 4 procesadores para el alineamiento. Usamos la opción
-    `-M` para marcar los alineamientos más cortos como secundarios (para
-    que los alineamientos sean compatibles con `picard`).
+    de procesadores que `bwa` usará para alinear con la opción
+    `-t <procesadores>`. Vamos a usar 2 procesadores para el
+    alineamiento. Usamos la opción `-M` para marcar los alineamientos
+    más cortos como secundarios (para que los alineamientos sean
+    compatibles con `picard`).
 
     Tal vez la parte más importante de este paso es establecer el **read
     group**. En este caso podemos asumir que cada muestra fue
@@ -298,10 +307,9 @@ tiempo de ejecución.
     solo **read group** por muestra. Si tuviéramos más de un **read
     group** por muestra sería recomendable hacer dos alineamientos y
     luego unirlos usando otras herramientas. Para establecer el read
-    group usamos la opción `-R` seguida de la siguiente cadena de
-    caracteres usando comillas dobles y evaluandola usando `echo`. Si el
-    identificador de la muestra está en una variable llamada
-    `id_muestra`, esta parte de la llamada se vería así: `$(echo
+    group usamos la opción `-R`. Si el identificador de la muestra está
+    en una variable llamada `id_muestra`, esta parte de la llamada se
+    vería así: `-R $(echo
              "@RG\tID:$id_muestra\tSM:$id_muestra\tPL:Illumina")`. Si
     revisamos esta expresión en detalle consta de tres campos separados
     por tabulación (`\t`). El primero, (`ID`), corresponde al
@@ -310,15 +318,16 @@ tiempo de ejecución.
     segundo (`SM`) corresponde al identificador de la muestra. El
     tercero (`PL`) corresponde a la plataforma usada para secuenciar. En
     el caso de los datos de *Heliconius* la plataforma utilizada para
-    todas las muestras fue Illuimina. En cada caso debes cambiar
-    `id_muestra` por el identificador asociado a cada muestra. Establece
-    el read group correctamente usando la opción `-R` y los detales
-    correspondientes a cada muestra. Todas las muestras de *Heliconius*
-    que usaremos fueron secuenciadas usando la plataforma `Illumina`.
+    todas las muestras fue Illuimina. Debes cambiar `id_muestra` por el
+    identificador asociado con la muestra que vas a mapear. Establece el
+    read group correctamente usando la opción `-R` y los detales
+    correspondientes a la muestra escogida. Como lo dijimos antes, todas
+    las muestras de *Heliconius* que usaremos fueron secuenciadas usando
+    la plataforma `Illumina`.
 
     Los tres argumentos siguientes son la ruta de la referencia y la
     ruta de los archivos de lectura (R1 y luego R2). Asegúrate de
-    especificar rutas absolutas para los tres archivos.
+    especificar la variable correcta para cada uno de estos archivos.
 
     La ruta utilizada por `bwa mem` para escribir el alineamiento es la
     **salida estándar**; esto significa que debemos re-dirigir los
@@ -330,13 +339,14 @@ tiempo de ejecución.
     disco (más compacto). Usando el operador `pipe` re-dirigimos la
     salida hacia la herramienta `samtools`. Como necesitamos ordenar el
     alineamiento entonces la función de `samtools` que utilizaremos será
-    `sort`. Especificamos que queremos usar 4 procesadores con la opción
-    `-@` y usando la opción `-o` le damos el nombre al archivo de
-    salida; como es un alineamiento ya ordenado vamos a finalizar el
-    nombre del archivo con el sufijo `.sort.bam`. La última pieza de
-    información que debemos darle a `samtools sort` es un `-` (guión):
-    Esto le indica a `samtools` que la información debe ser leída usando
-    la **entrada estándar** y no un archivo.
+    `sort`. Especificamos que queremos usar 2 procesadores con la opción
+    `-@ <procesadores>` y usando la opción `-o` le damos el nombre al
+    archivo de salida; como es un alineamiento ya ordenado vamos a
+    finalizar el nombre del archivo con el sufijo `.sort.bam`. La última
+    pieza de información que debemos darle a `samtools
+             sort` es un `-` (guión): Esto le indica a `samtools` que la
+    información debe ser leída usando la **entrada estándar** y no un
+    archivo.
 
 6.  Finalmente debemos indexar el alineamiento resultante con `samtools
              index`. La sintáxis es la siguiente:
@@ -351,32 +361,55 @@ tiempo de ejecución.
 7.  **Atención!:** Muéstrale tu script al personal docente para
     verificar que luce bien antes de enviarlo a la cola de trabajo.
 
-<details>
-<summary> Trata de construir el script por tu cuenta. Si no puedes avanzar en tu solución puedes ver el código aquí. </summary>
+    <details>
+    <summary> Trata de construir el script por tu cuenta. Si no puedes avanzar en tu solución puedes ver el código aquí. </summary>
 
-``` shell
-#!/bin/bash
-#SBATCH -p normal
-#SBATCH -n 2
-#SBATCH --mem=8000
-#SBATCH --time=0-12:00
+    ``` shell
+    #!/bin/bash
+    #SBATCH -p normal
+    #SBATCH -n 2
+    #SBATCH --mem=4000
+    #SBATCH --time=0-12:00
+    #SBATCH --mail-type=BEGIN,END,FAIL
+    #SBATCH --mail-user=mi.usuario@urosario.edu.co
 
-read_1=$1
-read_2=$2
-ref=$3
-rg_info=$4
-ref_info=$5
+    read_1=$1
+    read_2=$2
+    ref=$3
+    rg_info=$4
+    ref_info=$5
 
-module load bwa
-module load samtools
+    module load bwa
+    module load samtools
 
-bwa mem -t 4 -M -R $(echo "@RG\tID:$rg_info\tSM:$rg_info\tPL:Illumina") \
-    $ref $read_1 $read_2 | samtools sort -@ 4 -o $rg_info.$ref_info.SHORT.sort.bam -
+    bwa mem -t 4 -M -R $(echo "@RG\tID:$rg_info\tSM:$rg_info\tPL:Illumina") \
+        $ref $read_1 $read_2 | samtools sort -@ 4 -o $rg_info.$ref_info.SHORT.sort.bam -
 
-samtools index $rg_info.$ref_info.SHORT.sort.bam
-```
+    samtools index $rg_info.$ref_info.SHORT.sort.bam
+    ```
 
-</details>
+    </details>
+
+8.  Escribe la línea de comando que envía este script junto con la
+    información de las lecturas a la cola de trabajo. **Atención!:**
+    Muéstrale tu línea al personal docente antes de enviarla a la cola.
+
+    <details>
+    <summary> Trata escribir la línea de comando por tu cuenta. Si no puedes avanzar en tu solución puedes ver el código aquí. </summary>
+
+    Si tu script se llama `mapeo_bwa.sh` lo envías a la cola con
+    `sbatch` de esta forma.
+
+    ``` shell
+    ### Esta es la línea para enviar el trabajo a la cola
+    sbatch mapeo_bwa.sh /ruta/lectura.R1.fastq.gz /ruta/lectura.R2.fastq.gz \
+           /ruta/referencia.fasta id_muestra hmel2.5
+    ```
+
+    Reemplaza adecuadamente las rutas a las lecturas, a la referencia y
+    reemplaza también a `id_muestra` por el identificador de la muestra.
+
+    </details>
 
 ## Quitando duplicados de PCR
 
