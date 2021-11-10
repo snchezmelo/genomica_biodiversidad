@@ -1,5 +1,5 @@
 <!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-refresh-toc -->
-# Índice
+#  Índice
 
 - [Estructura poblacional en *Heliconius*](#estructura-poblacional-en-heliconius)
     - [Infiriendo estructura poblacional usando PCA](#infiriendo-estructura-poblacional-usando-pca)
@@ -18,7 +18,6 @@
 
 <!-- markdown-toc end -->
 
-
 # Estructura poblacional en *Heliconius*
 
 Nuestras 18 muestras de *Heliconius* corresponden a individuos de dos
@@ -32,7 +31,9 @@ individuos de las razas *florencia* (Colombia) y *thelxinoe* (Perú) de
 la especie *H. timareta*. Fíjate bien en las relaciones entre grupos
 mostradas en la filogenia y en el fenotipo de cada uno de estos grupos.
 
-![](./Imagenes/muestras_heliconius.png)
+| ![](./Imagenes/muestras_heliconius.png)                                                   |
+|-------------------------------------------------------------------------------------------|
+| Imagen tomada de [Dasmahapatra et al., 2012](https://www.nature.com/articles/nature11041) |
 
 Esperaríamos, naturalmente, que las relaciones de ancestría sean más
 cercanas entre las dos razas de *H. timareta* que cualquiera de ellas
