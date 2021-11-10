@@ -68,7 +68,7 @@ la imagen para instalarlo, es sencillo.
 
 ![](./Imagenes/instrucciones_markdown_pdf.png)
 
-Después de instalado exporta tu arcchivo de Markdown a PDF. En el menú
+Después de instalado exporta tu archivo de Markdown a PDF. En el menú
 superior haz click en `Packages` \> Markdown to PDF \> Convert, como lo
 muestra la imagen.
 
