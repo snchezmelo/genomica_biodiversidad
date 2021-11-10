@@ -21,6 +21,9 @@
 
 # Estructura poblacional en *Heliconius*
 
+**Todas las tareas de este tutorial tienen requerimientos bajos de
+tiempo y recursos, vamos a ejecutarlas de forma interactiva**
+
 Nuestras 18 muestras de *Heliconius* corresponden a individuos de dos
 grupos taxonómicos cercanamente emparentados. Las silvaniformes, que
 tienen patrones amarillos/naranja y negros predominantemente (parte
@@ -43,6 +46,9 @@ tengan una relación más cercana que cualquiera de ellas con las
 silvaniformes.
 
 ## Infiriendo estructura poblacional usando PCA
+
+Requerimientos computacionales: 1 procesador, 1GB de memoria, \~5
+minutos corriendo el PCA.
 
 El análisis de componentes principales tiene un amplio repertorio de
 aplicaciones, la genética es uno de ellos. Este método es uno de los más
@@ -257,9 +263,10 @@ Vamos a construir nuestro PCA por pasos.
 
 ## ¿Podemos observar diferentes patrones usando las mismas muestras?
 
-Comparación región optix con una representación más global del genoma.
 Ciertas regiones del genoma pueden mostrar procesos evolutivos
-interesantes.
+interesantes. Vamos a comparar la región del gen *optix* con una
+representación más amplia del genoma y estudiar las posibles
+diferencias.
 
 Usa `vcftools` para extraer la región `Hmel218003o:720000-800000`, que
 rodea al gen *optix*. Esta región podemos extraerla de cualquiera de los
@@ -307,6 +314,9 @@ Preguntas:
 
 # Análisis poblacionales por sitios y ventanas
 
+**Todas las tareas de este tutorial tienen requerimientos bajos de
+tiempo y recursos, vamos a ejecutarlas de forma interactiva**
+
 Vamos a usar el archivo `vcf` que filtramos para examinar la diversidad
 genómica en nuestras muestras. Recuerda que cada fila del ar chivo `vcf`
 describe una posición en el genoma de varias muestras y las columnas
@@ -321,6 +331,9 @@ permiten comparar qué tanta variedad hay en nuestras muestras y en qué
 lugares del genoma posiblemente están pasando cosas interesantes.
 
 ## Diversidad nucleotídica π
+
+Requerimientos computacionales: 1 procesador, 50 MB de memoria RAM, \~5
+minutos de tiempo de ejecución.
 
 La [diversidad
 nucleotídica](https://en.wikipedia.org/wiki/Nucleotide_diversity), a
@@ -491,7 +504,8 @@ poblaciones:
 
 ## Calculando índice de fijación F<sub>ST</sub> por sitio
 
-Requerimientos computacionales: TBD
+Requerimientos computacionales: 1 procesador, 50 MB de memoria RAM, \~10
+minutos de tiempo de ejecución.
 
 1.  **Preparando los datos**
 
@@ -664,7 +678,8 @@ Requerimientos computacionales: TBD
 
 ## Calculando índice de fijación F<sub>ST</sub> por ventana
 
-Requerimientos computacionales: TBD
+Requerimientos computacionales: 1 procesador, 50 MB de memoria RAM, \~5
+minutos de tiempo de ejecución.
 
 1.  **Preparando los datos**
 
@@ -842,6 +857,9 @@ Requerimientos computacionales: TBD
 
 # Introgresión
 
+**Todas las tareas de este tutorial tienen requerimientos bajos de
+tiempo y recursos, vamos a ejecutarlas de forma interactiva**
+
 ## Motivación
 
 Recientemente en biología evolutiva la idea de que las poblaciones y las
@@ -929,7 +947,7 @@ esta evidencia de flujo genético entre especies.
 
 ## Análisis por ventanas
 
-Recursos computacionales: Un procesador, 50 MB RAM, 2 minutos de tiempo
+Recursos computacionales: 1 procesador, 50 MB RAM, 2 minutos de tiempo
 de corrido (`Dsuite`).
 
 1.  **Preparando los datos:**
