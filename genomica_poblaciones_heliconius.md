@@ -1,5 +1,5 @@
 <!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-refresh-toc -->
-#  Índice
+# Índice
 
 - [Estructura poblacional en *Heliconius*](#estructura-poblacional-en-heliconius)
     - [Infiriendo estructura poblacional usando PCA](#infiriendo-estructura-poblacional-usando-pca)
@@ -17,6 +17,7 @@
     - [Análisis por ventanas](#análisis-por-ventanas)
 
 <!-- markdown-toc end -->
+
 
 # Estructura poblacional en *Heliconius*
 
