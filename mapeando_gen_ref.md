@@ -15,6 +15,7 @@
 
 <!-- markdown-toc end -->
 
+
 # Mapeo: Calidad de los datos de lectura
 
 ## Estructura de los datos: El formato `fastq`
@@ -178,7 +179,11 @@ timareta*. Específicamente tenemos individuos de la raza *malleti*
 (Colombia, especie *H. melpomene*) e individuos de las razas *florencia*
 (Colombia) y *thelxinoe* (Perú) de la especie *H. timareta*. Estas
 muestras fueron secuenciadas usando secuenciación de genoma completo de
-alta profundidad en plataforma Illumina.
+alta profundidad en plataforma Illumina. Desde hace varios años existe
+un genoma de referencia al que podemos alinear estos datos de
+secuenciación para hacer análisis genéticos posteriores en nuestras
+muestras. Vamos a descargar la última versión del genoma de referencia
+de *H. melpomene*.
 
 | ![](./Imagenes/muestras_heliconius.png)                                                   |
 |-------------------------------------------------------------------------------------------|
