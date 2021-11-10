@@ -1,9 +1,9 @@
 ---
 ---
 
-# <span class="todo TODO">TODO</span> Estructura poblacional en *Heliconius*
+# Estructura poblacional en *Heliconius*
 
-## <span class="todo TODO">TODO</span> Infiriendo estructura poblacional usando PCA
+## Infiriendo estructura poblacional usando PCA
 
 El análisis de componentes principales tiene un amplio repertorio de
 aplicaciones, la genética es uno de ellos. Este método es uno de los más
@@ -311,8 +311,8 @@ genoma tengan más diversidad nucleotídica que otras en una población?
     <summary> Trata de construir la línea de comando por tu cuenta. Si no puedes avanzar mira el código aquí </summary>
 
     ``` shell
-    vcftools --gzvcf heliconius.optixscaf.SNPS.NV.FL2.vcf.gz \
-             --window-pi 2000 --out diversidad_nucl_2K
+    vcftools --gzvcf archivo.vcf.gz \
+             --window-pi <tam. ventana> --out prefijo.salida
     ```
 
     </details>
@@ -437,9 +437,10 @@ datos y compáralos con los estimados anteriores.
 **Si te sobra tiempo...**
 
 Explora los patrones de diversidad nucleotídica en el set de datos
-extendido. ¿Puedes graficar la diversidad nucleotídica promedio por
-scaffold como un boxplot? ¿Hay algún scaffold que tenga diversidad
-nucleotídica promedio distinta a la del resto de los scaffolds?
+extendido (archivo `heliconius.GT.NOINDEL.FILTER.vcf.gz`). ¿Puedes
+graficar la diversidad nucleotídica promedio por scaffold como un
+boxplot? ¿Hay algún scaffold que tenga diversidad nucleotídica promedio
+distinta a la del resto de los scaffolds?
 
 ## <span class="todo TODO">TODO</span> D de Tajima
 
@@ -447,17 +448,21 @@ Podemos calcular estadísticos que nos permiten analizar si ciertas
 regiones del genoma en nuestras poblaciones están evolucionando
 neutralmente ó si están experimentando una posible presión de selección.
 Una de las medidas que podemos usar para esto es el D de Tajima. El D de
-Tajima puede cambiar con cambios en el tamaño poblacional o cuando hay
-procesos de selección.
+Tajima es un estadístico que muestra variaciones cuando hay cambios en
+el tamaño poblacional o cuando hay procesos de selección.
 
 Nuevamente, podemos usar `vcftools` para calcular el D de Tajima. Como
 en el caso de π, podemos calcular D de Tajima por ventana a lo largo de
 una región del genoma (scaffold ó cromosoma) o del genoma completo. Para
 esto usamos la opción `--TajimaD <tam. ventana>` donde `<tam. ventana>`
 es un número entero que determina el tamaño de la ventana que usaremos
-para el análisis.
+para el análisis. Usamos también la opción `--out <prefijo>` para
+especificar un prefijo para nuestros archivos de salida. Esta línea de
+comando debería ser relativamente sencilla.
 
 ``` shell
+vcftools --gzvcf archivo.vcf.gz \
+         --TajimaD <tamaño ventana> --out prefijo
 ```
 
 Analiza los datos
