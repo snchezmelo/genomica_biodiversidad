@@ -27,7 +27,7 @@ tienen patrones amarillos/naranja y negros predominantemente (parte
 superior de la imagen) y dos especies del clado conocido como *cydno -
 melpomene*. Específicamente de este último clado tenemos individuos de
 la raza *malleti* (Colombia, especie *H. melpomene*) e individuos de las
-razas *florencia* (Colombia) y *thelxinoe* (Perú) de la especie *H,
+razas *florencia* (Colombia) y *thelxinoe* (Perú) de la especie *H.
 timareta*. Fíjate bien en las relaciones entre grupos mostradas en la
 filogenia y en el fenotipo de cada uno de estos grupos.
 
