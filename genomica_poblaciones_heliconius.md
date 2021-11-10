@@ -21,6 +21,24 @@
 
 # Estructura poblacional en *Heliconius*
 
+Nuestras 18 muestras de *Heliconius* corresponden a individuos de dos
+grupos taxonómicos cercanamente emparentados. Las silvaniformes, que
+tienen patrones amarillos/naranja y negros predominantemente (parte
+superior de la imagen) y dos especies del clado conocido como *cydno -
+melpomene*. Específicamente de este último clado tenemos individuos de
+la raza *malleti* (Colombia, especie *H. melpomene*) e individuos de las
+razas *florencia* (Colombia) y *thelxinoe* (Perú) de la especie *H,
+timareta*. Fíjate bien en las relaciones entre grupos mostradas en la
+filogenia y en el fenotipo de cada uno de estos grupos.
+
+![](./Imagenes/muestras_heliconius.png)
+
+Esperaríamos, naturalmente, que las relaciones de ancestría sean más
+cercanas entre las dos razas de *H. timareta* que cualquiera de ellas
+con otro grupo, y además esperaríamos que *H. timareta* y *H. melpomene*
+tengan una relación más cercana que cualquiera de ellas con las
+silvaniformes.
+
 ## Infiriendo estructura poblacional usando PCA
 
 El análisis de componentes principales tiene un amplio repertorio de
@@ -41,10 +59,11 @@ observada entonces el resto de los componentes sumados explica el 42% de
 la variación restante.
 
 Usaremos el archivo de genotipos extendido
-`heliconius.GT.NOINDEL.FILTER.vcf.gz` disponible en la ruta \<XXX> en
-Centauro, **no usaremos el archivo que filtramos en este análisis pero
-sí en los siguientes**. Este archivo tiene 5 cromosomas de nuestros 18
-individuos de *Heliconius*. Es una aproximación más realista, pero
+`heliconius.GT.NOINDEL.FILTER.vcf.gz` disponible en la ruta
+`/home/juan.enciso/shared/GenomicaBiodiversidad_2021/dato_mapping/pca_five_chroms`
+en Centauro, **no usaremos el archivo que filtramos en este análisis
+pero sí en los siguientes**. Este archivo tiene 5 cromosomas de nuestros
+18 individuos de *Heliconius*. Es una aproximación más realista, pero
 todavía limitada, al conjunto completo de datos del genoma si lo
 comparamos con los datos que hemos venido trabajando.
 
