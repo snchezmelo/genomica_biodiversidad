@@ -415,25 +415,8 @@ genoma tengan más diversidad nucleotídica que otras en una población?
 
     ![](./Imagenes/histog_nsites_pi2k.png)
 
-    El estimado de π es robusto en la mayoría de los casos pero puede
-    ser engañoso cuando hay un solo sitio variante en la ventana.
-    Podemos aplicar un criterio un poco más estricto y filtrar las
-    ventanas que tengan pocas variantes, no solo una. Según nuestro
-    histograma hay un buen número de ventanas con más de 25 variantes.
-    Para no aplicar un filtro tan estricto y tener un buen balance entre
-    cantidad de información y datos confiables filtremos las ventanas
-    con menos de 10 variantes.
-
-    <details>
-    <summary> Trata de filtrar los datos por tu cuenta. Si no puedes avanzar mira el código aquí </summary>
-
-    ``` r
-    datos.pi.2k.filtrados <- datos.pi.2k %>% filter(N_VARIANTS > 10)
-    ```
-
-    </details>
-
-    Grafica los datos filtrados usando `ggplot` y una gráfica de línea.
+    Grafica los de posición a lo largo de `Hmel218003o` vs. diversidad
+    nucleotídica usando `ggplot` y una gráfica de línea.
 
     <details>
     <summary> Trata de graficar los resultados por tu cuenta. Si no puedes avanzar mira el código aquí </summary>
