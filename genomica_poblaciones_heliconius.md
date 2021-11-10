@@ -3,15 +3,32 @@
 
 # <span class="todo TODO">TODO</span> Estructura poblacional en *Heliconius*
 
-## <span class="todo TODO">TODO</span> Infiriendo estructura poblacional
-
 ## <span class="todo TODO">TODO</span> Infiriendo estructura poblacional usando PCA
 
+El análisis de componentes principales tiene un amplio repertorio de
+aplicaciones, la genética es uno de ellos. Este método es uno de los más
+comúnmente utilizados para identificar patrones de estructura
+poblacional en un grupo de muestras. Este método es frecuentemente
+utilizado porque no usa modelos de ningún tipo, es relativamente fácil
+de utilizar y tiene una interpretación sencilla.
+
+Este análisis nos permite calcular los componentes (PCs) que explican
+las diferencias entre individuos usando sus genotipos. El nombre de los
+componentes está basado en el porcentaje de variación que cada uno
+explica; PC1 es el componente que explica el mayor porcentaje de
+variación, PC2 explica el segundo porcentaje más grande y así
+sucesivamente. La suma de la variación explicada por los componentes
+principales es 100. Por ejemplo, si PC1 explica el 58% de la variación
+observada entonces el resto de los componentes sumados explica el 42% de
+la variación restante.
+
 Usaremos el archivo `heliconius.GT.NOINDEL.FILTER.vcf.gz` disponible en
-la ruta \<XXX> en Centauro. Este archivo tiene 5 cromosomas de nuestros
-18 individuos de *Heliconius*. Es una aproximación más realista, pero
-todavía limitada, al conjunto completo de datos del genoma si lo
-comparamos con los datos que hemos venido trabajando.
+la ruta \<XXX> en Centauro, **no usaremos el archivo que filtramos en
+este análisis pero sí en los siguientes**. Este archivo tiene 5
+cromosomas de nuestros 18 individuos de *Heliconius*. Es una
+aproximación más realista, pero todavía limitada, al conjunto completo
+de datos del genoma si lo comparamos con los datos que hemos venido
+trabajando.
 
 La herramienta que usaremos para explorar la estructura poblacional
 usando el análisis de componentes principales es `plink 1.9`, como
@@ -58,11 +75,16 @@ Vamos a construir nuestro PCA por pasos.
     -   `--out <prefijo>` nos permite determinar el prefijo de los
         archivos de salida.
 
-        ``` shell
-        plink --vcf archivo.vcf.gz --double-id \
-              --allow-extra-chr --indep-pairwise ventana paso umbral \
-              --out prefijo.salida
-        ```
+    <details>
+    <summary> Trata de construir la línea de comando por tu cuenta. Si no puedes avanzar mira el código aquí </summary>
+
+    ``` shell
+    plink --vcf archivo.vcf.gz --double-id \
+          --allow-extra-chr --indep-pairwise ventana paso umbral \
+          --out prefijo.salida
+    ```
+
+    </details>
 
     Al finalizar debemos tener dos archivos: Uno con una lista de sitios
     en desequilibrio de ligamiento (extensión `.prune.out`) y otro con
@@ -89,11 +111,16 @@ Vamos a construir nuestro PCA por pasos.
 
     -   `--out <prefijo.salida>`
 
-        ``` shell
-        plink --vcf archivo.vcf.gz --double-id \
-              --allow-extra-chr --extract archivo.prune.in \
-              --pca --out prefijo.salida
-        ```
+    <details>
+    <summary> Trata de construir la línea de comando por tu cuenta. Si no puedes avanzar mira el código aquí </summary>
+
+    ``` shell
+    plink --vcf archivo.vcf.gz --double-id \
+          --allow-extra-chr --extract archivo.prune.in \
+          --pca --out prefijo.salida
+    ```
+
+    </details>
 
     `plink` produce dos archivos de resultados al ejecutar el PCA: uno
     que contiene las proyecciones sobre cada eje para cada individuo
