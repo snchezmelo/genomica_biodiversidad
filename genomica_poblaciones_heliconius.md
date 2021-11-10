@@ -25,20 +25,38 @@ Vamos a construir nuestro PCA por pasos.
     solución a esto es eliminar una fracción de sitios que estén en
     desequilibrio de ligamiento, es decir, sitios cuyos alelos muestren
     una frecuencia muy alta de asociación estadística. Usamos las
-    siguientes opciones en `plink` para tener una dos listas: Una de
-    sitios en desequilibrio de ligamiento (extensión `.prune.out`) y
-    otra de sitios que son independientes entre sí (extensión
-    `.prune.in`).
+    siguientes opciones en `plink` para ejecutar este paso.
 
-    -   `--vcf <archivo.vcf.gz>`
+    -   `--vcf <archivo.vcf.gz>` aquí especificamos el archivo de
+        genotipos que usaremos.
 
-    -   `--double-id`
+    -   `--double-id` esta opción le indica a `plink` que no tenemos
+        información de la familia de cada individuo y que su
+        identificador debería usarse como información de familia
+        (`plink` espera tener una columna con información de la familia
+        de cada individuo).
 
-    -   `--allow-extra-chr`
+    -   `--allow-extra-chr` `plink` originalmente fue escrito para
+        trabajar con datos de humanos y espera que la nomenclatura de
+        los cromosomas corresponda con esto (1-22 autosomas y un
+        cromosoma sexual X). Activar esta opción flexibiliza la
+        nomenclatura que puede utilizarse.
 
-    -   `--indep-pairwise <tamaño ventana> <paso> <umbral r2> 50 10 0.1`
+    -   `--indep-pairwise <tamaño ventana> <paso> <umbral r2>` esta
+        opción es la que activa la tarea de marcar los sitios en
+        desequilibrio de ligamiento y los sitios independientes. Recibe
+        tres parámetros: el tamaño de la ventana en pares de bases, la
+        longitud del paso con el que nos movemos a lo largo de los datos
+        también en pares de bases, y el umbral de ligamiento que vamos a
+        tolerar entre variables independientes. El desequilibrio de
+        ligamiento entre variantes puede medirse con un coeficiente de
+        determinación (r<sup>2</sup>). Aquí vamos a marcar como
+        no-independientes a los sitios que tengan un r<sup>2</sup> mayor
+        a 0.1. Para el tamaño de ventana y el paso usaremos 50 pb y 10
+        pb respectivamente.
 
-    -   `--out <prefijo>`
+    -   `--out <prefijo>` nos permite determinar el prefijo de los
+        archivos de salida.
 
         ``` shell
         plink --vcf archivo.vcf.gz --double-id \
@@ -46,9 +64,12 @@ Vamos a construir nuestro PCA por pasos.
               --out prefijo.salida
         ```
 
-    Examina ambos archivos de salida, ¿Qué información observas en
-    ellos? ¿Cuántos sitios están registrados en cada uno de los
-    archivos?
+    Al finalizar debemos tener dos archivos: Uno con una lista de sitios
+    en desequilibrio de ligamiento (extensión `.prune.out`) y otro con
+    una lista de sitios que son independientes entre sí (extensión
+    `.prune.in`). Examina ambos archivos de salida, ¿Qué información
+    observas en ellos? ¿Cuántos sitios están registrados en cada uno de
+    los archivos?
 
 2.  **Análisis de componentes principales:** Ahora ejecutamos el
     análisis de componentes principales usando solo los sitios
@@ -61,9 +82,10 @@ Vamos a construir nuestro PCA por pasos.
     -   `--allow-extra-chr`
 
     -   `--extract <archivo.prune.in>` recibe la lista de sitios
-        independientes.
+        independientes que generamos en el paso anterior.
 
-    -   `--pca`
+    -   `--pca` hace que `plink` corra un análisis de componentes
+        principales con los datos especificados.
 
     -   `--out <prefijo.salida>`
 
@@ -154,17 +176,17 @@ Vamos a construir nuestro PCA por pasos.
 
     Preguntas:
 
-    -   ¿Qué grupos de individuos se encuentran más cerca entre sí?
+    -   [ ] ¿Qué grupos de individuos se encuentran más cerca entre sí?
         Describe los patrones que observas.
 
-    -   ¿Qué grupo se encuentra más alejado del resto? ¿En qué basas tu
-        afirmación?
+    -   [ ] ¿Qué grupo se encuentra más alejado del resto? ¿En qué basas
+        tu afirmación?
 
-    -   Observando la segunda gráfica ¿cuánta variación explica el
+    -   [ ] Observando la segunda gráfica ¿cuánta variación explica el
         quinto componente principal?
 
-    -   ¿Qué modificaciones tendríamos que hacer en el código de R para
-        pintar la relación entre PC2 y PC3?
+    -   [ ] ¿Qué modificaciones tendríamos que hacer en el código de R
+        para pintar la relación entre PC2 y PC3?
 
 ## ¿Podemos observar diferentes patrones usando las mismas muestras?
 
@@ -210,18 +232,18 @@ de copiarlas y pegarlas en R**. Debes ver los siguientes resultados.
 
 Preguntas:
 
--   ¿Qué grupos de individuos se encuentran más cerca entre sí? Describe
-    los patrones que observas.
--   ¿Ves alguna agrupación atípica en los resultados de la PCA? ¿Cuál
-    es? ¿Por qué es atípica?
--   Propón una hipótesis que explique las observaciones.
+-   [ ] ¿Qué grupos de individuos se encuentran más cerca entre sí?
+    Describe los patrones que observas.
+-   [ ] ¿Ves alguna agrupación atípica en los resultados de la PCA?
+    ¿Cuál es? ¿Por qué es atípica?
+-   [ ] Propón una hipótesis que explique las observaciones.
 
 # <span class="todo TODO">TODO</span> Análisis poblacionales por sitios y ventanas
 
-Vamos a usar nuestro archivo `vcf` para examinar la diversidad genómica
-en nuestras muestras. Recuerda que cada fila del ar chivo `vcf` describe
-una posición en el genoma de varias muestras y las columnas describen
-las llamadas de los alelos de cada individuo.
+Vamos a usar el archivo `vcf` que filtramos para examinar la diversidad
+genómica en nuestras muestras. Recuerda que cada fila del ar chivo `vcf`
+describe una posición en el genoma de varias muestras y las columnas
+describen las llamadas de los alelos de cada individuo.
 
 Analizar la diversidad genética nos permite describir las poblaciones y
 posiblemente la evidencia de algunos procesos de selección que estas
@@ -507,7 +529,7 @@ Requerimientos computacionales: TBD
     -   [ ] ¿Qué estructura tienen los archivos (número de filas y
         columnas, encabezado)?
 
-    -   [ ] ¿Qué inforamción puedes identificar en ellos (contenido de
+    -   [ ] ¿Qué información puedes identificar en ellos (contenido de
         cada columna)?
 
     -   [ ] ¿Cuántos estimados de estructura aparecen?
