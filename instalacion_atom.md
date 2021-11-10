@@ -26,8 +26,8 @@ instalador para tu sistema operativo.
 
 ![](./Imagenes/atom_page.png)
 
-Asegúrate de descargarlo en una ruta concida desde donde lo puedas
-ejecutar.
+Asegúrate de descargarlo en una ruta concida desde donde lo puedas ejecutar e
+instálalo siguiendo los pasos del ejecutable que descargaste.
 
 ## Interfaz de Atom y Markdown
 
