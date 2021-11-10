@@ -1,7 +1,6 @@
 <!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-refresh-toc -->
 # Índice
 
-
 - [Mapeo: Calidad de los datos de lectura](#mapeo-calidad-de-los-datos-de-lectura)
     - [Estructura de los datos: El formato `fastq`](#estructura-de-los-datos-el-formato-fastq)
     - [Puntajes de calidad](#puntajes-de-calidad)
@@ -15,7 +14,6 @@
     - [Quitando duplicados de PCR](#quitando-duplicados-de-pcr)
 
 <!-- markdown-toc end -->
-___
 
 # Mapeo: Calidad de los datos de lectura
 
@@ -169,6 +167,22 @@ experimentos/lecturas y sugerencias sobre cómo procesar los datos para
 mejorar la calidad.
 
 # Mapeo: Genoma de referencia
+
+Para este proces usaremos 18 muestras de mariposos *Heliconius* que
+corresponden a individuos de dos grupos taxonómicos cercanamente
+emparentados. Las silvaniformes, que tienen patrones amarillos/naranja y
+negros predominantemente (parte superior de la imagen) y dos especies
+del clado conocido como *cydno - melpomene*. De este último clado
+tenemos muestras de dos especies: *Heliconius melpomene* y *Heliconius
+timareta*. Específicamente tenemos individuos de la raza *malleti*
+(Colombia, especie *H. melpomene*) e individuos de las razas *florencia*
+(Colombia) y *thelxinoe* (Perú) de la especie *H. timareta*. Estas
+muestras fueron secuenciadas usando secuenciación de genoma completo de
+alta profundidad en plataforma Illumina.
+
+| ![](./Imagenes/muestras_heliconius.png)                                                   |
+|-------------------------------------------------------------------------------------------|
+| Imagen tomada de [Dasmahapatra et al., 2012](https://www.nature.com/articles/nature11041) |
 
 ## Descargando un genoma de referencia
 
