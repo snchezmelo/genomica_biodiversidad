@@ -12,8 +12,8 @@
 - [Introgresión](#introgresión)
     - [Motivación](#motivación)
     - [D de Patterson: Explicación](#d-de-patterson-explicación)
-- [<span class="todo TODO">TODO</span> Introgresión: Estimados por ventana](#span-classtodo-todotodospan-introgresión-estimados-por-ventana)
-    - [<span class="todo TODO">TODO</span> Evolución de la adaptación](#span-classtodo-todotodospan-evolución-de-la-adaptación)
+- [Introgresión: Estimados por ventana](#introgresión-estimados-por-ventana)
+    - [Evolución de la adaptación](#evolución-de-la-adaptación)
     - [Análisis por ventanas](#análisis-por-ventanas)
 
 <!-- markdown-toc end -->
@@ -907,11 +907,20 @@ Patterson se estima como
 
 <img src="https://render.githubusercontent.com/render/math?math=\huge D(P_{1}, P_{2}, P_{3}, O) = \frac{\sum_{i=1}^{n} [(1 - p_{i1})  p_{i2} p_{i3} (1 - p_{i4}) - p_{i1} (1 - p_{i2}) (1 - p_{i3}) p_{i4}]}{\sum_{i=1}^{n} [(1 - p_{i1}) p_{i2} p_{i3} (1 - p_{i4}) %2B p_{i1} (1 - p_{i2}) (1 - p_{i3}) p_{i4}]}">
 
-# <span class="todo TODO">TODO</span> Introgresión: Estimados por ventana
+# Introgresión: Estimados por ventana
 
-## <span class="todo TODO">TODO</span> Evolución de la adaptación
+## Evolución de la adaptación
 
-Vamos
+En nuestros datos, específicamente en el scaffold `Hmel218003o`, hemos
+observado patrones que se desvían un poco de las expectativas dada la
+historia natural de nuestras muestras: al parecer individuos de
+diferentes especies tienen ancestría compartida en una región específica
+del genoma.
+
+Vamos a usar el D de Patterson haciendo estimados en ventanas a lo largo
+de `Hmel218003o` para examinar la evidencia de exceso de flujo genético
+y trataremos de determinar en qué región específicamente puede existir
+esta evidencia de flujo genético entre especies.
 
 ## Análisis por ventanas
 
