@@ -1,5 +1,23 @@
----
----
+<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-refresh-toc -->
+# Índice
+
+- [Estructura poblacional en *Heliconius*](#estructura-poblacional-en-heliconius)
+    - [Infiriendo estructura poblacional usando PCA](#infiriendo-estructura-poblacional-usando-pca)
+    - [¿Podemos observar diferentes patrones usando las mismas muestras?](#podemos-observar-diferentes-patrones-usando-las-mismas-muestras)
+- [Análisis poblacionales por sitios y ventanas](#análisis-poblacionales-por-sitios-y-ventanas)
+    - [Diversidad nucleotídica π](#diversidad-nucleotídica-π)
+    - [Índice de fijación: Motivación y explicación](#índice-de-fijación-motivación-y-explicación)
+    - [Calculando índice de fijación F<sub>ST</sub> por sitio](#calculando-índice-de-fijación-fsubstsub-por-sitio)
+    - [Calculando índice de fijación F<sub>ST</sub> por ventana](#calculando-índice-de-fijación-fsubstsub-por-ventana)
+- [Introgresión](#introgresión)
+    - [Motivación](#motivación)
+    - [D de Patterson: Explicación](#d-de-patterson-explicación)
+- [<span class="todo TODO">TODO</span> Introgresión: Estimados por ventana](#span-classtodo-todotodospan-introgresión-estimados-por-ventana)
+    - [<span class="todo TODO">TODO</span> Evolución de la adaptación](#span-classtodo-todotodospan-evolución-de-la-adaptación)
+    - [Análisis por ventanas](#análisis-por-ventanas)
+
+<!-- markdown-toc end -->
+
 
 # Estructura poblacional en *Heliconius*
 
@@ -22,13 +40,13 @@ principales es 100. Por ejemplo, si PC1 explica el 58% de la variación
 observada entonces el resto de los componentes sumados explica el 42% de
 la variación restante.
 
-Usaremos el archivo `heliconius.GT.NOINDEL.FILTER.vcf.gz` disponible en
-la ruta \<XXX> en Centauro, **no usaremos el archivo que filtramos en
-este análisis pero sí en los siguientes**. Este archivo tiene 5
-cromosomas de nuestros 18 individuos de *Heliconius*. Es una
-aproximación más realista, pero todavía limitada, al conjunto completo
-de datos del genoma si lo comparamos con los datos que hemos venido
-trabajando.
+Usaremos el archivo de genotipos extendido
+`heliconius.GT.NOINDEL.FILTER.vcf.gz` disponible en la ruta \<XXX> en
+Centauro, **no usaremos el archivo que filtramos en este análisis pero
+sí en los siguientes**. Este archivo tiene 5 cromosomas de nuestros 18
+individuos de *Heliconius*. Es una aproximación más realista, pero
+todavía limitada, al conjunto completo de datos del genoma si lo
+comparamos con los datos que hemos venido trabajando.
 
 La herramienta que usaremos para explorar la estructura poblacional
 usando el análisis de componentes principales es `plink 1.9`, como
@@ -265,7 +283,7 @@ Preguntas:
     ¿Cuál es? ¿Por qué es atípica?
 -   [ ] Propón una hipótesis que explique las observaciones.
 
-# <span class="todo TODO">TODO</span> Análisis poblacionales por sitios y ventanas
+# Análisis poblacionales por sitios y ventanas
 
 Vamos a usar el archivo `vcf` que filtramos para examinar la diversidad
 genómica en nuestras muestras. Recuerda que cada fila del ar chivo `vcf`
@@ -897,7 +915,8 @@ Vamos
 
 ## Análisis por ventanas
 
-Recursos computacionales: TBD
+Recursos computacionales: Un procesador, 50 MB RAM, 2 minutos de tiempo
+de corrido (`Dsuite`).
 
 1.  **Preparando los datos:**
 
@@ -937,18 +956,23 @@ Recursos computacionales: TBD
     muestraO.3 Outgroup
     ```
 
-    Adicionalmente debemos crear otro archivo de texto que especifique
-    las combinaciones que queremos probar. En este archivo usamos una
-    línea por combinación que queramos probar y en cada línea escribimos
-    nuestras poblaciones en el orden de nuestra hipótesis: P1 P2 P3,
-    separadas entre sí por un espacio en blanco. Recuerda cuál es
-    nuestra hipótesis de introgresión y escribe las poblaciones de
-    nuestras muestras en el orden correspondiente.
+    Adicionalmente debemos crear otro archivo de texto al que llamaremos
+    `archivo.hipotesis` que especifique las combinaciones de poblaciones
+    que queremos probar para nuestras hipótesis de introgresión. En este
+    archivo usamos una línea por combinación de poblaciones y en cada
+    línea escribimos nuestras poblaciones en el orden de nuestra
+    hipótesis: P1 P2 P3, separadas entre sí por un caracter de
+    tabulación. Recuerda cuál es nuestra hipótesis de introgresión y
+    escribe las poblaciones de nuestras muestras en el orden
+    correspondiente. **Importante:** es posible que `Dsuite` te muestre
+    errores de ejecución si las poblaciones en este archivo no están
+    separadas por un caracter de tabulación.
 
 2.  **Estimando las estadísticas D:**
 
     Dsuite está disponible en para los usuarios de `biologia.evolutiva`
-    en `/shared/Dsuite/Build/Dsuite`.
+    en `/shared/Dsuite/Build/Dsuite`. **TODO Cambiar ruta cuando se cree
+    la particion en centauro**.
 
     Esta es la sintaxis que usamos para correr `Dsuite`.
 
@@ -958,22 +982,22 @@ Recursos computacionales: TBD
 
     El comando específico que usaremos es `Dinvestigate`. Este comando
     calcula varios estadísticos de introgresión a lo largo de una región
-    genómica. Usamos `Dinvestigate` con la opción `-w ventana,paso`,
-    para especificar los tamaños de la ventana y el paso que usaremos
-    para hacer el scan. Luego de especificar la ventana escribimos el
-    nombre de nuestro archivo `vcf.gz`, el nombre de nuestro archivo de
-    poblaciones y el nombre del archivo de combinaciones que queremos
-    probar.
+    genómica. Usamos `Dinvestigate` con la opción `-w ventana,paso` para
+    especificar los tamaños de la ventana y el paso que usaremos para
+    hacer el scan y con la opción `-n prefijo.salida` para darle un
+    prefijo a los archivos de salida. Luego de especificar la ventana
+    escribimos el nombre de nuestro archivo `vcf.gz`, el nombre de
+    nuestro archivo de poblaciones y el nombre del archivo de hipótesis.
 
     <details>
-    <summary> Trata de filtrar los datos por tu cuenta. Si no puedes avanzar mira el código aquí </summary>
+    <summary> Trata construir la línea de comando por tu cuenta. Si no puedes avanzar mira el código aquí </summary>
 
     ``` shell
     # utiliza los archivos en el orden correcto
     # archivo vcf
     # archivo poblaciones
     # archivo combinaciones
-    Dsuite Dinvestigate -w ventana,paso archivo.vcf.gz \
+    /ruta/a/Dsuite Dinvestigate -w ventana,paso archivo.vcf.gz \
            archivo.poblaciones archivo.combinaciones
     ```
 
@@ -1030,6 +1054,20 @@ Recursos computacionales: TBD
     debe verse como esta gŕafica. Pinta los estimados que obtuviste con
     varios tamaños de ventana y decide cuál es más informativo.
 
+    <details>
+    <summary> Escribe el código para cargar los datos y pintar la gráfica por tu cuenta. Si no puedes avanzar mira el código aquí </summary>
+
+    ``` r
+    ### carga los datos
+    tfm_test <- read_tsv("Thelxinoe_Florencia_Malleti_localFstats__500_100.txt")
+
+    ### Pinta D
+    ggplot(data=tfm_test, aes(x=windowStart, y=D)) +
+      geom_line() + theme_bw()
+    ```
+
+    </details>
+
     ![](./Imagenes/D_stat_optixscaf.png)
 
     -   [ ] ¿Hay alguna región de `Hmel218003o` en donde observes
@@ -1037,3 +1075,27 @@ Recursos computacionales: TBD
 
     -   [ ] ¿Puedes pintar la posición del gen *optix* en tu gráfica?
         Pista: Usa la función `geom_rect` de `ggplot`.
+
+5.  **Otras hipótesis de introgresión**
+
+    Usando `Dsuite` construye otras hipótesis de introgresión cambiando
+    el orden de P1, P2 y P3 en el archivo. Incluye por lo menos una
+    diferente a la que probamos en el punto anterior.
+
+    -   [ ] ¿Qué hipótesis de introgresión nuevas incluiste?
+
+    -   [ ] ¿Qué diferencias observas respecto a los resultados
+        anteriores?
+
+    -   [ ] ¿Cómo explicas las diferencias observadas?
+
+6.  **Si tienes tiempo...**
+
+    Usa el archivo de genotipos extendido
+    `heliconius.GT.NOINDEL.FILTER.vcf.gz` para correr `Dinvestigate`.
+    Utiliza la misma hipótesis de introgresión inicial. Analiza los
+    resultados visualizando con R.
+
+    -   [ ] ¿Existen otras regiones del genoma en donde haya potencial
+        evidencia de introgresión entre P2 y P3? ¿Cuáles son esas
+        regiones?
