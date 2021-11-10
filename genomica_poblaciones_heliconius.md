@@ -312,7 +312,7 @@ genoma tengan más diversidad nucleotídica que otras en una población?
 
     ``` shell
     vcftools --gzvcf archivo.vcf.gz \
-             --window-pi <tam. ventana> --out prefijo.salida
+             --window-pi tamaño ventana --out prefijo.salida
     ```
 
     </details>
@@ -441,36 +441,6 @@ extendido (archivo `heliconius.GT.NOINDEL.FILTER.vcf.gz`). ¿Puedes
 graficar la diversidad nucleotídica promedio por scaffold como un
 boxplot? ¿Hay algún scaffold que tenga diversidad nucleotídica promedio
 distinta a la del resto de los scaffolds?
-
-## <span class="todo TODO">TODO</span> D de Tajima
-
-Podemos calcular estadísticos que nos permiten analizar si ciertas
-regiones del genoma en nuestras poblaciones están evolucionando
-neutralmente ó si están experimentando una posible presión de selección.
-Una de las medidas que podemos usar para esto es el D de Tajima. El D de
-Tajima es un estadístico que muestra variaciones cuando hay cambios en
-el tamaño poblacional o cuando hay procesos de selección.
-
-Nuevamente, podemos usar `vcftools` para calcular el D de Tajima. Como
-en el caso de π, podemos calcular D de Tajima por ventana a lo largo de
-una región del genoma (scaffold ó cromosoma) o del genoma completo. Para
-esto usamos la opción `--TajimaD <tam. ventana>` donde `<tam. ventana>`
-es un número entero que determina el tamaño de la ventana que usaremos
-para el análisis. Usamos también la opción `--out <prefijo>` para
-especificar un prefijo para nuestros archivos de salida. Esta línea de
-comando debería ser relativamente sencilla.
-
-``` shell
-vcftools --gzvcf archivo.vcf.gz \
-         --TajimaD <tamaño ventana> --out prefijo
-```
-
-Analiza los datos
-
-Pinta los resultados
-
-``` r
-```
 
 ## Índice de fijación: Motivación y explicación
 
@@ -932,22 +902,23 @@ Recursos computacionales: TBD
 1.  **Preparando los datos:**
 
     Vamos a trabajar con nuestro `vcf` filtrado al igual que cuando
-    calculamos el índice de fijación por ventanas. En este caso también
-    debemos especificar la población a la que pertenecen nuestras
-    muestras de la siguiente manera. Crea un archivo nuevo usando
-    `nano`, dale un nombre informativo. Al interior de este archivo
-    debes esribir dos columnas separadas por tabulación (`\t`). En la
-    primera columna debes tener los nombres de las muestras tal y como
-    aparecen en el `vcf`. En la segunda columna debes especificar la
-    población a la que pertenece cada muestra. Debemos especificar las
-    poblaciones P1, P2 y P3 del análisis de introgresión. Los nombres de
-    las poblaciones son: Florencia, Thelxinoe, Malleti y Silvaniformes,
-    pero las Silvaniformes son nuestro outgroup, luego para ellas
-    debemos especificar la palabra Outgroup en la columna derecha. En
-    teoría todas las muestras del Outgroup deberían funcionar bien, pero
-    si el Outgroup y P1 experimentaron flujo genético en la región de
-    interés esto puede crear artefactos en los resultados. Es posible
-    que nuestras muestras de *H. pardalinus*, que son de Perú, muestren
+    calculamos el índice de fijación por ventanas, la diversidad
+    nucleotídica y el D de Tajima. En este caso debemos especificar la
+    población a la que pertenecen nuestras muestras de la siguiente
+    manera. Crea un archivo nuevo usando `nano`, dale un nombre
+    informativo. Al interior de este archivo debes esribir dos columnas
+    separadas por tabulación (`\t`). En la primera columna debes tener
+    los nombres de las muestras tal y como aparecen en el `vcf`. En la
+    segunda columna debes especificar la población a la que pertenece
+    cada muestra. Debemos especificar las poblaciones P1, P2 y P3 del
+    análisis de introgresión. Los nombres de las poblaciones son:
+    Florencia, Thelxinoe, Malleti y Silvaniformes, pero las
+    Silvaniformes son nuestro outgroup, luego para ellas debemos
+    especificar la palabra Outgroup en la columna derecha. En teoría
+    todas las muestras del Outgroup deberían funcionar bien, pero si el
+    Outgroup y P1 experimentaron flujo genético en la región de interés
+    esto puede crear artefactos en los resultados. Es posible que
+    nuestras muestras de *H. pardalinus*, que son de Perú, muestren
     evidencia de flujo con otras *Heliconius* de Perú (como Thelxinoe).
     Es por eso que a estas las excluimos del análisis marcando la
     segunda columna como xxx.
@@ -966,14 +937,51 @@ Recursos computacionales: TBD
     muestraO.3 Outgroup
     ```
 
+    Adicionalmente debemos crear otro archivo de texto que especifique
+    las combinaciones que queremos probar. En este archivo usamos una
+    línea por combinación que queramos probar y en cada línea escribimos
+    nuestras poblaciones en el orden de nuestra hipótesis: P1 P2 P3,
+    separadas entre sí por un espacio en blanco. Recuerda cuál es
+    nuestra hipótesis de introgresión y escribe las poblaciones de
+    nuestras muestras en el orden correspondiente.
+
 2.  **Estimando las estadísticas D:**
 
     Dsuite está disponible en para los usuarios de `biologia.evolutiva`
-    en `/shared/Dsuite/Build/Dsuite`
+    en `/shared/Dsuite/Build/Dsuite`.
+
+    Esta es la sintaxis que usamos para correr `Dsuite`.
+
+    ``` shell
+    Dsuite <comando> [opciones] archivos de entrada
+    ```
+
+    El comando específico que usaremos es `Dinvestigate`. Este comando
+    calcula varios estadísticos de introgresión a lo largo de una región
+    genómica. Usamos `Dinvestigate` con la opción `-w ventana,paso`,
+    para especificar los tamaños de la ventana y el paso que usaremos
+    para hacer el scan. Luego de especificar la ventana escribimos el
+    nombre de nuestro archivo `vcf.gz`, el nombre de nuestro archivo de
+    poblaciones y el nombre del archivo de combinaciones que queremos
+    probar.
+
+    <details>
+    <summary> Trata de filtrar los datos por tu cuenta. Si no puedes avanzar mira el código aquí </summary>
+
+    ``` shell
+    # utiliza los archivos en el orden correcto
+    # archivo vcf
+    # archivo poblaciones
+    # archivo combinaciones
+    Dsuite Dinvestigate -w ventana,paso archivo.vcf.gz \
+           archivo.poblaciones archivo.combinaciones
+    ```
+
+    </details>
 
     Prueba varios tamaños de ventana y paso: Prueba las combinaciones
     20,10; 50,25; 100,50; 500,250; 1000,500. Cada una de ellas no tarda
-    mucho en correr. **Reto:** Puedes hacerlo en un ciclo `for`? Pista:
+    mucho en correr. **Reto:** ¿Puedes hacerlo en un ciclo `for`? Pista:
     Puedes hacerlo con operaciones aritméticas, las cuales deben ir
     dentro de dobles paréntesis y precedidas por el operador `$`.
 
