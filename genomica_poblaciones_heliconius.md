@@ -8,15 +8,17 @@
 ## <span class="todo TODO">TODO</span> Infiriendo estructura poblacional usando PCA
 
 Usaremos el archivo `heliconius.GT.NOINDEL.FILTER.vcf.gz` disponible en
-la ruta \<XXX>. Este archivo tiene 5 cromosomas de nuestros 18
-individuos de *Heliconius*. Es una aproximación más realista, pero
+la ruta \<XXX> en Centauro. Este archivo tiene 5 cromosomas de nuestros
+18 individuos de *Heliconius*. Es una aproximación más realista, pero
 todavía limitada, al conjunto completo de datos del genoma si lo
 comparamos con los datos que hemos venido trabajando.
 
 La herramienta que usaremos para explorar la estructura poblacional
 usando el análisis de componentes principales es `plink 1.9`, como
-hicimos con los datos de *Lupinus*, pero con algunos pasos y opciones
-adicionales.
+hicimos con los datos de *Lupinus*, es posible que veas algunas
+diferencias entre este análisis y el que hiciste anteriormente.
+
+Vamos a construir nuestro PCA por pasos.
 
 1.  **Sitios independientes:** En este caso necesitamos tener
     independencia entre los sitios que usamos para hacer el análisis. La
@@ -34,15 +36,14 @@ adicionales.
 
     -   `--allow-extra-chr`
 
-    -   `--indep-pairwise <tamaño ventana> <paso> <umbral r^{2}>` 50 10
-        0.1
+    -   `--indep-pairwise <tamaño ventana> <paso> <umbral r2> 50 10 0.1`
 
     -   `--out <prefijo>`
 
         ``` shell
         plink --vcf archivo.vcf.gz --double-id \
               --allow-extra-chr --indep-pairwise ventana paso umbral \
-              --out prefijo_salida
+              --out prefijo.salida
         ```
 
     Examina ambos archivos de salida, ¿Qué información observas en
@@ -82,6 +83,14 @@ adicionales.
     máquina usando `scp` ó `mailx`.
 
 3.  **Visualización de los resultados en R:**
+
+    Vamos a graficar los resultados del análisis de componentes
+    principales. Es típico de estos análisis graficar las relaciones
+    entre las componentes 1 y 2, pues son el par de componentes que
+    explican la mayor proporción de variación genética en los datos,
+    pintaremos la relación entre estas dos componentes y un diagrama de
+    barras con el porcentaje de variación explicado por cada componente
+    usando R.
 
     ``` r
     ### Leer datos de la pca, recuerda que tenemos dos archivos
@@ -134,42 +143,78 @@ adicionales.
     ggplot(pve, aes(x=PC, y=pve)) + geom_bar(stat="identity") + theme_bw() +
       ylab("Porcentaje de variación explicado") + 
       xlab("Componente principal") +
-      scale_x_continuous(breaks = 1:length(pve))
+      scale_x_continuous(breaks = 1:length(eigval))
     ```
+
+    Tus resultados deben verse como estos.
 
     ![](./Imagenes/PCA_helic.png)
 
     ![](./Imagenes/pve_pca_helic.png)
 
-## <span class="todo TODO">TODO</span> Los resultados de la PCA dependen de la perspectiva
+    Preguntas:
+
+    -   ¿Qué grupos de individuos se encuentran más cerca entre sí?
+        Describe los patrones que observas.
+
+    -   ¿Qué grupo se encuentra más alejado del resto? ¿En qué basas tu
+        afirmación?
+
+    -   Observando la segunda gráfica ¿cuánta variación explica el
+        quinto componente principal?
+
+    -   ¿Qué modificaciones tendríamos que hacer en el código de R para
+        pintar la relación entre PC2 y PC3?
+
+## ¿Podemos observar diferentes patrones usando las mismas muestras?
 
 Comparación región optix con una representación más global del genoma.
 Ciertas regiones del genoma pueden mostrar procesos evolutivos
 interesantes.
 
-Usa `vcftools` para extraer la región `Hmel218003o:650000-1000000`, que
+Usa `vcftools` para extraer la región `Hmel218003o:720000-800000`, que
 rodea al gen *optix*. Esta región podemos extraerla de cualquiera de los
 dos conjuntos de genotipos (`vcf.gz`), debemos guardarla correctamente
-como un archivo `vcf.gz`.
+como un archivo `vcf.gz`. Las opciones `--chr <scaffold>`,
+`--from-bp <base inicio>` y `--to-bp <base fin>` son útiles para hacer
+esta extracción. No olvides incluir las opciones `--recode` y
+`--recode-INFO-all` para que los datos de salida estén en formato `vcf`.
 
-Extrayendo el subconjunto
+<details>
+<summary> Trata de construir la línea de comando por tu cuenta. Si no puedes avanzar mira el código aquí </summary>
 
 ``` shell
+vcftools --gzvcf heliconius.optixscaf.SNPS.NV.FL2.vcf.gz \
+         --chr Hmel218003o --from-bp 720000 --to-bp 800000 \
+         --recode --recode-INFO-all --stdout \
+    | bgzip -c > region.optix.vcf.gz
+
+bcftools index region.optix.vcf.gz
 ```
+
+</details>
 
 Usa `plink` para retener solo los sitios en equilibrio de ligamiento
 (independientes entre sí) y para hacer un análisis de componentes
-principales de esta región.
+principales de esta región de forma similar a como lo hicimos en la
+sección anterior. Recuerda transferir los archivos del cluster a tu
+máquina para analizarlos en R.
 
-Sitios independientes y PCA
+Las gráficas también las haces de la misma forma que en la sección
+anterior. **Te alentamos a digitarlas y a tratar de entenderlas en lugar
+de copiarlas y pegarlas en R**. Debes ver los siguientes resultados.
 
-``` shell
-```
+![](./Imagenes/PCA_helic_optix.png)
 
-Gráficas
+![](./Imagenes/var_explained_PCA_optix.png)
 
-``` r
-```
+Preguntas:
+
+-   ¿Qué grupos de individuos se encuentran más cerca entre sí? Describe
+    los patrones que observas.
+-   ¿Ves alguna agrupación atípica en los resultados de la PCA? ¿Cuál
+    es? ¿Por qué es atípica?
+-   Propón una hipótesis que explique las observaciones.
 
 # <span class="todo TODO">TODO</span> Análisis poblacionales por sitios y ventanas
 
@@ -375,7 +420,7 @@ Pinta los resultados
 
 ## Índice de fijación: Motivación y explicación
 
-EL índice de fijación F<sub>ST</sub> es una medida de separación entre
+El índice de fijación F<sub>ST</sub> es una medida de separación entre
 grupos de individuos. En teoría F<sub>ST</sub> varía entre 0 y 1 en
 donde 0 representa la ausencia de distancia genética entre poblaciones,
 mientras que 1 significa que las poblaciones están totalmente separadas.
@@ -895,7 +940,7 @@ Recursos computacionales: TBD
     -   [ ] ¿Qué estructura tienen los archivos (número de filas, número
         de columnas y encabezado)?
 
-    -   [ ] ¿Qué información puedes identificar en los archvios
+    -   [ ] ¿Qué información puedes identificar en los archivos
         (contenido de las columnas)?
 
     -   [ ] ¿Cuántos estimados de flujo genético aparecen?
