@@ -58,13 +58,12 @@ de Markdown y activa la opción de pre-visualización.
 
 ## Exportando Markdown a PDF
 
-Existen muchas herramientas para convertir textos entre varios formatos.
-Hay muchos tipos de conversión; la conversión de Markdown a PDF es
-bastante común. Atom es una aplicación modular, lo que significa que
-puedes extender su funcionalidad instalando nuevos paquetes. Para
+La conversión de Markdown a PDF es un procedimiento bastante común y vamos a
+necesitar hacerla algunas veces. Atom es una aplicación modular, lo que
+significa que puedes extender su funcionalidad instalando nuevos paquetes. Para
 convertir Markdown a PDF necesitamos instalar un paquete nuevo llamado
-`makrdown-pdf` (:astonished: vaya sorpresa). Sigue las instrucciones en
-la imagen para instalarlo, es sencillo.
+`makrdown-pdf` (:astonished: vaya sorpresa). Sigue las instrucciones en la
+imagen para instalarlo, es sencillo.
 
 ![](./Imagenes/instrucciones_markdown_pdf.png)
 
