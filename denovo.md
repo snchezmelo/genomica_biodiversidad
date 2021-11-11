@@ -4,19 +4,18 @@
 1. [O que és *de novo*](#denovo)
 2. [Dato ejemplo](#dato)
 3. [STACKS](#stacks)
-	a. [*process_radtags*](#process_radtagd)
-	b. [*ustacks*](#ustacks)
-	c. [*sstacks*](#sstacks)
-	d. [*cstacks*](#cstacks)
-	e. [*tsv2bam*](#tsv2bam)
-	f. [*gstacks*](#gstacks)
+	a. [*process_radtags*](#process_radtagd)  
+	b. [*ustacks*](#ustacks)  
+	c. [*sstacks*](#sstacks)  
+	d. [*cstacks*](#cstacks)  
+	e. [*tsv2bam*](#tsv2bam)  
+	f. [*gstacks*](#gstacks)  
 	g. [*populations*](#population)
-
 ---
 
 # O que és *de novo* <a name = "denovo"></a>
 
-*De novo* es una forma de ensamblaje del genoma sin la ayuda de datos genómicos de referencia, así és, una ensamblaje inicial de un genoma. Esto asume que no se conoce detalles del genoma, como el tamaño y la composición de las secuencias del ADN. Por esto, son bastante utilizados en organismos non-modelos donde no hay disponible genomas para muchas espécies. En la ausencia de un genoma referencia, los loci no se pueden visualizar posicionalmente; en su lugar, cada locus se examina de forma independiente para comprobar si es un valor atípico para para detectar falsos positivos. 
+*De novo* es una forma de ensamblaje del genoma sin la ayuda de datos genómicos de referencia, así és, una ensamblaje inicial de un genoma. Esto asume que no se conoce detalles del genoma, como el tamaño y la composición de las secuencias del ADN. Por esto, son bastante utilizados en organismos non-modelos donde no hay disponible genomas para muchas espécies. En la ausencia de un genoma referencia, los loci no se pueden visualizar posicionalmente; en su lugar, cada locus se examina de forma independiente para comprobar si es un valor atípico para para detectar falsos positivos.
 Además, *de novo* puede ser utilizado si hay un genoma referencia pero no es de alta calidad. Una análisis *de novo* complementario es bueno para comparar cuántos loci pueden faltar en el genoma de referencia o para identificar loci atípicos que no están en la referencia ensamblada. Cuando el genoma de referencia está distante, o si su calidad es cuestionable, tiene sentido adoptar un enfoque híbrido: ensamblar loci de novo y luego alinear sus secuencias de consenso y respaldar la información posicional en el conjunto de datos de novo. Esto permite aprovechar el genoma de referencia sin comprometer la consistencia de las llamadas de genotipo. Este enfoque híbrido permite una comparación directa de los análisis de novo y basados en referencias. Cuando el genoma es de buena calidad y las propiedades genómicas (por ejemplo, contenido repetido) del sistema son tales que el ensamblaje de novo de los loci RAD funciona bien, los dos enfoques deberían producir resultados muy similares.
 
 ![Comparasion de (a) *de novo* y (b) genoma referencia.](./Imagenes/denovo_vs_mapping.jpg)
@@ -27,7 +26,7 @@ En este curso vamos utilizar STACKS para hacer la ensemblaje *de novo*. Pero es 
 
 # Dato ejemplo <a name = "dato"></a>
 ## *Lupinus* (Contreras-Ortiz, et al., 2018)
-*Lupinus* es un genero de planta con una diversificación muy grande en los Andes, con 85 especies. Algunas especies cambiaran de la historia de vida anual para perenne, esto sendo sugerido como una adaptación clave que facilita la colonización de hábitats montanos (3500-4900m). Acá vamos utilizar muestras de dos especies estrechamente relacionadas de *Lupinus* (*L. triananus* (A) y *L. alopecuroides* (B) en Fig. 2). *L. alopecuroides* se distribui en la cordillera Central y Oriental al sur y *L. triananus* en la cordillera Oriental (Fig. 3). 
+*Lupinus* es un genero de planta con una diversificación muy grande en los Andes, con 85 especies. Algunas especies cambiaran de la historia de vida anual para perenne, esto sendo sugerido como una adaptación clave que facilita la colonización de hábitats montanos (3500-4900m). Acá vamos utilizar muestras de dos especies estrechamente relacionadas de *Lupinus* (*L. triananus* (A) y *L. alopecuroides* (B) en Fig. 2). *L. alopecuroides* se distribui en la cordillera Central y Oriental al sur y *L. triananus* en la cordillera Oriental (Fig. 3).
 
 ![Las dos especies de *Lupinus* que vamos trabajar: (A) *L. triananus* y (B) *L. alopecuroides*](./Imagenes/Lupinus_foto.png)
 
@@ -35,8 +34,8 @@ Vamos utilizar cinco individuos de cada espécies que fueron secuenciados a trav
 
 ![Mapa con la distribución de las dos espécies de *Lupinus* que vamos utilizar en nuestro dataset - en amarillo.](./Imagenes/Lupinus_distr.png)
 
-Artículos con más información sobre el conjunto de datos: 
-- Contreras-Ortiz, et al., 2018: https://academic.oup.com/botlinnean/article-abstract/187/1/118/4907975; 
+Artículos con más información sobre el conjunto de datos:
+- Contreras-Ortiz, et al., 2018: https://academic.oup.com/botlinnean/article-abstract/187/1/118/4907975;
 - Nevado et al., 2018: https://nph.onlinelibrary.wiley.com/doi/full/10.1111/nph.15243
 
 ---
@@ -50,13 +49,13 @@ Artículos con más información sobre el conjunto de datos:
 **Manual:** https://catchenlab.life.illinois.edu/stacks/manual/
 
 
-Stacks es un *"pipeline"* para construir loci a partir de secuencias cortas, como las generadas en la plataforma Illumina. Stacks se desarrolló para trabajar con datos basados en enzimas de restricción, como RAD-seq, con el propósito de construir mapas genéticos y realizar genómica y filogeografía de poblaciones. 
+Stacks es un *"pipeline"* para construir loci a partir de secuencias cortas, como las generadas en la plataforma Illumina. Stacks se desarrolló para trabajar con datos basados en enzimas de restricción, como RAD-seq, con el propósito de construir mapas genéticos y realizar genómica y filogeografía de poblaciones.
 
 Stacks identifica los loci en un conjunto de individuos, usando *de novo* o alineados con un genoma de referencia, y luego genotipa cada locus. Un análisis *de novo* en Stacks se desarrolla en seis etapas principales. Primero, las lecturas son demultiplexadas y limpiadas por el programa **process_radtags**. Las siguientes tres etapas comprenden la canalización principal de Stacks: construcción de loci (**ustacks**), creación del catálogo de loci (**cstacks**) y comparación con el catálogo (**sstacks**). En la quinta etapa, se ejecuta el programa **gstacks** para ensamblar y fusionar contigs de extremos emparejados, llamar a sitios variantes en la población y genotipos en cada muestra. En la etapa final, se ejecuta el programa de **populations**, que puede filtrar datos, calcular estadísticas de genética de poblaciones y exportar una variedad de formatos de datos.
 
 ![Pasos realizados en Stacks](./Imagenes/stacks_full_pipeline.png)
 
-### Antes de empezar: 
+### Antes de empezar:
 Vamos copiar los datos brutos que analizaremos a su usuario. Los datos **all.fastq.gz** se encuentran en la carpeta compartida xxxx. Ejecute el comando *scp* para copiar los datos a tu usuario. Además, creemos una carpeta donde vamos poner todos los resultados de stacks. Entonces en tu directorio y usando el comando *mkdir* generemos la carpeta llamada `01_stacks`. Ahora estamos listos para hacer el primero paso del pipeline :)
 
 Además, en el clúster para cargar stacks necesitamos usar este comando en el sbatch o en la línea de comando: `module load stacks/2.59`
@@ -268,7 +267,7 @@ El programa gstacks examinará un conjunto de datos RAD un locus a la vez, obser
 **Parámetros:**
 
 Lista completa de parámetros [aquí](https://catchenlab.life.illinois.edu/stacks/comp/populations.php).
- 
+
 `-P,--in_path` = directorio de entrada que tenga los archivos generados por Stacks (`01_stacks`)
 
 `-O,--out_path` = ruta a un directorio donde escribir los archivos de salida. (predeterminado al valor de -P.)
