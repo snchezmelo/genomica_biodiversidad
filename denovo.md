@@ -3,7 +3,7 @@
 
 1. [O que és *de novo*](#denovo)
 2. [Dato ejemplo](#dato)
-3. [STACKS](#stacks)
+3. [STACKS](#stacks)  
 	a. [*process_radtags*](#process_radtagd)  
 	b. [*ustacks*](#ustacks)  
 	c. [*sstacks*](#sstacks)  
@@ -20,23 +20,23 @@ Además, *de novo* puede ser utilizado si hay un genoma referencia pero no es de
 
 ![Comparasion de (a) *de novo* y (b) genoma referencia.](./Imagenes/denovo_vs_mapping.jpg)
 
-En este curso vamos utilizar STACKS para hacer la ensemblaje *de novo*. Pero es importante saber que hay varios otros softwares que lo hacen y el uso de uno u otro dependerá del tipo de datos y el propósito del estudio. Por ejemplo, ipyrad (https://ipyrad.readthedocs.io/en/master/) és bastante utilizado para filogenômica, SOAPdenovo (https://www.animalgenome.org/bioinfo/resources/manuals/SOAP.html) es nuevo??? **add others or some paper talking about several ones?**.
+En este curso vamos utilizar STACKS para hacer la ensemblaje *de novo*. Pero es importante saber que hay varios otros softwares que lo hacen y el uso de uno u otro dependerá del tipo de datos y el propósito del estudio. Por ejemplo, [ipyrad](https://ipyrad.readthedocs.io/en/master/) és bastante utilizado para filogenômica, [SOAPdenovo](https://www.animalgenome.org/bioinfo/resources/manuals/SOAP.html) es un software nuevo y muchos otros.
 
 ---
 
 # Dato ejemplo <a name = "dato"></a>
 ## *Lupinus* (Contreras-Ortiz, et al., 2018)
-*Lupinus* es un genero de planta con una diversificación muy grande en los Andes, con 85 especies. Algunas especies cambiaran de la historia de vida anual para perenne, esto sendo sugerido como una adaptación clave que facilita la colonización de hábitats montanos (3500-4900m). Acá vamos utilizar muestras de dos especies estrechamente relacionadas de *Lupinus* (*L. triananus* (A) y *L. alopecuroides* (B) en Fig. 2). *L. alopecuroides* se distribui en la cordillera Central y Oriental al sur y *L. triananus* en la cordillera Oriental (Fig. 3).
+*Lupinus* es un genero de planta con una diversificación muy grande en los Andes, con 85 especies. Algunas especies cambiaran de la historia de vida anual para perenne, esto sendo sugerido como una adaptación clave que facilita la colonización de hábitats montanos (3500-4900m). Acá vamos utilizar muestras de dos especies estrechamente relacionadas de *Lupinus* (*L. triananus* (A) y *L. alopecuroides* (B) en la figura abajo).
 
 ![Las dos especies de *Lupinus* que vamos trabajar: (A) *L. triananus* y (B) *L. alopecuroides*](./Imagenes/Lupinus_foto.png)
 
-Vamos utilizar cinco individuos de cada espécies que fueron secuenciados a través de la técnica nextRAD en el trabajo de Contreras-Ortiz et al. (2018 - Fig. 3) y que están disponibles públicamente. El secuenciamento fue realizado in an Illumina NextSeq500 con lecturas de 150bp y *single-end*.
+*L. alopecuroides* se distribui en la cordillera Central y Oriental al sur y *L. triananus* en la cordillera Oriental (ver mapa abajo).Vamos utilizar cinco individuos de cada espécies que fueron secuenciados a través de la técnica nextRAD en el trabajo de Contreras-Ortiz et al. (2018) y que están disponibles públicamente. El secuenciamento fue realizado in an Illumina NextSeq500 con lecturas de 150bp y *single-end*.
 
 ![Mapa con la distribución de las dos espécies de *Lupinus* que vamos utilizar en nuestro dataset - en amarillo.](./Imagenes/Lupinus_distr.png)
 
-Artículos con más información sobre el conjunto de datos:
-- Contreras-Ortiz, et al., 2018: https://academic.oup.com/botlinnean/article-abstract/187/1/118/4907975;
-- Nevado et al., 2018: https://nph.onlinelibrary.wiley.com/doi/full/10.1111/nph.15243
+Artículos con más información sobre el conjunto de datos:  
+- [Contreras-Ortiz, et al., 2018](https://academic.oup.com/botlinnean/article-abstract/187/1/118/4907975);
+- [Nevado et al., 2018](https://nph.onlinelibrary.wiley.com/doi/full/10.1111/nph.15243).
 
 ---
 
