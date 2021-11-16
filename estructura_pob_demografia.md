@@ -180,11 +180,13 @@ Acá, vamos utilizar un script llamado [*easySFS*](https://github.com/isaacoverc
 1. en carpeta *data* vamos activar un ambiente *conda* ya creado con algunos softwares que necesitamos:
 - cargar: `module load conda`
 - activar el ambiente: `source activate ~/data/conda/conda_envs/easySFS`
+
 2. clonar el repositorio de *easySFS* [repositorio de github](https://github.com/isaacovercast/easySFS):  
 `git clone https://github.com/isaacovercast/easySFS.git`
+
 3. ejecutar:
 - entrar en la carpeta: `cd easySFS`
-- hacer ejecutable: `chmod 777 easySFS.py`
+- hacer ejecutable: `chmod +x easySFS.py`
 
 Ahora estamos listos para crear el archivo SFS:
 1. necesitamos de 2 archivos para hacer el SFS: el vcf (con uno solo SNP per loci) y el archivo de población que usamos con *Stacks* - mira las rutas donde están estos dos archivos.  
