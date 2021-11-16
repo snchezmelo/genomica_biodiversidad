@@ -3,14 +3,15 @@
 
 1. [¿Que és *de novo*?](#denovo)
 2. [Datos de ejemplo](#dato)
-3. [Software STACKS](#stacks)  
-	a. [*process_radtags*](#process_radtagd)  
-	b. [*ustacks*](#ustacks)  
-	c. [*sstacks*](#sstacks)  
-	d. [*cstacks*](#cstacks)  
-	e. [*tsv2bam*](#tsv2bam)  
-	f. [*gstacks*](#gstacks)  
+3. [Software STACKS](#stacks)
+	a. [*process_radtags*](#process_radtagd)
+	b. [*ustacks*](#ustacks)
+	c. [*sstacks*](#sstacks)
+	d. [*cstacks*](#cstacks)
+	e. [*tsv2bam*](#tsv2bam)
+	f. [*gstacks*](#gstacks)
 	g. [*populations*](#population)
+
 ---
 
 # Que és *de novo* <a name = "denovo"></a>
@@ -29,7 +30,7 @@ En este curso vamos a utilizar STACKS para hacer la ensemblaje *de novo*. Pero e
 ## *Lupinus* (Contreras-Ortiz, et al., 2018)
 *Lupinus* es un género de planta con una diversificación muy grande en los Andes, con 85 especies. Algunas especies cambian su historia de vida anual a perenne, esto ha sido sugerido como una adaptación clave que facilita la colonización de hábitats montanos (3500-4900m). Aquí vamos a utilizar muestras de dos especies estrechamente relacionadas de *Lupinus* (*L. triananus* (A) y *L. alopecuroides* (B) en la figura abajo).
 
-![Las dos especies de *Lupinus* que vamos trabajar: (A) *L. triananus* y (B) *L. alopecuroides*(foto de [Contreras-Ortiz, et al., 2018](https://academic.oup.com/botlinnean/article-abstract/187/1/118/4907975)).](./Imagenes/Lupinus_foto.png)
+![Las dos especies de *Lupinus* que vamos trabajar: (A) *L. triananus* y (B) *L. alopecuroides* (foto de [Contreras-Ortiz, et al., 2018](https://academic.oup.com/botlinnean/article-abstract/187/1/118/4907975)).](./Imagenes/Lupinus_foto.png)
 
 *L. alopecuroides* se distribuye en la cordillera Central y Oriental al sur y *L. triananus* en la cordillera Oriental (ver mapa abajo). Vamos a utilizar cinco individuos de cada especie que fueron secuenciados a través de la técnica nextRAD en el trabajo de [Contreras-Ortiz, et al., 2018](https://academic.oup.com/botlinnean/article-abstract/187/1/118/4907975) y que están disponibles públicamente. El secuenciamiento fue realizado en Illumina NextSeq500 con lecturas de 150bp y *single-end*.
 
@@ -68,7 +69,7 @@ En un análisis típico, los datos estarán en formato FASTQ, que es el formato 
 
 *Process_radtags* examina las lecturas crudas de Illumina y, en primer lugar, comprueba que los barcodes y el sitio de corte RAD (Fig. abajo) estén intactos y demultiplexa los datos. Si hay errores en el barcode o en el sitio RAD dentro de un cierto margen, *process_radtags* puede corregirlos. En segundo lugar, desliza una ventana a lo largo de la lectura y verifica el puntaje de calidad promedio dentro de la ventana. Si la puntuación cae por debajo del 90% de probabilidad de ser correcta (una puntuación *phred* bruta de 10), la lectura se descarta. Estos procedimientos eliminan las lecturas en que la secuencia se degrada a medida que se secuencia, pero aún admite algunos errores de secuenciación que se puede corregir.
 
-![Diagrama con un ejemplo de los elementos (barcode, adaptadores, ...) de cada fragmento de ADN secuenciado (from [Peterson et al., 2012)](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0037135)](./Imagenes/Peterson2012_diagramLibrary.png)
+![Diagrama con un ejemplo de los elementos (barcode, adaptadores, ...) de cada fragmento de ADN secuenciado (Foto de [Peterson et al., 2012)](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0037135)](./Imagenes/Peterson2012_diagramLibrary.png)
 
 **Archivos necesarios:**
 - archivo fastq.gz con todas las muestras crudas (no procesado)
