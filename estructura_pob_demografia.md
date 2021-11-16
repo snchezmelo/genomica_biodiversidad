@@ -1,6 +1,6 @@
-# Análisis de estrutura de la población y demográfico con *Lupinus*
+# Análisis de estructura de la población y demográfico con *Lupinus*
 
-## Tabla de contenido:
+## Índice:
 
 1. [Estructura de la población](#estructura):  
 	a. [PCA](#pca)  
@@ -12,7 +12,7 @@
 # Estructura de la población <a name = "estructura"></a>
 ## PCA <a name = "pca"></a>
 
-Ahora que ya tenemos nuestro VCF listo, podemos empezar a hacer análisis. Primero, verificaremos la estructura de la población mediante un [análisis de componentes principales (PCA)](https://en.wikipedia.org/wiki/Principal_component_analysis). PCA es un método sin modelo y sin necesidad de una asignación de población previa que ayuda a identificar la estructura de la población y la ascendencia compartida. En el caso de los datos genéticos, PCA resumirá la variación en términos de frecuencias alélicas. Es decir, PCA identifica los principales ejes de variación basado en las frecuencias alélicas, con el primer componente explicando la variación principal observada, el segundo el siguiente más grande, y así sucesivamente. Al hacer esto, calculará las coordenadas de los individuos a lo largo de los ejes para posicionar las muestras en el conjunto de datos. Para realizar un PCA en los datos de *Lupinus*, usaremos el software [plink - versión 1.9](https://www.cog-genomics.org/plink/). 
+Ahora que ya tenemos nuestro VCF listo, podemos empezar a hacer análisis. Primero, verificaremos la estructura de la población mediante un [análisis de componentes principales (PCA)](https://en.wikipedia.org/wiki/Principal_component_analysis). PCA es un método sin modelo y sin necesidad de una asignación de población previa que ayuda a identificar la estructura de la población y la ascendencia compartida. En el caso de los datos genéticos, PCA resumirá la variación en términos de frecuencias alélicas. Es decir, PCA identifica los principales ejes de variación basado en las frecuencias alélicas, con el primer componente explicando la variación principal observada, el segundo el siguiente más grande, y así sucesivamente. Al hacer esto, calculará las coordenadas de los individuos a lo largo de los ejes para posicionar las muestras en el conjunto de datos. Para realizar un PCA en los datos de *Lupinus*, usaremos el software [plink - versión 1.9](https://www.cog-genomics.org/plink/).
 
 1. crear una carpeta llamada "demografia" donde vamos hacer estos analisis
 2. dentro de esta carpeta, crea una otra llamada "PCA"
@@ -77,11 +77,11 @@ Listo :)
 
 ## Admixture <a name = "admixture"></a>
 
-El software [*Admixture*](https://dalexander.github.io/admixture/) - [Manual](https://dalexander.github.io/admixture/admixture-manual.pdf) - hace la estimación de máxima verosimilitud de la ancestralidad (#K) de los individuos basado en datos de genótipos multilocus (SNP). 
+El software [*Admixture*](https://dalexander.github.io/admixture/) - [Manual](https://dalexander.github.io/admixture/admixture-manual.pdf) - hace la estimación de máxima verosimilitud de la ancestralidad (#K) de los individuos basado en datos de genótipos multilocus (SNP).
 
 ![Un gráfico de *admixture* (imagen de: [Lawson et al., 2018](https://www.nature.com/articles/s41467-018-05257-7))](./Imagenes/admixture.png)
 
-**Suposiciones del modelo:** 
+**Suposiciones del modelo:**
 - los SNP no están vinculados
 - los individuos no san relacionados
 - los sitios son bialélicos y se eliminan los singletons
@@ -177,26 +177,27 @@ Es importante tener en cuenta que existen diferentes tipos de SFS (para una, dos
 
 Acá, vamos utilizar un script llamado [*easySFS*](https://github.com/isaacovercast/easySFS) para generar el SFS de nuestro archivo vcf. Como tenemos dos poblaciones, vamos estimar el *joint* SFS o 2D SFS (= "minor allele frequency SFS" = *jointMAF*).
 
-1. crear una carpeta *fastsimcoal* dentro de la carpeta *demografia*
-2. en carpeta *fastsimcoal* vamos instalar *easySFS*, para esto vamos seguir las instrucciones que están en el [repositorio de github](https://github.com/isaacovercast/easySFS):  
-- crea un nuevo ambiente conda: `conda create -n easySFS`
-- activar el ambiente: `conda activate easySFS`
-- instalar dependencias: `conda install -c bioconda dadi pandas`
-- clonar el repositorio: `git clone https://github.com/isaacovercast/easySFS.git`
-- `cd easySFS`
-- y hacer ejecutable: `chmod 777 easySFS.py`
+1. en carpeta *data* vamos activar un ambiente *conda* ya creado con algunos softwares que necesitamos:
+- cargar: `module load conda`
+- activar el ambiente: `source activate ~/data/conda/conda_envs/easySFS`
+2. clonar el repositorio de *easySFS* [repositorio de github](https://github.com/isaacovercast/easySFS):  
+`git clone https://github.com/isaacovercast/easySFS.git`
+3. ejecutar:
+- entrar en la carpeta: `cd easySFS`
+- hacer ejecutable: `chmod 777 easySFS.py`
 
-3. necesitamos de 2 archivos para hacer el SFS: el vcf (con uno solo SNP per loci) y el archivo de población que usamos con *Stacks* - mira las rutas donde están estos dos archivos.  
-4. ahora estamos listos para generar el SFS en dos pasos. El primero es:  
+Ahora estamos listos para crear el archivo SFS:
+1. necesitamos de 2 archivos para hacer el SFS: el vcf (con uno solo SNP per loci) y el archivo de población que usamos con *Stacks* - mira las rutas donde están estos dos archivos.  
+2. vamos a generar el SFS en dos pasos. El primero es:  
 `./easySFS.py -i <ruta_vcf>/populations.snps.vcf -p <ruta_pop_map>/Lupinus_pops.txt --preview`
 
 Que dará como resultado algo como esto:
 ```
 L_alopecuroides
-(2, 215)	(3, 322)	(4, 389)	(5, 435)	(6, 467)	(7, 491)	(8, 507)	(9, 209)	(10, 214)	
+(2, 215)	(3, 322)	(4, 389)	(5, 435)	(6, 467)	(7, 491)	(8, 507)	(9, 209)	(10, 214)
 
 L_triananus
-(2, 457)	(3, 685)	(4, 823)	(5, 916)	(6, 980)	(7, 1023)	(8, 1051)	(9, 538)	(10, 544)	
+(2, 457)	(3, 685)	(4, 823)	(5, 916)	(6, 980)	(7, 1023)	(8, 1051)	(9, 538)	(10, 544)
 ```
 Cada columna es el número de muestras (2n) en la proyección y el número de sitios segregantes en ese valor de proyección. El manual de *dadi* recomienda maximizar el número de sitios segregantes, pero al mismo tiempo, si tiene muchos datos faltantes, es posible que deba equilibrar el número de sitios segregados con el número de muestras para evitar reducir demasiado el muestreo.
 
@@ -214,12 +215,11 @@ Esto vas generar una carpeta `output` con archivos para los softwares *dadi* y *
 Ahora que ya tenemos nuestro joint SFS, finalmente podemos ejecutar [*fastsimcoal2*](http://cmpg.unibe.ch/software/fastsimcoal27/) :)  
 Fastsimcoal es un software de modelado demográfico que permite probar varios escenarios demográficos con diferentes niveles de complejidad dependiendo de sus datos. Utiliza el SFS para ajustar los parámetros del modelo a los datos observados mediante la realización de simulaciones coalescentes. El manual es bastante completo y se puede encontrar [acá](http://cmpg.unibe.ch/software/fastsimcoal27/man/fastsimcoal27.pdf).
 
-Antes de empezar, vamos hacer el download del software:` wget <RUTA_DEL_INTERTNET>`
-
-y descomprimir el archivo zip : `unzip <ARCHIVO>.zip`
-
-Adentre en la carpeta `cd` para hacer el archivo executable: `chmod +x <ARCHIVO>` y estamos listos :smile:
-
+Antes de empezar necesitamos:
+1. crear una carpeta *fastsimcoal* dentro de la carpeta *demografia*
+2. dentro de esta carpeta vamos hacer el download del software: `wget <RUTA_DEL_INTERTNET>`
+3. descomprimir el archivo zip : `unzip <ARCHIVO>.zip`
+4. adentre en la carpeta `cd` para hacer el archivo executable: `chmod +x <ARCHIVO>` y estamos listos :smile:
 
 ### Archivos de entrada:  
 Para ejecutar fastsimcoal2 necesitamos 3 archivos en una mesma carpeta. Los 3 archivos deben tener el mismo prefijo pero diferente extensión. Todos son archivos de texto:
@@ -272,7 +272,7 @@ $ruta_fastsimcoal -t ${PREFIX}.tpl -e ${PREFIX}.est -n 250000 -m --removeZeroSFS
 cp ${PREFIX}/${PREFIX}.bestlhoods ../bestlhoods/${PREFIX}_${SLURM_ARRAY_TASK_ID}.bestlhoods
 ```
 
-Antes de ejecutar el *sbatch*, no se olvide de generar una nueva carpeta llamada `bestlhoods` que es donde vamos poner los resultados para mirar el mejor likelihood. 
+Antes de ejecutar el *sbatch*, no se olvide de generar una nueva carpeta llamada `bestlhoods` que es donde vamos poner los resultados para mirar el mejor likelihood.
 
 **Memoria necesaria:** ~70mb
 
@@ -283,7 +283,7 @@ Antes de ejecutar el *sbatch*, no se olvide de generar una nueva carpeta llamada
 Los archivos ${PREFIX}.bestlhoods ya copiamos a la carpeta `bestlhoods`. Naveguemos a esa carpeta y comparemos qué *run* presenta el mejor *likelihood*. Para esto, vamos ejecutar la línea:  
 `cat ${PREFIX}_{1..5}.bestlhoods | grep -v MaxObsLhood | awk '{print NR,$5}' | sort -k 2`
 
-En cada archivo, vamos sacar el encabezamiento con `grep`, después vamos mostrar en la pantalla al número de ejecución que acá corresponde el número de línea usando el comando `awk '{print NR,$5}` donde $5 es la columna del *MaxEstLhood* y, por lo tanto, la probabilidad que queremos comparar entre diferentes ejecuciones. Por último, ordenaremos el archivo de la mejor probabilidad a la peor `sort`. 
+En cada archivo, vamos sacar el encabezamiento con `grep`, después vamos mostrar en la pantalla al número de ejecución que acá corresponde el número de línea usando el comando `awk '{print NR,$5}` donde $5 es la columna del *MaxEstLhood* y, por lo tanto, la probabilidad que queremos comparar entre diferentes ejecuciones. Por último, ordenaremos el archivo de la mejor probabilidad a la peor `sort`.
 
 ### Modelo de divergencia con migración `div_mig`:  
 Ahora que del modelo *div* ya esta siendo ejecutado, vamos generar los archivos para el modelo de divergencia con migración `div_mig`. Copie `cp` los archivos del `div` para `div_mig`. En este modelo, tenemos que modificar los archivos para añadir una matriz de migración en el `.tpl` y los parámetros de migración en el `.est`. Vamos intentar hacer estas modificaciones en grupos. Un consejo es echar un vistazo a la página 77 del [manual](http://cmpg.unibe.ch/software/fastsimcoal27/man/fastsimcoal27.pdf).
@@ -337,7 +337,7 @@ AIC_div_mig
 ### Bootstrap:  
 Ahora que sabemos cuál de los modelos es el mejor, podemos hacer *bootstrapping* para averiguar qué tan seguros estamos de nuestras estimaciones de parámetros. Para esto vamos obtener intervalos de confianza haciendo *parametric bootstraps* - en las páginas 58-60 del [manual](http://cmpg.unibe.ch/software/fastsimcoal27/man/fastsimcoal27.pdf) hay una buena explicación.
 
-La idea és que utilizemos el archivo que contiene las estimaciones de los parámetros (*_maxL.par*) de la ejecución com mejor *likelihood* , para simular 100 SFS y ejecutar *fastsimcoal* basado en estos SFS simulados. De esta forma, descubriremos cómo nuestros datos tienen poder para inferir correctamente los parámetros estimados. 
+La idea és que utilizemos el archivo que contiene las estimaciones de los parámetros (*_maxL.par*) de la ejecución com mejor *likelihood* , para simular 100 SFS y ejecutar *fastsimcoal* basado en estos SFS simulados. De esta forma, descubriremos cómo nuestros datos tienen poder para inferir correctamente los parámetros estimados.
 
 1. crear una carpeta `bootstrap` en la carpeta `fastsimcoal`
 2. copiar el archivo `\*_maxL.par` de la mejor *run* del mejor modelo para la carpeta `bootstrap` - vamos modificar esto archivo
@@ -367,7 +367,7 @@ con los SFS simulados. En la carpeta del modelo que tenga los archivos `.tpl` y 
 8. Ahora que ya tenemos los archivos listos para hacer el bootstrap, vamos copiar y modificar el `.sh` usado en la ejecución inicial de *fastsimcoal* para hacer los *bootstraps*. Primero copie el `.sh` para la carpeta `bootstrap`. Ahora vamos cambiar el archivo:
 - cambiar `--job_name` y el `--array=1-10`
 - cambiar la ruta para la carpeta `boostrap/Lupinus_div/${PREFIX}_${SLURM_ARRAY_TASK_ID}`_
-- como ahora las carpetas ya están todas generadas de antemano, tenemos que remover las r líneas con los comandos `mkdir`, `cp` y `cd` 
+- como ahora las carpetas ya están todas generadas de antemano, tenemos que remover las r líneas con los comandos `mkdir`, `cp` y `cd`
 - en la línea de comando del *fastsimcoal*, cambiar la opción `-m` por `-d`
 - cambiar la carpeta `bestlhoods` por una nueva que vamos crear llamada `results` dentro de la carpeta `bootstrap`
 
@@ -377,7 +377,7 @@ con los SFS simulados. En la carpeta del modelo que tenga los archivos `.tpl` y 
 
 **Tiempo de ejecución:** ~10min
 
-**Output:** dentro de la carpeta `results` vamos tener todos los archivos `bestlhoods` para calcular los intervalos de confianza. 
+**Output:** dentro de la carpeta `results` vamos tener todos los archivos `bestlhoods` para calcular los intervalos de confianza.
 
 10. para calcular los intervalos de confinanza, en la carpeta `results` vamos generar una tabla fácil que podemos copiar y salvar en un archivo txt en tu computadora para leerlo en R. Vamos hacer así:  
 `cat ${PREFIX}_{1..10}.bestlhoods | grep -v MaxObsLhood`  
