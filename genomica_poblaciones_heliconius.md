@@ -74,13 +74,14 @@ observada entonces el resto de los componentes sumados explica el 42% de
 la variación restante.
 
 Usaremos el archivo de genotipos extendido
-`heliconius.GT.NOINDEL.FILTER.vcf.gz` disponible en la ruta
+`heliconius.GT.NOINDEL.FILTER.vcf.gz` y su archivo de índice (`.csi`)
+están disponibles en la ruta
 `/home/juan.enciso/shared/GenomicaBiodiversidad_2021/dato_mapping/pca_five_chroms`
-en Centauro, **no usaremos el archivo que filtramos en este análisis
-pero sí en los siguientes**. Este archivo tiene 5 cromosomas de nuestros
-18 individuos de *Heliconius*. Es una aproximación más realista, pero
-todavía limitada, al conjunto completo de datos del genoma si lo
-comparamos con los datos que hemos venido trabajando.
+en Centauro, **no usaremos el archivo de genotipos que filtramos en este
+análisis pero sí en los siguientes**. Este archivo tiene 5 cromosomas de
+nuestros 18 individuos de *Heliconius*. Es una aproximación más
+realista, pero todavía limitada, al conjunto completo de datos del
+genoma si lo comparamos con los datos que hemos venido trabajando.
 
 La herramienta que usaremos para explorar la estructura poblacional
 usando el análisis de componentes principales es `plink 1.9`, como

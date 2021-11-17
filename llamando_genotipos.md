@@ -1,22 +1,5 @@
-<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-refresh-toc -->
-# Índice
-
-- [Sub-muestreando los alineamientos](#sub-muestreando-los-alineamientos)
-    - [Extrayendo una región específica de los alineamientos](#extrayendo-una-región-específica-de-los-alineamientos)
-- [Llamando genotipos](#llamando-genotipos)
-    - [Genotipos y SNPs](#genotipos-y-snps)
-    - [Llamada de genotipos](#llamada-de-genotipos)
-- [Operaciones con archivos VCF/BCF](#operaciones-con-archivos-vcfbcf)
-    - [El formato VCF](#el-formato-vcf)
-    - [Extrayendo información de un archivo VCF](#extrayendo-información-de-un-archivo-vcf)
-    - [Tipos de variantes](#tipos-de-variantes)
-    - [Filtrando sitios](#filtrando-sitios)
-        - [Calculando estadísticas en nuestros genotipos](#calculando-estadísticas-en-nuestros-genotipos)
-        - [Analizando y visualizando las estadísticas de los genotipos en `R`](#analizando-y-visualizando-las-estadísticas-de-los-genotipos-en-r)
-        - [Aplicando los filtros al archivo VCF](#aplicando-los-filtros-al-archivo-vcf)
-
-<!-- markdown-toc end -->
-
+---
+---
 
 # Sub-muestreando los alineamientos
 
@@ -24,11 +7,12 @@
 
 Para este paso vamos a utilizar los alineamientos de las 18 muestras de
 *Heliconius* cuyos duplicados de PCR ya fueron removidos. Los
-alineamientos y sus archivos de índice se encuentran en la ruta
-`/ruta/XXX` y tienen la extensión `smallr.rmd.sort.bam`. Copia los
-alineamientos y sus índicies a un directorio llamado `llamada_genotipos`
-en tu directorio de trabajo. **Asegúrate de copiar los alineamientos y
-sus índices**.
+alineamientos y sus archivos de índice se encuentran en Centauro, en la
+ruta `/home/workshopX/shared_workshop/alineamientos_heliconius/`, donde
+`workshopX` es el usuario asignado para el curso, y tienen la extensión
+`smallr.rmd.sort.bam`. Copia los alineamientos y sus índicies a un
+directorio llamado `llamada_genotipos` en tu directorio de trabajo.
+**Asegúrate de copiar los alineamientos y sus índices**.
 
 ## Extrayendo una región específica de los alineamientos
 
