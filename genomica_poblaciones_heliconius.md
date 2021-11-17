@@ -1,23 +1,5 @@
-<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-refresh-toc -->
-# Índice
-
-- [Estructura poblacional en *Heliconius*](#estructura-poblacional-en-heliconius)
-    - [Infiriendo estructura poblacional usando PCA](#infiriendo-estructura-poblacional-usando-pca)
-    - [¿Podemos observar diferentes patrones usando las mismas muestras?](#podemos-observar-diferentes-patrones-usando-las-mismas-muestras)
-- [Análisis poblacionales por sitios y ventanas](#análisis-poblacionales-por-sitios-y-ventanas)
-    - [Diversidad nucleotídica π](#diversidad-nucleotídica-π)
-    - [Índice de fijación: Motivación y explicación](#índice-de-fijación-motivación-y-explicación)
-    - [Calculando índice de fijación F<sub>ST</sub> por sitio](#calculando-índice-de-fijación-fsubstsub-por-sitio)
-    - [Calculando índice de fijación F<sub>ST</sub> por ventana](#calculando-índice-de-fijación-fsubstsub-por-ventana)
-- [Introgresión](#introgresión)
-    - [Motivación](#motivación)
-    - [D de Patterson: Explicación](#d-de-patterson-explicación)
-- [Introgresión: Estimados por ventana](#introgresión-estimados-por-ventana)
-    - [Evolución de la adaptación](#evolución-de-la-adaptación)
-    - [Análisis por ventanas](#análisis-por-ventanas)
-
-<!-- markdown-toc end -->
-
+---
+---
 
 # Estructura poblacional en *Heliconius*
 
@@ -44,6 +26,30 @@ cercanas entre las dos razas de *H. timareta* que cualquiera de ellas
 con otro grupo, y además esperaríamos que *H. timareta* y *H. melpomene*
 tengan una relación más cercana que cualquiera de ellas con las
 silvaniformes.
+
+Recuerda la identidad de nuestros individuos y las poblaciones y
+especies a las que pertenecen.
+
+| Clado           | Especie      | Polbación/Raza | ID        | Identificador en nuestros datos |
+|-----------------|--------------|----------------|-----------|---------------------------------|
+| silvaniformes   | *ethilla*    | *aerotome*     | JM67      | H.eth.aer.JM67                  |
+| silvaniformes   | *hecale*     | *felix*        | JM273     | H.hec.fel.JM273                 |
+| cydno/melpomene | *melpomene*  | *malleti*      | CJ16550   | H.melp.malleti.CJ16550          |
+| cydno/melpomene | *melpomene*  | *malleti*      | CS21      | H.melp.malleti.CS21             |
+| cydno/melpomene | *melpomene*  | *malleti*      | CS22      | H.melp.malleti.CS22             |
+| cydno/melpomene | *melpomene*  | *malleti*      | CS24      | H.melp.malleti.CS24             |
+| silvaniformes   | *numata*     | *numata*       | MJ09.4125 | H.num.num.MJ09.4125             |
+| silvaniformes   | *numata*     | *silvana*      | MJ09.4184 | H.num.sil.MJ09.4184             |
+| silvaniformes   | *pardalinus* | *sergestus*    | JM202     | H.par.ser.JM202                 |
+| silvaniformes   | *pardalinus* | *ssp. nova*    | JM371     | H.par.spn.JM371                 |
+| cydno/melpomene | *timareta*   | *florencia*    | CS2337    | H.tim.fln.CS2337                |
+| cydno/melpomene | *timareta*   | *florencia*    | CS2341    | H.tim.fln.CS2341                |
+| cydno/melpomene | *timareta*   | *florencia*    | CS2358    | H.tim.fln.CS2358                |
+| cydno/melpomene | *timareta*   | *florencia*    | CS2359    | H.tim.fln.CS2359                |
+| cydno/melpomene | *timareta*   | *thelxinoe*    | JM313     | H.tim.thx.JM313                 |
+| cydno/melpomene | *timareta*   | *thelxinoe*    | JM57      | H.tim.thx.JM57                  |
+| cydno/melpomene | *timareta*   | *thelxinoe*    | JM84      | H.tim.thx.JM84                  |
+| cydno/melpomene | *timareta*   | *thelxinoe*    | JM86      | H.tim.thx.JM86                  |
 
 ## Infiriendo estructura poblacional usando PCA
 
