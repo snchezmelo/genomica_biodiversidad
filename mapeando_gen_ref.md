@@ -1,22 +1,59 @@
-<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-refresh-toc -->
-# Índice
-
-- [Mapeo: Calidad de los datos de lectura](#mapeo-calidad-de-los-datos-de-lectura)
-    - [Estructura de los datos: El formato `fastq`](#estructura-de-los-datos-el-formato-fastq)
-    - [Puntajes de calidad](#puntajes-de-calidad)
-    - [Analizando las calidades de las lecturas](#analizando-las-calidades-de-las-lecturas)
-    - [Buenas y malas calidades](#buenas-y-malas-calidades)
-- [Mapeo: Genoma de referencia](#mapeo-genoma-de-referencia)
-    - [Descargando un genoma de referencia](#descargando-un-genoma-de-referencia)
-- [Mapeo: Pasos y herramientas](#mapeo-pasos-y-herramientas)
-    - [Preparando los archivos](#preparando-los-archivos)
-    - [Alineamiento de las lecturas](#alineamiento-de-las-lecturas)
-    - [Quitando duplicados de PCR](#quitando-duplicados-de-pcr)
-
-<!-- markdown-toc end -->
-
+---
+---
 
 # Mapeo: Calidad de los datos de lectura
+
+## Las muestras que usaremos
+
+Para este proceso usaremos 18 muestras de mariposas *Heliconius* que
+corresponden a individuos de dos grupos taxonómicos cercanamente
+emparentados. Las silvaniformes, que tienen patrones amarillos/naranja y
+negros predominantemente (parte superior de la imagen) y dos especies
+del clado conocido como *cydno - melpomene*. De este último clado
+tenemos muestras de dos especies: *Heliconius melpomene* y *Heliconius
+timareta*. Específicamente tenemos individuos de la raza *malleti*
+(Colombia, especie *H. melpomene*) e individuos de las razas *florencia*
+(Colombia) y *thelxinoe* (Perú) de la especie *H. timareta*. Estas
+muestras fueron secuenciadas usando secuenciación de genoma completo de
+alta profundidad en plataforma Illumina. Desde hace varios años existe
+un genoma de referencia al que podemos alinear estos datos de
+secuenciación para hacer análisis genéticos posteriores en nuestras
+muestras.
+
+| ![](./Imagenes/muestras_heliconius.png)                                                   |
+|-------------------------------------------------------------------------------------------|
+| Imagen tomada de [Dasmahapatra et al., 2012](https://www.nature.com/articles/nature11041) |
+
+Los datos de las lecturas de secuenciación de estas muestras que
+usaremos en los siguientes pasos están disponibles en Centauro, en la
+carpeta `/home/workshopX/shared_workshop/reads_heliconius/`, donde
+`workshopX` es el usuario que te corresponde para el curso. Verifica que
+puedes acceder a la carpeta y hacer una lista de los archivos.
+
+| Clado           | Especie      | Polbación/Raza | ID        | Archivo lecturas 1                    | Archivo lecturas 2                    |
+|-----------------|--------------|----------------|-----------|---------------------------------------|---------------------------------------|
+| silvaniformes   | *ethilla*    | *aerotome*     | JM67      | H.eth.aer.JM67.SH.R1.fastq.gz         | H.eth.aer.JM67.SH.R2.fastq.gz         |
+| silvaniformes   | *hecale*     | *felix*        | JM273     | H.hec.fel.JM273.SH.R1.fastq.gz        | H.hec.fel.JM273.SH.R2.fastq.gz        |
+| cydno/melpomene | *melpomene*  | *malleti*      | CJ16550   | H.melp.malleti.CJ16550.SH.R1.fastq.gz | H.melp.malleti.CJ16550.SH.R2.fastq.gz |
+| cydno/melpomene | *melpomene*  | *malleti*      | CS21      | H.melp.malleti.CS21.SH.R1.fastq.gz    | H.melp.malleti.CS21.SH.R2.fastq.gz    |
+| cydno/melpomene | *melpomene*  | *malleti*      | CS22      | H.melp.malleti.CS22.SH.R1.fastq.gz    | H.melp.malleti.CS22.SH.R2.fastq.gz    |
+| cydno/melpomene | *melpomene*  | *malleti*      | CS24      | H.melp.malleti.CS24.SH.R1.fastq.gz    | H.melp.malleti.CS24.SH.R2.fastq.gz    |
+| silvaniformes   | *numata*     | *numata*       | MJ09.4125 | H.num.num.MJ09.4125.SH.R1.fastq.gz    | H.num.num.MJ09.4125.SH.R2.fastq.gz    |
+| silvaniformes   | *numata*     | *silvana*      | MJ09.4184 | H.num.sil.MJ09.4184.SH.R1.fastq.gz    | H.num.sil.MJ09.4184.SH.R2.fastq.gz    |
+| silvaniformes   | *pardalinus* | *sergestus*    | JM202     | H.par.ser.JM202.SH.R1.fastq.gz        | H.par.ser.JM202.SH.R2.fastq.gz        |
+| silvaniformes   | *pardalinus* | *ssp. nova*    | JM371     | H.par.spn.JM371.SH.R1.fastq.gz        | H.par.spn.JM371.SH.R2.fastq.gz        |
+| cydno/melpomene | *timareta*   | *florencia*    | CS2337    | H.tim.fln.CS2337.SH.R1.fastq.gz       | H.tim.fln.CS2337.SH.R2.fastq.gz       |
+| cydno/melpomene | *timareta*   | *florencia*    | CS2341    | H.tim.fln.CS2341.SH.R1.fastq.gz       | H.tim.fln.CS2341.SH.R2.fastq.gz       |
+| cydno/melpomene | *timareta*   | *florencia*    | CS2358    | H.tim.fln.CS2358.SH.R1.fastq.gz       | H.tim.fln.CS2358.SH.R2.fastq.gz       |
+| cydno/melpomene | *timareta*   | *florencia*    | CS2359    | H.tim.fln.CS2359.SH.R1.fastq.gz       | H.tim.fln.CS2359.SH.R2.fastq.gz       |
+| cydno/melpomene | *timareta*   | *thelxinoe*    | JM313     | H.tim.thx.JM313.SH.R1.fastq.gz        | H.tim.thx.JM313.SH.R2.fastq.gz        |
+| cydno/melpomene | *timareta*   | *thelxinoe*    | JM57      | H.tim.thx.JM57.SH.R1.fastq.gz         | H.tim.thx.JM57.SH.R2.fastq.gz         |
+| cydno/melpomene | *timareta*   | *thelxinoe*    | JM84      | H.tim.thx.JM84.SH.R1.fastq.gz         | H.tim.thx.JM84.SH.R2.fastq.gz         |
+| cydno/melpomene | *timareta*   | *thelxinoe*    | JM86      | H.tim.thx.JM86.SH.R1.fastq.gz         | H.tim.thx.JM86.SH.R2.fastq.gz         |
+
+**Atención:** En este punto debes escoger una muestra para trabajar.
+Copia sus archivos en tu directorio de trabajo y ten a la mano los datos
+correspondientes a esta muestra.
 
 ## Estructura de los datos: El formato `fastq`
 
@@ -105,7 +142,7 @@ Corriendo fastqc con los datos de *Heliconius*:
 2.  Crea un script de `bash` para enviar el trabajo a la cola del
     cluster. Pide los recursos necesarios usando las directivas de
     `SBATCH`, no olvides el `shebang`. Encuentra el módulo de `Fastqc`
-    en el cluster y cárgalo correctamente.
+    en el cluster y cárgalo.
 
 3.  En tu script: Crea un directiorio y dale un nombre que identifique a
     la muestra que vas a correr. Finaliza el nombre con el sufijo `_QC`.
@@ -169,25 +206,8 @@ mejorar la calidad.
 
 # Mapeo: Genoma de referencia
 
-Para este proces usaremos 18 muestras de mariposos *Heliconius* que
-corresponden a individuos de dos grupos taxonómicos cercanamente
-emparentados. Las silvaniformes, que tienen patrones amarillos/naranja y
-negros predominantemente (parte superior de la imagen) y dos especies
-del clado conocido como *cydno - melpomene*. De este último clado
-tenemos muestras de dos especies: *Heliconius melpomene* y *Heliconius
-timareta*. Específicamente tenemos individuos de la raza *malleti*
-(Colombia, especie *H. melpomene*) e individuos de las razas *florencia*
-(Colombia) y *thelxinoe* (Perú) de la especie *H. timareta*. Estas
-muestras fueron secuenciadas usando secuenciación de genoma completo de
-alta profundidad en plataforma Illumina. Desde hace varios años existe
-un genoma de referencia al que podemos alinear estos datos de
-secuenciación para hacer análisis genéticos posteriores en nuestras
-muestras. Vamos a descargar la última versión del genoma de referencia
-de *H. melpomene*.
-
-| ![](./Imagenes/muestras_heliconius.png)                                                   |
-|-------------------------------------------------------------------------------------------|
-| Imagen tomada de [Dasmahapatra et al., 2012](https://www.nature.com/articles/nature11041) |
+Vamos a descargar la última versión del genoma de referencia de *H.
+melpomene*.
 
 ## Descargando un genoma de referencia
 
@@ -236,12 +256,19 @@ Sigue estos pasos para descargarlo:
     referencia. Usa `nano` para crear un nuevo archivo de texto.  
     Usa una línea por muestra y la siguiente estructura para cada
     línea:  
-    Columna 1: El primer archivo de lecturas de la muestra (R1)  
-    Columna 2: El segundo archivo de lecturas de la muestra (R2)  
-    Columna 3: El archivo de la referencia (`fasta` o `fasta`
-    comprimido).  
-    Columna 4: El identificador de la muestra  
-    Columna 5: El identificador de la referencia  
+    Columna 1: La ruta completa al primer archivo de lecturas de la
+    muestra (R1)  
+    Columna 2: La ruta completa al segundo archivo de lecturas de la
+    muestra (R2)  
+    Columna 3: La ruta completa al archivo de la referencia (`fasta` o
+    `fasta` comprimido).  
+    Columna 4: El identificador de la muestra: Fíjate en la tabla de las
+    muestras. Para identificar a cada una usamos abreviaturas de su
+    especie y raza y su columna de ID para crear un identificador único:
+    Por ejemplo, para los archivos correspondientes a *Heliconius
+    timareta florencia* CS2538 usamos el identificador
+    H.tim.fln.CS2358  
+    Columna 5: El identificador de la referencia (Hmel2.5)  
     **Importante:** Este archivo es creado con esta estructura para
     poder tener un registro organizado de las muestras que queremos
     procesar. **Cada estudiante hará el mapeo de solo una de las

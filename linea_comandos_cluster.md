@@ -342,7 +342,7 @@ usando `sbatch`. A partir del paso 4 trabaja en una sesión interactiva.
 
     ``` shell
     # sintaxis de uso de tar
-    tar [OPCIONES] [ARCHIVOS]
+    tar [OPCIONES] archivo.tar.gz directorio
     ```
 
 6.  Copia el archivo resultante (`bash_loops1.tar.gz`) a tu máquina
