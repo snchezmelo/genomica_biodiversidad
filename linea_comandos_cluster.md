@@ -154,27 +154,39 @@ estén duplicados. Las instrucciones utilizadas para resolver este punto
 deben guardarse en un script de `bash` que contenga el paso por paso de
 la solución.
 
-1.  Usa el comando `cut` para cortar y acceder a columnas individuales
+1.  ¿Cuántas líneas tiene el archivo `gen_ch1_mus_musculus.txt`?
+    ¿Cuántas palabras tiene este archivo? ¿Cuántos caracteres tiene este
+    archivo?
+2.  Usa `head` y `tail` para responder: ¿Cuáles son los primeros 5 genes
+    que aparecen en el archivo (segunda columna)? ¿Cuáles son los
+    últimos 3 genes?
+3.  Usa el comando `cut` para cortar y acceder a columnas individuales
     del archivo de genes del ratón. La opción `-f<n>` te permite escoger
     columnas individuales o grupos de columnas que quieras cortar. Debes
     reemplazar `<n>` por el número de columna que quieras seleccionar.
-2.  Usa los comandos `uniq`, `sort` y `grep` para contar la aparición de
-    cada nombre en la segunda columna.
-3.  Genera una lista con los nombres de los genes repetidos y guárdala
+4.  Usa `head` y `tail` para imprimir las líneas de la 925 a la 938 del
+    archivo `gen_ch1_mus_musculus.txt`, re-dirige la salida a `cut`
+    usando el operador `|` y corta solamente los identificadores de los
+    genes. ¿Qué identificadores se encontraron en esta selección?
+    ¿Cuántos identificadores hay allí?
+5.  Usa los comandos `uniq`, `sort` y `grep` para contar la aparición de
+    cada nombre en la segunda columna. ¿Qué opción de `uniq` debes usar
+    para contar repeticiones?
+6.  Genera una lista con los nombres de los genes repetidos y guárdala
     en un archivo llamado `repetidos_ch1_mmus.txt`
-4.  Genera una lista con los nombres de los genes no repetidos y
+7.  Genera una lista con los nombres de los genes no repetidos y
     guárdala en un archivo llamado `no_repetidos_ch1_mmus.txt`
-5.  Responde: ¿Cuántas líneas tiene originalmente el archivo
+8.  Responde: ¿Cuántas líneas tiene originalmente el archivo
     `genes_ch1_mus_musculus.txt`?
-6.  Responde: Ignorando las repeticiones ¿cuántos genes únicos hay
+9.  Responde: Ignorando las repeticiones ¿cuántos genes únicos hay
     realmente en estos datos?
-7.  Responde: Reporta el número más alto de repeticiones que tiene un
+10. Responde: Reporta el número más alto de repeticiones que tiene un
     gen en este archivo.
 
 ## Marcadores de secuencias
 
 Cuando se hacen experimentos de secuenciación a gran escala normalmente
-se agregan marcas moleculares para poder identificar las muestras
+se agregan etiquetas moleculares para poder identificar las muestras
 correctamente al momento de procesar los datos. El archivo
 [`tags_seqs.txt.gz`](./material/tags_seqs.txt.gz) contiene dos columnas:
 En la columna izquierda hay identificadores moleculares únicos para cada
@@ -205,6 +217,22 @@ trabajar este punto</u>.
 
     Responde: ¿En total cuántos individuos tienen alguna de estas tres
     secuencias en la segunfa parte de la columna izquierda?
+
+3.  Asigna la ruta absoluta del archivo `tags_seqs.txt.gz` a una
+    variable de `bash`. Utiliza el operador `$` para expandir el
+    contenido de la variable y usa esta expansión en una llamada a la
+    versión adecuada de `grep` y las opciones adecuadas de este programa
+    para contar el número de identificadores moleculares que empiezan
+    con la base `T`. ¿Cuántos encontraste?
+
+4.  Usa las versión apropiada las versiones apropiadas de `cat`, `grep`
+    y `cut` para mostrar únicamente los individuos que pertenecen al
+    outgroup. Los individuos del outgroup son aquellos cuyo nombre
+    (segunda columna). Empieza con `out`.
+
+5.  Usa `cut` con las opciones apropiadas para quedarte solo con la
+    información correspondiente a `secuencia2` y la segunda columna,
+    excluyendo la parte de `secuencia1-` en cada fila.
 
 # Trabajando en el cluster de cómputo (CENTAURO)
 
