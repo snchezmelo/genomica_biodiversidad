@@ -15,11 +15,11 @@
 # Descargando los tutoriales de GitHub <a name = "descargando-tutoriales"></a>
 
 Hay dos formas posibles de descargar los tutoriales de nuestro curso:  
-1. Ir al repositorio en [GitHub con el material](https://github.com/juanenciso14/genomica_biodiversidad), haga clic en el botón verde "Code" y luego "Download Zip".Esto guardará un archivo zip en su computadora. Encuéntrelo y descomprímalo -  se convertirá en una carpeta llamada "genomica_biodiversidad" con todos los tutoriales que necesitaremos durante esta semana.
+1. Acceda al repositorio en [GitHub con el material](https://github.com/juanenciso14/genomica_biodiversidad), haga clic en el botón verde "Code" y luego "Download Zip".Esto guardará un archivo zip en su computadora. Encuéntrelo y descomprímalo -  se convertirá en una carpeta llamada "genomica_biodiversidad" con todos los tutoriales que necesitaremos durante esta semana.
 
-2. Si tiene git en su computadora, usando la terminal puede navegar a la carpeta que desea tener la carpeta con los tutoriales y hacer:  
+2. Si tiene git en su computadora, usando la terminal puede navegar a la carpeta en la que desea tener los tutoriales y hacer:  
 `git clone https://github.com/juanenciso14/genomica_biodiversidad.git`  
-El comando `git clone` lo usaremos en el clúster otras veces, por lo que tendrás la oportunidad de practicarlo sin tener que instalarlo en tu máquina. No veremos otras funcionalidades de `git` durante el curso. Pero si estás interesado en aprender más sobre él, hay varios tutoriales disponibles online, como este [video](https://www.youtube.com/watch?v=RGOj5yH7evk) y [este curso](https://swcarpentry.github.io/git-novice/).
+El comando `git clone` lo usaremos en el clúster otras veces, por lo que tendrá la oportunidad de practicarlo sin tener que instalarlo en su máquina. No veremos otras funcionalidades de `git` durante el curso. Pero si está interesado en aprender más sobre él, hay varios tutoriales disponibles online, como este [video](https://www.youtube.com/watch?v=RGOj5yH7evk) y [este curso](https://swcarpentry.github.io/git-novice/).
 
 <center>Ahora estamos listos para empezar :smile:</center>
 
@@ -35,17 +35,17 @@ macOS.
 
 ## Descargando e instalando Atom
 
-Ingresa al [sitio web de Atom](https://atom.io/) y descarga el
-instalador para tu sistema operativo.
+Ingrese al [sitio web de Atom](https://atom.io/) y descarge el
+instalador para su sistema operativo.
 
 ![](./Imagenes/atom_page.png)
 
-Asegúrate de descargarlo en una ruta conocida desde donde lo puedas ejecutar e
-instálalo siguiendo los pasos del ejecutable que descargaste.
+Asegúrese de descargarlo en una ruta conocida desde donde lo pueda ejecutar e
+instálelo siguiendo los pasos del ejecutable que descargó.
 
 ## Interfaz de Atom y Markdown
 
-Ejecuta Atom en tu máquina. Atom es capaz de manejar varios tipos de
+Ejecute Atom en su máquina. Atom es capaz de manejar varios tipos de
 archivo por defecto y puede usar colores para facilitar la distinción de
 varios elementos de sintáxis de algunos lenguajes.
 
@@ -56,17 +56,17 @@ En particular, Atom puede manejar bien los archivos tipo Markdown
 
 Vamos abrir en Atom la carpeta que acabamos de descargar con los tutoriales de este curso. Vaya a `File > Add Project Folder`, navegue hasta la carpeta del curso y haga clic en Open. En la barra de la izquierda se mostrarán todos los archivos y carpetas que tenemos en esta carpeta.
 
-Abre un archivo de Markdown (extensión `.md`) que esta en esta barra de la izquierda.
+Abra un archivo de Markdown (extensión `.md`) que esta en esta barra de la izquierda.
 
-Mira la esquina inferior derecha; en esta parte Atom te dice
-qué tipo de gramática está usando para interpretar el texto de tu
+Mire la esquina inferior derecha; en esta parte Atom dice
+qué tipo de gramática está usando para interpretar el texto de su
 archivo.
 
 ![](./Imagenes/atom_gramatica.png)
 
-Normalmente el editor es capaz de inferir la gramática automáticamente
-pero si no, puedes hacer click en la sección a la que apunta la flecha y
-escoger la gramática que quieres para tu archivo. Haz click y escoge
+Normalmente el editor es capaz de inferir la gramática automáticamente. 
+Si no, puede hacer click en la sección a la que apunta la flecha y
+escoger la gramática que quiere para su archivo. Haga click y escoja
 Markdown.
 
 Atom ofrece la opción de pre-visualización de Markdown en el editor
@@ -116,7 +116,7 @@ Los comandos básicos para recordar son:
 Para empezar, en grupos vamos hacer [esto ejercício](https://www.markdowntutorial.com/es/).  
 Después de terminar, abra un nuevo archivo en Atom y juegue un poco con la sintaxis de Markdown copiando un texto de [aquí](https://www.zendalibros.com/los-30-mejores-poemas-en-espanol/) para formatear de la manera que desee (abriendo el *preview* para mirar). Salve el archivo en formato `.md`.
 
-Se tu te olvidas de la sintaxis no hay lío! Puedes escribir como un archivo de texto 😉
+Si olvida la sintaxis, ¡no hay lío! Puede escribir como si fuera un archivo de texto 😉
 
 ## Exportando Markdown a PDF
 
@@ -124,16 +124,16 @@ La conversión de Markdown a PDF es un procedimiento bastante común y vamos a
 necesitar hacerla algunas veces. Atom es una aplicación modular, lo que
 significa que puedes extender su funcionalidad instalando nuevos paquetes. Para
 convertir Markdown a PDF necesitamos instalar un paquete nuevo llamado
-`makrdown-pdf` (:astonished: vaya sorpresa). Sigue las instrucciones en la
+`makrdown-pdf` (:astonished: vaya sorpresa). Siga las instrucciones en la
 imagen para instalarlo, es sencillo.
 
 ![](./Imagenes/instrucciones_markdown_pdf.png)
 
-Después de instalado exporta el archivo que tu generó en el paso anterior de Markdown a PDF. En el menú superior haz click en `Packages` \> Markdown to PDF \> Convert, como lo muestra la imagen.
+Después de instalado, exporte el archivo que generó en el paso anterior de Markdown a PDF. En el menú superior haga click en `Packages` \> Markdown to PDF \> Convert, como lo muestra la imagen.
 
 ![](./Imagenes/atom_markdown_a_pdf.png)
 
-Deberías ver un recuadro verde en la parte superior derecha que te dice
+Debería ver un recuadro verde en la parte superior derecha donde dice
 que la conversión se hizo con éxito.
 
-Examina el PDF que acabas de crear en tu explorador de archivos.
+Examine el PDF que acabas de crear en su explorador de archivos.
