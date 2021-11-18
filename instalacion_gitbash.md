@@ -13,13 +13,13 @@
 
 ## Instalación de Git Bash SDK
 
-Descarga el ejecutable (exe) de [Git Bash
+Descarge el ejecutable (exe) de [Git Bash
 SDK](https://github.com/git-for-windows/build-extra/releases/tag/git-sdk-1.0.8)
-y ejecuta el archivo descargado.
+y ejecute el archivo descargado.
 
 ![](./Imagenes/descarga_gitbash_SDK.png)
 
-Sigue las instrucciones del proceso de instalación, puede tardar algunos
+Siga las instrucciones del proceso de instalación, puede tardar algunos
 minutos.
 
 ## Instalación de herramientas en Git Bash SDK
@@ -33,12 +33,12 @@ Para instalar `wget` usando `pacman` simplemente escribimos:
 
 `pacman -S wget`
 
-Cuando termines de instalar `wget` verás algo como esto
+Cuando termines de instalar `wget` verá algo como esto:
 
 ![](./Imagenes/wget_instalado.png)
 
 Esto ejecutará correctamente la instalación de `wget` siempre y cuando
 éste se encuentre en la lista de repositorios accesibles para `pacman`.
 
-Si necesitas instalar otras herramientas que no están disponibles por
-defecto, puedes usar esta misma sintaxis :smiley:.
+Si necesita instalar otras herramientas que no están disponibles por
+defecto, puede usar esta misma sintaxis :smiley:.
