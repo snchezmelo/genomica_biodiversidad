@@ -12,7 +12,7 @@
 **Advertencia:** Este es un tutorial muy corto sobre como escribir
 algunos bucles o ciclos `for` en `bash`. Esta no es una guía comprensiva
 sobre estos elementos del lenguaje. Para información más detallada
-consulta [el manual de
+consulte [el manual de
 `bash`](https://www.gnu.org/software/bash/manual/bash.html#Looping-Constructs).
 
 Para operar con ciclos `for` de forma básica podemos aprender un par de
@@ -21,7 +21,7 @@ expresiones a listas ó sobre parámetros posicionales especificados de
 forma explícita.
 
 Todos los ciclos `for` escritos en `bash` tienen un encabezado, una
-instrucción `do`, un bloque de código que quieres ejecutar y finalmente
+instrucción `do`, un bloque de código que se quiere ejecutar y finalmente
 una instrucción `done`. En los ejemplos que veremos todos los ciclos
 `for` declaran una variable con la que irá visitando los distintos
 objetos a lo largo de la ejecución del ciclo.
@@ -34,17 +34,17 @@ Ejemplo de la estructura de un ciclo `for` escrito en múltiples líneas:
 # los tres puntos ... son una elipsis de la lista de objetos
 # que vamos a recorrer con el for
 for vr in ...
-do # abrimos el bloque de codigo con la instruccion do
+do # abrimos el bloque de código con la instrucción do
     # aquí va el bloque de codigo
     # puede tener una o varias lineas
-done # cerramos el bloque de codigo con la instruccion done
+done # cerramos el bloque de código con la instrucción done
 ```
 
 Ejemplo de la estructura de un ciclo `for` escrito en una sola línea:
 
 ``` shell
 # esta es una forma compacta de la estructura mostrada arriba
-# fijate que separas las partes del ciclo for con el caracter ;
+# separa las partes del ciclo for con el caracter ;
 # los primeros tres puntos son una elipsis de la lista de objetos que recorremos
 # los segundos tres puntos son una elipsis del bloque de codigo que ejecutamos en el for
 for vr in ...; do ...; done
@@ -54,10 +54,10 @@ for vr in ...; do ...; done
 
 1.  **Expansiones con nombres de archivos que se ajustan a un patrón**
 
-    Supón que el directorio en el que estás trabajando actualmente
+    Suponga que el directorio en el que está trabajando actualmente
     contiene 120 archivos de texto que terminan en la extensión `.txt`.
-    Para cada uno de estos archivos quieres imprimir la primera línea.
-    Recuerda que usamos el operador `*` para hacer expansiones de
+    Para cada uno de estos archivos quiere imprimir la primera línea.
+    Recuerde que usamos el operador `*` para hacer expansiones de
     patrones en los nombres de los archivos a una lista que contiene los
     nombres de todos los archivos que contienen el patrón. Si quisieras
     listar los 120 archivos con extensión `.txt` de tu directiorio,
@@ -71,7 +71,7 @@ for vr in ...; do ...; done
     do # instruccion do
         # quiero la primera linea de cada archivo de la lista
 
-        # fijate que hago referencia a la variable arch
+        # fíjese que hago referencia a la variable arch
         # usando el operador $
         head -n 1 $arch
     done # instruccion done
@@ -79,14 +79,14 @@ for vr in ...; do ...; done
 
     -   [ ] Reto: ¿Puedes escribir este ejemplo en una sola línea?
 
-    -   [ ] Reto: ¿Qué modificaciones harías para incluir la primera
+    -   [ ] Reto: ¿Qué modificaciones haría para incluir la primera
         línea y las últimas tres líneas de cada archivo en un nuevo
         archivo?
 
 2.  **Expansiones con corchetes `{}`**
 
-    Supón que quieres imprimir en pantalla los números del 1 al 10.
-    Puedes definir una secuencia de números dentro de corchetes
+    Suponga que quieree imprimir en pantalla los números del 1 al 10.
+    Puede definir una secuencia de números dentro de corchetes
     especificando los límites de la secuencia separados por el operador
     `..` y encerrados en corchetes `{}`. Luego, la expansión de esta
     secuencia se puede recorrer unando un ciclo `for` como lo muestra el
@@ -96,9 +96,9 @@ for vr in ...; do ...; done
     for num in {1..10}; do echo $num; done
     ```
 
-    -   [ ] Reto: ¿Puedes escribir este ciclo en múltiples líneas?
+    -   [ ] Reto: ¿Puede escribir este ciclo en múltiples líneas?
 
-    -   [ ] Reto: Puedes incluir una secuencia de valores arbitrarios
+    -   [ ] Reto: Puede incluir una secuencia de valores arbitrarios
         separados por `,` al interior de los corchetes. Imprime las
         letras `a`, `E`, `Z`, `q`, `t` usando esta estrategia en un
         ciclo `for`.
@@ -107,7 +107,7 @@ for vr in ...; do ...; done
 
 1.  **Usamos los parámetros posicionales de la siguiente forma**:
 
-    Supón que queremos imprimir en pantalla los valores 1, 5, 6, 8, 12.
+    Suponga que queremos imprimir en pantalla los valores 1, 5, 6, 8, 12.
     Podríamos usar la estrategia del último reto pero hay otra forma más
     simple de hacerlo: Podemos escribir los valores separados por
     espacio entre ellos en el encabezado del `for`, como lo muestra el
@@ -120,7 +120,7 @@ for vr in ...; do ...; done
     done
     ```
 
-    -   [ ] Reto: ¿Qué cambios debes hacer en el ciclo `for` para que el
+    -   [ ] Reto: ¿Qué cambios debe hacer en el ciclo `for` para que el
         orden de la impresión de los números sea el siguiente?
 
         ``` shell
@@ -131,6 +131,6 @@ for vr in ...; do ...; done
         8
         ```
 
-    -   [ ] Reto: Supón que tienes tres archivos de texto plano llamados
-        `a1.txt` `lista.log` `caso.err`. ¿Cómo imprimes la primera línea
+    -   [ ] Reto: Suponga que tiene tres archivos de texto plano llamados
+        `a1.txt` `lista.log` `caso.err`. ¿Cómo puede imprimir la primera línea
         de cada archivo usando esta estrategia?
